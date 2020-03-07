@@ -1,0 +1,32 @@
+.textfield {
+  display: flex;
+  flex-direction: column;
+}
+
+.textfield__label {
+  color: var(--color-text-input-label);
+  margin-bottom: var(--space-xxs);
+}
+
+.textfield_required .textfield__label::after {
+  content: '*';
+  color: var(--color-text-input-required);
+  margin-left: var(--space-xxxxs);
+}
+
+.textfield_row {
+  flex-direction: row;
+  align-items: center;
+}
+
+.textfield_row .textfield__label {
+  margin-bottom: 0;
+}
+
+.textfield_row .textfield__input {
+  margin: var(--space-xs);
+}
+
+.textfield_row .textfield__append {
+  color: var(--color-text-input-append);
+}
