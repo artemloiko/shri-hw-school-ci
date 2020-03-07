@@ -6,6 +6,8 @@
   line-height: 36px;
   cursor: pointer;
   max-width: 100%;
+  color: var(--color-text);
+  text-decoration: none;
 }
 
 .button:hover {
