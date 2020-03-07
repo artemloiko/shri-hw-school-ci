@@ -3,9 +3,12 @@
   flex-direction: column;
 }
 
+.textfield__input {
+  margin-top: var(--space-xxs);
+}
+
 .textfield__label {
   color: var(--color-text-input-label);
-  margin-bottom: var(--space-xxs);
 }
 
 .textfield_required .textfield__label::after {
@@ -17,10 +20,6 @@
 .textfield_row {
   flex-direction: row;
   align-items: center;
-}
-
-.textfield_row .textfield__label {
-  margin-bottom: 0;
 }
 
 .textfield_row .textfield__input {

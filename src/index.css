@@ -43,6 +43,10 @@
   --color-text-ghost: var(--grey-200);
   --color-text-disabled: #b9b9b9;
 
+  --color-text-success: var(--green-500);
+  --color-text-fail: var(--red-500);
+  --color-text-running: var(--orange-500);
+
   --color-bg-input: var(--white-500);
   --color-border-input: var(--grey-350);
   --color-border-input-focused: var(--grey-500);
@@ -75,8 +79,9 @@
   --space-l: 16px;
   --space-xl: 18px;
   --space-xxl: 20px;
-  --space-xxxl: 36px;
-  --space-xxxxl: 56px;
+  --space-xxxl: 24px;
+  --space-xxxxl: 36px;
+  --space-xxxxxl: 56px;
 
   --border-radius-m: 4px;
   --border-radius-l: 6px;

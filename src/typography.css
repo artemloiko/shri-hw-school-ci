@@ -1,8 +1,3 @@
-html {
-  font-family: 'YS Text', Arial, Helvetica, sans-serif;
-  color: var(--color-text);
-}
-
 @font-face {
   font-family: 'YS Text';
   src: url('//yastatic.net/islands/_/PyVcRbwHetz0gOVWLonWH7Od8zM.woff2') format('woff2'),
@@ -11,7 +6,6 @@ html {
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'YS Text';
   src: url('//yastatic.net/islands/_/7_GKBdKFbUPzKlghJRv55xgz0FQ.woff2') format('woff2'),
@@ -20,7 +14,6 @@ html {
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'YS Text';
   src: url('//yastatic.net/islands/_/6Roy0LCd05cK4nNCipgzheYcNVU.woff2') format('woff2'),
@@ -28,4 +21,9 @@ html {
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+}
+
+.typography {
+  font-family: 'YS Text', Arial, Helvetica, sans-serif;
+  color: var(--color-text);
 }
