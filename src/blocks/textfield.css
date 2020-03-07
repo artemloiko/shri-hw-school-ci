@@ -24,7 +24,7 @@
 }
 
 .textfield_row .textfield__input {
-  margin: var(--space-xs);
+  margin: 0 var(--space-xs);
 }
 
 .textfield_row .textfield__append {

@@ -44,11 +44,11 @@
   padding-right: var(--clear-button-width);
 }
 
-.input_clear .input__clear {
+.input_clear .input__clear-btn {
   display: block;
 }
 
-.input__clear {
+.input__clear-btn {
   display: none;
   position: absolute;
   width: var(--clear-button-width);

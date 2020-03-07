@@ -1,5 +1,6 @@
 html {
   font-family: 'YS Text', Arial, Helvetica, sans-serif;
+  color: var(--color-text);
 }
 
 @font-face {

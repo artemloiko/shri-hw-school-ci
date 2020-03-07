@@ -1,6 +1,8 @@
 .icon {
   width: 16px;
   height: 16px;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .icon_size_small {

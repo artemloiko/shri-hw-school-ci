@@ -1,0 +1,54 @@
+.button {
+  background-color: var(--color-bg-control);
+  border: 2px solid var(--color-bg-control);
+  padding: 0 var(--space-xxl);
+  border-radius: var(--border-radius-m);
+  line-height: 36px;
+  cursor: pointer;
+  max-width: 100%;
+}
+
+.button:hover {
+  background-color: var(--color-bg-control-hovered);
+  border-color: var(--color-bg-control-hovered);
+}
+.button:focus {
+  outline: none;
+  border-color: var(--color-border-control-focused);
+}
+
+.button__text {
+  font-size: var(--typo-size-m);
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.button_action {
+  --color-bg-control: var(--color-bg-action);
+  --color-bg-control-hovered: var(--color-bg-action-hovered);
+  --color-border-control-focused: var(--color-border-action-focused);
+}
+
+.button_mini {
+  line-height: 28px;
+}
+
+.button_icon {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.button_icon .button__text {
+  margin-left: var(--space-xxs);
+}
+
+@media screen and (max-width: 480px) {
+  .button_icon {
+    padding: var(--space-xxs);
+  }
+  .button_icon .button__text {
+    display: none;
+  }
+}
