@@ -1,0 +1,52 @@
+.card-ci-run {
+  position: relative;
+  width: 100%;
+  padding: var(--space-m) var(--space-xxxl) var(--space-m) var(--space-xxxxxl);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  box-shadow: var(--card-shadow);
+}
+
+.card-ci-run:not(.card-ci-run_details):hover {
+  cursor: pointer;
+  box-shadow: var(--card-shadow-hovered);
+}
+
+.card-ci-run__status-icon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: var(--space-xxxl);
+  top: var(--space-m);
+}
+
+.card-ci-run__info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-ci-run__commit-info {
+  display: flex;
+  flex-flow: row wrap;
+}
+.card-ci-run__commit-info-elem {
+  margin-top: var(--space-xs);
+  margin-right: var(--space-xs);
+}
+
+@media (max-width: 480px) {
+  .card-ci-run {
+    padding: var(--space-l) var(--space-m) var(--space-l) var(--space-xxxxl);
+  }
+  .card-ci-run__status-icon {
+    width: 16px;
+    height: 16px;
+    left: var(--space-m);
+    top: var(--space-l);
+  }
+  .card-ci-run__commit-info {
+    flex-direction: column;
+  }
+}

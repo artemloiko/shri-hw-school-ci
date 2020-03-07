@@ -1,0 +1,33 @@
+.meta-ci-run {
+  display: flex;
+  flex-flow: column;
+  opacity: 0.65;
+}
+
+.meta-ci-run__elem:not(:first-child) {
+  margin-top: var(--space-xs);
+}
+
+@media (max-width: 768px) {
+  .meta-ci-run {
+    min-width: 100%;
+    flex-flow: row wrap;
+    border-top: 1px solid var(--blue-grey-50);
+    margin-top: var(--space-xs);
+  }
+  .meta-ci-run__elem {
+    margin-top: var(--space-xs);
+    margin-right: var(--space-xs);
+  }
+}
+
+.meta-ci-run_details {
+  min-width: 100%;
+  flex-flow: row wrap;
+  border-top: 1px solid var(--blue-grey-50);
+  margin-top: var(--space-xs);
+}
+.meta-ci-run_details .meta-ci-run__elem {
+  margin-top: var(--space-xs);
+  margin-right: var(--space-xs);
+}
