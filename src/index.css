@@ -1,3 +1,95 @@
+/* Colors */
 :root {
   --black-500: #000000;
+
+  --grey-600: #595959;
+  --grey-500: #b3b3b3;
+  --grey-400: #cccccc;
+  --grey-350: #d9d9d9;
+  --grey-300: #dbdbdb;
+  --grey-250: #cecece;
+  --grey-200: #cccccc;
+  --grey-100: #e6e6e6;
+  --grey-50: #f2f2f2;
+
+  --blue-grey-600: #434445;
+  --blue-grey-500: #7f8285;
+  --blue-grey-50: #f0f2f3;
+  --white-500: #ffffff;
+  --red-500: #ff3333;
+  --orange-500: #ff9a00;
+  --green-500: #00b341;
+
+  --yellow-900: #b38f00;
+  --yellow-600: #f2c200;
+  --yellow-500: #ffcc00;
+}
+
+:root {
+  --color-bg-base: var(--white-500);
+  --color-bg-footer: var(--blue-grey-50);
+
+  --color-bg-control: var(--grey-100);
+  --color-bg-control-hovered: var(--grey-300);
+  --color-bg-control-disabled: var(--grey-50);
+  --color-border-control-focused: var(--grey-500);
+
+  --color-bg-action: var(--yellow-500);
+  --color-bg-action-hovered: var(--yellow-600);
+  --color-border-action-focused: var(--yellow-900);
+
+  --color-text: var(--black-500);
+  --color-text-secondary: var(--grey-600);
+  --color-text-ghost: var(--grey-200);
+  --color-text-disabled: #b9b9b9;
+
+  --color-bg-input: var(--white-500);
+  --color-border-input: var(--grey-350);
+  --color-border-input-focused: var(--grey-500);
+  --color-text-input-placeholder: var(--grey-200);
+  --color-text-input-label: var(--color-text);
+  --color-text-input-required: var(--red-500);
+  --color-text-input-append: var(--blue-grey-600);
+}
+
+/* Typography */
+
+:root {
+  --typo-size-m: 13px;
+  --typo-size-l: 15px;
+  --typo-size-xl: 24px;
+
+  --typo-line-height-m: 15px;
+  --typo-line-height-l: 20px;
+  --typo-line-height-xl: 28px;
+}
+
+/* Spaces & border */
+:root {
+  --space-xxxxs: 2px;
+  --space-xxxs: 4px;
+  --space-xxs: 6px;
+  --space-xs: 8px;
+  --space-s: 10px;
+  --space-m: 12px;
+  --space-l: 16px;
+  --space-xl: 18px;
+  --space-xxl: 20px;
+  --space-xxxl: 48px;
+  --space-xxxxl: 56px;
+
+  --border-radius-m: 4px;
+  --border-radius-l: 6px;
+
+  --space-input-v: var(--space-s);
+  --space-input-h: var(--space-m);
+}
+
+/* Shadows */
+:root {
+  --shadow-lightblue-10: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
+  --shadow-lightblue-40: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
+
+  --card-shadow: var(--shadow-lightblue-10);
+  --card-shadow-hovered: var(--shadow-lightblue-40);
 }
