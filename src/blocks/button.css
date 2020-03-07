@@ -1,9 +1,9 @@
 .button {
   background-color: var(--color-bg-control);
   border: 2px solid var(--color-bg-control);
-  padding: 0 var(--space-xxl);
+  padding: 0 var(--space-xl);
   border-radius: var(--border-radius-m);
-  line-height: 36px;
+  line-height: 32px;
   cursor: pointer;
   max-width: 100%;
   color: var(--color-text);
@@ -32,14 +32,16 @@
   --color-border-control-focused: var(--color-border-action-focused);
 }
 
-.button_mini {
-  line-height: 28px;
+.button_size_small {
+  line-height: 24px;
 }
 
 .button_icon {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  padding-right: var(--space-m);
+  padding-left: var(--space-xxs);
 }
 
 .button_icon .button__text {
@@ -53,4 +55,10 @@
   .button_icon .button__text {
     display: none;
   }
+}
+.button_icon-only {
+  padding: var(--space-xxs);
+}
+.button_icon-only .button__text {
+  display: none;
 }

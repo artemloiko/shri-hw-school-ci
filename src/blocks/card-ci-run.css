@@ -6,9 +6,11 @@
   flex-flow: row wrap;
   justify-content: space-between;
   box-shadow: var(--card-shadow);
+  color: var(--color-text);
 }
-
+.card-ci-run:not(.card-ci-run_details):focus,
 .card-ci-run:not(.card-ci-run_details):hover {
+  outline: none;
   cursor: pointer;
   box-shadow: var(--card-shadow-hovered);
 }
