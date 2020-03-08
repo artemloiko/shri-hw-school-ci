@@ -1,16 +1,17 @@
-.heading-ci-run {
+.card-ci-run__heading {
   display: flex;
   flex-flow: row nowrap;
   line-height: 20px;
   padding-right: var(--space-xs);
 }
 
-.heading-ci-run__number {
+.card-ci-run__heading-number {
   font-size: 18px;
   margin-right: var(--space-xxxs);
 }
 
-.heading-ci-run__message {
+.card-ci-run__heading-message {
+  color: var(--color-text);
   font-size: 15px;
   overflow: hidden;
   display: -webkit-box;
@@ -18,28 +19,30 @@
   -webkit-box-orient: vertical;
 }
 
-.heading-ci-run_status_success .heading-ci-run__number {
+.card-ci-run_details .card-ci-run__heading-message {
+  display: block;
+}
+.card-ci-run_status_success .card-ci-run__heading-number {
   color: var(--color-text-success);
 }
-.heading-ci-run_status_fail .heading-ci-run__number {
+.card-ci-run_status_fail .card-ci-run__heading-number {
   color: var(--color-text-fail);
 }
-.heading-ci-run_status_running .heading-ci-run__number {
+.card-ci-run_status_running .card-ci-run__heading-number {
   color: var(--color-text-running);
 }
 
 @media (max-width: 480px) {
-  .heading-ci-run {
+  .card-ci-run__heading {
     flex-direction: column;
     padding-right: 0;
   }
-  .heading-ci-run__number {
+  .card-ci-run__heading-number {
     font-size: 16px;
     line-height: 16px;
     margin-bottom: var(--space-xs);
   }
-  .heading-ci-run__message {
-    white-space: normal;
+  .card-ci-run__heading-message {
     display: block;
   }
 }

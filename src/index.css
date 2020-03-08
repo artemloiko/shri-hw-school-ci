@@ -97,9 +97,11 @@
   --border-radius-m: 4px;
   --border-radius-l: 6px;
 
+  /* Возможно это задумка дизайнера, то что паддинги инпута немного отличаются тем самым сдвигая его.
+  Но в базовых константах все отступы кратны двойки, поэтому этот отступ делаю через calc*/
   --space-input-top: calc(var(--space-xs) + 1px);
   --space-input-bottom: var(--space-xs);
-  --space-input-h: calc(var(--space-s) + 1px);
+  --space-input-h: calc(var(--space-s));
 }
 
 /* Shadows */
