@@ -106,8 +106,8 @@
 
 /* Shadows */
 :root {
-  --shadow-lightblue-10: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
-  --shadow-lightblue-40: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
+  --shadow-lightblue-10: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
+  --shadow-lightblue-40: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
 
   --card-shadow: var(--shadow-lightblue-10);
   --card-shadow-hovered: var(--shadow-lightblue-40);

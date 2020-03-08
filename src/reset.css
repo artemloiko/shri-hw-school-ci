@@ -60,3 +60,7 @@ table {
 a {
   text-decoration: none;
 }
+
+button::-moz-focus-inner {
+  border: 0;
+}
