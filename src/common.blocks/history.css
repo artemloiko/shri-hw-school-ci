@@ -1,7 +1,5 @@
 .history {
   width: 100%;
-  margin-top: var(--space-xs);
-  margin-bottom: var(--space-xxl);
   display: flex;
   flex-direction: column;
 }
@@ -15,9 +13,6 @@
 }
 
 @media (max-width: 480px) {
-  .history {
-    margin-bottom: var(--space-l);
-  }
   .history__pagination {
     align-self: stretch;
   }
