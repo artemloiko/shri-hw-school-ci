@@ -1,3 +1,24 @@
+.typography {
+  font-family: 'YS Text', Arial, Helvetica, sans-serif;
+  color: var(--color-text);
+}
+
+.typography__elem {
+  margin-top: var(--space-xs);
+}
+
+.typography__headline4 {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: bold;
+}
+
+.typography__subtitle2 {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--blue-grey-500);
+}
+
 @font-face {
   font-family: 'YS Text';
   src: url('//yastatic.net/islands/_/PyVcRbwHetz0gOVWLonWH7Od8zM.woff2') format('woff2'),
@@ -21,9 +42,4 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
-}
-
-.typography {
-  font-family: 'YS Text', Arial, Helvetica, sans-serif;
-  color: var(--color-text);
 }
