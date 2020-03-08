@@ -4,7 +4,7 @@ const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const browserSync = require('browser-sync').create();
 
-const cssFileOrder = ['src/reset.css', 'src/index.css', 'src/**/*.css'];
+const cssFileOrder = ['src/reset.css', 'src/index.css', 'src/base.blocks/**/*.css', 'src/**/*.css'];
 
 function build() {
   return src(cssFileOrder)
