@@ -19,6 +19,7 @@
   margin: 0;
   display: flex;
   flex-flow: row wrap;
+  flex: 1;
 }
 .footer__nav-item {
   margin-right: var(--space-m);

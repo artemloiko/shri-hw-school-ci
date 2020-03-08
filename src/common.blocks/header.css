@@ -11,6 +11,10 @@
 
 .header__heading {
   color: var(--blue-grey-500);
+  align-self: center;
+  /* text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; */
 }
 
 .header__control-group {
