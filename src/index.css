@@ -27,7 +27,6 @@
 
 :root {
   --color-bg-base: var(--white-500);
-  --color-bg-footer: var(--blue-grey-50);
 
   --color-bg-control: var(--grey-100);
   --color-bg-control-hovered: var(--grey-300);
@@ -41,7 +40,9 @@
   --color-text: var(--black-500);
   --color-text-secondary: var(--grey-600);
   --color-text-ghost: var(--grey-200);
+
   --color-text-disabled: #b9b9b9;
+  --color-text-link-hovered: var(--red-500);
 
   --color-text-success: var(--green-500);
   --color-text-fail: var(--red-500);
@@ -54,6 +55,9 @@
   --color-text-input-label: var(--color-text);
   --color-text-input-required: var(--red-500);
   --color-text-input-append: var(--blue-grey-600);
+
+  --color-bg-footer: var(--blue-grey-50);
+  --color-text-footer: var(--blue-grey-500);
 }
 
 /* Typography */
@@ -61,11 +65,13 @@
 :root {
   --typo-size-m: 13px;
   --typo-size-l: 15px;
-  --typo-size-xl: 24px;
+  --typo-size-xl: 18px;
+  --typo-size-xxl: 24px;
 
   --typo-line-height-m: 15px;
   --typo-line-height-l: 20px;
-  --typo-line-height-xl: 28px;
+  --typo-line-height-xl: 22px;
+  --typo-line-height-xxl: 28px;
 }
 
 /* Spaces & border */
@@ -82,6 +88,10 @@
   --space-xxxl: 24px;
   --space-xxxxl: 36px;
   --space-xxxxxl: 56px;
+  --space-xxxxxxl: 100px;
+
+  --container-space-desktop: var(--space-xxxxxxl);
+  --container-space-mobile: var(--space-l);
 
   --border-radius-m: 4px;
   --border-radius-l: 6px;

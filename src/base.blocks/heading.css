@@ -1,0 +1,16 @@
+.heading {
+  color: var(--color-text);
+}
+
+.heading_h1 {
+  font-size: var(--typo-size-xxl);
+  line-height: var(--typo-line-height-xxl);
+  letter-spacing: 0.25px;
+}
+
+@media (max-width: 480px) {
+  .heading_h1 {
+    font-size: var(--typo-size-xl);
+    line-height: var(--typo-line-height-xl);
+  }
+}

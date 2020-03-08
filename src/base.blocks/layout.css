@@ -5,7 +5,7 @@
   margin: 0 auto;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .container {
     padding-left: var(--container-space-mobile);
     padding-right: var(--container-space-mobile);
