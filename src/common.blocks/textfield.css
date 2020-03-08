@@ -9,6 +9,9 @@
 
 .textfield__label {
   color: var(--color-text-input-label);
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.06px;
 }
 
 .textfield_required .textfield__label::after {
@@ -28,4 +31,6 @@
 
 .textfield_row .textfield__append {
   color: var(--color-text-input-append);
+  font-size: 13px;
+  line-height: 18px;
 }

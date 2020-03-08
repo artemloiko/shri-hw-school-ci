@@ -3,7 +3,7 @@
   color: var(--color-text);
 }
 
-.typography__elem {
+.typography__elem:not(:first-child) {
   margin-top: var(--space-xs);
 }
 

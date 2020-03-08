@@ -24,6 +24,7 @@
   max-width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
+  text-align: center;
 }
 
 .button_action {

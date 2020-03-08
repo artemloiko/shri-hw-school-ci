@@ -96,8 +96,9 @@
   --border-radius-m: 4px;
   --border-radius-l: 6px;
 
-  --space-input-v: var(--space-s);
-  --space-input-h: var(--space-m);
+  --space-input-top: calc(var(--space-xs) + 1px);
+  --space-input-bottom: var(--space-xs);
+  --space-input-h: calc(var(--space-s) + 1px);
 }
 
 /* Shadows */
