@@ -1,0 +1,27 @@
+.form {
+  width: 100%;
+}
+
+.form__submit-group {
+  display: flex;
+  flex-flow: row wrap;
+  margin-top: var(--space-xxxl);
+}
+.form__submit-group-elem:not(:first-child) {
+  margin-left: var(--space-xs);
+}
+
+@media (max-width: 480px) {
+  .form__submit-group {
+    flex-direction: column;
+    margin-top: var(--space-xxl);
+  }
+  .form__submit-group-elem:not(:first-child) {
+    margin-left: 0;
+    margin-top: var(--space-m);
+  }
+}
+
+.form__textfield:not(:first-child) {
+  margin-top: var(--space-xl);
+}
