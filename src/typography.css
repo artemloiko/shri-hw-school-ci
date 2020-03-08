@@ -7,6 +7,11 @@
   margin-top: var(--space-xs);
 }
 
+.typography__body1 {
+  font-size: 13px;
+  line-height: 125%;
+}
+
 .typography__headline4 {
   font-size: 15px;
   line-height: 20px;
