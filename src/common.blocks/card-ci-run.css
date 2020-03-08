@@ -7,6 +7,7 @@
   justify-content: space-between;
   box-shadow: var(--card-shadow);
   color: var(--color-text);
+  border-radius: var(--border-radius-l);
 }
 .card-ci-run:not(.card-ci-run_details):focus,
 .card-ci-run:not(.card-ci-run_details):hover {

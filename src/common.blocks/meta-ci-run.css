@@ -5,7 +5,7 @@
 }
 
 .meta-ci-run__elem:not(:first-child) {
-  margin-top: var(--space-xs);
+  margin-top: var(--space-m);
 }
 
 @media (max-width: 768px) {
@@ -15,6 +15,10 @@
     border-top: 1px solid var(--blue-grey-50);
     margin-top: var(--space-xs);
   }
+  .meta-ci-run__elem:not(:first-child) {
+    margin-top: var(--space-xs);
+  }
+
   .meta-ci-run__elem {
     margin-top: var(--space-xs);
     margin-right: var(--space-xs);

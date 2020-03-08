@@ -2,6 +2,7 @@
   display: flex;
   flex-flow: row nowrap;
   line-height: 20px;
+  padding-right: var(--space-xs);
 }
 
 .heading-ci-run__number {
@@ -30,6 +31,7 @@
 @media (max-width: 480px) {
   .heading-ci-run {
     flex-direction: column;
+    padding-right: 0;
   }
   .heading-ci-run__number {
     font-size: 16px;
@@ -38,5 +40,6 @@
   }
   .heading-ci-run__message {
     white-space: normal;
+    display: block;
   }
 }
