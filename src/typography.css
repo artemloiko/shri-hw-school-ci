@@ -12,6 +12,21 @@
   line-height: 125%;
 }
 
+.typography__headline1 {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: 0.25px;
+  color: var(--blue-grey-500);
+}
+
+.typography__headline2 {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: 0.25px;
+}
+
 .typography__headline4 {
   font-size: 15px;
   line-height: 20px;
@@ -22,6 +37,17 @@
   font-size: 13px;
   line-height: 18px;
   color: var(--blue-grey-500);
+}
+
+@media (max-width: 480px) {
+  .typography__headline1 {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .typography__headline2 {
+    font-size: 18px;
+    line-height: 22px;
+  }
 }
 
 @font-face {
