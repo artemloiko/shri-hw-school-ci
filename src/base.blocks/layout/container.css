@@ -1,4 +1,6 @@
 .container {
+  flex: 1;
+  display: flex;
   max-width: 1024px;
   padding-left: var(--container-space-desktop);
   padding-right: var(--container-space-desktop);
@@ -10,10 +12,4 @@
     padding-left: var(--container-space-mobile);
     padding-right: var(--container-space-mobile);
   }
-}
-
-.page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
 }
