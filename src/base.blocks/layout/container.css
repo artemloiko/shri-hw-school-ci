@@ -5,6 +5,7 @@
   padding-left: var(--container-space-desktop);
   padding-right: var(--container-space-desktop);
   margin: 0 auto;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
