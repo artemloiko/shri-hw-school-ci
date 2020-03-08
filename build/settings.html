@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>School CI server | Settings</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="typography page">
+    <header class="header">
+      <div class="container header__container">
+        <h1 class="header__heading typography__headline1">School CI server</h1>
+      </div>
+    </header>
+
+    <div class="container page__content">
+      <div class="settings">
+        <div class="typography settings__elem">
+          <h4 class="typography__elem typography__headline4">Settings</h4>
+          <p class="typography__elem typography__subtitle2">
+            Configure repository connection and synchronization settings.
+          </p>
+        </div>
+
+        <form class="form settings__elem">
+          <div class="form__input-group">
+            <div class="textfield textfield_required form__textfield">
+              <label class="textfield__label" for="repository">GitHub repository</label>
+              <div class="input input_fullwidth input_clear textfield__input">
+                <input
+                  type="text"
+                  class="input__input"
+                  placeholder="user-name/repo-name"
+                  id="repository"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="textfield form__textfield">
+              <label class="textfield__label" for="command">Build command</label>
+              <div class="input input_fullwidth input_clear textfield__input">
+                <input
+                  type="text"
+                  class="input__input"
+                  placeholder="npm run build"
+                  id="command"
+                  value="npm ci && npm run build"
+                />
+                <div class="input__clear-btn" tabindex="0"></div>
+              </div>
+            </div>
+
+            <div class="textfield form__textfield">
+              <label class="textfield__label" for="branch">Main branch</label>
+              <div class="input input_fullwidth input_clear textfield__input">
+                <input
+                  type="text"
+                  class="input__input"
+                  placeholder="master"
+                  id="branch"
+                  value="master |"
+                />
+                <div class="input__clear-btn" tabindex="0"></div>
+              </div>
+            </div>
+
+            <div class="textfield textfield_row form__textfield">
+              <label class="textfield__label" for="synchronizeTime">Synchronize every</label>
+              <div class="input input_counter textfield__input">
+                <input
+                  type="text"
+                  class="input__input"
+                  placeholder="10"
+                  id="synchronizeTime"
+                  value="10"
+                />
+              </div>
+              <div class="textfield__append">minutes</div>
+            </div>
+          </div>
+
+          <div class="form__submit-group">
+            <button type="submit" class="button button_action form__submit-group-elem">
+              <div class="button__text">Save</div>
+            </button>
+            <a href="/" class="button form__submit-group-elem"
+              ><div class="button__text ">Cancel</div></a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container footer__container">
+        <ul class="footer__nav">
+          <li class="footer__nav-item">
+            <a href="#" class="footer__link link">Support</a>
+          </li>
+          <li class="footer__nav-item">
+            <a href="#" class="footer__link link">Learning</a>
+          </li>
+        </ul>
+        <div class="footer__copy">
+          &copy; 2020 Artem Loiko
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
