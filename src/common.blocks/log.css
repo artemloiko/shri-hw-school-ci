@@ -1,0 +1,24 @@
+.log {
+  width: 100%;
+  max-width: 1024px;
+  margin: var(--space-m) auto 0;
+  padding: 0 var(--container-space-desktop);
+}
+
+.log__pre {
+  font-size: 10px;
+  line-height: 20px;
+  font-family: Hack, monospace;
+  background: var(--color-bg-log);
+  padding: var(--space-xs) var(--space-m);
+  border-radius: var(--border-radius-l);
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+@media (max-width: 768px) {
+  .log {
+    padding: 0;
+    margin-top: var(--space-l);
+  }
+}
