@@ -4,10 +4,8 @@
 
   --grey-600: #595959;
   --grey-500: #b3b3b3;
-  --grey-400: #cccccc;
-  --grey-350: #d9d9d9;
+  --grey-400: #d9d9d9;
   --grey-300: #dbdbdb;
-  --grey-250: #cecece;
   --grey-200: #cccccc;
   --grey-100: #e6e6e6;
   --grey-50: #f2f2f2;
@@ -15,6 +13,7 @@
   --blue-grey-600: #434445;
   --blue-grey-500: #7f8285;
   --blue-grey-50: #f0f2f3;
+
   --white-500: #ffffff;
   --red-500: #ff3333;
   --orange-500: #ff9a00;
@@ -50,7 +49,7 @@
   --color-text-running: var(--orange-500);
 
   --color-bg-input: var(--white-500);
-  --color-border-input: var(--grey-350);
+  --color-border-input: var(--grey-400);
   --color-border-input-focused: var(--grey-500);
   --color-text-input-placeholder: var(--grey-200);
   --color-text-input-label: var(--color-text);
@@ -64,18 +63,16 @@
 /* Typography */
 
 :root {
-  --typo-size-m: 13px;
-  --typo-size-l: 15px;
+  --typo-size-xxs: 10px;
+  --typo-size-xs: 12px;
+  --typo-size-s: 13px;
+  --typo-size-m: 15px;
+  --typo-size-l: 16px;
   --typo-size-xl: 18px;
   --typo-size-xxl: 24px;
-
-  --typo-line-height-m: 15px;
-  --typo-line-height-l: 20px;
-  --typo-line-height-xl: 22px;
-  --typo-line-height-xxl: 28px;
 }
 
-/* Spaces & border */
+/* Spaces */
 :root {
   --space-xxxxs: 2px;
   --space-xxxs: 4px;
@@ -91,11 +88,11 @@
   --space-xxxxxl: 56px;
   --space-xxxxxxl: 100px;
 
-  --container-space-desktop: var(--space-xxxxxxl);
-  --container-space-mobile: var(--space-l);
+  --space-container-desktop: var(--space-xxxxxxl);
+  --space-container-mobile: var(--space-l);
 
-  --border-radius-m: 4px;
-  --border-radius-l: 6px;
+  --space-header-v: var(--space-s);
+  --space-footer-v: var(--space-xs);
 
   /* Возможно это задумка дизайнера, то что паддинги инпута немного отличаются тем самым сдвигая его.
   Но в базовых константах все отступы кратны двойки, поэтому этот отступ делаю через calc*/
@@ -104,8 +101,19 @@
   --space-input-h: calc(var(--space-s));
 }
 
-/* Shadows */
+/* #мойвопрос Насколько хорош такой подход? */
+@media (max-width: 480px) {
+  :root {
+    --space-header-v: var(--space-m);
+    --space-footer-v: var(--space-m);
+  }
+}
+
+/* Other */
 :root {
+  --border-radius-m: 4px;
+  --border-radius-l: 6px;
+
   --shadow-lightblue-10: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
   --shadow-lightblue-40: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
 

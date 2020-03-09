@@ -1,5 +1,6 @@
 .link {
   color: var(--color-text);
+  letter-spacing: 0.06px;
 }
 
 .link:hover {

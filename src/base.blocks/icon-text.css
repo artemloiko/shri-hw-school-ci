@@ -6,11 +6,13 @@
 .icon-text__icon {
   opacity: 0.3;
 }
+
 .icon-text__text {
   margin-left: var(--space-xxxs);
-  font-size: var(--typo-size-m);
-  line-height: 16px;
+  font-size: var(--typo-size-s);
+  line-height: 1.25;
 }
+
 .icon-text__secondary-text {
   color: var(--color-text-secondary);
 }

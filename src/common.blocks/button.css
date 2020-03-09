@@ -1,12 +1,14 @@
 .button {
+  max-width: 100%;
+  padding: 0 var(--space-xl);
+  color: var(--color-text);
+
   background-color: var(--color-bg-control);
   border: 2px solid var(--color-bg-control);
-  padding: 0 var(--space-xl);
   border-radius: var(--border-radius-m);
+
   line-height: 32px;
   cursor: pointer;
-  max-width: 100%;
-  color: var(--color-text);
   text-decoration: none;
 }
 
@@ -20,11 +22,12 @@
 }
 
 .button__text {
-  font-size: var(--typo-size-m);
+  font-size: var(--typo-size-s);
   max-width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
   text-align: center;
+  white-space: nowrap;
 }
 
 .button_action {
@@ -45,7 +48,6 @@
   padding-right: var(--space-m);
   padding-left: var(--space-xxs);
 }
-
 .button_icon .button__text {
   margin-left: var(--space-xxs);
 }
@@ -58,6 +60,7 @@
     display: none;
   }
 }
+
 .button_icon-only {
   padding: var(--space-xxs);
 }

@@ -8,45 +8,45 @@
 }
 
 .typography__body1 {
-  font-size: 13px;
-  line-height: 125%;
+  font-size: var(--typo-size-s);
+  line-height: 1.25;
 }
 
 .typography__headline1 {
   font-weight: 500;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: var(--typo-size-xxl);
+  line-height: 1.17;
   letter-spacing: 0.25px;
   color: var(--blue-grey-500);
 }
 
 .typography__headline2 {
   font-weight: 500;
-  font-size: 24px;
-  line-height: 30px;
+  font-size: var(--typo-size-xxl);
+  line-height: 1.25;
   letter-spacing: 0.25px;
 }
 
 .typography__headline4 {
-  font-size: 15px;
-  line-height: 20px;
-  font-weight: bold;
+  font-size: var(--typo-size-m);
+  line-height: 1.34;
+  font-weight: 600;
 }
 
 .typography__subtitle2 {
-  font-size: 13px;
-  line-height: 18px;
+  font-size: var(--typo-size-s);
+  line-height: 1.3847;
   color: var(--blue-grey-500);
 }
 
 @media (max-width: 480px) {
   .typography__headline1 {
-    font-size: 18px;
-    line-height: 22px;
+    font-size: var(--typo-size-xl);
+    line-height: 1.23;
   }
   .typography__headline2 {
-    font-size: 18px;
-    line-height: 22px;
+    font-size: var(--typo-size-xl);
+    line-height: 1.23;
   }
 }
 

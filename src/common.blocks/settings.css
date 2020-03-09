@@ -4,7 +4,7 @@
 }
 
 .settings__elem:not(:first-child) {
-  margin-top: var(--space-xxl);
+  margin-top: var(--space-xxxl);
 }
 
 @media (max-width: 480px) {

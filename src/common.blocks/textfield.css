@@ -9,8 +9,8 @@
 
 .textfield__label {
   color: var(--color-text-input-label);
-  font-size: 13px;
-  line-height: 18px;
+  font-size: var(--typo-size-s);
+  line-height: 1.3847;
   letter-spacing: 0.06px;
 }
 
@@ -31,6 +31,6 @@
 
 .textfield_row .textfield__append {
   color: var(--color-text-input-append);
-  font-size: 13px;
-  line-height: 18px;
+  font-size: var(--typo-size-s);
+  line-height: 1.3847;
 }
