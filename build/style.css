@@ -71,10 +71,8 @@ button::-moz-focus-inner {
 
   --grey-600: #595959;
   --grey-500: #b3b3b3;
-  --grey-400: #cccccc;
-  --grey-350: #d9d9d9;
+  --grey-400: #d9d9d9;
   --grey-300: #dbdbdb;
-  --grey-250: #cecece;
   --grey-200: #cccccc;
   --grey-100: #e6e6e6;
   --grey-50: #f2f2f2;
@@ -82,6 +80,7 @@ button::-moz-focus-inner {
   --blue-grey-600: #434445;
   --blue-grey-500: #7f8285;
   --blue-grey-50: #f0f2f3;
+
   --white-500: #ffffff;
   --red-500: #ff3333;
   --orange-500: #ff9a00;
@@ -117,7 +116,7 @@ button::-moz-focus-inner {
   --color-text-running: var(--orange-500);
 
   --color-bg-input: var(--white-500);
-  --color-border-input: var(--grey-350);
+  --color-border-input: var(--grey-400);
   --color-border-input-focused: var(--grey-500);
   --color-text-input-placeholder: var(--grey-200);
   --color-text-input-label: var(--color-text);
@@ -131,18 +130,16 @@ button::-moz-focus-inner {
 /* Typography */
 
 :root {
-  --typo-size-m: 13px;
-  --typo-size-l: 15px;
+  --typo-size-xxs: 10px;
+  --typo-size-xs: 12px;
+  --typo-size-s: 13px;
+  --typo-size-m: 15px;
+  --typo-size-l: 16px;
   --typo-size-xl: 18px;
   --typo-size-xxl: 24px;
-
-  --typo-line-height-m: 15px;
-  --typo-line-height-l: 20px;
-  --typo-line-height-xl: 22px;
-  --typo-line-height-xxl: 28px;
 }
 
-/* Spaces & border */
+/* Spaces */
 :root {
   --space-xxxxs: 2px;
   --space-xxxs: 4px;
@@ -158,11 +155,11 @@ button::-moz-focus-inner {
   --space-xxxxxl: 56px;
   --space-xxxxxxl: 100px;
 
-  --container-space-desktop: var(--space-xxxxxxl);
-  --container-space-mobile: var(--space-l);
+  --space-container-desktop: var(--space-xxxxxxl);
+  --space-container-mobile: var(--space-l);
 
-  --border-radius-m: 4px;
-  --border-radius-l: 6px;
+  --space-header-v: var(--space-s);
+  --space-footer-v: var(--space-xs);
 
   /* Возможно это задумка дизайнера, то что паддинги инпута немного отличаются тем самым сдвигая его.
   Но в базовых константах все отступы кратны двойки, поэтому этот отступ делаю через calc*/
@@ -171,8 +168,19 @@ button::-moz-focus-inner {
   --space-input-h: calc(var(--space-s));
 }
 
-/* Shadows */
+/* #мойвопрос Насколько хорош такой подход? */
+@media (max-width: 480px) {
+  :root {
+    --space-header-v: var(--space-m);
+    --space-footer-v: var(--space-m);
+  }
+}
+
+/* Other */
 :root {
+  --border-radius-m: 4px;
+  --border-radius-l: 6px;
+
   --shadow-lightblue-10: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
   --shadow-lightblue-40: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
 
@@ -212,11 +220,13 @@ button::-moz-focus-inner {
 .icon-text__icon {
   opacity: 0.3;
 }
+
 .icon-text__text {
   margin-left: var(--space-xxxs);
-  font-size: var(--typo-size-m);
-  line-height: 16px;
+  font-size: var(--typo-size-s);
+  line-height: 1.25;
 }
+
 .icon-text__secondary-text {
   color: var(--color-text-secondary);
 }
@@ -274,7 +284,6 @@ button::-moz-focus-inner {
 .input_fullwidth {
   width: 100%;
 }
-
 .input_counter {
   width: 52px;
 }
@@ -288,8 +297,8 @@ button::-moz-focus-inner {
   border: 2px solid var(--color-border-input);
   border-radius: var(--border-radius-m);
 
-  font-size: var(--typo-size-m);
-  line-height: var(--typo-line-height-m);
+  font-size: var(--typo-size-s);
+  line-height: 1.1539;
 
   color: var(--color-text);
   background-color: var(--color-bg-input);
@@ -302,14 +311,6 @@ button::-moz-focus-inner {
 
 .input__input::placeholder {
   color: var(--color-text-input-placeholder);
-}
-
-.input_clear .input__input {
-  padding-right: var(--clear-button-width);
-}
-
-.input_clear .input__clear-btn {
-  display: block;
 }
 
 .input__clear-btn {
@@ -327,8 +328,21 @@ button::-moz-focus-inner {
   background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 16C3.6 16 0 12.4 0 8C0 3.6 3.6 0 8 0C12.4 0 16 3.6 16 8C16 12.4 12.4 16 8 16ZM12 5.12L10.88 4L8 6.88L5.12 4L4 5.12L6.88 8L4 10.88L5.12 12L8 9.12L10.88 12L12 10.88L9.12 8L12 5.12Z' fill='%23CCCCCC'/%3E%3C/svg%3E%0A");
 }
 
+.input_clear .input__input {
+  padding-right: var(--clear-button-width);
+}
+
+.input_clear .input__clear-btn {
+  display: block;
+}
+
+.input__input:placeholder-shown ~ .input__clear-btn {
+  display: none;
+}
+
 .link {
   color: var(--color-text);
+  letter-spacing: 0.06px;
 }
 
 .link:hover {
@@ -341,16 +355,16 @@ button::-moz-focus-inner {
   align-items: flex-start;
   justify-content: flex-start;
   max-width: 1024px;
-  padding-left: var(--container-space-desktop);
-  padding-right: var(--container-space-desktop);
+  padding-left: var(--space-container-desktop);
+  padding-right: var(--space-container-desktop);
   margin: 0 auto;
   width: 100%;
 }
 
 @media (max-width: 768px) {
   .container {
-    padding-left: var(--container-space-mobile);
-    padding-right: var(--container-space-mobile);
+    padding-left: var(--space-container-mobile);
+    padding-right: var(--space-container-mobile);
   }
 }
 
@@ -435,13 +449,14 @@ button::-moz-focus-inner {
 }
 
 .card-ci-run__heading-number {
-  font-size: 18px;
+  font-weight: 500;
+  font-size: var(--typo-size-xl);
   margin-right: var(--space-xxxs);
 }
 
 .card-ci-run__heading-message {
   color: var(--color-text);
-  font-size: 15px;
+  font-size: var(--typo-size-m);
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -467,8 +482,8 @@ button::-moz-focus-inner {
     padding-right: 0;
   }
   .card-ci-run__heading-number {
-    font-size: 16px;
-    line-height: 16px;
+    font-size: var(--typo-size-l);
+    line-height: 1;
     margin-bottom: var(--space-xs);
   }
   .card-ci-run__heading-message {
@@ -524,45 +539,45 @@ button::-moz-focus-inner {
 }
 
 .typography__body1 {
-  font-size: 13px;
-  line-height: 125%;
+  font-size: var(--typo-size-s);
+  line-height: 1.25;
 }
 
 .typography__headline1 {
   font-weight: 500;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: var(--typo-size-xxl);
+  line-height: 1.17;
   letter-spacing: 0.25px;
   color: var(--blue-grey-500);
 }
 
 .typography__headline2 {
   font-weight: 500;
-  font-size: 24px;
-  line-height: 30px;
+  font-size: var(--typo-size-xxl);
+  line-height: 1.25;
   letter-spacing: 0.25px;
 }
 
 .typography__headline4 {
-  font-size: 15px;
-  line-height: 20px;
-  font-weight: bold;
+  font-size: var(--typo-size-m);
+  line-height: 1.34;
+  font-weight: 600;
 }
 
 .typography__subtitle2 {
-  font-size: 13px;
-  line-height: 18px;
+  font-size: var(--typo-size-s);
+  line-height: 1.3847;
   color: var(--blue-grey-500);
 }
 
 @media (max-width: 480px) {
   .typography__headline1 {
-    font-size: 18px;
-    line-height: 22px;
+    font-size: var(--typo-size-xl);
+    line-height: 1.23;
   }
   .typography__headline2 {
-    font-size: 18px;
-    line-height: 22px;
+    font-size: var(--typo-size-xl);
+    line-height: 1.23;
   }
 }
 
@@ -592,14 +607,16 @@ button::-moz-focus-inner {
 }
 
 .button {
+  max-width: 100%;
+  padding: 0 var(--space-xl);
+  color: var(--color-text);
+
   background-color: var(--color-bg-control);
   border: 2px solid var(--color-bg-control);
-  padding: 0 var(--space-xl);
   border-radius: var(--border-radius-m);
+
   line-height: 32px;
   cursor: pointer;
-  max-width: 100%;
-  color: var(--color-text);
   text-decoration: none;
 }
 
@@ -613,11 +630,12 @@ button::-moz-focus-inner {
 }
 
 .button__text {
-  font-size: var(--typo-size-m);
+  font-size: var(--typo-size-s);
   max-width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
   text-align: center;
+  white-space: nowrap;
 }
 
 .button_action {
@@ -638,7 +656,6 @@ button::-moz-focus-inner {
   padding-right: var(--space-m);
   padding-left: var(--space-xxs);
 }
-
 .button_icon .button__text {
   margin-left: var(--space-xxs);
 }
@@ -651,6 +668,7 @@ button::-moz-focus-inner {
     display: none;
   }
 }
+
 .button_icon-only {
   padding: var(--space-xxs);
 }
@@ -668,14 +686,14 @@ button::-moz-focus-inner {
 }
 
 .footer__container {
-  color: var(--color-text-footer);
-
-  padding-top: var(--space-xs);
-  padding-bottom: var(--space-xs);
   display: flex;
   justify-content: space-between;
-  font-size: var(--typo-size-m);
-  line-height: 16px;
+
+  padding-top: var(--space-footer-v);
+  padding-bottom: var(--space-footer-v);
+  color: var(--color-text-footer);
+  font-size: var(--typo-size-s);
+  line-height: 1.25;
 }
 
 .footer__nav {
@@ -685,20 +703,19 @@ button::-moz-focus-inner {
   flex-flow: row wrap;
   flex: 1;
 }
+
 .footer__nav-item {
   margin-right: var(--space-m);
 }
+
 .footer__link {
   color: var(--color-text-footer);
-  letter-spacing: 0.06px;
 }
 
 @media (max-width: 768px) {
   .footer__container {
-    padding-top: var(--space-m);
-    padding-bottom: var(--space-m);
     flex-direction: column;
-    line-height: 18px;
+    line-height: 1.3847;
   }
   .footer__copy {
     margin-top: var(--space-xs);
@@ -740,7 +757,7 @@ button::-moz-focus-inner {
   max-width: 100%;
   margin: 0 auto;
   align-self: center;
-  transform: translateY(-2%);
+  transform: translateY(-5%);
 }
 
 .get-started__image {
@@ -762,8 +779,8 @@ button::-moz-focus-inner {
 }
 
 .header__container {
-  padding-top: var(--space-s);
-  padding-bottom: var(--space-s);
+  padding-top: var(--space-header-v);
+  padding-bottom: var(--space-header-v);
   display: flex;
   justify-content: space-between;
 }
@@ -781,13 +798,6 @@ button::-moz-focus-inner {
 
 .header__control {
   margin-left: var(--space-xs);
-}
-
-@media (max-width: 480px) {
-  .header__container {
-    padding-top: var(--space-m);
-    padding-bottom: var(--space-m);
-  }
 }
 
 .history {
@@ -814,12 +824,12 @@ button::-moz-focus-inner {
   width: 100%;
   max-width: 1024px;
   margin: var(--space-m) auto 0;
-  padding: 0 var(--container-space-desktop);
+  padding: 0 var(--space-container-desktop);
 }
 
 .log__pre {
-  font-size: 10px;
-  line-height: 20px;
+  font-size: var(--typo-size-xxs);
+  line-height: 2;
   font-family: Hack, monospace;
   background: var(--color-bg-log);
   padding: var(--space-xs) var(--space-m);
@@ -833,6 +843,9 @@ button::-moz-focus-inner {
     padding: 0;
     margin-top: var(--space-l);
   }
+  .log__pre {
+    padding: var(--space-xxxs) var(--space-m);
+  }
 }
 
 .settings {
@@ -841,7 +854,7 @@ button::-moz-focus-inner {
 }
 
 .settings__elem:not(:first-child) {
-  margin-top: var(--space-xxl);
+  margin-top: var(--space-xxxl);
 }
 
 @media (max-width: 480px) {
@@ -861,8 +874,8 @@ button::-moz-focus-inner {
 
 .textfield__label {
   color: var(--color-text-input-label);
-  font-size: 13px;
-  line-height: 18px;
+  font-size: var(--typo-size-s);
+  line-height: 1.3847;
   letter-spacing: 0.06px;
 }
 
@@ -883,6 +896,6 @@ button::-moz-focus-inner {
 
 .textfield_row .textfield__append {
   color: var(--color-text-input-append);
-  font-size: 13px;
-  line-height: 18px;
+  font-size: var(--typo-size-s);
+  line-height: 1.3847;
 }
