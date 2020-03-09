@@ -41,6 +41,13 @@
   padding: 0 var(--space-m);
 }
 
+@media (min-width: 481px) {
+  .button_mini-desktop {
+    line-height: 24px;
+    padding: 0 var(--space-m);
+  }
+}
+
 .button_icon {
   display: flex;
   flex-flow: row nowrap;
