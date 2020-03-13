@@ -3,11 +3,6 @@ const path = require('path');
 const apiRoutes = require('./api');
 
 const init = server => {
-  server.get('*', (req, res, next) => {
-    console.log('Request was made to: ' + req.originalUrl);
-    return next();
-  });
-
   server.use(express.static(path.resolve(__dirname, '../../build')));
 
   server.use('/api', apiRoutes);
