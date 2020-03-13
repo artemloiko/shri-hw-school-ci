@@ -13,9 +13,10 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   // settingsService save settings
-  return res.end();
+  // return res.end();
+  next(new Error('post error'));
 });
 
 module.exports = router;

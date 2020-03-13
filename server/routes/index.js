@@ -12,6 +12,15 @@ const init = server => {
     res.status(404);
     return res.sendFile(pathToFile);
   });
+
+  server.use((err, req, res, next) => {
+    res.status(err.status || 500);
+    res.json({
+      error: {
+        message: err.message,
+      },
+    });
+  });
 };
 
 module.exports = {
