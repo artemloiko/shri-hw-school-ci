@@ -14,10 +14,15 @@ const init = server => {
   });
 
   server.use((err, req, res, next) => {
-    res.status(err.status || 500);
+    res.status(err.status || err.response.status || 500);
+    const { status, statusText, headers, data } = err.response;
+    const errResponse = { status, statusText, headers, data };
+
     res.json({
       error: {
         message: err.message,
+
+        response: errResponse,
       },
     });
   });
