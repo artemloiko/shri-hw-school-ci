@@ -1,3 +1,7 @@
+const GitService = require('./gitService');
+
+const gitService = new GitService();
+
 class SettingsService {
   constructor(storage) {
     this.storage = storage;
@@ -8,6 +12,8 @@ class SettingsService {
   }
 
   async setSettings(settingsDTO) {
+    const { repoName } = settingsDTO;
+    await gitService.cloneRepository(repoName);
     return this.storage.setSettings(settingsDTO);
   }
 }

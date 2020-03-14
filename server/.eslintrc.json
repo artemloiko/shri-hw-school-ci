@@ -16,6 +16,8 @@
     "linebreak-style": "off",
     "consistent-return": "off",
     "object-curly-newline": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "class-methods-use-this": "off",
+    "no-unused-vars": "warn"
   }
 }
