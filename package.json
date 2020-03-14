@@ -1,33 +1,21 @@
 {
-  "name": "shri-hw-layout",
-  "version": "0.2.1",
-  "description": "School CI. Layout.",
-  "root": true,
+  "name": "shri-hw-school-ci",
+  "version": "0.0.1",
+  "description": "School CI. SHRI homework project.",
   "scripts": {
-    "lint": "eslint src/ --max-warnings=0",
-    "prettier": "prettier --write src/**/*.*",
-    "build": "gulp build",
-    "watch": "gulp watch",
-    "start": "npm run watch"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artuom130/shri-hw-school-ci.git"
   },
   "author": "Artem Loiko",
   "license": "ISC",
-  "devDependencies": {
-    "autoprefixer": "^9.7.3",
-    "browser-sync": "^2.26.7",
-    "gulp": "^4.0.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-postcss": "^8.0.0",
-    "prettier": "^1.18.2"
+  "bugs": {
+    "url": "https://github.com/artuom130/shri-hw-school-ci/issues"
   },
-  "browserslist": {
-    "production": [
-      "last 2 chrome version",
-      "last 2 firefox version"
-    ],
-    "development": [
-      "last 2 chrome version",
-      "last 2 firefox version"
-    ]
+  "homepage": "https://github.com/artuom130/shri-hw-school-ci#readme",
+  "devDependencies": {
+    "prettier": "^1.19.1"
   }
 }

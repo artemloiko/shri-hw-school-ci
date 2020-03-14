@@ -1,0 +1,33 @@
+{
+  "name": "school-ci-client",
+  "version": "0.2.1",
+  "description": "School CI. Layout.",
+  "root": true,
+  "scripts": {
+    "lint": "eslint src/ --max-warnings=0",
+    "prettier": "prettier --write src/**/*.*",
+    "build": "gulp build",
+    "watch": "gulp watch",
+    "start": "npm run watch"
+  },
+  "author": "Artem Loiko",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^9.7.3",
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^8.0.0",
+    "prettier": "^1.18.2"
+  },
+  "browserslist": {
+    "production": [
+      "last 2 chrome version",
+      "last 2 firefox version"
+    ],
+    "development": [
+      "last 2 chrome version",
+      "last 2 firefox version"
+    ]
+  }
+}
