@@ -6,7 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "start:debug": "nodemon --inspect-brk server.js"
+    "start:debug": "nodemon --inspect-brk server.js",
+    "lint": "eslint ./"
+  },
+  "engines": {
+    "node": ">=12.16.1"
   },
   "author": "Artem Loiko",
   "license": "ISC",
@@ -18,6 +22,10 @@
     "morgan": "^1.9.1"
   },
   "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
     "nodemon": "^2.0.2"
   }
 }
