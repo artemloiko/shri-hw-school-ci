@@ -15,6 +15,10 @@ class Storage {
     const response = await axiosAPI.get('/conf');
     return response.data;
   }
+  async setSettings(settingsDTO) {
+    const response = await axiosAPI.post('/conf', settingsDTO);
+    return response.data;
+  }
 }
 
 const storageInstance = new Storage();
