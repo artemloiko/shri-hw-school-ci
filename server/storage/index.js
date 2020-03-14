@@ -1,6 +1,6 @@
-const config = require('../config');
 const axios = require('axios');
 const https = require('https');
+const config = require('../config');
 
 const axiosAPI = axios.create({
   baseURL: config.storageURL,
@@ -11,8 +11,12 @@ const axiosAPI = axios.create({
 });
 
 class Storage {
+  constructor(axiosInstance) {
+    this.axiosInstance = axiosInstance;
+  }
+
   async getSettings() {
-    const response = await axiosAPI.get('/conf');
+    const response = await this.axiosInstance.get('/conf');
     return response.data;
   }
 
@@ -24,22 +28,22 @@ class Storage {
    * @param {number} settingsDTO.period
    */
   async setSettings(settingsDTO) {
-    const response = await axiosAPI.post('/conf', settingsDTO);
+    const response = await this.axiosInstance.post('/conf', settingsDTO);
     return response.data;
   }
 
   async getBuildsList() {
-    const response = await axiosAPI.get('/build/list');
+    const response = await this.axiosInstance.get('/build/list');
     return response.data;
   }
 
   async getBuildLog(buildId) {
-    const response = await axiosAPI.get(`/build/log?buildId=${buildId}`);
+    const response = await this.axiosInstance.get(`/build/log?buildId=${buildId}`);
     return response.data;
   }
 
   async getBuildDetails(buildId) {
-    const response = await axiosAPI.get(`/build/details?buildId=${buildId}`);
+    const response = await this.axiosInstance.get(`/build/details?buildId=${buildId}`);
     return response.data;
   }
 
@@ -51,7 +55,7 @@ class Storage {
    * @param {string} buildCreateDTO.authorName
    */
   async buildInit(buildCreateDTO) {
-    const response = await axiosAPI.post('/build/request', buildCreateDTO);
+    const response = await this.axiosInstance.post('/build/request', buildCreateDTO);
     return response.data;
   }
 
@@ -61,7 +65,7 @@ class Storage {
    * @param {string} buildStartDTO.dateTime dateTime in ISO format 2020-03-14T07:56:21.843Z
    */
   async buildStart(buildStartDTO) {
-    const response = await axiosAPI.post('/build/start', buildStartDTO);
+    const response = await this.axiosInstance.post('/build/start', buildStartDTO);
     return response.data;
   }
 
@@ -73,7 +77,7 @@ class Storage {
    * @param {string} buildFinishDTO.buildLog
    */
   async buildFinish(buildFinishDTO) {
-    const response = await axiosAPI.post('/build/finish', buildFinishDTO);
+    const response = await this.axiosInstance.post('/build/finish', buildFinishDTO);
     return response.data;
   }
 
@@ -82,11 +86,11 @@ class Storage {
    * @param {string} buildStartDTO.buildId
    */
   async buildCancel(buildCancelDTO) {
-    const response = await axiosAPI.post('/build/Cancel', buildCancelDTO);
+    const response = await this.axiosInstance.post('/build/Cancel', buildCancelDTO);
     return response.data;
   }
 }
 
-const storageInstance = new Storage();
+const storageInstance = new Storage(axiosAPI);
 
 module.exports = storageInstance;

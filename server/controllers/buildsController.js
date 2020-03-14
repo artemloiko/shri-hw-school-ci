@@ -1,10 +1,10 @@
 const express = require('express');
 const storage = require('../storage');
 const BuildsSevice = require('../services/buildsService.js');
-const logError = require('../utils/logger').logError;
+const { logError } = require('../utils/logger');
 
 const buildsService = new BuildsSevice(storage);
-let router = express.Router();
+const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   try {
@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/:commitHash', async (req, res, next) => {
-  const commitHash = req.params.commitHash;
+  // const commitHash = req.params.commitHash;
   try {
     // await buildsService.setBuilds(buildsDTO);
     return res.end();
@@ -27,7 +27,7 @@ router.post('/:commitHash', async (req, res, next) => {
 });
 
 router.get('/:commitHash', async (req, res, next) => {
-  const commitHash = req.params.commitHash;
+  const { commitHash } = req.params.commitHash;
   try {
     const data = await buildsService.getBuildDetails(commitHash);
     return res.json(data);
@@ -38,7 +38,7 @@ router.get('/:commitHash', async (req, res, next) => {
 });
 
 router.get('/:commitHash/logs', async (req, res, next) => {
-  const commitHash = req.params.commitHash;
+  const { commitHash } = req.params.commitHash;
   try {
     const data = await buildsService.getBuildLog(commitHash);
     return res.json(data);

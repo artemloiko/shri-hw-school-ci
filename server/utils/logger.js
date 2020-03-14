@@ -1,5 +1,5 @@
 function logError(message, err) {
-  let errorResponse = undefined;
+  let errorResponse;
   if (err.response) {
     const { status, statusText, headers, data } = err.response;
     errorResponse = { status, statusText, headers, data };

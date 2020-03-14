@@ -2,11 +2,13 @@ class BuildsService {
   constructor(storage) {
     this.storage = storage;
   }
+
   async getBuildsList() {
     return this.storage.getBuildsList();
   }
 
   async addBuild(commitHash) {
+    console.log('commitHash', commitHash);
     // TODO: Get required info about commit by hash
     await this.storage.buildInit();
   }

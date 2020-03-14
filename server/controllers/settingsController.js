@@ -3,7 +3,7 @@ const storage = require('../storage');
 const SettingsSevice = require('../services/settingsService.js');
 
 const settingsService = new SettingsSevice(storage);
-let router = express.Router();
+const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   try {
@@ -24,7 +24,7 @@ router.post('/', async (req, res, next) => {
       'Error /api/settings POST',
       err.message,
       err.stack,
-      err.response && err.response.data
+      err.response && err.response.data,
     );
     next(err);
   }

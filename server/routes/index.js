@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const apiRoutes = require('./api');
 
-const init = server => {
+const init = (server) => {
   server.use(express.static(path.resolve(__dirname, '../../build')));
 
   server.use('/api', apiRoutes);
@@ -13,7 +13,7 @@ const init = server => {
     return res.sendFile(pathToFile);
   });
 
-  server.use((err, req, res, next) => {
+  server.use((err, req, res) => {
     res.status(err.status || err.response.status || 500);
     const { status, statusText, headers, data } = err.response;
     const errResponse = { status, statusText, headers, data };
@@ -29,5 +29,5 @@ const init = server => {
 };
 
 module.exports = {
-  init: init,
+  init,
 };
