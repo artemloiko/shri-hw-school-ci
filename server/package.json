@@ -5,8 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --ignore 'repo/' server.js",
-    "start:debug": "nodemon --ignore 'repo/' --inspect-brk server.js",
+    "start": "nodemon server.js",
+    "start:debug": "nodemon --inspect-brk server.js",
+    "start:prod": "node server.js",
     "lint": "eslint ./"
   },
   "engines": {
@@ -28,5 +29,8 @@
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-node": "^11.0.0",
     "nodemon": "^2.0.2"
+  },
+  "nodemonConfig": {
+    "ignore": ["repo/*"]
   }
 }
