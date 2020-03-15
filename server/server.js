@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
-const config = require('./config');
-const routes = require('./routes');
+const config = require('./src/config');
+const routes = require('./src/routes');
 
 async function bootstrap() {
   const server = express();
