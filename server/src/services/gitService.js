@@ -9,30 +9,35 @@ class GitService {
   async updateRepository(repoName, mainBranch) {
     const currentRepoName = await this.getCurrentRepositoryName();
     if (currentRepoName === repoName) {
-      try {
-        await exec(`cd repo && git fetch && git checkout ${mainBranch} && git pull`);
-      } catch (error) {
-        console.error('GitService.updateRepository error\n', error.stderr);
-        throw new HttpError(
-          `Cannot find branch ${mainBranch} in repo ${repoName}`,
-          400,
-          'GIT_CANNOT_FIND_BRANCH',
-        );
-      }
+      await this.updateBranch(mainBranch);
       return;
     }
 
+    await this.cloneRepository(repoName);
+    await this.updateBranch(mainBranch);
+  }
+
+  async updateBranch(branchName) {
+    try {
+      await exec(`cd repo && git fetch && git checkout ${branchName} && git pull`);
+    } catch (error) {
+      console.error('GitService.updateRepository error\n', error.stderr);
+      throw new HttpError(
+        `Cannot find branch ${branchName} in repo`,
+        400,
+        'GIT_CANNOT_FIND_BRANCH',
+      );
+    }
+  }
+
+  async cloneRepository(repoName) {
     try {
       await fs.remove('./repo');
-      await this.cloneRepository(repoName);
+      await exec(`git clone https://github.com/${repoName}.git repo`);
     } catch (error) {
       console.error('GitService.updateRepository error', error);
       throw new HttpError(`Cannot find ${repoName} repository`, 400, 'GIT_CANNOT_FIND_REPO');
     }
-  }
-
-  async cloneRepository(repoName, mainBranch) {
-    return exec(`git clone -b ${mainBranch} https://github.com/${repoName}.git repo`);
   }
 
   async getCurrentRepositoryName() {
