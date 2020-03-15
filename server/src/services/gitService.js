@@ -1,6 +1,7 @@
 const fs = require('fs-extra');
 const { exec: execCb } = require('child_process');
 const { promisify } = require('util');
+const { HttpError } = require('../utils/customErrors');
 
 const exec = promisify(execCb);
 
@@ -9,9 +10,15 @@ class GitService {
     const currentRepoName = await this.getCurrentRepositoryName();
     if (currentRepoName === repoName) {
       await exec('cd repo && git pull');
-    } else {
+      return;
+    }
+
+    try {
       await fs.remove('./repo');
-      return this.cloneRepository(repoName);
+      await this.cloneRepository(repoName);
+    } catch (error) {
+      console.error('GitService.updateRepository error', error);
+      throw new HttpError(`Cannot find ${repoName} repository`, 400, 'GIT_CANNOT_FIND_REPO');
     }
   }
 
@@ -38,7 +45,8 @@ class GitService {
       const { stdout: hash } = await exec(`git log --pretty=format:"%h" -1 ${branchName}`);
       return hash;
     } catch (error) {
-      console.log('getLastCommitHash error', error);
+      console.error('GitService.getLastCommitHash error\n', error.stderr);
+      throw new HttpError('Cannot find mainBranch in repo', 400, 'GIT_CANNOT_FIND_BRANCH');
     }
   }
 

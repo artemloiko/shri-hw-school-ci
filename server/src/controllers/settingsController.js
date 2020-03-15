@@ -1,7 +1,8 @@
 const express = require('express');
 const storage = require('../storage');
 const SettingsSevice = require('../services/settingsService.js');
-const { logError } = require('../utils/logger');
+const { HttpError } = require('../utils/customErrors');
+const { logResponseError } = require('../utils/logger');
 
 const settingsService = new SettingsSevice(storage);
 const router = express.Router();
@@ -18,12 +19,14 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   const settingsDTO = req.body;
   try {
-    await settingsService.setSettings(settingsDTO);
     await settingsService.updateRepository(settingsDTO);
     await settingsService.addLastCommitToQueue(settingsDTO);
+    await settingsService.setSettings(settingsDTO);
     return res.end();
   } catch (err) {
-    logError('Error /api/settings POST', err);
+    if (!(err instanceof HttpError)) {
+      logResponseError('/api/settings POST error', err);
+    }
     next(err);
   }
 });

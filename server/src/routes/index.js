@@ -13,16 +13,13 @@ const init = (server) => {
     return res.sendFile(pathToFile);
   });
 
-  server.use((err, req, res) => {
-    res.status(err.status || err.response.status || 500);
-    const { status, statusText, headers, data } = err.response;
-    const errResponse = { status, statusText, headers, data };
-
+  // eslint-disable-next-line no-unused-vars
+  server.use((err, req, res, next) => {
+    res.status(err.status || 500);
     res.json({
       error: {
         message: err.message,
-
-        response: errResponse,
+        errorCode: err.errorCode ? err.errorCode : 'INTERNAL_SERVER_ERROR',
       },
     });
   });

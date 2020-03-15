@@ -1,4 +1,4 @@
-function logError(message, err) {
+function logResponseError(message, err) {
   let errorResponse;
   if (err.response) {
     const { status, statusText, headers, data } = err.response;
@@ -12,4 +12,4 @@ function logError(message, err) {
   console.error(message, error);
 }
 
-exports.logError = logError;
+exports.logResponseError = logResponseError;

@@ -22,8 +22,8 @@ class SettingsService {
   }
 
   async addLastCommitToQueue(settingsDTO) {
-    const { branchName } = settingsDTO;
-    const lastCommitHash = await gitService.getLastCommitHash(branchName);
+    const { mainBranch } = settingsDTO;
+    const lastCommitHash = await gitService.getLastCommitHash(mainBranch);
     if (!buildQueue.has(lastCommitHash)) {
       buildQueue.enqueue(lastCommitHash);
     }
