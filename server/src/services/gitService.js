@@ -34,8 +34,12 @@ class GitService {
   }
 
   async getLastCommitHash(branchName) {
-    // TODO: get last commit of ${branchName}
-    return '0b0b0bf8';
+    try {
+      const { stdout: hash } = await exec(`git log --pretty=format:"%h" -1 ${branchName}`);
+      return hash;
+    } catch (error) {
+      console.log('getLastCommitHash error', error);
+    }
   }
 
   async getCommitDetails(commitHash) {
