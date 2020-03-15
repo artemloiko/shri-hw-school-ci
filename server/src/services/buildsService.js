@@ -1,3 +1,8 @@
+const GitService = require('./gitService');
+const buildQueue = require('../buildQueue');
+
+const gitService = new GitService();
+
 class BuildsService {
   constructor(storage) {
     this.storage = storage;
@@ -7,10 +12,10 @@ class BuildsService {
     return this.storage.getBuildsList();
   }
 
-  async addBuild(commitHash) {
-    console.log('commitHash', commitHash);
-    // TODO: Get required info about commit by hash
-    await this.storage.buildInit();
+  async addToBuildQueue(commitHash) {
+    const commitDetails = await gitService.getCommitDetails(commitHash);
+    buildQueue.enqueue(commitHash);
+    await this.storage.buildInit(commitDetails);
   }
 
   async getBuildDetails(buildId) {

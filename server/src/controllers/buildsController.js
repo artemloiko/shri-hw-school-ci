@@ -16,9 +16,9 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/:commitHash', async (req, res, next) => {
-  // const commitHash = req.params.commitHash;
+  const { commitHash } = req.params;
   try {
-    // await buildsService.setBuilds(buildsDTO);
+    await buildsService.addToBuildQueue(commitHash);
     return res.end();
   } catch (err) {
     logError('Error /api/builds/:commitHash POST', err);
@@ -27,7 +27,7 @@ router.post('/:commitHash', async (req, res, next) => {
 });
 
 router.get('/:commitHash', async (req, res, next) => {
-  const { commitHash } = req.params.commitHash;
+  const { commitHash } = req.params;
   try {
     const data = await buildsService.getBuildDetails(commitHash);
     return res.json(data);
@@ -38,7 +38,7 @@ router.get('/:commitHash', async (req, res, next) => {
 });
 
 router.get('/:commitHash/logs', async (req, res, next) => {
-  const { commitHash } = req.params.commitHash;
+  const { commitHash } = req.params;
   try {
     const data = await buildsService.getBuildLog(commitHash);
     return res.json(data);
