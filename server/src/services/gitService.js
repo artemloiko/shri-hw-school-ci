@@ -6,10 +6,19 @@ const { HttpError } = require('../utils/customErrors');
 const exec = promisify(execCb);
 
 class GitService {
-  async updateRepository(repoName) {
+  async updateRepository(repoName, mainBranch) {
     const currentRepoName = await this.getCurrentRepositoryName();
     if (currentRepoName === repoName) {
-      await exec('cd repo && git pull');
+      try {
+        await exec(`cd repo && git fetch && git checkout ${mainBranch} && git pull`);
+      } catch (error) {
+        console.error('GitService.updateRepository error\n', error.stderr);
+        throw new HttpError(
+          `Cannot find branch ${mainBranch} in repo ${repoName}`,
+          400,
+          'GIT_CANNOT_FIND_BRANCH',
+        );
+      }
       return;
     }
 
@@ -22,8 +31,8 @@ class GitService {
     }
   }
 
-  async cloneRepository(repoName) {
-    return exec(`git clone https://github.com/${repoName}.git repo`);
+  async cloneRepository(repoName, mainBranch) {
+    return exec(`git clone -b ${mainBranch} https://github.com/${repoName}.git repo`);
   }
 
   async getCurrentRepositoryName() {
@@ -42,11 +51,15 @@ class GitService {
 
   async getLastCommitHash(branchName) {
     try {
-      const { stdout: hash } = await exec(`git log --pretty=format:"%h" -1 ${branchName}`);
+      const { stdout: hash } = await exec(`cd repo && git log --pretty=format:%h -1 ${branchName}`);
       return hash;
     } catch (error) {
       console.error('GitService.getLastCommitHash error\n', error.stderr);
-      throw new HttpError('Cannot find mainBranch in repo', 400, 'GIT_CANNOT_FIND_BRANCH');
+      throw new HttpError(
+        `Cannot find branch ${branchName} in repo`,
+        400,
+        'GIT_CANNOT_FIND_BRANCH',
+      );
     }
   }
 

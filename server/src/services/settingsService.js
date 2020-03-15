@@ -17,8 +17,8 @@ class SettingsService {
   }
 
   async updateRepository(settingsDTO) {
-    const { repoName } = settingsDTO;
-    await gitService.updateRepository(repoName);
+    const { repoName, mainBranch } = settingsDTO;
+    await gitService.updateRepository(repoName, mainBranch);
   }
 
   async addLastCommitToQueue(settingsDTO) {
