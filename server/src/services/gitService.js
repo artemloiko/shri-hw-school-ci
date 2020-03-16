@@ -35,7 +35,7 @@ class GitService {
       await fs.remove('./repo');
       await exec(`git clone https://github.com/${repoName}.git repo`);
     } catch (error) {
-      console.error('GitService.updateRepository error', error);
+      console.error('GitService.updateRepository error\n', error);
       throw new HttpError(`Cannot find ${repoName} repository`, 400, 'GIT_CANNOT_FIND_REPO');
     }
   }
@@ -47,8 +47,8 @@ class GitService {
       // /(?<=git@.+:).+\/.+(?=\.git\n?$)/ matches from ssh git@example.com:user-name/repo-name.git
       const matchRepoNameRegex = /(?<=\/\/.+\..+\/).+\/.+(?=\.git\n?$)|(?<=git@.+:).+\/.+(?=\.git\n?$)/;
       const repoOriginLink = result.stdout;
-      const matchedName = repoOriginLink.match(matchRepoNameRegex);
-      return matchedName ? matchedName[0] : '';
+      const nameMatch = repoOriginLink.match(matchRepoNameRegex);
+      return nameMatch ? nameMatch[0] : '';
     } catch (error) {
       return '';
     }
@@ -77,6 +77,7 @@ class GitService {
       const authorName = logInfo.split(SPLITTER)[0];
       const commitMessage = logInfo.split(SPLITTER)[1];
       const branches = logInfo.split(SPLITTER)[2];
+      // branches example "HEAD -> branch, origin/branch, branch"
       const branchName = branches
         .split(', ')[0]
         .replace(/\w+\s->\s/, '')
