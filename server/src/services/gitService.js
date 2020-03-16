@@ -69,15 +69,27 @@ class GitService {
   }
 
   async getCommitDetails(commitHash) {
-    // TODO: add implementation
-    const commitDetails = {
-      commitMessage: 'string',
-      commitHash: 'string',
-      branchName: 'string',
-      authorName: 'string',
-    };
-    // throw new Error(`Cannot find commit ${commitHash} in current repository`);
-    return commitDetails;
+    try {
+      const SPLITTER = '{SPLIT}';
+      const { stdout: logInfo } = await exec(
+        `cd repo && git log --pretty="%an${SPLITTER}%s${SPLITTER}%D" -1 ${commitHash}`,
+      );
+      const authorName = logInfo.split(SPLITTER)[0];
+      const commitMessage = logInfo.split(SPLITTER)[1];
+      const branches = logInfo.split(SPLITTER)[2];
+      const branchName = branches
+        .split(', ')[0]
+        .replace(/\w+\s->\s/, '')
+        .replace(/origin\//, '');
+      return { commitHash, commitMessage, authorName, branchName };
+    } catch (error) {
+      console.error('GitService.getCommitDetails error\n', error.stderr);
+      throw new HttpError(
+        `Cannot get detils of commit ${commitHash}`,
+        400,
+        'GIT_CANNOT_FIND_COMMIT',
+      );
+    }
   }
 }
 
