@@ -1,4 +1,4 @@
-/* Colors */
+/* PALETTE */
 :root {
   --black-500: #000000;
 
@@ -22,8 +22,37 @@
   --yellow-900: #b38f00;
   --yellow-600: #f2c200;
   --yellow-500: #ffcc00;
+
+  --typo-size-xxs: 10px;
+  --typo-size-xs: 12px;
+  --typo-size-s: 13px;
+  --typo-size-m: 15px;
+  --typo-size-l: 16px;
+  --typo-size-xl: 18px;
+  --typo-size-xxl: 24px;
+
+  --space-xxxxs: 2px;
+  --space-xxxs: 4px;
+  --space-xxs: 6px;
+  --space-xs: 8px;
+  --space-s: 10px;
+  --space-m: 12px;
+  --space-l: 16px;
+  --space-xl: 18px;
+  --space-xxl: 20px;
+  --space-xxxl: 24px;
+  --space-xxxxl: 36px;
+  --space-xxxxxl: 56px;
+  --space-xxxxxxl: 100px;
+
+  --border-radius-m: 4px;
+  --border-radius-l: 6px;
+
+  --shadow-lightblue-10: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
+  --shadow-lightblue-40: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
 }
 
+/* SEMANTIC */
 :root {
   --color-bg-base: var(--white-500);
   --color-bg-log: var(--grey-50);
@@ -58,35 +87,6 @@
 
   --color-bg-footer: var(--blue-grey-50);
   --color-text-footer: var(--blue-grey-500);
-}
-
-/* Typography */
-
-:root {
-  --typo-size-xxs: 10px;
-  --typo-size-xs: 12px;
-  --typo-size-s: 13px;
-  --typo-size-m: 15px;
-  --typo-size-l: 16px;
-  --typo-size-xl: 18px;
-  --typo-size-xxl: 24px;
-}
-
-/* Spaces */
-:root {
-  --space-xxxxs: 2px;
-  --space-xxxs: 4px;
-  --space-xxs: 6px;
-  --space-xs: 8px;
-  --space-s: 10px;
-  --space-m: 12px;
-  --space-l: 16px;
-  --space-xl: 18px;
-  --space-xxl: 20px;
-  --space-xxxl: 24px;
-  --space-xxxxl: 36px;
-  --space-xxxxxl: 56px;
-  --space-xxxxxxl: 100px;
 
   --space-container-desktop: var(--space-xxxxxxl);
   --space-container-mobile: var(--space-l);
@@ -94,14 +94,14 @@
   --space-header-v: var(--space-s);
   --space-footer-v: var(--space-xs);
 
-  /* Возможно это задумка дизайнера, то что паддинги инпута немного отличаются тем самым сдвигая его.
-  Но в базовых константах все отступы кратны двойки, поэтому этот отступ делаю через calc*/
   --space-input-top: calc(var(--space-xs) + 1px);
   --space-input-bottom: var(--space-xs);
   --space-input-h: calc(var(--space-s));
+
+  --card-shadow: var(--shadow-lightblue-10);
+  --card-shadow-hovered: var(--shadow-lightblue-40);
 }
 
-/* #мойвопрос Насколько хорош такой подход? */
 @media (max-width: 480px) {
   :root {
     --space-header-v: var(--space-m);
@@ -109,14 +109,8 @@
   }
 }
 
-/* Other */
-:root {
-  --border-radius-m: 4px;
-  --border-radius-l: 6px;
-
-  --shadow-lightblue-10: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
-  --shadow-lightblue-40: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
-
-  --card-shadow: var(--shadow-lightblue-10);
-  --card-shadow-hovered: var(--shadow-lightblue-40);
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
 }

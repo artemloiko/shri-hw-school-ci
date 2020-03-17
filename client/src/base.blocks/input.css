@@ -13,11 +13,11 @@
 .input_counter {
   width: 52px;
 }
-.input_counter .input__input {
+.input_counter .input__text {
   text-align: right;
 }
 
-.input__input {
+.input__text {
   width: 100%;
   padding: var(--space-input-top) var(--space-input-h) var(--space-input-bottom);
   border: 2px solid var(--color-border-input);
@@ -30,12 +30,12 @@
   background-color: var(--color-bg-input);
 }
 
-.input__input:focus {
+.input__text:focus {
   outline: none;
   border-color: var(--color-border-input-focused);
 }
 
-.input__input::placeholder {
+.input__text::placeholder {
   color: var(--color-text-input-placeholder);
 }
 
@@ -54,7 +54,7 @@
   background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 16C3.6 16 0 12.4 0 8C0 3.6 3.6 0 8 0C12.4 0 16 3.6 16 8C16 12.4 12.4 16 8 16ZM12 5.12L10.88 4L8 6.88L5.12 4L4 5.12L6.88 8L4 10.88L5.12 12L8 9.12L10.88 12L12 10.88L9.12 8L12 5.12Z' fill='%23CCCCCC'/%3E%3C/svg%3E%0A");
 }
 
-.input_clear .input__input {
+.input_clear .input__text {
   padding-right: var(--clear-button-width);
 }
 
@@ -62,6 +62,6 @@
   display: block;
 }
 
-.input__input:placeholder-shown ~ .input__clear-btn {
+.input__text:placeholder-shown ~ .input__clear-btn {
   display: none;
 }

@@ -20,6 +20,7 @@
   display: flex;
   flex-flow: row wrap;
   flex: 1;
+  list-style: none;
 }
 
 .footer__nav-item {
@@ -27,7 +28,9 @@
 }
 
 .footer__link {
+  display: block;
   color: var(--color-text-footer);
+  line-height: 1.25;
 }
 
 @media (max-width: 768px) {
@@ -35,6 +38,10 @@
     flex-direction: column;
     line-height: 1.3847;
   }
+  .footer__link {
+    line-height: 1.3847;
+  }
+
   .footer__copy {
     margin-top: var(--space-xs);
   }

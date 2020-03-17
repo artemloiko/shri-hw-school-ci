@@ -15,7 +15,7 @@
 
     <div class="container page__content">
       <div class="settings">
-        <div class="typography settings__elem">
+        <div class="settings__elem">
           <h4 class="typography__elem typography__headline4">Settings</h4>
           <p class="typography__elem typography__subtitle2">
             Configure repository connection and synchronization settings.
@@ -29,7 +29,7 @@
               <div class="input input_fullwidth input_clear textfield__input">
                 <input
                   type="text"
-                  class="input__input"
+                  class="input__text"
                   placeholder="user-name/repo-name"
                   id="repository"
                   required
@@ -42,7 +42,7 @@
               <div class="input input_fullwidth input_clear textfield__input">
                 <input
                   type="text"
-                  class="input__input"
+                  class="input__text"
                   placeholder="npm run build"
                   id="command"
                   value="npm ci && npm run build"
@@ -56,7 +56,7 @@
               <div class="input input_fullwidth input_clear textfield__input">
                 <input
                   type="text"
-                  class="input__input"
+                  class="input__text"
                   placeholder="master"
                   id="branch"
                   value="master |"
@@ -64,13 +64,14 @@
                 <div class="input__clear-btn" tabindex="0"></div>
               </div>
             </div>
-
+          </div>
+          <div class="form__input-group">
             <div class="textfield textfield_row form__textfield">
               <label class="textfield__label" for="synchronizeTime">Synchronize every</label>
               <div class="input input_counter textfield__input">
                 <input
                   type="text"
-                  class="input__input"
+                  class="input__text"
                   placeholder="10"
                   id="synchronizeTime"
                   value="10"

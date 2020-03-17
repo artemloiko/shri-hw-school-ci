@@ -1,71 +1,4 @@
-html,
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-pre,
-a,
-code,
-div,
-span {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-  box-sizing: border-box;
-}
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-body {
-  line-height: 1;
-}
-ol,
-ul {
-  list-style: none;
-}
-blockquote,
-q {
-  quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: '';
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-a {
-  text-decoration: none;
-}
-
-button::-moz-focus-inner {
-  border: 0;
-}
-
-/* Colors */
+/* PALETTE */
 :root {
   --black-500: #000000;
 
@@ -89,8 +22,37 @@ button::-moz-focus-inner {
   --yellow-900: #b38f00;
   --yellow-600: #f2c200;
   --yellow-500: #ffcc00;
+
+  --typo-size-xxs: 10px;
+  --typo-size-xs: 12px;
+  --typo-size-s: 13px;
+  --typo-size-m: 15px;
+  --typo-size-l: 16px;
+  --typo-size-xl: 18px;
+  --typo-size-xxl: 24px;
+
+  --space-xxxxs: 2px;
+  --space-xxxs: 4px;
+  --space-xxs: 6px;
+  --space-xs: 8px;
+  --space-s: 10px;
+  --space-m: 12px;
+  --space-l: 16px;
+  --space-xl: 18px;
+  --space-xxl: 20px;
+  --space-xxxl: 24px;
+  --space-xxxxl: 36px;
+  --space-xxxxxl: 56px;
+  --space-xxxxxxl: 100px;
+
+  --border-radius-m: 4px;
+  --border-radius-l: 6px;
+
+  --shadow-lightblue-10: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
+  --shadow-lightblue-40: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
 }
 
+/* SEMANTIC */
 :root {
   --color-bg-base: var(--white-500);
   --color-bg-log: var(--grey-50);
@@ -125,35 +87,6 @@ button::-moz-focus-inner {
 
   --color-bg-footer: var(--blue-grey-50);
   --color-text-footer: var(--blue-grey-500);
-}
-
-/* Typography */
-
-:root {
-  --typo-size-xxs: 10px;
-  --typo-size-xs: 12px;
-  --typo-size-s: 13px;
-  --typo-size-m: 15px;
-  --typo-size-l: 16px;
-  --typo-size-xl: 18px;
-  --typo-size-xxl: 24px;
-}
-
-/* Spaces */
-:root {
-  --space-xxxxs: 2px;
-  --space-xxxs: 4px;
-  --space-xxs: 6px;
-  --space-xs: 8px;
-  --space-s: 10px;
-  --space-m: 12px;
-  --space-l: 16px;
-  --space-xl: 18px;
-  --space-xxl: 20px;
-  --space-xxxl: 24px;
-  --space-xxxxl: 36px;
-  --space-xxxxxl: 56px;
-  --space-xxxxxxl: 100px;
 
   --space-container-desktop: var(--space-xxxxxxl);
   --space-container-mobile: var(--space-l);
@@ -161,14 +94,14 @@ button::-moz-focus-inner {
   --space-header-v: var(--space-s);
   --space-footer-v: var(--space-xs);
 
-  /* Возможно это задумка дизайнера, то что паддинги инпута немного отличаются тем самым сдвигая его.
-  Но в базовых константах все отступы кратны двойки, поэтому этот отступ делаю через calc*/
   --space-input-top: calc(var(--space-xs) + 1px);
   --space-input-bottom: var(--space-xs);
   --space-input-h: calc(var(--space-s));
+
+  --card-shadow: var(--shadow-lightblue-10);
+  --card-shadow-hovered: var(--shadow-lightblue-40);
 }
 
-/* #мойвопрос Насколько хорош такой подход? */
 @media (max-width: 480px) {
   :root {
     --space-header-v: var(--space-m);
@@ -176,16 +109,10 @@ button::-moz-focus-inner {
   }
 }
 
-/* Other */
-:root {
-  --border-radius-m: 4px;
-  --border-radius-l: 6px;
-
-  --shadow-lightblue-10: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
-  --shadow-lightblue-40: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
-
-  --card-shadow: var(--shadow-lightblue-10);
-  --card-shadow-hovered: var(--shadow-lightblue-40);
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
 }
 
 .card {
@@ -197,6 +124,7 @@ button::-moz-focus-inner {
   box-shadow: var(--card-shadow);
   color: var(--color-text);
   border-radius: var(--border-radius-l);
+  text-decoration: none;
 }
 
 .card:focus,
@@ -215,6 +143,7 @@ button::-moz-focus-inner {
 .icon-text {
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
 }
 
 .icon-text__icon {
@@ -225,10 +154,14 @@ button::-moz-focus-inner {
   margin-left: var(--space-xxxs);
   font-size: var(--typo-size-s);
   line-height: 1.25;
+  word-break: break-all;
+  /* flex: 1; */
 }
 
 .icon-text__secondary-text {
   color: var(--color-text-secondary);
+  /* flex: initial; */
+  word-break: normal;
 }
 
 .icon {
@@ -287,11 +220,11 @@ button::-moz-focus-inner {
 .input_counter {
   width: 52px;
 }
-.input_counter .input__input {
+.input_counter .input__text {
   text-align: right;
 }
 
-.input__input {
+.input__text {
   width: 100%;
   padding: var(--space-input-top) var(--space-input-h) var(--space-input-bottom);
   border: 2px solid var(--color-border-input);
@@ -304,12 +237,12 @@ button::-moz-focus-inner {
   background-color: var(--color-bg-input);
 }
 
-.input__input:focus {
+.input__text:focus {
   outline: none;
   border-color: var(--color-border-input-focused);
 }
 
-.input__input::placeholder {
+.input__text::placeholder {
   color: var(--color-text-input-placeholder);
 }
 
@@ -328,7 +261,7 @@ button::-moz-focus-inner {
   background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 16C3.6 16 0 12.4 0 8C0 3.6 3.6 0 8 0C12.4 0 16 3.6 16 8C16 12.4 12.4 16 8 16ZM12 5.12L10.88 4L8 6.88L5.12 4L4 5.12L6.88 8L4 10.88L5.12 12L8 9.12L10.88 12L12 10.88L9.12 8L12 5.12Z' fill='%23CCCCCC'/%3E%3C/svg%3E%0A");
 }
 
-.input_clear .input__input {
+.input_clear .input__text {
   padding-right: var(--clear-button-width);
 }
 
@@ -336,13 +269,14 @@ button::-moz-focus-inner {
   display: block;
 }
 
-.input__input:placeholder-shown ~ .input__clear-btn {
+.input__text:placeholder-shown ~ .input__clear-btn {
   display: none;
 }
 
 .link {
   color: var(--color-text);
   letter-spacing: 0.06px;
+  text-decoration: none;
 }
 
 .link:hover {
@@ -371,7 +305,10 @@ button::-moz-focus-inner {
 .page {
   display: flex;
   flex-direction: column;
+  line-height: 1;
+  margin: 0;
   min-height: 100vh;
+  min-height: -webkit-fill-available;
 }
 
 .page__content {
@@ -495,6 +432,7 @@ button::-moz-focus-inner {
   display: flex;
   flex-flow: column;
   opacity: 0.65;
+  max-width: 30%;
 }
 
 .card-ci-run__meta-elem:not(:first-child) {
@@ -535,15 +473,18 @@ button::-moz-focus-inner {
 }
 
 .typography__elem:not(:first-child) {
+  margin: 0;
   margin-top: var(--space-xs);
 }
 
 .typography__body1 {
+  margin: 0;
   font-size: var(--typo-size-s);
   line-height: 1.25;
 }
 
 .typography__headline1 {
+  margin: 0;
   font-weight: 500;
   font-size: var(--typo-size-xxl);
   line-height: 1.17;
@@ -552,6 +493,7 @@ button::-moz-focus-inner {
 }
 
 .typography__headline2 {
+  margin: 0;
   font-weight: 500;
   font-size: var(--typo-size-xxl);
   line-height: 1.25;
@@ -559,12 +501,14 @@ button::-moz-focus-inner {
 }
 
 .typography__headline4 {
+  margin: 0;
   font-size: var(--typo-size-m);
   line-height: 1.34;
   font-weight: 600;
 }
 
 .typography__subtitle2 {
+  margin: 0;
   font-size: var(--typo-size-s);
   line-height: 1.3847;
   color: var(--blue-grey-500);
@@ -709,6 +653,7 @@ button::-moz-focus-inner {
   display: flex;
   flex-flow: row wrap;
   flex: 1;
+  list-style: none;
 }
 
 .footer__nav-item {
@@ -716,7 +661,9 @@ button::-moz-focus-inner {
 }
 
 .footer__link {
+  display: block;
   color: var(--color-text-footer);
+  line-height: 1.25;
 }
 
 @media (max-width: 768px) {
@@ -724,6 +671,10 @@ button::-moz-focus-inner {
     flex-direction: column;
     line-height: 1.3847;
   }
+  .footer__link {
+    line-height: 1.3847;
+  }
+
   .footer__copy {
     margin-top: var(--space-xs);
   }
@@ -731,6 +682,10 @@ button::-moz-focus-inner {
 
 .form {
   width: 100%;
+}
+
+.form__input-group:not(:first-child) {
+  margin-top: var(--space-xxl);
 }
 
 .form__submit-group {
@@ -743,6 +698,10 @@ button::-moz-focus-inner {
 }
 
 @media (max-width: 480px) {
+  .form__input-group:not(:first-child) {
+    margin-top: var(--space-l);
+  }
+
   .form__submit-group {
     flex-direction: column;
     margin-top: var(--space-xxl);
@@ -764,7 +723,6 @@ button::-moz-focus-inner {
   max-width: 100%;
   margin: 0 auto;
   align-self: center;
-  transform: translateY(-5%);
 }
 
 .get-started__image {
@@ -835,6 +793,7 @@ button::-moz-focus-inner {
 }
 
 .log__pre {
+  margin: 0;
   font-size: var(--typo-size-xxs);
   line-height: 2;
   font-family: Hack, monospace;
@@ -852,6 +811,7 @@ button::-moz-focus-inner {
   }
   .log__pre {
     padding: var(--space-xxxs) var(--space-m);
+    border-radius: initial;
   }
 }
 

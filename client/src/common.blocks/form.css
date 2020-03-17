@@ -2,6 +2,10 @@
   width: 100%;
 }
 
+.form__input-group:not(:first-child) {
+  margin-top: var(--space-xxl);
+}
+
 .form__submit-group {
   display: flex;
   flex-flow: row wrap;
@@ -12,6 +16,10 @@
 }
 
 @media (max-width: 480px) {
+  .form__input-group:not(:first-child) {
+    margin-top: var(--space-l);
+  }
+
   .form__submit-group {
     flex-direction: column;
     margin-top: var(--space-xxl);

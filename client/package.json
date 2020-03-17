@@ -1,6 +1,6 @@
 {
   "name": "school-ci-client",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "School CI. Layout.",
   "root": true,
   "scripts": {
@@ -29,5 +29,9 @@
       "last 2 chrome version",
       "last 2 firefox version"
     ]
+  },
+  "engines": {
+    "node": ">= 12.16.1",
+    "npm": ">= 6.13.4"
   }
 }
