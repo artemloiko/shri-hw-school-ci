@@ -2,7 +2,12 @@
 
 ### Node.js version 12.16.1
 
-## Build
+## Getting started
+
+```bash
+cd client
+npm install
+```
 
 Для разработки используется nodemon
 
