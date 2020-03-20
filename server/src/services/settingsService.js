@@ -24,9 +24,18 @@ class SettingsService {
   async addLastCommitToQueue(settingsDTO) {
     const { mainBranch } = settingsDTO;
     const lastCommitHash = await gitService.getLastCommitHash(mainBranch);
-    if (!buildQueue.has(lastCommitHash)) {
+
+    const isAlredyBuilt = await this.checkIfCommitIsBuilt(lastCommitHash);
+    const isAlreadyInQueue = buildQueue.has(lastCommitHash);
+
+    if (!isAlreadyInQueue && !isAlredyBuilt) {
       buildQueue.enqueue(lastCommitHash);
     }
+  }
+
+  async checkIfCommitIsBuilt(commitHash) {
+    const { data: buildList } = await this.storage.getBuildsList();
+    return buildList.some((build) => build.commitHash === commitHash);
   }
 }
 

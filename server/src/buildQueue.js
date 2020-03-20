@@ -5,6 +5,7 @@ class BuildQueue {
 
   enqueue(queueElem) {
     this.buildQueue.push(queueElem);
+    console.log(`✌️ Commit ${queueElem} added to buildQueue!`);
   }
 
   dequeue() {
