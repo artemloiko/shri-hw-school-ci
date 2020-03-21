@@ -11,8 +11,10 @@
     "lint": "eslint ./"
   },
   "engines": {
-    "node": ">=12.16.1"
+    "node": ">=12.16.1",
+    "npm": "6.13.4 "
   },
+  "engineStrict": true,
   "author": "Artem Loiko",
   "license": "ISC",
   "dependencies": {

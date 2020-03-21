@@ -9,7 +9,7 @@ class BuildQueue {
   }
 
   dequeue() {
-    return this.buildQueue.unshift();
+    return this.buildQueue.shift();
   }
 
   has(queueElem) {

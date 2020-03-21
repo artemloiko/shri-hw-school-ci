@@ -2,6 +2,8 @@
 
 ### Node.js version 12.16.1
 
+[Документация API](https://documenter.getpostman.com/view/10695911/SzS2yooe?version=latest)
+
 ## Getting started
 
 ```bash
