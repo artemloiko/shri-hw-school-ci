@@ -11,8 +11,10 @@
     "lint": "eslint ./"
   },
   "engines": {
-    "node": ">=12.16.1"
+    "node": ">=12.16.1",
+    "npm": "6.13.4 "
   },
+  "engineStrict": true,
   "author": "Artem Loiko",
   "license": "ISC",
   "dependencies": {
@@ -21,7 +23,8 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fs-extra": "^8.1.0",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "node-cron": "^2.0.3"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
@@ -31,6 +34,8 @@
     "nodemon": "^2.0.2"
   },
   "nodemonConfig": {
-    "ignore": ["repo/*"]
+    "ignore": [
+      "repo/*"
+    ]
   }
 }

@@ -5,10 +5,11 @@ class BuildQueue {
 
   enqueue(queueElem) {
     this.buildQueue.push(queueElem);
+    console.log(`✌️ Commit ${queueElem} added to buildQueue!`);
   }
 
   dequeue() {
-    return this.buildQueue.unshift();
+    return this.buildQueue.shift();
   }
 
   has(queueElem) {

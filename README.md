@@ -10,16 +10,6 @@
 npm install
 ```
 
-### Начало работы в client
+### Начало работы в [client](client/README.md)
 
-```bash
-cd client
-npm install
-```
-
-### Начало работы в server
-
-```bash
-cd server
-npm install
-```
+### Начало работы в [server](server/README.md)

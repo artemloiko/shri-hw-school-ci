@@ -6,6 +6,7 @@ const { logResponseError } = require('../utils/logger');
 
 const settingsService = new SettingsSevice(storage);
 const router = express.Router();
+const syncCommitsCron = require('../crones/sync-commits-cron');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -22,6 +23,7 @@ router.post('/', async (req, res, next) => {
     await settingsService.updateRepository(settingsDTO);
     await settingsService.addLastCommitToQueue(settingsDTO);
     await settingsService.setSettings(settingsDTO);
+    syncCommitsCron.update(settingsDTO);
     return res.end();
   } catch (err) {
     if (!(err instanceof HttpError)) {
