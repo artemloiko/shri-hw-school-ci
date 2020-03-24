@@ -1,0 +1,14 @@
+.settings {
+  max-width: 474px;
+  width: 100%;
+}
+
+.settings__elem:not(:first-child) {
+  margin-top: var(--space-xxxl);
+}
+
+@media (max-width: 480px) {
+  .settings__elem:not(:first-child) {
+    margin-top: 14px;
+  }
+}
