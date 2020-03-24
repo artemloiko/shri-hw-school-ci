@@ -1,0 +1,15 @@
+@import url('./styles/variables.css');
+@import url('./styles/container.css');
+@import url('./styles/typography.css');
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
