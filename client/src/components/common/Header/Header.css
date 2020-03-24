@@ -1,0 +1,25 @@
+.header {
+  background-color: var(--color-bg-base);
+}
+
+.header__container {
+  padding-top: var(--space-header-v);
+  padding-bottom: var(--space-header-v);
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__heading {
+  align-self: center;
+  flex: 1;
+}
+
+.header__control-group {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+}
+
+.header__control {
+  margin-left: var(--space-xs);
+}

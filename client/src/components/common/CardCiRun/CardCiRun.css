@@ -1,0 +1,169 @@
+.card-ci-run {
+  position: relative;
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  flex-flow: row wrap;
+  box-shadow: var(--card-shadow);
+  color: var(--color-text);
+  border-radius: var(--border-radius-l);
+  text-decoration: none;
+  padding: var(--space-m) var(--space-xxxl) var(--space-m) var(--space-xxxxxl);
+}
+
+.card-ci-run:focus,
+.card-ci-run:hover {
+  outline: none;
+  cursor: pointer;
+  box-shadow: var(--card-shadow-hovered);
+}
+
+.card-ci-run_details:focus,
+.card-ci-run_details:hover {
+  cursor: default;
+  box-shadow: var(--card-shadow);
+}
+
+.card-ci-run__status-icon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: var(--space-xxxl);
+  top: var(--space-m);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.card-ci-run_status_success .card-ci-run__status-icon {
+  background-image: url('../../../images/icon/success.svg');
+}
+.card-ci-run_status_fail .card-ci-run__status-icon {
+  background-image: url('../../../images/icon/fail.svg');
+}
+.card-ci-run_status_running .card-ci-run__status-icon {
+  background-image: url('../../../images/icon/running.svg');
+}
+
+.card-ci-run__info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-ci-run__commit-info {
+  display: flex;
+  flex-flow: row wrap;
+}
+.card-ci-run__commit-info-elem {
+  margin-top: var(--space-xs);
+  margin-right: var(--space-xs);
+}
+
+@media (max-width: 480px) {
+  .card-ci-run {
+    padding: var(--space-l) var(--space-m) var(--space-l) var(--space-xxxxl);
+  }
+  .card-ci-run__status-icon {
+    width: 16px;
+    height: 16px;
+    left: var(--space-m);
+    top: var(--space-l);
+  }
+  .card-ci-run__commit-info {
+    flex-direction: column;
+  }
+}
+
+/* CardCiRun Meta */
+
+.card-ci-run__meta {
+  display: flex;
+  flex-flow: column;
+  opacity: 0.65;
+  max-width: 30%;
+}
+
+.card-ci-run__meta-elem:not(:first-child) {
+  margin-top: var(--space-m);
+}
+
+@media (max-width: 768px) {
+  .card-ci-run__meta {
+    min-width: 100%;
+    flex-flow: row wrap;
+    border-top: 1px solid var(--blue-grey-50);
+    margin-top: var(--space-xs);
+  }
+  .card-ci-run__meta-elem:not(:first-child) {
+    margin-top: var(--space-xs);
+  }
+
+  .card-ci-run__meta-elem {
+    margin-top: var(--space-xs);
+    margin-right: var(--space-xs);
+  }
+}
+
+.card-ci-run_details .card-ci-run__meta {
+  min-width: 100%;
+  flex-flow: row wrap;
+  border-top: 1px solid var(--blue-grey-50);
+  margin-top: var(--space-xs);
+}
+.card-ci-run_details .card-ci-run__meta-elem {
+  margin-top: var(--space-xs);
+  margin-right: var(--space-xs);
+}
+
+/* CardCiRun Heading */
+
+.card-ci-run__heading {
+  display: flex;
+  flex-flow: row nowrap;
+  line-height: 20px;
+  padding-right: var(--space-xs);
+}
+
+.card-ci-run__heading-number {
+  font-weight: 500;
+  font-size: var(--typo-size-xl);
+  margin-right: var(--space-xxxs);
+}
+
+.card-ci-run__heading-message {
+  color: var(--color-text);
+  font-size: var(--typo-size-m);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.card-ci-run_details .card-ci-run__heading-message {
+  display: block;
+}
+.card-ci-run_status_success .card-ci-run__heading-number {
+  color: var(--color-text-success);
+}
+.card-ci-run_status_fail .card-ci-run__heading-number {
+  color: var(--color-text-fail);
+}
+.card-ci-run_status_running .card-ci-run__heading-number {
+  color: var(--color-text-running);
+}
+
+@media (max-width: 480px) {
+  .card-ci-run__heading {
+    flex-direction: column;
+    padding-right: 0;
+  }
+  .card-ci-run__heading-number {
+    font-size: var(--typo-size-l);
+    line-height: 1;
+    margin-bottom: var(--space-xs);
+  }
+  .card-ci-run__heading-message {
+    display: block;
+  }
+}
