@@ -82,8 +82,6 @@ CardCiRun.propTypes = {
   }).isRequired,
   mods: PropTypes.shape({
     details: PropTypes.bool,
-    clear: PropTypes.bool,
-    counter: PropTypes.bool,
   }),
   mix: PropTypes.arrayOf(PropTypes.string),
 };

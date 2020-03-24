@@ -1,74 +1,92 @@
 [
 	{
-		"id": 1368,
-		"title": "add documentation for postgres scaler",
-		"branch": "master",
-		"hash": "9c9f0b9",
-		"author": "Philip Kirkorov",
-		"status": "success"
+		"buildNumber": 1368,
+		"commitMessage": "add documentation for postgres scaler",
+		"branchName": "master",
+		"commitHash": "9c9f0b9",
+		"authorName": "Philip Kirkorov",
+		"status": "Success",
+		"start": "2020-01-21T03:06:00.002",
+		"duration": 4800
 	},
 	{
-		"id": 1367,
-		"title": "Super cool UI kit for making websites that look like games",
-		"branch": "super-cool-ui-kit",
-		"hash": "952e5567",
-		"author": "Vadim Makeev",
-		"status": "fail"
+		"buildNumber": 1367,
+		"commitMessage": "Super cool UI kit for making websites that look like games",
+		"branchName": "super-cool-ui-kit",
+		"commitHash": "952e5567",
+		"authorName": "Vadim Makeev",
+		"status": "Fail",
+		"start": "2020-01-21T03:06:00.002",
+		"duration": 4800
 	},
 	{
-		"id": 1366,
-		"title": "Merge branch 'master' of github.com:jaywcjlove/awesome",
-		"branch": "master",
-		"hash": "b4636ab",
-		"author": "Philip Kirkorov",
-		"status": "success"
+		"buildNumber": 1366,
+		"commitMessage": "Merge branchName 'master' of github.com:jaywcjlove/awesome",
+		"branchName": "master",
+		"commitHash": "b4636ab",
+		"authorName": "Philip Kirkorov",
+		"status": "Success",
+		"start": "2020-01-21T03:06:00.002",
+		"duration": 4800
 	},
 	{
-		"id": 1365,
-		"title": "upgrade typescript to 3.8",
-		"branch": "master",
-		"hash": "b4636ab",
-		"author": "Philip Kirkorov",
-		"status": "running"
+		"buildNumber": 1365,
+		"commitMessage": "upgrade typescript to 3.8",
+		"branchName": "master",
+		"commitHash": "b4636ab",
+		"authorName": "Philip Kirkorov",
+		"status": "InProgress",
+		"start": "2020-01-21T03:06:00.002",
+		"duration": 4800
 	},
 	{
-		"id": 1364,
-		"title": "add documentation for postgres scaler",
-		"branch": "master",
-		"hash": "b4636ab",
-		"author": "Philip Kirkorov",
-		"status": "success"
+		"buildNumber": 1364,
+		"commitMessage": "add documentation for postgres scaler",
+		"branchName": "master",
+		"commitHash": "b4636ab",
+		"authorName": "Philip Kirkorov",
+		"status": "Success",
+		"start": "2020-01-21T03:06:00.002",
+		"duration": 4800
 	},
 	{
-		"id": 1367,
-		"title": "replace all `div` to `article`",
-		"branch": "master",
-		"hash": "952e5567",
-		"author": "Vadim Makeev",
-		"status": "fail"
+		"buildNumber": 1367,
+		"commitMessage": "replace all `div` to `article`",
+		"branchName": "master",
+		"commitHash": "952e5567",
+		"authorName": "Vadim Makeev",
+		"status": "Fail",
+		"start": "2020-01-21T03:06:00.002",
+		"duration": 4800
 	},
 	{
-		"id": 1362,
-		"title": "improved accessibility",
-		"branch": "master",
-		"hash": "e41e4cc",
-		"author": "Philip Kirkorov",
-		"status": "success"
+		"buildNumber": 1362,
+		"commitMessage": "improved accessibility",
+		"branchName": "master",
+		"commitHash": "e41e4cc",
+		"authorName": "Philip Kirkorov",
+		"status": "Success",
+		"start": "2020-01-21T03:06:00.002",
+		"duration": 4800
 	},
 	{
-		"id": 1350,
-		"title": "fix: upload 别片类型",
-		"branch": "master",
-		"hash": "e41e4cc",
-		"author": "Philip Kirkorov",
-		"status": "success"
+		"buildNumber": 1350,
+		"commitMessage": "fix: upload 别片类型",
+		"branchName": "master",
+		"commitHash": "e41e4cc",
+		"authorName": "Philip Kirkorov",
+		"status": "Success",
+		"start": "2020-01-21T03:06:00.002",
+		"duration": 4800
 	},
 	{
-		"id": 1349,
-		"title": "Form item has default height align with form size",
-		"branch": "master",
-		"hash": "e41e4cc",
-		"author": "Philip Kirkorov",
-		"status": "success"
+		"buildNumber": 1349,
+		"commitMessage": "Form item has default height align with form size",
+		"branchName": "master",
+		"commitHash": "e41e4cc",
+		"authorName": "Philip Kirkorov",
+		"status": "Success",
+		"start": "2020-01-21T03:06:00.002",
+		"duration": 4800
 	}
 ]

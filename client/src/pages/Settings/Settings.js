@@ -48,13 +48,13 @@ function Settings() {
               ></Input>
             </TextField>
 
-            <TextField label="Main branch" htmlFor="branch" mix={['form']}>
+            <TextField label="Main branchName" htmlFor="branchName" mix={['form']}>
               <Input
                 mods={{ clear: true, fullwidth: true }}
                 mix={['textfield']}
                 type="text"
                 placeholder="master"
-                id="branch"
+                id="branchName"
                 defaultValue="master"
               ></Input>
             </TextField>

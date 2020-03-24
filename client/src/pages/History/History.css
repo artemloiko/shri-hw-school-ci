@@ -1,0 +1,19 @@
+.history {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.history__card {
+  margin-bottom: var(--space-xs);
+}
+
+.history__pagination {
+  align-self: flex-start;
+}
+
+@media (max-width: 480px) {
+  .history__pagination {
+    align-self: stretch;
+  }
+}
