@@ -1,0 +1,21 @@
+.icon-text {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.icon__icon-text {
+  opacity: 0.3;
+}
+
+.icon-text__text {
+  margin-left: var(--space-xxxs);
+  font-size: var(--typo-size-s);
+  line-height: 1.25;
+  word-break: break-all;
+}
+
+.icon-text__secondary-text {
+  color: var(--color-text-secondary);
+  word-break: normal;
+}

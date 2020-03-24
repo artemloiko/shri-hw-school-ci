@@ -1,0 +1,24 @@
+.card {
+  position: relative;
+  width: 100%;
+  padding: var(--space-m) var(--space-xxxl) var(--space-m) var(--space-xxxxxl);
+  display: flex;
+  flex-flow: row wrap;
+  box-shadow: var(--card-shadow);
+  color: var(--color-text);
+  border-radius: var(--border-radius-l);
+  text-decoration: none;
+}
+
+.card:focus,
+.card:hover {
+  outline: none;
+  cursor: pointer;
+  box-shadow: var(--card-shadow-hovered);
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: var(--space-l) var(--space-m) var(--space-l) var(--space-xxxxl);
+  }
+}

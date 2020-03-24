@@ -1,0 +1,40 @@
+.icon {
+  min-width: 16px;
+  min-height: 16px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.icon_size_small {
+  min-width: 12px;
+  min-height: 12px;
+}
+
+.icon_type_commit {
+  background-image: url('../../../images/icon/code-commit.svg');
+}
+
+.icon_type_calendar {
+  background-image: url('../../../images/icon/calendar.svg');
+}
+
+.icon_type_stopwatch {
+  background-image: url('../../../images/icon/stopwatch.svg');
+}
+
+.icon_type_user {
+  background-image: url('../../../images/icon/user.svg');
+}
+
+.icon_type_rebuild {
+  background-image: url('../../../images/icon/rebuild.svg');
+}
+
+.icon_type_play {
+  background-image: url('../../../images/icon/play.svg');
+}
+
+.icon_type_settings {
+  background-image: url('../../../images/icon/settings.svg');
+}
