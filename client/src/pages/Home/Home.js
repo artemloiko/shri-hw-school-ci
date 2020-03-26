@@ -15,7 +15,7 @@ function Home() {
             Configure repository connection and synchronization settings
           </p>
         </div>
-        <Button href="/settings.html" mods={{ action: true }} className="get-started__button">
+        <Button to="settings" mods={{ action: true }} className="get-started__button">
           Open settings
         </Button>
       </div>

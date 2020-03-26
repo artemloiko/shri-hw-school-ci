@@ -19,7 +19,7 @@ function Header() {
             Run build
           </Button> */}
           <Button
-            href="/settings"
+            to="/settings"
             className="header__control"
             mods={{ size: 'small', icon: true, 'icon-only': false }}
             icon={<Icon mods={{ size: 'small', type: 'settings' }} />}

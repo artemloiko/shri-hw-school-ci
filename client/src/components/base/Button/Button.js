@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from '@reach/router';
 import { cn } from 'utils/bem-cn';
 
 import './Button.css';
 
 function Button(props) {
-  const { type, href, children, icon } = props;
+  const { type, to = '', children, icon } = props;
 
   return type ? (
     <button type={type} className={cn('button', props)}>
@@ -13,16 +14,16 @@ function Button(props) {
       <div className="button__text">{children}</div>
     </button>
   ) : (
-    <a href={href} className={cn('button', props)}>
+    <Link to={to} className={cn('button', props)}>
       {icon}
       <div className="button__text">{children}</div>
-    </a>
+    </Link>
   );
 }
 
 Button.propTypes = {
   type: PropTypes.string,
-  href: PropTypes.string,
+  to: PropTypes.string,
   children: PropTypes.string,
   icon: PropTypes.element,
   className: PropTypes.string,

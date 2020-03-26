@@ -9,12 +9,12 @@ function Footer() {
       <div className="container footer__container">
         <ul className="footer__nav">
           <li className="footer__nav-item">
-            <Link href="/settings" className="footer__link">
+            <Link to="/" className="footer__link">
               Support
             </Link>
           </li>
           <li className="footer__nav-item">
-            <Link href="/settings" className="footer__link">
+            <Link to="/" className="footer__link">
               Learning
             </Link>
           </li>

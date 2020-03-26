@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link as RouterLink } from '@reach/router';
 import { cn } from 'utils/bem-cn';
 
 import './Link.css';
 
 function Link(props) {
-  const { href, children } = props;
+  const { to = '', children } = props;
 
   return (
-    <a href={href} className={cn('link', props)}>
+    <RouterLink to={to} className={cn('link', props)}>
       {children}
-    </a>
+    </RouterLink>
   );
 }
 
 Link.propTypes = {
-  href: PropTypes.string,
+  to: PropTypes.string,
   children: PropTypes.any.isRequired,
 };
 

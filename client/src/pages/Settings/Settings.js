@@ -84,7 +84,7 @@ function Settings() {
             <Button type="submit" mods={{ action: true }} className="form__submit-group-elem">
               Save
             </Button>
-            <Button href="/" className="form__submit-group-elem">
+            <Button to="/" className="form__submit-group-elem">
               Cancel
             </Button>
           </FormSubmitGroup>

@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from '@reach/router';
 
 import './Card.css';
 
-function Card({ href, children }) {
+function Card({ to = '', children }) {
   return (
-    <a href={href} className="card">
+    <Link to={to} className="card">
       {children}
-    </a>
+    </Link>
   );
 }
 
 Card.propTypes = {
-  href: PropTypes.string,
+  to: PropTypes.string,
   children: PropTypes.any,
 };
 

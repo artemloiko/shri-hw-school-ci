@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from '@reach/router';
 import clsx from 'clsx';
 import { cn } from 'utils/bem-cn';
 
@@ -9,7 +10,7 @@ import IconText from 'components/base/IconText/IconText';
 import './CardCiRun.css';
 
 function CardCiRun(props) {
-  const { buildInfo, mods = {} } = props;
+  const { buildInfo } = props;
   const {
     buildNumber,
     commitMessage,
@@ -28,8 +29,8 @@ function CardCiRun(props) {
   };
 
   return (
-    <a
-      {...(mods.details ? {} : { href: `/details/${buildNumber}` })}
+    <Link
+      to={`/details/${buildNumber}`}
       className={clsx(cn('card-ci-run', props), cardStatusClasses)}
       tabIndex="0"
     >
@@ -65,7 +66,7 @@ function CardCiRun(props) {
           text={duration.toString()} // 1 ч 20 мин
         ></IconText>
       </div>
-    </a>
+    </Link>
   );
 }
 
