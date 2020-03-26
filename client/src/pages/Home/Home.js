@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getSettings } from '../../actions/SettingsAction';
 import Page from 'components/base/Page/Page';
 import Button from 'components/base/Button/Button';
 
@@ -6,6 +8,12 @@ import introImage from 'images/intro.svg';
 import './Home.css';
 
 function Home() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getSettings());
+  }, [dispatch]);
+
   return (
     <Page contentClass="container">
       <div className="get-started">
