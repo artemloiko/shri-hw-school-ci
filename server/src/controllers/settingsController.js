@@ -1,23 +1,21 @@
-const express = require('express');
-const storage = require('../storage');
+const storage = require('../models/storage');
 const SettingsSevice = require('../services/settingsService.js');
 const { HttpError } = require('../utils/customErrors');
 const { logResponseError } = require('../utils/logger');
 
 const settingsService = new SettingsSevice(storage);
-const router = express.Router();
 const syncCommitsCron = require('../crones/sync-commits-cron');
 
-router.get('/', async (req, res, next) => {
+const getSettings = async (req, res, next) => {
   try {
     const currentSettings = await settingsService.getSettings();
     return res.json(currentSettings);
   } catch (err) {
     next(err);
   }
-});
+};
 
-router.post('/', async (req, res, next) => {
+const setSettings = async (req, res, next) => {
   const settingsDTO = req.body;
   try {
     await settingsService.updateRepository(settingsDTO);
@@ -31,6 +29,9 @@ router.post('/', async (req, res, next) => {
     }
     next(err);
   }
-});
+};
 
-module.exports = router;
+module.exports = {
+  getSettings,
+  setSettings,
+};

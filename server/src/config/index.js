@@ -10,6 +10,7 @@ if (envFound.error) {
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
+  nodeEnv: process.env.NODE_ENV,
   port: process.env.PORT || '3000',
   storageURL: process.env.STORAGE_URL,
   storageApikey: process.env.STORAGE_API_KEY,

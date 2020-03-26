@@ -1,6 +1,6 @@
 const axios = require('axios');
 const https = require('https');
-const config = require('../config');
+const config = require('../../config');
 
 const axiosAPI = axios.create({
   baseURL: config.storageURL,

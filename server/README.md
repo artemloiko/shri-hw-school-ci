@@ -19,6 +19,15 @@ npm run start:debug // запуск nodemon в дебаг режиме
 npm run start:prod // запуск сервера через node
 ```
 
+Параметры конфига задаются в .env  
+Создайте файл .env в папке server с полями
+
+```conf
+PORT=3001
+STORAGE_URL=https://hw.shri.yandex/api/ # URL вашего хранилища
+STORAGE_API_KEY=Bearer your_api_key # your_api_key - apiKey от вашего хранилища
+```
+
 ## About
 
 Текущая версия АПИ:  
