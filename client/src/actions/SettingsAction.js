@@ -15,7 +15,7 @@ const getSettingsFail = (error) => {
   return createAction(GET_SETTINGS_FAIL, error, true);
 };
 
-async function fetchSettings() {
+async function mockApi() {
   await new Promise((resolve, reject) => {
     setTimeout(resolve, 1500);
   });
@@ -28,14 +28,30 @@ async function fetchSettings() {
   };
 }
 
-export function getSettings() {
-  return async (dispatch, getState) => {
+function fetchSettings() {
+  return async (dispatch) => {
     dispatch(getSettingsRequest());
     try {
-      const data = await fetchSettings();
+      const data = await mockApi();
       dispatch(getSettingsSuccess(data));
     } catch (error) {
       dispatch(getSettingsFail(error));
+    }
+  };
+}
+
+function shouldFetchSettings(state) {
+  const { settings } = state;
+  if (!settings.id) {
+    return true;
+  }
+  return false;
+}
+
+export function fetchSettingsIfNeeded() {
+  return (dispatch, getState) => {
+    if (shouldFetchSettings(getState())) {
+      dispatch(fetchSettings());
     }
   };
 }

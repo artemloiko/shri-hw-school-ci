@@ -1,32 +1,29 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getSettings } from '../../actions/SettingsAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSettingsIfNeeded } from '../../actions/SettingsAction';
 import Page from 'components/base/Page/Page';
-import Button from 'components/base/Button/Button';
+import Loader from 'components/common/Loader/Loader';
+import GetStarted from 'components/common/GetStarted/GetStarted';
+import BuildHistory from 'components/common/BuildHistory/BuildHistory';
 
-import introImage from 'images/intro.svg';
 import './Home.css';
+import builds from './commits.json';
 
 function Home() {
+  const settings = useSelector((state) => state.settings);
   const dispatch = useDispatch();
 
+  console.log('[HOME RENDER]', settings);
+
   useEffect(() => {
-    dispatch(getSettings());
+    dispatch(fetchSettingsIfNeeded());
   }, [dispatch]);
 
   return (
     <Page contentClass="container">
-      <div className="get-started">
-        <img src={introImage} alt="Configure settings" className="get-started__image" />
-        <div className="typography get-started__text">
-          <p className="typography__body1">
-            Configure repository connection and synchronization settings
-          </p>
-        </div>
-        <Button to="settings" mods={{ action: true }} className="get-started__button">
-          Open settings
-        </Button>
-      </div>
+      <Loader isLoading={settings.isFetching}>
+        {settings.repoName ? <BuildHistory builds={builds} /> : <GetStarted />}
+      </Loader>
     </Page>
   );
 }

@@ -4,7 +4,9 @@ import {
   GET_SETTINGS_SUCCESS,
 } from '../actions/SettingsAction';
 
-const initialState = {};
+const initialState = {
+  isFetching: true,
+};
 
 export function settingsReducer(state = initialState, action) {
   switch (action.type) {
