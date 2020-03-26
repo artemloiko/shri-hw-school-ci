@@ -6,18 +6,18 @@ import { cn } from 'utils/bem-cn';
 import './Button.css';
 
 function Button(props) {
-  const { type, to = '', children, icon } = props;
+  const { type = 'button', to = '', children, icon } = props;
 
-  return type ? (
-    <button type={type} className={cn('button', props)}>
-      {icon}
-      <div className="button__text">{children}</div>
-    </button>
-  ) : (
-    <Link to={to} className={cn('button', props)}>
+  return to ? (
+    <Link {...props} to={to} className={cn('button', props)}>
       {icon}
       <div className="button__text">{children}</div>
     </Link>
+  ) : (
+    <button {...props} type={type} className={cn('button', props)}>
+      {icon}
+      <div className="button__text">{children}</div>
+    </button>
   );
 }
 
