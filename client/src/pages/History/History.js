@@ -7,11 +7,10 @@ import './History.css';
 import builds from './commits.json';
 
 function History() {
-  console.log('builds', builds);
   return (
     <Page contentClass="container history">
       {builds.map((build) => (
-        <CardCiRun className="history__card" buildInfo={build}></CardCiRun>
+        <CardCiRun className="history__card" buildInfo={build} key={build.id}></CardCiRun>
       ))}
       <Button mods={{ 'mini-desktop': true }} className="history__pagination">
         Show more

@@ -1,5 +1,6 @@
 [
 	{
+		"id": "aa040d72-ce1c-423d-bd66-258be0da1368",
 		"buildNumber": 1368,
 		"commitMessage": "add documentation for postgres scaler",
 		"branchName": "master",
@@ -10,6 +11,7 @@
 		"duration": 4800
 	},
 	{
+		"id": "aa040d72-ce1c-423d-bd66-258be0aa1367",
 		"buildNumber": 1367,
 		"commitMessage": "Super cool UI kit for making websites that look like games",
 		"branchName": "super-cool-ui-kit",
@@ -20,6 +22,7 @@
 		"duration": 4800
 	},
 	{
+		"id": "aa040d72-ce1c-423d-bd66-258be0da1366",
 		"buildNumber": 1366,
 		"commitMessage": "Merge branchName 'master' of github.com:jaywcjlove/awesome",
 		"branchName": "master",
@@ -30,6 +33,7 @@
 		"duration": 4800
 	},
 	{
+		"id": "aa040d72-ce1c-423d-bd66-258be0da1365",
 		"buildNumber": 1365,
 		"commitMessage": "upgrade typescript to 3.8",
 		"branchName": "master",
@@ -40,6 +44,7 @@
 		"duration": 4800
 	},
 	{
+		"id": "aa040d72-ce1c-423d-bd66-258be0da1364",
 		"buildNumber": 1364,
 		"commitMessage": "add documentation for postgres scaler",
 		"branchName": "master",
@@ -50,6 +55,7 @@
 		"duration": 4800
 	},
 	{
+		"id": "aa040d72-ce1c-423d-bd66-258be0da1367",
 		"buildNumber": 1367,
 		"commitMessage": "replace all `div` to `article`",
 		"branchName": "master",
@@ -60,6 +66,7 @@
 		"duration": 4800
 	},
 	{
+		"id": "aa040d72-ce1c-423d-bd66-258be0da1362",
 		"buildNumber": 1362,
 		"commitMessage": "improved accessibility",
 		"branchName": "master",
@@ -70,6 +77,7 @@
 		"duration": 4800
 	},
 	{
+		"id": "aa040d72-ce1c-423d-bd66-258be0da1350",
 		"buildNumber": 1350,
 		"commitMessage": "fix: upload 别片类型",
 		"branchName": "master",
@@ -80,6 +88,7 @@
 		"duration": 4800
 	},
 	{
+		"id": "aa040d72-ce1c-423d-bd66-258be0da1349",
 		"buildNumber": 1349,
 		"commitMessage": "Form item has default height align with form size",
 		"branchName": "master",

@@ -72,6 +72,7 @@ function CardCiRun(props) {
 
 CardCiRun.propTypes = {
   buildInfo: PropTypes.exact({
+    id: PropTypes.string,
     buildNumber: PropTypes.number,
     commitMessage: PropTypes.string,
     branchName: PropTypes.string,
