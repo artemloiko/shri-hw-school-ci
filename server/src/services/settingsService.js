@@ -1,4 +1,4 @@
-const buildQueue = require('../buildQueue');
+const buildQueue = require('../models/buildQueue');
 const GitService = require('./gitService');
 
 const gitService = new GitService();

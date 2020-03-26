@@ -8,9 +8,10 @@ const syncCommitsCron = require('./src/crones/sync-commits-cron');
 
 async function bootstrap() {
   const server = express();
+  const isProd = config.nodeEnv === 'production';
 
   server.use(bodyParser.json());
-  server.use(morgan('dev'));
+  server.use(morgan(isProd ? 'common' : 'dev'));
   routes.init(server);
   syncCommitsCron.init();
 

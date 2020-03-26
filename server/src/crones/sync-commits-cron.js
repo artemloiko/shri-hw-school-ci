@@ -1,6 +1,7 @@
 const cron = require('node-cron');
-const storage = require('../storage');
+const storage = require('../models/storage');
 const SettingsSevice = require('../services/settingsService.js');
+const { logResponseError } = require('../utils/logger');
 
 const settingsService = new SettingsSevice(storage);
 
@@ -24,7 +25,7 @@ class SyncCommitsCron {
         );
       }
     } catch (error) {
-      console.error('⚠️ Cannot get period for synchronization', error);
+      logResponseError('⚠️ Cannot get period for synchronization', error);
     }
   }
 

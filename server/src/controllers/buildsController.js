@@ -1,21 +1,19 @@
-const express = require('express');
-const storage = require('../storage');
+const storage = require('../models/storage');
 const BuildsSevice = require('../services/buildsService.js');
 const { logResponseError } = require('../utils/logger');
 
 const buildsService = new BuildsSevice(storage);
-const router = express.Router();
 
-router.get('/', async (req, res, next) => {
+const getBuildList = async (req, res, next) => {
   try {
     const currentBuilds = await buildsService.getBuildsList();
     return res.json(currentBuilds);
   } catch (err) {
     next(err);
   }
-});
+};
 
-router.post('/:commitHash', async (req, res, next) => {
+const addBuild = async (req, res, next) => {
   const { commitHash } = req.params;
   try {
     await buildsService.addToBuildQueue(commitHash);
@@ -24,9 +22,9 @@ router.post('/:commitHash', async (req, res, next) => {
     logResponseError('Error /api/builds/:commitHash POST', err);
     next(err);
   }
-});
+};
 
-router.get('/:commitHash', async (req, res, next) => {
+const getBuildDetails = async (req, res, next) => {
   const { commitHash } = req.params;
   try {
     const data = await buildsService.getBuildDetails(commitHash);
@@ -35,9 +33,9 @@ router.get('/:commitHash', async (req, res, next) => {
     logResponseError('Error /api/builds/:commitHash GET', err);
     next(err);
   }
-});
+};
 
-router.get('/:commitHash/logs', async (req, res, next) => {
+const getBuildLog = async (req, res, next) => {
   const { commitHash } = req.params;
   try {
     const data = await buildsService.getBuildLog(commitHash);
@@ -46,6 +44,11 @@ router.get('/:commitHash/logs', async (req, res, next) => {
     logResponseError('Error /api/builds/:commitHash/logs GET', err);
     next(err);
   }
-});
+};
 
-module.exports = router;
+module.exports = {
+  getBuildList,
+  addBuild,
+  getBuildDetails,
+  getBuildLog,
+};
