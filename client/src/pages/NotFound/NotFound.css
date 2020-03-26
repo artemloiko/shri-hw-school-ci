@@ -1,0 +1,23 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
+  align-self: center;
+  text-align: center;
+}
+
+.not-found__heading {
+  font-size: 20vw;
+  line-height: 1;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
+
+.not-found__text {
+  font-size: 5vw;
+  line-height: 1;
+  margin: 0;
+}
