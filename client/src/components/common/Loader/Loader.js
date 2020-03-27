@@ -5,7 +5,21 @@ import './Loader.css';
 
 function Loader(props) {
   const { children, isLoading } = props;
-  return <>{isLoading ? <div className="loader">LOADING...</div> : children}</>;
+  return (
+    <>
+      {isLoading && (
+        <div className="loader">
+            <div className="cat">
+              <div className="cat__body"></div>
+              <div className="cat__body"></div>
+              <div className="cat__tail"></div>
+              <div className="cat__head"></div>
+          </div>
+        </div>
+      )}
+      {children}
+    </>
+  );
 }
 
 Loader.propTypes = {
