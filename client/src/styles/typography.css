@@ -21,6 +21,7 @@
   line-height: 1.17;
   letter-spacing: 0.25px;
   color: var(--blue-grey-500);
+  text-decoration: none;
 }
 
 .typography__headline2 {
@@ -29,6 +30,7 @@
   font-size: var(--typo-size-xxl);
   line-height: 1.25;
   letter-spacing: 0.25px;
+  text-decoration: none;
 }
 
 .typography__headline4 {

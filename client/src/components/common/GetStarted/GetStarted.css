@@ -9,6 +9,7 @@
 
 .get-started__image {
   max-width: 100%;
+  min-height: 124px;
 }
 
 .get-started__text {
