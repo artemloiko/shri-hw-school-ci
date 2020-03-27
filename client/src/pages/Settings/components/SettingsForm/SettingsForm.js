@@ -8,9 +8,12 @@ import { Formik } from 'formik';
 
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from 'components/common/Loader/Loader';
+import { updateSettings } from 'actions/SettingsAction';
+import api from 'utils/api';
 
 function SettingsForm(props) {
   const settings = useSelector((state) => state.settings);
+  const dispatch = useDispatch();
 
   return (
     <Formik
@@ -28,17 +31,23 @@ function SettingsForm(props) {
         });
         return errors;
       }}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={async (values, { setSubmitting }) => {
         const settingsDTO = { ...values, period: Number(values.period) };
-
-        setTimeout(() => {
-          alert(JSON.stringify(settingsDTO, null, 2));
-          setSubmitting(false);
-        }, 1000);
+        try {
+          await api.setSettings(settingsDTO);
+        } catch (err) {
+          const { response } = err;
+          const errorMessage = response?.data?.error?.message || err.message;
+          const errorCode = response?.data?.error?.errorCode;
+          console.log('Updating settings error', errorMessage, errorCode);
+          alert(errorMessage);
+        }
+        setSubmitting(false);
+        dispatch(updateSettings(settingsDTO));
       }}
     >
       {(formikBag) => {
-        const { getFieldProps, handleSubmit, isSubmitting, setFieldValue, errors } = formikBag;
+        const { getFieldProps, handleSubmit, isSubmitting, setFieldValue } = formikBag;
         return (
           <Loader isLoading={isSubmitting}>
             <Form {...props} onSubmit={handleSubmit}>
@@ -58,7 +67,6 @@ function SettingsForm(props) {
                     setFieldValue={setFieldValue}
                     {...getFieldProps('repoName')}
                   ></Input>
-                  {errors.repoName}
                 </TextField>
 
                 <TextField

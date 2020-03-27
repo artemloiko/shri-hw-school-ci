@@ -3,6 +3,7 @@ import { createAction } from '../utils/createAction';
 export const GET_SETTINGS_REQUEST = 'GET_SETTINGS_REQUEST';
 export const GET_SETTINGS_SUCCESS = 'GET_SETTINGS_SUCCESS';
 export const GET_SETTINGS_FAIL = 'GET_SETTINGS_FAIL';
+export const UPDATE_SETTINGS = 'UPDATE_SETTINGS';
 
 const getSettingsRequest = () => {
   return createAction(GET_SETTINGS_REQUEST);
@@ -48,4 +49,8 @@ export function fetchSettingsIfNeeded() {
       dispatch(fetchSettings());
     }
   };
+}
+
+export function updateSettings(settingsDTO) {
+  return createAction(UPDATE_SETTINGS, settingsDTO);
 }
