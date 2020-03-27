@@ -50,7 +50,6 @@ function Home(props) {
     >
       <Loader isLoading={!settings.isLoaded}>
         {settings.id ? <BuildHistory builds={builds} /> : <GetStarted />}
-        {settings.error}
       </Loader>
     </Page>
   );

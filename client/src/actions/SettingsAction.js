@@ -21,9 +21,6 @@ function fetchSettings() {
   return async (dispatch) => {
     dispatch(getSettingsRequest());
     try {
-      await new Promise((resolve, reject) => {
-        setTimeout(resolve, 2500);
-      });
       const data = await api.getSettings();
       dispatch(getSettingsSuccess(data));
     } catch (error) {

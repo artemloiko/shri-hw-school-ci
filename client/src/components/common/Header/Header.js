@@ -11,9 +11,11 @@ function Header(props) {
     <header className="header">
       <div className="container header__container">
         {text ? (
-          <h1 className="header__heading typography__headline2">{text}</h1>
+          <h1 className="header__heading">
+            <span className="typography__headline2">{text}</span>
+          </h1>
         ) : (
-          <h1 className="header__heading typography__headline1">
+          <h1 className="header__heading">
             <Link to="/" className="typography__headline1">
               School CI server
             </Link>

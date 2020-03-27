@@ -2,8 +2,18 @@
 @import url('./styles/container.css');
 @import url('./styles/typography.css');
 
+html,
 body {
+  height: 100%;
   margin: 0;
+}
+
+#root,
+#root > div {
+  height: 100%;
+}
+
+body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
