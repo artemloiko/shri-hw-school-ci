@@ -1,9 +1,9 @@
-
 /* PALETTE */
 :root {
   --black-500: #000000;
 
   --grey-600: #595959;
+  --grey-550: #b9b9b9;
   --grey-500: #b3b3b3;
   --grey-400: #d9d9d9;
   --grey-300: #dbdbdb;
@@ -71,7 +71,7 @@
   --color-text-secondary: var(--grey-600);
   --color-text-ghost: var(--grey-200);
 
-  --color-text-disabled: #b9b9b9;
+  --color-text-disabled: var(--grey-550);
   --color-text-link-hovered: var(--red-500);
 
   --color-text-success: var(--green-500);

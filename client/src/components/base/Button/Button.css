@@ -74,3 +74,11 @@
 .button_icon-only .button__text {
   display: none;
 }
+
+.button_disabled {
+  background-color: var(--color-bg-control-disabled);
+  border-color: var(--color-bg-control-disabled);
+  color: var(--color-text-disabled);
+  cursor: auto;
+  pointer-events: none;
+}
