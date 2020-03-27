@@ -9,11 +9,11 @@ import './Page.css';
 
 function Page({ children, contentClass }) {
   return (
-    <div className="typography page">
-      <Header />
-      <div className={clsx('page__content', contentClass)}>{children}</div>
-      <Footer />
-    </div>
+      <div className="typography page">
+        <Header />
+        <div className={clsx('page__content', contentClass)}>{children}</div>
+        <Footer />
+      </div>
   );
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Page from 'components/base/Page/Page';
+import Page from 'components/common/Page/Page';
 import CardCiRun from 'components/common/CardCiRun/CardCiRun';
 import Log from 'components/common/Log/Log';
 

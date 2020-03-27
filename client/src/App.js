@@ -3,7 +3,7 @@ import { Router } from '@reach/router';
 import Home from './pages/Home/Home';
 import Settings from './pages/Settings/Settings';
 import Details from './pages/Details/Details';
-import NotFound from './pages/NotFound/NotFound';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Home path="/" />
       <Settings path="settings" />
       <Details path="details/:buildNumber" />
-      <NotFound default />
+      <ErrorPage default />
     </Router>
   );
 }

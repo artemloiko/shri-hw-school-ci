@@ -1,5 +1,5 @@
 import React from 'react';
-import Page from 'components/base/Page/Page';
+import Page from 'components/common/Page/Page';
 import Input from 'components/base/Input/Input';
 import TextField from 'components/common/TextField/TextField';
 
