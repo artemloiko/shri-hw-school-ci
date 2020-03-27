@@ -34,8 +34,12 @@ class SettingsService {
   }
 
   async checkIfCommitIsBuilt(commitHash) {
-    const { data: buildList } = await this.storage.getBuildsList();
-    return buildList.some((build) => build.commitHash === commitHash);
+    try {
+      const { data: buildList } = await this.storage.getBuildsList();
+      return buildList.some((build) => build.commitHash === commitHash);
+    } catch (err) {
+      return false;
+    }
   }
 }
 
