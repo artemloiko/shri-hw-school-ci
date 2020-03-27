@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const config = require('./src/config');
 const routes = require('./src/routes');
@@ -10,6 +11,7 @@ async function bootstrap() {
   const server = express();
   const isProd = config.nodeEnv === 'production';
 
+  if (!isProd) server.use(cors());
   server.use(bodyParser.json());
   server.use(morgan(isProd ? 'common' : 'dev'));
   routes.init(server);
