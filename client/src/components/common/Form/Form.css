@@ -15,6 +15,10 @@
   margin-left: var(--space-xs);
 }
 
+.form__error {
+  color: var(--color-text-fail);
+}
+
 @media (max-width: 480px) {
   .form__input-group:not(:first-child) {
     margin-top: var(--space-l);

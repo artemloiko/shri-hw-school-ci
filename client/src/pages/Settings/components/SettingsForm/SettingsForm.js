@@ -26,15 +26,20 @@ function SettingsForm(props) {
       validate={(values) => {
         const errors = {};
         const requiredFields = ['repoName', 'buildCommand', 'mainBranch'];
-        requiredFields.forEach((field) => {
-          if (!values[field]) errors[field] = 'Required';
+        const requiredFieldsLabels = ['Repository name', 'Build Command', 'Main branch'];
+        requiredFields.forEach((field, i) => {
+          if (!values[field]) errors[field] = `${requiredFieldsLabels[i]} is required`;
         });
+        if (values.period && !/\d+/.test(values.period)) {
+          errors.period = 'Perios should be a number';
+        }
         return errors;
       }}
       onSubmit={async (values, { setSubmitting }) => {
         const settingsDTO = { ...values, period: Number(values.period) };
         try {
           await api.setSettings(settingsDTO);
+          dispatch(updateSettings(settingsDTO));
         } catch (err) {
           const { response } = err;
           const errorMessage = response?.data?.error?.message || err.message;
@@ -43,11 +48,17 @@ function SettingsForm(props) {
           alert(errorMessage);
         }
         setSubmitting(false);
-        dispatch(updateSettings(settingsDTO));
       }}
     >
       {(formikBag) => {
-        const { getFieldProps, handleSubmit, isSubmitting, setFieldValue } = formikBag;
+        const {
+          getFieldProps,
+          handleSubmit,
+          isSubmitting,
+          setFieldValue,
+          errors,
+          touched,
+        } = formikBag;
         return (
           <Loader isLoading={isSubmitting}>
             <Form {...props} onSubmit={handleSubmit}>
@@ -70,7 +81,7 @@ function SettingsForm(props) {
                 </TextField>
 
                 <TextField
-                  label=" Build command"
+                  label="Build command"
                   htmlFor="buildCommand"
                   mods={{ required: true }}
                   mix={['form']}
@@ -119,6 +130,8 @@ function SettingsForm(props) {
                     id="period"
                     setFieldValue={setFieldValue}
                     {...getFieldProps('period')}
+                    pattern="\d+"
+                    title="Only numbers"
                   ></Input>
                 </TextField>
               </FormInputGroup>
@@ -138,6 +151,20 @@ function SettingsForm(props) {
                   Cancel
                 </Button>
               </FormSubmitGroup>
+              <FormInputGroup>
+                {touched.repoName && errors.repoName && (
+                  <p className="form__error typography__body1">{errors.repoName}</p>
+                )}
+                {touched.buildCommand && errors.buildCommand && (
+                  <p className="form__error typography__body1">{errors.buildCommand}</p>
+                )}
+                {touched.mainBranch && errors.mainBranch && (
+                  <p className="form__error typography__body1">{errors.mainBranch}</p>
+                )}
+                {touched.period && errors.period && (
+                  <p className="form__error typography__body1">{errors.period}</p>
+                )}
+              </FormInputGroup>
             </Form>
           </Loader>
         );
