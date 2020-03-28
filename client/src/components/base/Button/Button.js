@@ -6,15 +6,20 @@ import { cn } from 'utils/bem-cn';
 import './Button.css';
 
 function Button(props) {
-  const { type = 'button', to = '', children, icon, mods = {} } = props;
+  const { type = 'button', to = '', children, icon, mods = {}, ...buttonProps } = props;
 
   return to ? (
-    <Link {...props} to={to} className={cn('button', props)} tabIndex={mods.disabled ? -1 : 0}>
+    <Link
+      {...buttonProps}
+      to={to}
+      className={cn('button', props)}
+      tabIndex={mods.disabled ? -1 : 0}
+    >
       {icon}
       <div className="button__text">{children}</div>
     </Link>
   ) : (
-    <button {...props} type={type} className={cn('button', props)} disabled={mods.disabled}>
+    <button {...buttonProps} type={type} className={cn('button', props)} disabled={mods.disabled}>
       {icon}
       <div className="button__text">{children}</div>
     </button>

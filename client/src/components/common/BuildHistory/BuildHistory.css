@@ -4,12 +4,13 @@
   flex-direction: column;
 }
 
-.build-history__card {
-  margin-bottom: var(--space-xs);
+.build-history__card:not(:first-child) {
+  margin-top: var(--space-xs);
 }
 
 .build-history__pagination {
   align-self: flex-start;
+  margin-top: var(--space-xs);
 }
 
 @media (max-width: 480px) {
