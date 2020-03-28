@@ -51,12 +51,14 @@
 
   --shadow-lightblue-10: 0px 1px 1px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
   --shadow-lightblue-40: 0px 2px 8px rgba(67, 68, 69, 0.3), 0px 0px 1.5px rgba(67, 68, 69, 0.3);
+  --shadow-lightblue-80: 0px 6px 16px rgba(67, 68, 69, 0.3), 0px 0px 1px rgba(67, 68, 69, 0.3);
 }
 
 /* SEMANTIC */
 :root {
   --color-bg-base: var(--white-500);
   --color-bg-log: var(--grey-50);
+  --color-bg-overlay: rgba(0, 0, 0, 0.4);
 
   --color-bg-control: var(--grey-100);
   --color-bg-control-hovered: var(--grey-300);
@@ -101,6 +103,10 @@
 
   --card-shadow: var(--shadow-lightblue-10);
   --card-shadow-hovered: var(--shadow-lightblue-40);
+
+  --modal-shadow: var(--shadow-lightblue-80);
+  --modal-space: var(--space-xxl);
+  --modal-border-radius: var(--border-radius-m);
 }
 
 @media (max-width: 480px) {

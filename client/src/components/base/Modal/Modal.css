@@ -1,0 +1,25 @@
+.modal-overlay {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: var(--color-bg-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  width: 100%;
+  max-width: 485px;
+  position: relative;
+  padding: var(--modal-space);
+  box-shadow: var(--modal-shadow);
+  border-radius: var(--modal-border-radius);
+  background-color: var(--color-bg-base);
+  color: var(--color-text);
+  display: flex;
+  flex-flow: row wrap;
+}
