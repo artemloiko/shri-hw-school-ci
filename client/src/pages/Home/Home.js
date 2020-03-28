@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSettingsIfNeeded } from '../../actions/SettingsAction';
 import { fetchBuildsListIfNeeded } from '../../actions/BuildsAction';
@@ -9,6 +9,7 @@ import Page from 'components/common/Page/Page';
 import Loader from 'components/common/Loader/Loader';
 import GetStarted from 'components/common/GetStarted/GetStarted';
 import BuildHistory from 'components/common/BuildHistory/BuildHistory';
+import BuildModal from 'pages/Home/components/BuildModal/BuildModal';
 
 import './Home.css';
 
@@ -21,6 +22,20 @@ function Home(props) {
     dispatch(fetchSettingsIfNeeded());
     dispatch(fetchBuildsListIfNeeded());
   }, [dispatch]);
+
+  const [buildModalOpen, setBuildModalOpen] = useState(false);
+  const handleBuildModalOpen = useCallback(
+    (e) => {
+      if (e.type === 'keydown' && e.key !== ' ' && e.key !== 'Enter') {
+        return;
+      }
+      setBuildModalOpen(true);
+    },
+    [setBuildModalOpen],
+  );
+  const handleBuildModalClose = useCallback(() => {
+    setBuildModalOpen(false);
+  }, [setBuildModalOpen]);
 
   const settingsLoadedAndSpecified = Boolean(settings.isLoaded && settings.id);
 
@@ -37,6 +52,7 @@ function Home(props) {
               className="header__control"
               mods={{ size: 'small', icon: true }}
               icon={<Icon mods={{ size: 'small', type: 'play' }} />}
+              onClick={handleBuildModalOpen}
             >
               Run build
             </Button>
@@ -55,6 +71,7 @@ function Home(props) {
       <Loader isLoading={!settings.isLoaded || (settingsLoadedAndSpecified && !builds.isLoaded)}>
         {!settings.id ? <GetStarted /> : <BuildHistory builds={builds.buildsList} />}
       </Loader>
+      <BuildModal isOpen={buildModalOpen} closeModal={handleBuildModalClose}></BuildModal>
     </Page>
   );
 }

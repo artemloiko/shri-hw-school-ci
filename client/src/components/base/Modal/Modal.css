@@ -21,5 +21,6 @@
   background-color: var(--color-bg-base);
   color: var(--color-text);
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: column;
+  align-items: flex-start;
 }

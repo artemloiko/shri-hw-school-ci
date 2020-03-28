@@ -1,0 +1,26 @@
+.build-modal__elem:not(:first-child) {
+  margin-top: var(--space-m);
+}
+
+.build-modal__form {
+  width: 100%;
+}
+
+.build-modal__form-submit-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.build-modal__form-submit-group-elem:not(:first-child) {
+  margin-left: var(--space-s);
+}
+
+@media (max-width: 480px) {
+  .build-modal__form-submit-group {
+    flex-direction: column;
+  }
+  .build-modal__form-submit-group-elem:not(:first-child) {
+    margin-left: 0;
+    margin-top: var(--space-s);
+  }
+}
