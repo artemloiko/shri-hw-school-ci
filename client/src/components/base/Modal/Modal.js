@@ -13,7 +13,7 @@ function Modal(props) {
   return (
     <ReactModal
       {...props}
-      className={cn('modal', { props })}
+      className={cn('modal', props)}
       overlayClassName="modal-overlay typography"
     >
       {children || 'Example Modal'}
