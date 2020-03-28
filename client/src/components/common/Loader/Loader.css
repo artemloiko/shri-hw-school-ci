@@ -13,6 +13,10 @@
   z-index: 999;
 }
 
+.loader_static {
+  position: static;
+}
+
 .cat {
   position: relative;
   width: 100%;

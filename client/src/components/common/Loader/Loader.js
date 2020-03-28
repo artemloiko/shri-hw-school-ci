@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { cn } from 'utils/bem-cn';
 
 import './Loader.css';
 
@@ -8,7 +9,7 @@ function Loader(props) {
   return (
     <>
       {isLoading && (
-        <div className="loader">
+        <div className={cn('loader', props)}>
           <div className="cat">
             <div className="cat__body"></div>
             <div className="cat__body"></div>
@@ -26,6 +27,9 @@ Loader.propTypes = {
   children: PropTypes.any.isRequired,
   isLoading: PropTypes.bool.isRequired,
   showContent: PropTypes.bool,
+  mods: PropTypes.shape({
+    static: PropTypes.bool,
+  }),
 };
 
 export default Loader;
