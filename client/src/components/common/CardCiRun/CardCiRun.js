@@ -24,8 +24,8 @@ function CardCiRun(props) {
 
   const cardStatusClasses = {
     'card-ci-run_status_success': status === 'Success',
-    'card-ci-run_status_running': status === 'InProgress',
-    'card-ci-run_status_fail': status === 'Fail',
+    'card-ci-run_status_running': status === 'InProgress' || status === 'Waiting',
+    'card-ci-run_status_fail': status === 'Fail' || status === 'Canceled',
   };
 
   return (
@@ -54,31 +54,35 @@ function CardCiRun(props) {
           ></IconText>
         </div>
       </div>
-      <div className="card-ci-run__meta">
-        <IconText
-          className="card-ci-run__meta-elem"
-          icon={<Icon mods={{ type: 'calendar' }} mix={['icon-text']} />}
-          text={new Date(start).toLocaleDateString()} //21 янв, 03:06
-        ></IconText>
-        <IconText
-          className="card-ci-run__meta-elem"
-          icon={<Icon mods={{ type: 'stopwatch' }} mix={['icon-text']} />}
-          text={duration.toString()} // 1 ч 20 мин
-        ></IconText>
-      </div>
+      {start && (
+        <div className="card-ci-run__meta">
+          <IconText
+            className="card-ci-run__meta-elem"
+            icon={<Icon mods={{ type: 'calendar' }} mix={['icon-text']} />}
+            text={new Date(start).toLocaleDateString()} //21 янв, 03:06
+          ></IconText>
+          {duration && (
+            <IconText
+              className="card-ci-run__meta-elem"
+              icon={<Icon mods={{ type: 'stopwatch' }} mix={['icon-text']} />}
+              text={duration.toString()} // 1 ч 20 мин
+            ></IconText>
+          )}
+        </div>
+      )}
     </Link>
   );
 }
 
 CardCiRun.propTypes = {
-  buildInfo: PropTypes.exact({
-    id: PropTypes.string,
-    buildNumber: PropTypes.number,
-    commitMessage: PropTypes.string,
-    branchName: PropTypes.string,
-    commitHash: PropTypes.string,
-    authorName: PropTypes.string,
-    status: PropTypes.string,
+  buildInfo: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    buildNumber: PropTypes.number.isRequired,
+    commitMessage: PropTypes.string.isRequired,
+    commitHash: PropTypes.string.isRequired,
+    branchName: PropTypes.string.isRequired,
+    authorName: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
     start: PropTypes.string,
     duration: PropTypes.number,
   }).isRequired,

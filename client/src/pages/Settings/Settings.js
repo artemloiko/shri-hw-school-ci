@@ -18,7 +18,7 @@ function Settings(props) {
 
   return (
     <Page contentClass="container">
-      <Loader isLoading={!settings.isLoaded} hideChildren>
+      <Loader isLoading={!settings.isLoaded}>
         <div className="settings">
           <div className="settings__elem">
             <h4 className="typography__elem typography__headline4">Settings</h4>

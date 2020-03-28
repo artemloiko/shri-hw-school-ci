@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-// import { buildsReducer } from './builds';
+import { buildsReducer } from './builds';
 import { settingsReducer } from './settings';
 export const rootReducer = combineReducers({
-  // builds: buildsReducer,
+  builds: buildsReducer,
   settings: settingsReducer,
 });

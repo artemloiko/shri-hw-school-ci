@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSettingsIfNeeded } from '../../actions/SettingsAction';
+import { fetchBuildsListIfNeeded } from '../../actions/BuildsAction';
 
 import Icon from 'components/base/Icon/Icon';
 import Button from 'components/base/Button/Button';
@@ -10,15 +11,18 @@ import GetStarted from 'components/common/GetStarted/GetStarted';
 import BuildHistory from 'components/common/BuildHistory/BuildHistory';
 
 import './Home.css';
-import builds from './commits.json';
 
 function Home(props) {
   const settings = useSelector((state) => state.settings);
+  const builds = useSelector((state) => state.builds);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchSettingsIfNeeded());
+    dispatch(fetchBuildsListIfNeeded());
   }, [dispatch]);
+
+  const settingsLoadedAndSpecified = Boolean(settings.isLoaded && settings.id);
 
   // TODO: show erorr if network is fall
   return (
@@ -48,8 +52,8 @@ function Home(props) {
         </>
       }
     >
-      <Loader isLoading={!settings.isLoaded}>
-        {settings.id ? <BuildHistory builds={builds} /> : <GetStarted />}
+      <Loader isLoading={!settings.isLoaded || (settingsLoadedAndSpecified && !builds.isLoaded)}>
+        {!settings.id ? <GetStarted /> : <BuildHistory builds={builds.buildsList} />}
       </Loader>
     </Page>
   );

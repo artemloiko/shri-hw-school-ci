@@ -60,7 +60,7 @@ function SettingsForm(props) {
           touched,
         } = formikBag;
         return (
-          <Loader isLoading={isSubmitting}>
+          <Loader isLoading={isSubmitting} showContent>
             <Form {...props} onSubmit={handleSubmit}>
               <FormInputGroup>
                 <TextField

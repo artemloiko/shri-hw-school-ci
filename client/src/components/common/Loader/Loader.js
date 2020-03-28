@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './Loader.css';
 
 function Loader(props) {
-  const { children, isLoading, hideChildren } = props;
+  const { children, isLoading, showContent } = props;
   return (
     <>
       {isLoading && (
@@ -17,7 +17,7 @@ function Loader(props) {
           </div>
         </div>
       )}
-      {isLoading && hideChildren ? null : children}
+      {isLoading && !showContent ? null : children}
     </>
   );
 }
@@ -25,7 +25,7 @@ function Loader(props) {
 Loader.propTypes = {
   children: PropTypes.any.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  hideChildren: PropTypes.bool,
+  showContent: PropTypes.bool,
 };
 
 export default Loader;

@@ -7,29 +7,36 @@ import CardCiRun from 'components/common/CardCiRun/CardCiRun';
 import './BuildHistory.css';
 
 function BuildHistory(props) {
-  const { builds } = props;
+  const { builds = [] } = props;
+  const buildsCards = builds.map((build) => (
+    <CardCiRun className="build-history__card" buildInfo={build} key={build.id}></CardCiRun>
+  ));
   return (
     <div className="build-history">
-      {builds.map((build) => (
-        <CardCiRun className="build-history__card" buildInfo={build} key={build.id}></CardCiRun>
-      ))}
-      <Button mods={{ 'mini-desktop': true }} className="build-history__pagination">
-        Show more
-      </Button>
+      {builds.length ? (
+        <>
+          {buildsCards}
+          <Button mods={{ 'mini-desktop': true }} className="build-history__pagination">
+            Show more
+          </Button>
+        </>
+      ) : (
+        <h3 className="typography__headline4">No builds.</h3>
+      )}
     </div>
   );
 }
 
 BuildHistory.propTypes = {
   builds: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string,
-      buildNumber: PropTypes.number,
-      commitMessage: PropTypes.string,
-      branchName: PropTypes.string,
-      commitHash: PropTypes.string,
-      authorName: PropTypes.string,
-      status: PropTypes.string,
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      buildNumber: PropTypes.number.isRequired,
+      commitMessage: PropTypes.string.isRequired,
+      commitHash: PropTypes.string.isRequired,
+      branchName: PropTypes.string.isRequired,
+      authorName: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
       start: PropTypes.string,
       duration: PropTypes.number,
     }),
