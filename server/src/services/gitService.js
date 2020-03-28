@@ -78,10 +78,20 @@ class GitService {
       const commitMessage = logInfo.split(SPLITTER)[1];
       const branches = logInfo.split(SPLITTER)[2];
       // branches example "HEAD -> branch, origin/branch, branch"
-      const branchName = branches
+      let branchName = branches
         .split(', ')[0]
+        .trim()
         .replace(/\w+\s->\s/, '')
         .replace(/origin\//, '');
+      if (!branchName) {
+        const { stdout } = await exec(`cd repo && git name-rev ${commitHash}`);
+        const branchInfo = stdout.split(' ')[1];
+        branchName = branchInfo
+          .trim()
+          .replace(/origin\//, '')
+          .replace(/remotes\//, '')
+          .replace(/[~^].+$/, '');
+      }
       return { commitHash, commitMessage, authorName, branchName };
     } catch (error) {
       console.error('GitService.getCommitDetails error\n', error.stderr);
