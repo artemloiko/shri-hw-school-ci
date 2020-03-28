@@ -3,7 +3,7 @@ import { createAction } from '../utils/createAction';
 export const GET_BUILDS_LIST_REQUEST = 'GET_BUILDS_LIST_REQUEST';
 export const GET_BUILDS_LIST_SUCCESS = 'GET_BUILDS_LIST_SUCCESS';
 export const GET_BUILDS_LIST_FAIL = 'GET_BUILDS_LIST_FAIL';
-export const GET_BUILDS_LIST_ASYNC = 'GET_BUILDS_LIST_ASYNC';
+export const GET_BUILDS_LIST_UPDATE = 'GET_BUILDS_LIST_UPDATE';
 
 const getBuildsListRequest = () => {
   return createAction(GET_BUILDS_LIST_REQUEST);
@@ -46,4 +46,12 @@ export function fetchBuildsListIfNeeded() {
       dispatch(fetchBuildsList());
     }
   };
+}
+
+export function updateBuildsList(data) {
+  return createAction(GET_BUILDS_LIST_UPDATE, data);
+}
+
+export async function addBuild(commitHash) {
+  return api.addBuild(commitHash);
 }

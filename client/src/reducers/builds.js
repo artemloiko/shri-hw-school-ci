@@ -2,7 +2,7 @@ import {
   GET_BUILDS_LIST_REQUEST,
   GET_BUILDS_LIST_SUCCESS,
   GET_BUILDS_LIST_FAIL,
-  GET_BUILDS_LIST_ASYNC,
+  GET_BUILDS_LIST_UPDATE,
 } from '../actions/BuildsAction';
 const initialState = {
   isFetching: false,
@@ -17,8 +17,8 @@ export function buildsReducer(state = initialState, action) {
       return { ...state, buildsList: action.payload, isLoaded: true, isFetching: false };
     case GET_BUILDS_LIST_FAIL:
       return { ...state, error: action.payload, isLoaded: true, isFetching: false };
-    case GET_BUILDS_LIST_ASYNC:
-      return { ...state, buildsList: action.payload };
+    case GET_BUILDS_LIST_UPDATE:
+      return { ...state, buildsList: [action.payload, ...state.buildsList] };
     default:
       return { ...state };
   }

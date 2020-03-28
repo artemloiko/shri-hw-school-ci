@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'components/base/Modal/Modal';
+import ErrorModal from 'components/common/ErrorModal/ErrorModal';
 import Input from 'components/base/Input/Input';
 import Button from 'components/base/Button/Button';
 import Loader from 'components/common/Loader/Loader';
 import { Formik } from 'formik';
 
+import { useDispatch } from 'react-redux';
+import { navigate } from '@reach/router';
+import { addBuild, updateBuildsList } from 'actions/BuildsAction';
+
 import './BuildModal.css';
 
 function BuildModal(props) {
   const { closeModal, isOpen } = props;
+
+  const dispatch = useDispatch();
+  const [error, setError] = useState({ isOpen: false });
   return (
     <Modal
       isOpen={isOpen}
@@ -32,26 +40,32 @@ function BuildModal(props) {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting, resetForm }) => {
-          setTimeout(() => {
-            alert('submit', values);
-            setSubmitting(false);
-            resetForm();
-          }, 2000);
+        onSubmit={async (values, { setSubmitting, resetForm }) => {
+          try {
+            const data = await addBuild(values.commitHash);
+            dispatch(updateBuildsList(data));
+            navigate(`/details/${data.id}`);
+          } catch (error) {
+            setError({ isOpen: true, message: error?.response?.data?.error.message });
+          }
+          resetForm();
+          setSubmitting(false);
         }}
       >
         {(formikBag) => {
           const { getFieldProps, handleSubmit, isSubmitting, setFieldValue } = formikBag;
           return (
-            <Loader isLoading={isSubmitting} showContent>
+            <Loader isLoading={isSubmitting} showContent style={{ width: '30%' }}>
               <form className="build-modal__form build-modal__elem" onSubmit={handleSubmit}>
                 <Input
                   mods={{ clear: true, fullwidth: true }}
                   placeholder="Commit hash"
                   id="commitHash"
-                  required
                   setFieldValue={setFieldValue}
                   {...getFieldProps('commitHash')}
+                  required
+                  pattern="\w{6,}"
+                  title="Hash 6 letters/numbers"
                 ></Input>
                 <div className="build-modal__form-submit-group build-modal__elem">
                   <Button
@@ -74,6 +88,13 @@ function BuildModal(props) {
           );
         }}
       </Formik>
+      <ErrorModal
+        isOpen={error.isOpen}
+        errorMessage={error.message}
+        closeModal={() => {
+          setError({ isOpen: false });
+        }}
+      ></ErrorModal>
     </Modal>
   );
 }

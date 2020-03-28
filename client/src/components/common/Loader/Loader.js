@@ -5,11 +5,11 @@ import { cn } from 'utils/bem-cn';
 import './Loader.css';
 
 function Loader(props) {
-  const { children, isLoading, showContent } = props;
+  const { children, isLoading, showContent, ...loaderProps } = props;
   return (
     <>
       {isLoading && (
-        <div className={cn('loader', props)}>
+        <div {...loaderProps} className={cn('loader', props)}>
           <div className="cat">
             <div className="cat__body"></div>
             <div className="cat__body"></div>
