@@ -43,7 +43,7 @@ class API {
 
   async getBuildLog(buildId) {
     const response = await this.axiosInstance.get(`/builds/${buildId}/logs`);
-    return response.data?.data;
+    return response.data;
   }
 }
 

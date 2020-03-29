@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Home path="/" />
       <Settings path="settings" />
-      <Details path="details/:buildNumber" />
+      <Details path="details/:buildId" />
       <ErrorPage default />
     </Router>
   );
