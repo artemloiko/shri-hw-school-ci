@@ -10,6 +10,9 @@
   width: 100%;
   position: relative;
 }
+.container_shrink {
+  flex: 0;
+}
 
 @media (max-width: 768px) {
   .container {
