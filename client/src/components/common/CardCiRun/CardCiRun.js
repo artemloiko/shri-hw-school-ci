@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from '@reach/router';
 import clsx from 'clsx';
+import { Link } from '@reach/router';
 import { cn } from 'utils/bem-cn';
+import { format } from 'date-fns';
 
 import Icon from 'components/base/Icon/Icon';
 import IconText from 'components/base/IconText/IconText';
@@ -27,6 +28,13 @@ function CardCiRun(props) {
     'card-ci-run_status_success': status === 'Success',
     'card-ci-run_status_running': status === 'InProgress' || status === 'Waiting',
     'card-ci-run_status_fail': status === 'Fail' || status === 'Canceled',
+  };
+
+  const formatTime = (duration) => {
+    const durationInMinutes = Math.round(duration / 60);
+    const minutes = durationInMinutes % 60;
+    const hours = (durationInMinutes - minutes) / 60;
+    return hours ? `${hours} h ${minutes} min` : `${minutes} min`;
   };
 
   return (
@@ -60,13 +68,13 @@ function CardCiRun(props) {
           <IconText
             className="card-ci-run__meta-elem"
             icon={<Icon mods={{ type: 'calendar' }} mix={['icon-text']} />}
-            text={new Date(start).toLocaleDateString()} //21 янв, 03:06
+            text={format(new Date(start), 'dd LLL, kk:mm')} //21 янв, 03:06
           ></IconText>
           {duration && (
             <IconText
               className="card-ci-run__meta-elem"
               icon={<Icon mods={{ type: 'stopwatch' }} mix={['icon-text']} />}
-              text={duration.toString()} // 1 ч 20 мин
+              text={formatTime(duration)} // 1 ч 20 мин
             ></IconText>
           )}
         </div>
