@@ -12,6 +12,7 @@ import './CardCiRun.css';
 function CardCiRun(props) {
   const { buildInfo } = props;
   const {
+    id,
     buildNumber,
     commitMessage,
     branchName,
@@ -30,7 +31,7 @@ function CardCiRun(props) {
 
   return (
     <Link
-      to={`/details/${buildNumber}`}
+      to={`/details/${id}`}
       className={clsx(cn('card-ci-run', props), cardStatusClasses)}
       tabIndex="0"
     >
@@ -76,13 +77,13 @@ function CardCiRun(props) {
 
 CardCiRun.propTypes = {
   buildInfo: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    buildNumber: PropTypes.number.isRequired,
-    commitMessage: PropTypes.string.isRequired,
-    commitHash: PropTypes.string.isRequired,
-    branchName: PropTypes.string.isRequired,
-    authorName: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
+    id: PropTypes.string,
+    buildNumber: PropTypes.number,
+    commitMessage: PropTypes.string,
+    commitHash: PropTypes.string,
+    branchName: PropTypes.string,
+    authorName: PropTypes.string,
+    status: PropTypes.string,
     start: PropTypes.string,
     duration: PropTypes.number,
   }).isRequired,
