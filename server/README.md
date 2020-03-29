@@ -7,7 +7,7 @@
 ## Getting started
 
 ```bash
-cd client
+cd server
 npm install
 ```
 
@@ -16,7 +16,7 @@ npm install
 ```bash
 npm run start // запуск nodemon
 npm run start:debug // запуск nodemon в дебаг режиме
-npm run start:prod // запуск сервера через node
+npm run start:prod // запуск сервера в прод режиме
 ```
 
 Параметры конфига задаются в .env  
