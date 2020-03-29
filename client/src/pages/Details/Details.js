@@ -19,13 +19,14 @@ function Details(props) {
   const { buildId } = props;
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getBuildDetails(buildId));
   }, [buildId, dispatch]);
 
   const currentBuild = useSelector((state) => state.buildsDetails[buildId]);
+  const settings = useSelector((state) => state.settings);
 
-  const isDetailsLoading = !currentBuild || !currentBuild.details.isLoaded;
   const handleRebuild = async () => {
     const commitHash = currentBuild?.details?.commitHash;
     if (!commitHash) return;
@@ -38,9 +39,13 @@ function Details(props) {
     }
   };
 
+  const isDetailsLoading = !currentBuild || !currentBuild.details.isLoaded;
+  const isLogsLoading = !currentBuild || !currentBuild.logs.isLoaded;
+
   return (
     <Page
       contentClass="details"
+      headerText={settings.repoName}
       headerControls={
         <>
           <Button
@@ -70,10 +75,7 @@ function Details(props) {
           )}
         </div>
         <Log log={currentBuild?.logs?.log}>
-          <Loader
-            isLoading={!currentBuild || !currentBuild.logs.isLoaded}
-            mods={{ static: true }}
-          ></Loader>
+          <Loader isLoading={isLogsLoading} mods={{ static: true }}></Loader>
         </Log>
       </Loader>
     </Page>

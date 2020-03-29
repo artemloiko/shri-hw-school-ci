@@ -18,7 +18,7 @@ export function buildsReducer(state = initialState, action) {
     case GET_BUILDS_LIST_FAIL:
       return { ...state, error: action.payload, isLoaded: true, isFetching: false };
     case GET_BUILDS_LIST_UPDATE:
-      return { ...state, buildsList: [action.payload, ...state.buildsList] };
+      return { ...state, buildsList: [action.payload, ...(state.buildsList || [])] };
     default:
       return { ...state };
   }
