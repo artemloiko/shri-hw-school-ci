@@ -8,7 +8,7 @@ const init = (server) => {
   server.use('/api', apiRoutes);
 
   server.get('/*', (req, res) => {
-    const pathToFile = path.resolve(__dirname, '../../../client/build/404.html');
+    const pathToFile = path.resolve(__dirname, '../../../client/build/index.html');
     res.status(404);
     return res.sendFile(pathToFile);
   });
