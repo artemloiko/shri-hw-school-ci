@@ -17,6 +17,10 @@
   position: static;
 }
 
+.loader_animate {
+  animation: fadeIn 1.5s;
+}
+
 .cat {
   position: relative;
   width: 100%;
@@ -92,5 +96,17 @@
   }
   to {
     transform: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

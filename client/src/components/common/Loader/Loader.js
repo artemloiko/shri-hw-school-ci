@@ -24,11 +24,12 @@ function Loader(props) {
 }
 
 Loader.propTypes = {
-  children: PropTypes.any.isRequired,
+  children: PropTypes.any,
   isLoading: PropTypes.bool.isRequired,
   showContent: PropTypes.bool,
   mods: PropTypes.shape({
     static: PropTypes.bool,
+    animate: PropTypes.bool,
   }),
 };
 
