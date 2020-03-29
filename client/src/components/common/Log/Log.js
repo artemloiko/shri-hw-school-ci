@@ -3,17 +3,28 @@ import PropTypes from 'prop-types';
 
 import './Log.css';
 
+const Convert = require('ansi-to-html');
+const ansiConverter = new Convert({ fg: '#000', bg: '#000' });
+
 function Log(props) {
-  const { children } = props;
+  const { children, log = '' } = props;
   return (
     <div className="log">
-      <pre className="log__pre">{children}</pre>
+      {log ? (
+        <pre
+          className="log__pre"
+          dangerouslySetInnerHTML={{ __html: ansiConverter.toHtml(log) }}
+        ></pre>
+      ) : (
+        <pre className="log__pre">{children}</pre>
+      )}
     </div>
   );
 }
 
 Log.propTypes = {
-  childre: PropTypes.string,
+  children: PropTypes.any,
+  log: PropTypes.string,
 };
 
 export default Log;

@@ -69,10 +69,11 @@ function Details(props) {
             <CardCiRun mods={{ details: true }} buildInfo={currentBuild.details}></CardCiRun>
           )}
         </div>
-        <Log>
-          <Loader isLoading={!currentBuild || !currentBuild.logs.isLoaded} mods={{ static: true }}>
-            {currentBuild?.logs?.log}
-          </Loader>
+        <Log log={currentBuild?.logs?.log}>
+          <Loader
+            isLoading={!currentBuild || !currentBuild.logs.isLoaded}
+            mods={{ static: true }}
+          ></Loader>
         </Log>
       </Loader>
     </Page>
