@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSettingsIfNeeded } from '../../actions/SettingsAction';
-import { fetchBuildsListIfNeeded } from '../../actions/BuildsAction';
+import { fetchSettingsIfNeeded } from 'actions/SettingsAction';
+import { fetchBuildsListIfNeeded } from 'actions/BuildsAction';
 
 import Icon from 'components/base/Icon/Icon';
 import Button from 'components/base/Button/Button';
