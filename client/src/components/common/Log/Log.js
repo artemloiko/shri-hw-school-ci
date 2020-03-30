@@ -7,16 +7,14 @@ const Convert = require('ansi-to-html');
 const ansiConverter = new Convert({ fg: '#000', bg: '#000' });
 
 function Log(props) {
-  const { children, log = '' } = props;
+  const { log = '' } = props;
   return (
     <div className="log">
-      {log ? (
+      {log && (
         <pre
           className="log__pre"
           dangerouslySetInnerHTML={{ __html: ansiConverter.toHtml(log) }}
         ></pre>
-      ) : (
-        <pre className="log__pre">{children}</pre>
       )}
     </div>
   );
