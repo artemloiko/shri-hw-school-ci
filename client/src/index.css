@@ -18,6 +18,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a:visited {
+  color: inherit;
+}
+
 *,
 *:after,
 *:before {
