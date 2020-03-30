@@ -1,9 +1,0 @@
-.link {
-  color: var(--color-text);
-  letter-spacing: 0.06px;
-  text-decoration: none;
-}
-
-.link:hover {
-  color: var(--color-text-link-hovered);
-}
