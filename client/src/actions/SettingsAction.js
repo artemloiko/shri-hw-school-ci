@@ -3,7 +3,9 @@ import { createAction } from '../utils/createAction';
 export const GET_SETTINGS_REQUEST = 'GET_SETTINGS_REQUEST';
 export const GET_SETTINGS_SUCCESS = 'GET_SETTINGS_SUCCESS';
 export const GET_SETTINGS_FAIL = 'GET_SETTINGS_FAIL';
-export const UPDATE_SETTINGS = 'UPDATE_SETTINGS';
+export const SET_SETTINGS = 'SET_SETTINGS';
+export const SET_SETTINGS_FAIL = 'SET_SETTINGS_FAIL';
+export const RESET_SETTINGS_ERROR = 'RESET_SETTINGS_ERROR';
 
 const getSettingsRequest = () => {
   return createAction(GET_SETTINGS_REQUEST);
@@ -49,5 +51,13 @@ export function fetchSettingsIfNeeded() {
 }
 
 export function updateSettings(settingsDTO) {
-  return createAction(UPDATE_SETTINGS, settingsDTO);
+  return createAction(SET_SETTINGS, settingsDTO);
+}
+
+export function updateSettingsFail(error) {
+  return createAction(SET_SETTINGS_FAIL, error);
+}
+
+export function resetSettingsError() {
+  return createAction(RESET_SETTINGS_ERROR);
 }

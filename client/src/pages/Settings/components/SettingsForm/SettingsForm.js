@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Input from 'components/base/Input/Input';
-import TextField from 'components/common/TextField/TextField';
-import Button from 'components/base/Button/Button';
-import Form, { FormInputGroup, FormSubmitGroup } from 'components/common/Form/Form';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik } from 'formik';
 
-import { useDispatch, useSelector } from 'react-redux';
+import Input from 'components/base/Input/Input';
+import Button from 'components/base/Button/Button';
+import TextField from 'components/common/TextField/TextField';
 import Loader from 'components/common/Loader/Loader';
-import { updateSettings } from 'actions/SettingsAction';
+import Form, { FormInputGroup, FormSubmitGroup } from 'components/common/Form/Form';
+
+import { updateSettings, updateSettingsFail } from 'actions/SettingsAction';
 import api from 'utils/api';
 
 function SettingsForm(props) {
@@ -42,10 +43,8 @@ function SettingsForm(props) {
           dispatch(updateSettings(settingsDTO));
         } catch (err) {
           const { response } = err;
-          const errorMessage = response?.data?.error?.message || err.message;
-          const errorCode = response?.data?.error?.errorCode;
-          console.log('Updating settings error', errorMessage, errorCode);
-          alert(errorMessage);
+          const error = response?.data?.error || err;
+          dispatch(updateSettingsFail(error));
         }
         setSubmitting(false);
       }}

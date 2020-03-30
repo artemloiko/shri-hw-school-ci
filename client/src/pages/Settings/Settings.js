@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSettingsIfNeeded } from '../../actions/SettingsAction';
 
 import Page from 'components/common/Page/Page';
-import SettingsForm from 'pages/Settings/components/SettingsForm/SettingsForm';
 import Loader from 'components/common/Loader/Loader';
+import ErrorModal from 'components/common/ErrorModal/ErrorModal';
+import SettingsForm from 'pages/Settings/components/SettingsForm/SettingsForm';
+
+import { fetchSettingsIfNeeded, resetSettingsError } from 'actions/SettingsAction';
 
 import './Settings.css';
 
@@ -29,6 +31,11 @@ function Settings(props) {
           <SettingsForm className="settings__elem" />
         </div>
       </Loader>
+      <ErrorModal
+        isOpen={Boolean(settings.error)}
+        errorMessage={settings.error?.message}
+        closeModal={() => dispatch(resetSettingsError())}
+      ></ErrorModal>
     </Page>
   );
 }
