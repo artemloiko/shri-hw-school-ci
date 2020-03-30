@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
-
 import { cn } from 'utils/bem-cn';
 
 import './Modal.css';

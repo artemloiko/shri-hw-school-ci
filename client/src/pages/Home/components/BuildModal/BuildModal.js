@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { navigate } from '@reach/router';
+import { Formik } from 'formik';
+
 import Modal from 'components/base/Modal/Modal';
-import ErrorModal from 'components/common/ErrorModal/ErrorModal';
 import Input from 'components/base/Input/Input';
 import Button from 'components/base/Button/Button';
 import Loader from 'components/common/Loader/Loader';
-import { Formik } from 'formik';
+import ErrorModal from 'components/common/ErrorModal/ErrorModal';
 
-import { useDispatch } from 'react-redux';
-import { navigate } from '@reach/router';
 import { addBuild, updateBuildsList } from 'actions/BuildsAction';
 
 import './BuildModal.css';

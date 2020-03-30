@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import clsx from 'clsx';
+
 import Footer from 'components/common/Footer/Footer';
 import Header from 'components/common/Header/Header';
 

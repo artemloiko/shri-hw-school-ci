@@ -1,7 +1,7 @@
 import React from 'react';
+import Link from 'components/base/Link/Link';
 
 import './Footer.css';
-import Link from 'components/base/Link/Link';
 
 function Footer() {
   return (

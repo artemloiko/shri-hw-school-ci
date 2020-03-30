@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Modal from 'components/base/Modal/Modal';
 import Button from 'components/base/Button/Button';
 
