@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { navigate } from '@reach/router';
 
-import Page from 'components/common/Page/Page';
-import CardCiRun from 'components/common/CardCiRun/CardCiRun';
-import Log from 'components/common/Log/Log';
-import Loader from 'components/common/Loader/Loader';
-import Button from 'components/base/Button/Button';
 import Icon from 'components/base/Icon/Icon';
+import Button from 'components/base/Button/Button';
+import Log from 'components/common/Log/Log';
+import Page from 'components/common/Page/Page';
+import Loader from 'components/common/Loader/Loader';
+import CardCiRun from 'components/common/CardCiRun/CardCiRun';
+import ErrorModal from 'components/common/ErrorModal/ErrorModal';
 
 import { getBuildDetails } from 'actions/BuildsDetailsAction';
 import { updateBuildsList, addBuild } from 'actions/BuildsAction';
@@ -16,9 +17,8 @@ import { updateBuildsList, addBuild } from 'actions/BuildsAction';
 import './Details.css';
 
 function Details(props) {
-  const { buildId } = props;
-
   const dispatch = useDispatch();
+  const { buildId } = props;
 
   useEffect(() => {
     dispatch(getBuildDetails(buildId));
@@ -27,16 +27,23 @@ function Details(props) {
   const currentBuild = useSelector((state) => state.buildsDetails[buildId]);
   const settings = useSelector((state) => state.settings);
 
+  const [isRebuildSubmitting, setIsRebuildSubmitting] = useState(false);
+  const [rebuildError, setRebuildError] = useState();
+
   const handleRebuild = async () => {
     const commitHash = currentBuild?.details?.commitHash;
     if (!commitHash) return;
     try {
+      setIsRebuildSubmitting(true);
       const data = await addBuild(currentBuild.details.commitHash);
       dispatch(updateBuildsList(data));
       navigate(`/details/${data.id}`);
     } catch (error) {
-      console.log('Cannot find commit', commitHash);
+      setRebuildError(
+        error?.response?.data?.error?.message + '. Check your repo settings' || 'Network error',
+      );
     }
+    setIsRebuildSubmitting(false);
   };
 
   const isDetailsLoading = !currentBuild || !currentBuild.details.isLoaded;
@@ -51,7 +58,7 @@ function Details(props) {
           <Button
             type="button"
             className="header__control"
-            mods={{ size: 'small', icon: true }}
+            mods={{ size: 'small', icon: true, disabled: isRebuildSubmitting }}
             icon={<Icon mods={{ size: 'small', type: 'rebuild' }} />}
             onClick={handleRebuild}
           >
@@ -60,7 +67,7 @@ function Details(props) {
           <Button
             to="/settings"
             className="header__control"
-            mods={{ size: 'small', icon: true, 'icon-only': true }}
+            mods={{ size: 'small', icon: true, 'icon-only': true, disabled: isRebuildSubmitting }}
             icon={<Icon mods={{ size: 'small', type: 'settings' }} />}
           >
             Settings
@@ -78,6 +85,12 @@ function Details(props) {
           <Loader isLoading={isLogsLoading} mods={{ static: true }}></Loader>
         </Log>
       </Loader>
+
+      <ErrorModal
+        closeModal={() => setRebuildError()}
+        isOpen={Boolean(rebuildError)}
+        errorMessage={rebuildError}
+      ></ErrorModal>
     </Page>
   );
 }
