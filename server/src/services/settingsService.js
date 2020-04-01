@@ -29,7 +29,7 @@ class SettingsService {
     const isAlreadyInQueue = buildQueue.has(lastCommitHash);
 
     if (!isAlreadyInQueue && !isAlredyBuilt) {
-      buildQueue.enqueue(lastCommitHash);
+      await buildQueue.enqueue(lastCommitHash);
     }
   }
 

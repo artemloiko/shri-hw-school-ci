@@ -14,7 +14,7 @@ class BuildsService {
 
   async addToBuildQueue(commitHash) {
     const commitDetails = await gitService.getCommitDetails(commitHash);
-    buildQueue.enqueue(commitHash);
+    await buildQueue.enqueue(commitHash);
     return this.storage.buildInit(commitDetails);
   }
 
