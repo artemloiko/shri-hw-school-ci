@@ -18,7 +18,7 @@ function Button(props) {
       className={cn('button', { ...props, mods })}
       tabIndex={mods.disabled ? -1 : 0}
     >
-      {iconType && <Icon mods={{ size: 'small', type: iconType }} />}
+      {iconType && <Icon mods={{ size: 'small', type: iconType }} mix={['button']} />}
       <div className="button__text">{children}</div>
     </Link>
   ) : (
@@ -28,7 +28,7 @@ function Button(props) {
       className={cn('button', { ...props, mods })}
       disabled={mods.disabled}
     >
-      {iconType && <Icon mods={{ size: 'small', type: iconType }} />}
+      {iconType && <Icon mods={{ size: 'small', type: iconType }} mix={['button']} />}
       <div className="button__text">{children}</div>
     </button>
   );

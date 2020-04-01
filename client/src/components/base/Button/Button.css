@@ -82,3 +82,7 @@
   cursor: auto;
   pointer-events: none;
 }
+
+.button_disabled .button__icon {
+  opacity: 0.3;
+}
