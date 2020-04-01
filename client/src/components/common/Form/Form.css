@@ -34,6 +34,6 @@
   }
 }
 
-.textfield__form:not(:first-child) {
+.form__textfield:not(:first-child) {
   margin-top: var(--space-xl);
 }

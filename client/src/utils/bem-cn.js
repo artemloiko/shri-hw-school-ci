@@ -6,7 +6,7 @@ export const cn = (blockName, props) => {
   const cnMods = cnBem(blockName)(mods);
   let cnMix = '';
   if (mix.length) {
-    cnMix = mix.map((mixBlock) => cnBem(blockName, mixBlock)()).join(' ');
+    cnMix = mix.map((mixBlock) => cnBem(mixBlock, blockName)()).join(' ');
   }
   return `${className} ${cnMods} ${cnMix}`.trim();
 };

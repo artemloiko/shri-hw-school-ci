@@ -27,9 +27,9 @@
   line-height: 1.3847;
 }
 
-.input__textfield {
+.textfield__input {
   margin-top: var(--space-xxs);
 }
-.textfield_row .input__textfield {
+.textfield_row .textfield__input {
   margin: 0 var(--space-xs);
 }
