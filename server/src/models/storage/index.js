@@ -32,8 +32,8 @@ class Storage {
     return response.data;
   }
 
-  async getBuildsList() {
-    const response = await this.axiosInstance.get('/build/list');
+  async getBuildsList(offset, limit) {
+    const response = await this.axiosInstance.get(`/build/list?offset=${offset}&limit=${limit}`);
     return response.data;
   }
 

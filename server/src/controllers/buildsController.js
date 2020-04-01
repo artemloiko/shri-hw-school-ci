@@ -5,8 +5,9 @@ const { logResponseError } = require('../utils/logger');
 const buildsService = new BuildsSevice(storage);
 
 const getBuildList = async (req, res, next) => {
+  const { limit, offset } = req.query;
   try {
-    const currentBuilds = await buildsService.getBuildsList();
+    const currentBuilds = await buildsService.getBuildsList(offset, limit);
     return res.json(currentBuilds);
   } catch (err) {
     next(err);

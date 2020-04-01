@@ -8,8 +8,8 @@ class BuildsService {
     this.storage = storage;
   }
 
-  async getBuildsList() {
-    return this.storage.getBuildsList();
+  async getBuildsList(offset = 0, limit = 25) {
+    return this.storage.getBuildsList(offset, limit);
   }
 
   async addToBuildQueue(commitHash) {
