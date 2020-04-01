@@ -5,7 +5,6 @@ import { Link } from '@reach/router';
 import { cn } from 'utils/bem-cn';
 import { format } from 'date-fns';
 
-import Icon from 'components/base/Icon/Icon';
 import IconText from 'components/base/IconText/IconText';
 
 import './CardCiRun.css';
@@ -52,13 +51,13 @@ function CardCiRun(props) {
         <div className="card-ci-run__commit-info">
           <IconText
             className="card-ci-run__commit-info-elem"
-            icon={<Icon mods={{ type: 'commit' }} mix={['icon-text']} />}
+            iconType="commit"
             text={branchName}
             secondaryText={commitHash}
           ></IconText>
           <IconText
             className="card-ci-run__commit-info-elem"
-            icon={<Icon mods={{ type: 'user' }} mix={['icon-text']} />}
+            iconType="user"
             text={authorName}
           ></IconText>
         </div>
@@ -67,13 +66,13 @@ function CardCiRun(props) {
         <div className="card-ci-run__meta">
           <IconText
             className="card-ci-run__meta-elem"
-            icon={<Icon mods={{ type: 'calendar' }} mix={['icon-text']} />}
+            iconType="calendar"
             text={format(new Date(start), 'dd LLL, kk:mm')}
           ></IconText>
           {duration && (
             <IconText
               className="card-ci-run__meta-elem"
-              icon={<Icon mods={{ type: 'stopwatch' }} mix={['icon-text']} />}
+              iconType="stopwatch"
               text={formatTime(duration)}
             ></IconText>
           )}

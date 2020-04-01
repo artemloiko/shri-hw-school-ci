@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { navigate } from '@reach/router';
 
-import Icon from 'components/base/Icon/Icon';
 import Button from 'components/base/Button/Button';
 import Log from 'components/common/Log/Log';
 import Page from 'components/common/Page/Page';
@@ -58,8 +57,8 @@ function Details(props) {
           <Button
             type="button"
             className="header__control"
-            mods={{ size: 'small', icon: true, disabled: isRebuildSubmitting }}
-            icon={<Icon mods={{ size: 'small', type: 'rebuild' }} />}
+            mods={{ size: 'small', disabled: isRebuildSubmitting }}
+            iconType="rebuild"
             onClick={handleRebuild}
           >
             Rebuild
@@ -67,8 +66,8 @@ function Details(props) {
           <Button
             to="/settings"
             className="header__control"
-            mods={{ size: 'small', icon: true, 'icon-only': true, disabled: isRebuildSubmitting }}
-            icon={<Icon mods={{ size: 'small', type: 'settings' }} />}
+            mods={{ size: 'small', 'icon-only': true, disabled: isRebuildSubmitting }}
+            iconType="settings"
           >
             Settings
           </Button>

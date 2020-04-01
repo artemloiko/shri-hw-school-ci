@@ -9,6 +9,7 @@ function Icon(props) {
 }
 
 Icon.propTypes = {
+  className: PropTypes.string,
   mods: PropTypes.shape({
     size: PropTypes.oneOf(['small']),
     type: PropTypes.oneOf([
@@ -22,7 +23,6 @@ Icon.propTypes = {
     ]).isRequired,
   }).isRequired,
   mix: PropTypes.arrayOf(PropTypes.string),
-  className: PropTypes.string,
 };
 
 export default Icon;

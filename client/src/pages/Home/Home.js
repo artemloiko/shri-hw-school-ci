@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchSettingsIfNeeded } from 'actions/SettingsAction';
 import { fetchBuildsListIfNeeded } from 'actions/BuildsAction';
 
-import Icon from 'components/base/Icon/Icon';
 import Button from 'components/base/Button/Button';
 import Page from 'components/common/Page/Page';
 import Loader from 'components/common/Loader/Loader';
@@ -50,8 +49,8 @@ function Home(props) {
             <Button
               type="button"
               className="header__control"
-              mods={{ size: 'small', icon: true }}
-              icon={<Icon mods={{ size: 'small', type: 'play' }} />}
+              mods={{ size: 'small' }}
+              iconType="play"
               onClick={handleBuildModalOpen}
             >
               Run build
@@ -60,8 +59,8 @@ function Home(props) {
           <Button
             to="/settings"
             className="header__control"
-            mods={{ size: 'small', icon: true, 'icon-only': !!settings.id }}
-            icon={<Icon mods={{ size: 'small', type: 'settings' }} />}
+            mods={{ size: 'small', 'icon-only': !!settings.id }}
+            iconType="settings"
           >
             Settings
           </Button>
