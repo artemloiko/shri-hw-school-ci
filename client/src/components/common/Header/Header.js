@@ -5,25 +5,16 @@ import { Link } from '@reach/router';
 import './Header.css';
 
 function Header(props) {
-  const { text, controls } = props;
+  const { text = ' School CI server', controls } = props;
 
   return (
     <header className="header">
       <div className="container header__container">
-        {text ? (
-          <h1 className="header__heading">
-            <Link to="/" className="typography__headline2">
-              {text}
-            </Link>
-          </h1>
-        ) : (
-          <h1 className="header__heading">
-            <Link to="/" className="typography__headline1">
-              School CI server
-            </Link>
-          </h1>
-        )}
-
+        <h1 className="header__heading">
+          <Link to="/" className={text ? 'typography__headline2' : 'typography__headline1'}>
+            {text}
+          </Link>
+        </h1>
         <div className="header__control-group">{controls}</div>
       </div>
     </header>
