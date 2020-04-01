@@ -7,7 +7,8 @@ import CardCiRun from 'components/common/CardCiRun/CardCiRun';
 import './BuildHistory.css';
 
 function BuildHistory(props) {
-  const { builds = [] } = props;
+  const { builds = [], loadMore, isLoadedAll, isLoadingMore } = props;
+
   const buildsCards = builds.map((build) => (
     <CardCiRun className="build-history__card" buildInfo={build} key={build.id}></CardCiRun>
   ));
@@ -16,9 +17,15 @@ function BuildHistory(props) {
       {builds.length ? (
         <>
           {buildsCards}
-          <Button mods={{ 'mini-desktop': true }} className="build-history__pagination">
-            Show more
-          </Button>
+          {!isLoadedAll && (
+            <Button
+              mods={{ 'mini-desktop': true, disabled: isLoadingMore }}
+              className="build-history__pagination"
+              onClick={loadMore}
+            >
+              Show more
+            </Button>
+          )}
         </>
       ) : (
         <h3 className="typography__headline4">No builds.</h3>
@@ -41,6 +48,9 @@ BuildHistory.propTypes = {
       duration: PropTypes.number,
     }),
   ),
+  loadMore: PropTypes.func,
+  isLoadedAll: PropTypes.bool,
+  isLoadingMore: PropTypes.bool,
 };
 
 export default BuildHistory;

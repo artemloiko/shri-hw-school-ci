@@ -26,8 +26,8 @@ class API {
     return response.data?.data;
   }
 
-  async getBuildsList() {
-    const response = await this.axiosInstance.get('/builds');
+  async getBuildsList(offset = 0, limit = 25) {
+    const response = await this.axiosInstance.get(`/builds?offset=${offset}&limit=${limit}`);
     return response.data?.data;
   }
 

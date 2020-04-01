@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSettingsIfNeeded } from 'actions/SettingsAction';
-import { fetchBuildsListIfNeeded } from 'actions/BuildsAction';
+import { fetchBuildsListIfNeeded, fetchMoreBuilds } from 'actions/BuildsAction';
 
 import Button from 'components/base/Button/Button';
 import Page from 'components/common/Page/Page';
@@ -22,6 +22,11 @@ function Home(props) {
     dispatch(fetchBuildsListIfNeeded());
   }, [dispatch]);
 
+  const handleLoadMore = useCallback(() => {
+    dispatch(fetchMoreBuilds());
+  }, [dispatch]);
+
+  // TODO: create custom hook for modal
   const [buildModalOpen, setBuildModalOpen] = useState(false);
   const handleBuildModalOpen = useCallback(
     (e) => {
@@ -38,7 +43,6 @@ function Home(props) {
 
   const settingsLoadedAndSpecified = Boolean(settings.isLoaded && settings.id);
 
-  // TODO: show erorr if network is fall
   return (
     <Page
       contentClass="container"
@@ -68,7 +72,16 @@ function Home(props) {
       }
     >
       <Loader isLoading={!settings.isLoaded || (settingsLoadedAndSpecified && !builds.isLoaded)}>
-        {!settings.id ? <GetStarted /> : <BuildHistory builds={builds.buildsList} />}
+        {!settings.id ? (
+          <GetStarted />
+        ) : (
+          <BuildHistory
+            builds={builds.buildsList}
+            loadMore={handleLoadMore}
+            isLoadedAll={builds.isFullListLoaded}
+            isLoadingMore={builds.isFetchingMore}
+          />
+        )}
       </Loader>
       <BuildModal isOpen={buildModalOpen} closeModal={handleBuildModalClose}></BuildModal>
     </Page>
