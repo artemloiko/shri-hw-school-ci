@@ -31,8 +31,9 @@ function SettingsForm(props) {
         requiredFields.forEach((field, i) => {
           if (!values[field]) errors[field] = `${requiredFieldsLabels[i]} is required`;
         });
+
         if (values.period && !/^\d+$/.test(values.period)) {
-          errors.period = 'Perios should be a number';
+          errors.period = 'Period should be a number';
         }
         return errors;
       }}

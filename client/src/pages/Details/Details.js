@@ -38,9 +38,8 @@ function Details(props) {
       dispatch(updateBuildsList(data));
       navigate(`/details/${data.id}`);
     } catch (error) {
-      setRebuildError(
-        error?.response?.data?.error?.message + '. Check your repo settings' || 'Network error',
-      );
+      const errorMessage = error?.response?.data?.error?.message;
+      setRebuildError(errorMessage ? `${errorMessage}. Check your repo settings` : 'Network error');
     }
     setIsRebuildSubmitting(false);
   };
