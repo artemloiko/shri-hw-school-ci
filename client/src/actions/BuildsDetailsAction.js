@@ -17,11 +17,9 @@ const buildDetailsInit = (id) => {
 const getBuildDetailsRequest = (id) => {
   return createAction(GET_BUILD_DETAILS_REQUEST, { id });
 };
-
 const getBuildDetailsSuccess = (id, data) => {
   return createAction(GET_BUILD_DETAILS_SUCCESS, { id, data });
 };
-
 const getBuildDetailsFail = (id, error) => {
   return createAction(GET_BUILD_DETAILS_FAIL, { id, error }, true);
 };
@@ -33,6 +31,7 @@ function fetchBuildDetailsIfNeeded(buildId) {
     if (details?.isFetching || details?.isLoaded) {
       return;
     }
+
     dispatch(getBuildDetailsRequest(buildId));
     try {
       const data = await api.getBuildDetails(buildId);
@@ -42,14 +41,13 @@ function fetchBuildDetailsIfNeeded(buildId) {
     }
   };
 }
+
 const getBuildLogsRequest = (id) => {
   return createAction(GET_BUILD_LOGS_REQUEST, { id });
 };
-
 const getBuildLogsSuccess = (id, data) => {
   return createAction(GET_BUILD_LOGS_SUCCESS, { id, data });
 };
-
 const getBuildLogsFail = (id, error) => {
   return createAction(GET_BUILD_LOGS_FAIL, { id, error }, true);
 };
@@ -61,10 +59,12 @@ function fetchBuildLogsIfNeeded(buildId) {
     if (logs?.isFetching || logs?.isLoaded) {
       return;
     }
+
     if (details.status === 'Waiting' || details.status === 'InProgress') {
       dispatch(getBuildLogsSuccess(buildId, ''));
       return;
     }
+
     dispatch(getBuildLogsRequest(buildId));
     try {
       const data = await api.getBuildLog(buildId);
@@ -75,17 +75,26 @@ function fetchBuildLogsIfNeeded(buildId) {
   };
 }
 
+function findLocalBuildDetails(buildId, state) {
+  const { builds } = state;
+  const { buildsList = [] } = builds;
+  return buildsList.find((build) => build.id === buildId);
+}
+
 export function getBuildDetails(buildId) {
   return async (dispatch, getState) => {
-    const { builds, buildsDetails } = getState();
-    const { buildsList = [] } = builds;
+    const state = getState();
+
+    const { buildsDetails } = state;
     if (!buildsDetails[buildId]) {
       dispatch(buildDetailsInit(buildId));
     }
-    const currentBuild = buildsList.find((build) => build.id === buildId);
+
+    const currentBuild = findLocalBuildDetails(buildId, state);
     if (currentBuild) {
       dispatch(getBuildDetailsSuccess(buildId, currentBuild));
     }
+
     dispatch(fetchBuildDetailsIfNeeded(buildId));
     dispatch(fetchBuildLogsIfNeeded(buildId));
   };

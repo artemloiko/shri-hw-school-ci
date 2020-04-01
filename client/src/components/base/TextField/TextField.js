@@ -21,7 +21,7 @@ function TextField(props) {
 TextField.propTypes = {
   label: PropTypes.string,
   htmlFor: PropTypes.string,
-  childre: PropTypes.element,
+  children: PropTypes.element,
 
   className: PropTypes.string,
   mods: PropTypes.shape({

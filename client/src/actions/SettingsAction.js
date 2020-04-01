@@ -10,11 +10,9 @@ export const RESET_SETTINGS_ERROR = 'RESET_SETTINGS_ERROR';
 const getSettingsRequest = () => {
   return createAction(GET_SETTINGS_REQUEST);
 };
-
 const getSettingsSuccess = (data) => {
   return createAction(GET_SETTINGS_SUCCESS, data);
 };
-
 const getSettingsFail = (error) => {
   return createAction(GET_SETTINGS_FAIL, error, true);
 };
@@ -33,13 +31,12 @@ function fetchSettings() {
 
 function shouldFetchSettings(state) {
   const { settings } = state;
-  if (settings.isFetching) {
+
+  if (settings?.isFetching || settings?.isLoaded) {
     return false;
   }
-  if (!settings.isLoaded) {
-    return true;
-  }
-  return false;
+
+  return true;
 }
 
 export function fetchSettingsIfNeeded() {

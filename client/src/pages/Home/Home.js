@@ -7,8 +7,8 @@ import Icon from 'components/base/Icon/Icon';
 import Button from 'components/base/Button/Button';
 import Page from 'components/common/Page/Page';
 import Loader from 'components/common/Loader/Loader';
-import GetStarted from 'components/common/GetStarted/GetStarted';
 import BuildHistory from 'components/common/BuildHistory/BuildHistory';
+import GetStarted from 'pages/Home/components/GetStarted/GetStarted';
 import BuildModal from 'pages/Home/components/BuildModal/BuildModal';
 
 import './Home.css';

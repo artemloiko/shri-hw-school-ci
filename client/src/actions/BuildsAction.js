@@ -31,13 +31,12 @@ function fetchBuildsList() {
 
 function shouldFetchBuildsList(state) {
   const { builds } = state;
-  if (builds.isFetching) {
+
+  if (builds?.isFetching || builds?.isLoaded) {
     return false;
   }
-  if (!builds.isLoaded) {
-    return true;
-  }
-  return false;
+
+  return true;
 }
 
 export function fetchBuildsListIfNeeded() {

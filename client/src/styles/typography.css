@@ -1,6 +1,8 @@
 .typography {
   font-family: 'YS Text', Arial, Helvetica, sans-serif;
   color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .typography__elem:not(:first-child) {
@@ -69,6 +71,12 @@
     line-height: 1.23;
   }
 }
+
+.typography a:visited {
+  color: inherit;
+}
+
+/* FONTS LOADING */
 
 @font-face {
   font-family: 'YS Text';

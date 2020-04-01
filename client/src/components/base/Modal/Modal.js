@@ -8,10 +8,10 @@ import './Modal.css';
 ReactModal.setAppElement('#root');
 
 function Modal(props) {
-  const { children } = props;
+  const { children, ...modalProps } = props;
   return (
     <ReactModal
-      {...props}
+      {...modalProps}
       className={cn('modal', props)}
       overlayClassName="modal-overlay typography"
     >
@@ -22,7 +22,7 @@ function Modal(props) {
 
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  childre: PropTypes.any,
+  children: PropTypes.any,
 };
 
 export default Modal;

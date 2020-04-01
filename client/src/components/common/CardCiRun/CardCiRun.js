@@ -68,13 +68,13 @@ function CardCiRun(props) {
           <IconText
             className="card-ci-run__meta-elem"
             icon={<Icon mods={{ type: 'calendar' }} mix={['icon-text']} />}
-            text={format(new Date(start), 'dd LLL, kk:mm')} //21 янв, 03:06
+            text={format(new Date(start), 'dd LLL, kk:mm')}
           ></IconText>
           {duration && (
             <IconText
               className="card-ci-run__meta-elem"
               icon={<Icon mods={{ type: 'stopwatch' }} mix={['icon-text']} />}
-              text={formatTime(duration)} // 1 ч 20 мин
+              text={formatTime(duration)}
             ></IconText>
           )}
         </div>

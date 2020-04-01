@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 
 import Input from 'components/base/Input/Input';
 import Button from 'components/base/Button/Button';
-import TextField from 'components/common/TextField/TextField';
+import TextField from 'components/base/TextField/TextField';
 import Loader from 'components/common/Loader/Loader';
 import Form, { FormInputGroup, FormSubmitGroup } from 'components/common/Form/Form';
 
