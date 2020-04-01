@@ -16,7 +16,7 @@ class BuildQueue {
   async enqueue(queueElem) {
     this.buildQueue.push(queueElem);
     await saveQueueToFile(this.buildQueue);
-    console.log(`Commit ${queueElem} added to buildQueue!`);
+    console.log(`New build ${queueElem.commitHash} - ${queueElem.buildId} added to buildQueue!`);
   }
 
   async dequeue() {
@@ -25,12 +25,16 @@ class BuildQueue {
     return dequeuedElem;
   }
 
-  has(queueElem) {
-    return this.buildQueue.includes(queueElem);
+  has({ commitHash, buildId }) {
+    return this.buildQueue.some(
+      (elem) => elem.commitHash === commitHash || elem.buildId === buildId,
+    );
   }
 
-  async remove(queueElem) {
-    this.buildQueue = this.buildQueue.filter((elem) => elem !== queueElem);
+  async remove({ commitHash, buildId }) {
+    this.buildQueue = this.buildQueue.filter(
+      (elem) => elem.commitHash !== commitHash || elem.buildId !== buildId,
+    );
     await saveQueueToFile(this.buildQueue);
   }
 

@@ -26,10 +26,13 @@ class SettingsService {
     const lastCommitHash = await gitService.getLastCommitHash(mainBranch);
 
     const isAlredyBuilt = await this.checkIfCommitIsBuilt(lastCommitHash);
-    const isAlreadyInQueue = buildQueue.has(lastCommitHash);
+    const isAlreadyInQueue = buildQueue.has({ commitHash: lastCommitHash });
 
     if (!isAlreadyInQueue && !isAlredyBuilt) {
-      await buildQueue.enqueue(lastCommitHash);
+      const commitDetails = await gitService.getCommitDetails(lastCommitHash);
+      const data = await this.storage.buildInit(commitDetails);
+      const buildId = data.data.id;
+      await buildQueue.enqueue({ commitHash: lastCommitHash, buildId });
     }
   }
 

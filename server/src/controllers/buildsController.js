@@ -17,8 +17,7 @@ const getBuildList = async (req, res, next) => {
 const addBuild = async (req, res, next) => {
   const { commitHash } = req.params;
   try {
-    const data = await buildsService.addToBuildQueue(commitHash);
-    const buildId = data.data.id;
+    const buildId = await buildsService.addToBuildQueue(commitHash);
     const commitDetails = await buildsService.getBuildDetails(buildId);
     return res.json(commitDetails);
   } catch (err) {
