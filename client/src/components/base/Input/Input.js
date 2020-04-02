@@ -14,6 +14,7 @@ function Input(props) {
       if (e.type === 'keydown' && e.key !== ' ' && e.key !== 'Enter') {
         return;
       }
+      e.preventDefault();
       setFieldValue(name, '');
       inputRef.current.focus();
     },
