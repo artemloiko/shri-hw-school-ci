@@ -41,7 +41,7 @@ function Home(props) {
     setBuildModalOpen(false);
   }, [setBuildModalOpen]);
 
-  const settingsLoadedAndSpecified = Boolean(settings.isLoaded && settings.id);
+  const settingsLoadedAndSpecified = Boolean(settings.isLoaded && settings.repoName);
 
   return (
     <Page
@@ -49,7 +49,7 @@ function Home(props) {
       headerText={settings.repoName}
       headerControls={
         <>
-          {settings.id && (
+          {settings.repoName && (
             <Button
               type="button"
               className="header__control"
@@ -63,7 +63,7 @@ function Home(props) {
           <Button
             to="/settings"
             className="header__control"
-            mods={{ size: 'small', 'icon-only': !!settings.id }}
+            mods={{ size: 'small', 'icon-only': !!settings.repoName }}
             iconType="settings"
           >
             Settings
@@ -72,7 +72,7 @@ function Home(props) {
       }
     >
       <Loader isLoading={!settings.isLoaded || (settingsLoadedAndSpecified && !builds.isLoaded)}>
-        {!settings.id ? (
+        {!settings.repoName ? (
           <GetStarted />
         ) : (
           <BuildHistory

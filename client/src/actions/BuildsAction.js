@@ -34,6 +34,10 @@ function fetchBuildsList() {
 function shouldFetchBuildsList(state) {
   const { builds } = state;
 
+  if (builds.error) {
+    return true;
+  }
+
   if (builds?.isFetching || builds?.isLoaded) {
     return false;
   }

@@ -18,7 +18,7 @@ export function buildsReducer(state = initialState, action) {
   const { payload } = action;
   switch (action.type) {
     case GET_BUILDS_LIST_REQUEST:
-      return { ...state, isFetching: true };
+      return { ...state, isLoaded: false, isFetching: true, error: undefined };
     case GET_BUILDS_LIST_SUCCESS:
       return { ...state, buildsList: payload, isLoaded: true, isFetching: false };
     case GET_BUILDS_LIST_FAIL:

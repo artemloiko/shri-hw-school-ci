@@ -10,6 +10,7 @@ import Loader from 'components/common/Loader/Loader';
 import Form, { FormInputGroup, FormSubmitGroup } from 'components/common/Form/Form';
 
 import { updateSettings, updateSettingsFail } from 'actions/SettingsAction';
+import { fetchBuildsListIfNeeded } from 'actions/BuildsAction';
 import api from 'utils/api';
 
 function SettingsForm(props) {
@@ -42,6 +43,7 @@ function SettingsForm(props) {
         try {
           await api.setSettings(settingsDTO);
           dispatch(updateSettings(settingsDTO));
+          dispatch(fetchBuildsListIfNeeded(true));
         } catch (err) {
           const { response } = err;
           const error = response?.data?.error || err;
