@@ -28,6 +28,9 @@ STORAGE_URL=https://hw.shri.yandex/api/ # URL вашего хранилища
 STORAGE_API_KEY=Bearer your_api_key # your_api_key - apiKey от вашего хранилища
 ```
 
+Токен можно получить здесь -> https://hw.shri.yandex/
+Нужно будет войти через гитхаб
+
 ## About
 
 Текущая версия АПИ:  
