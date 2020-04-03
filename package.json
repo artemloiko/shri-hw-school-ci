@@ -17,5 +17,13 @@
   "homepage": "https://github.com/artuom130/shri-hw-school-ci#readme",
   "devDependencies": {
     "prettier": "^1.19.1"
+  },
+  "dependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/register": "^7.9.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "ignore-styles": "^5.0.1"
   }
 }
