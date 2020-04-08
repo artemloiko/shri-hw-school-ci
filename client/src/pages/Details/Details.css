@@ -1,0 +1,9 @@
+.details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+}
+.details__container {
+  flex: 0;
+}

@@ -7,7 +7,7 @@
 ## Getting started
 
 ```bash
-cd client
+cd server
 npm install
 ```
 
@@ -16,7 +16,7 @@ npm install
 ```bash
 npm run start // запуск nodemon
 npm run start:debug // запуск nodemon в дебаг режиме
-npm run start:prod // запуск сервера через node
+npm run start:prod // запуск сервера в прод режиме
 ```
 
 Параметры конфига задаются в .env  
@@ -27,6 +27,9 @@ PORT=3001
 STORAGE_URL=https://hw.shri.yandex/api/ # URL вашего хранилища
 STORAGE_API_KEY=Bearer your_api_key # your_api_key - apiKey от вашего хранилища
 ```
+
+Токен можно получить здесь -> https://hw.shri.yandex/
+Нужно будет войти через гитхаб
 
 ## About
 

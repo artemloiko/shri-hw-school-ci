@@ -8,14 +8,16 @@ class BuildsService {
     this.storage = storage;
   }
 
-  async getBuildsList() {
-    return this.storage.getBuildsList();
+  async getBuildsList(offset = 0, limit = 25) {
+    return this.storage.getBuildsList(offset, limit);
   }
 
   async addToBuildQueue(commitHash) {
     const commitDetails = await gitService.getCommitDetails(commitHash);
-    buildQueue.enqueue(commitHash);
-    await this.storage.buildInit(commitDetails);
+    const data = await this.storage.buildInit(commitDetails);
+    const buildId = data.data.id;
+    await buildQueue.enqueue({ commitHash, buildId });
+    return buildId;
   }
 
   async getBuildDetails(buildId) {

@@ -1,5 +1,11 @@
 node_modules
 dist
+
+#workspace & environment settings
 .cache
+.vscode
 .env
+
+#node.js server temp fodlers
 repo
+temp

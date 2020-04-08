@@ -32,11 +32,24 @@ class GitService {
 
   async cloneRepository(repoName) {
     try {
+      const repoUrl = `https://github.com/${repoName}.git`;
+      if (!(await this.checkIfRepositoryExists(repoUrl))) {
+        throw new Error('Repository does not exist');
+      }
       await fs.remove('./repo');
-      await exec(`git clone https://github.com/${repoName}.git repo`);
+      await exec(`git clone ${repoUrl} repo`);
     } catch (error) {
       console.error('GitService.updateRepository error\n', error.stderr);
       throw new HttpError(`Cannot find ${repoName} repository`, 400, 'GIT_CANNOT_FIND_REPO');
+    }
+  }
+
+  async checkIfRepositoryExists(repoUrl) {
+    try {
+      await exec(`git ls-remote ${repoUrl}`);
+      return true;
+    } catch (err) {
+      return false;
     }
   }
 
@@ -78,10 +91,20 @@ class GitService {
       const commitMessage = logInfo.split(SPLITTER)[1];
       const branches = logInfo.split(SPLITTER)[2];
       // branches example "HEAD -> branch, origin/branch, branch"
-      const branchName = branches
+      let branchName = branches
         .split(', ')[0]
+        .trim()
         .replace(/\w+\s->\s/, '')
         .replace(/origin\//, '');
+      if (!branchName) {
+        const { stdout } = await exec(`cd repo && git name-rev ${commitHash}`);
+        const branchInfo = stdout.split(' ')[1];
+        branchName = branchInfo
+          .trim()
+          .replace(/origin\//, '')
+          .replace(/remotes\//, '')
+          .replace(/[~^].+$/, '');
+      }
       return { commitHash, commitMessage, authorName, branchName };
     } catch (error) {
       console.error('GitService.getCommitDetails error\n', error.stderr);

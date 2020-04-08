@@ -1,17 +1,13 @@
-const express = require('express');
-const path = require('path');
 const apiRoutes = require('./api');
+// eslint-disable-next-line node/no-unpublished-require
+const { clientSSR } = require('../../../client/server/index.js');
 
 const init = (server) => {
-  server.use(express.static(path.resolve(__dirname, '../../../client/build')));
-
   server.use('/api', apiRoutes);
 
-  server.get('/*', (req, res) => {
-    const pathToFile = path.resolve(__dirname, '../../../client/build/404.html');
-    res.status(404);
-    return res.sendFile(pathToFile);
-  });
+  if (process.env.NODE_ENV === 'production') {
+    server.use(clientSSR);
+  }
 
   // eslint-disable-next-line no-unused-vars
   server.use((err, req, res, next) => {

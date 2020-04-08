@@ -1,0 +1,4 @@
+.build-modal__elem:not(:first-child) {
+  margin-top: var(--space-m);
+}
+

@@ -5,8 +5,9 @@ const { logResponseError } = require('../utils/logger');
 const buildsService = new BuildsSevice(storage);
 
 const getBuildList = async (req, res, next) => {
+  const { limit, offset } = req.query;
   try {
-    const currentBuilds = await buildsService.getBuildsList();
+    const currentBuilds = await buildsService.getBuildsList(offset, limit);
     return res.json(currentBuilds);
   } catch (err) {
     next(err);
@@ -16,8 +17,9 @@ const getBuildList = async (req, res, next) => {
 const addBuild = async (req, res, next) => {
   const { commitHash } = req.params;
   try {
-    await buildsService.addToBuildQueue(commitHash);
-    return res.end();
+    const buildId = await buildsService.addToBuildQueue(commitHash);
+    const commitDetails = await buildsService.getBuildDetails(buildId);
+    return res.json(commitDetails);
   } catch (err) {
     logResponseError('Error /api/builds/:commitHash POST', err);
     next(err);

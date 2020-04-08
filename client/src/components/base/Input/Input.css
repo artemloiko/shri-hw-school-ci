@@ -1,0 +1,67 @@
+.input {
+  width: fit-content;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  --clear-button-width: calc(16px + (var(--space-input-h) * 2));
+  --clear-button-height: calc(16px + (var(--space-input-top) + var(--space-input-bottom)));
+}
+
+.input_fullwidth {
+  width: 100%;
+}
+.input_counter {
+  width: 52px;
+}
+.input_counter .input__text {
+  text-align: right;
+}
+
+.input__text {
+  width: 100%;
+  padding: var(--space-input-top) var(--space-input-h) var(--space-input-bottom);
+  border: 2px solid var(--color-border-input);
+  border-radius: var(--border-radius-m);
+
+  font-size: var(--typo-size-s);
+  line-height: 1.1539;
+
+  color: var(--color-text);
+  background-color: var(--color-bg-input);
+}
+
+.input__text:focus {
+  outline: none;
+  border-color: var(--color-border-input-focused);
+}
+
+.input__text::placeholder {
+  color: var(--color-text-input-placeholder);
+}
+
+.input__clear-btn {
+  display: none;
+  position: absolute;
+  width: var(--clear-button-width);
+  height: var(--clear-button-height);
+  top: 2px;
+  right: 2px;
+
+  cursor: pointer;
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('../../../images/icon/clear.svg');
+}
+
+.input_clear .input__text {
+  padding-right: var(--clear-button-width);
+}
+
+.input_clear .input__clear-btn {
+  display: block;
+}
+
+.input__text:placeholder-shown ~ .input__clear-btn {
+  display: none;
+}
