@@ -18,6 +18,8 @@ function Link(props) {
 Link.propTypes = {
   to: PropTypes.string,
   children: PropTypes.any.isRequired,
+  className: PropTypes.string,
+  mix: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default Link;

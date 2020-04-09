@@ -23,6 +23,8 @@ function Modal(props) {
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   children: PropTypes.any,
+  className: PropTypes.string,
+  mix: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default Modal;
