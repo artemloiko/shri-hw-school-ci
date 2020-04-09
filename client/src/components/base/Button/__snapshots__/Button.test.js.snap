@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button with default props matches the snapshot 1`] = `
+<button
+  className="button"
+  type="button"
+>
+  <div
+    className="button__text"
+  >
+    Default button
+  </div>
+</button>
+`;
+
+exports[`Button[type=link] with all props matches the snapshot 1`] = `
+<a
+  aria-current="page"
+  className="block button button_action button_icon block__button"
+  href="/"
+  onClick={[Function]}
+  tabIndex={0}
+>
+  <div
+    className="icon icon_size_small icon_type_play button__icon"
+  />
+  <div
+    className="button__text"
+  >
+    Link
+  </div>
+</a>
+`;
+
+exports[`Button[type=submit] with all props matches the snapshot 1`] = `
+<button
+  className="block button button_action button_icon block__button"
+  type="submit"
+>
+  <div
+    className="icon icon_size_small icon_type_play button__icon"
+  />
+  <div
+    className="button__text"
+  >
+    Button
+  </div>
+</button>
+`;
