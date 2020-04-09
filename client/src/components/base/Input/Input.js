@@ -57,7 +57,7 @@ Input.propTypes = {
   required: PropTypes.bool,
   pattern: PropTypes.string,
   title: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.any,
 
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
