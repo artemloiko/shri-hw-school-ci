@@ -8,7 +8,9 @@ import App from './App';
 
 import './index.css';
 
-ReactDOM.hydrate(
+const mount = process.env.NODE_ENV === 'development' ? ReactDOM.render : ReactDOM.hydrate;
+
+mount(
   <React.StrictMode>
     <ErrorBoundary>
       <Provider store={store}>
