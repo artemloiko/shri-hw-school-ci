@@ -5,7 +5,7 @@ import { cn } from 'utils/bem-cn';
 import './Input.css';
 
 function Input(props) {
-  const { setFieldValue, ...inputProps } = props;
+  const { setFieldValue, mods = {}, className, mix, ...inputProps } = props;
   const { name, onBlur } = inputProps;
   const inputRef = useRef();
 
@@ -32,14 +32,16 @@ function Input(props) {
   );
 
   return (
-    <div className={cn('input', props)}>
+    <div className={cn('input', { className, mods, mix })}>
       <input {...inputProps} className="input__text" ref={inputRef} onBlur={handleBlur} />
-      {props.mods.clear && (
+      {mods.clear && (
         <div
           className="input__clear-btn"
           tabIndex="0"
           onClick={handleClear}
           onKeyDown={handleClear}
+          role="button"
+          aria-label="Clear input"
         ></div>
       )}
     </div>
@@ -47,12 +49,19 @@ function Input(props) {
 }
 
 Input.propTypes = {
-  type: PropTypes.string,
   id: PropTypes.string,
+  name: PropTypes.string,
   placeholder: PropTypes.string,
-  required: PropTypes.bool,
-  defaultValue: PropTypes.string,
+  type: PropTypes.string,
   inputMode: PropTypes.string,
+  required: PropTypes.bool,
+  pattern: PropTypes.string,
+  title: PropTypes.string,
+  value: PropTypes.string,
+
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  setFieldValue: PropTypes.func.isRequired,
 
   className: PropTypes.string,
   mods: PropTypes.shape({
