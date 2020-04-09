@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextField with all possible props matches the snapshot 1`] = `
+<div
+  className="block textfield textfield_required textfield_row block__textfield"
+>
+  <label
+    className="textfield__label"
+    htmlFor="input"
+  >
+    Label
+  </label>
+  <input
+    id="input"
+    type="text"
+  />
+  <div
+    className="textfield__append"
+  >
+    appendText
+  </div>
+</div>
+`;
