@@ -5,8 +5,10 @@
  * @param {boolean} error
  * @param {*} meta
  */
-export function createAction(type, payload, error = false, meta = null) {
-  const FSA = { type, payload, error };
+export function createAction(type, payload, error, meta) {
+  const FSA = { type };
+  if (payload) FSA.payload = payload;
+  if (error) FSA.error = error;
   if (meta) FSA.meta = meta;
   return FSA;
 }
