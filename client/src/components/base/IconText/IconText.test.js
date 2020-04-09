@@ -1,37 +1,26 @@
 import React from 'react';
-import { unmountComponentAtNode, render } from 'react-dom';
-import { act } from 'react-dom/test-utils';
+import renderer from 'react-test-renderer';
 
 import IconText from './IconText';
 
-let container = null;
-beforeEach(() => {
-  container = document.createElement('div');
-  document.body.appendChild(container);
+test('IconText with required props matches the snapshot', () => {
+  const tree = renderer.create(<IconText iconType="commit" text="master" />).toJSON();
+
+  expect(tree).toMatchSnapshot();
 });
 
-afterEach(() => {
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
+test('IconText with all possible props matches the snapshot', () => {
+  const tree = renderer
+    .create(
+      <IconText
+        iconType="commit"
+        text="master"
+        secondaryText="90e1126"
+        className="block"
+        mix={['block']}
+      />,
+    )
+    .toJSON();
 
-it('IconText renders main text', () => {
-  const mainText = 'Author';
-
-  act(() => {
-    render(<IconText iconType="commit" text={mainText} />, container);
-  });
-  expect(container.textContent).toBe(mainText);
-});
-
-it('IconText renders main and secondary text', () => {
-  const mainText = 'Author';
-  const secondaryText = 'Commit';
-
-  act(() => {
-    render(<IconText iconType="commit" text={mainText} secondaryText={secondaryText} />, container);
-  });
-
-  expect(container.textContent).toBe(mainText + secondaryText);
+  expect(tree).toMatchSnapshot();
 });
