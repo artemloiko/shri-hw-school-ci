@@ -4,7 +4,8 @@
     "es6": true,
     "node": true
   },
-  "extends": ["eslint-config-airbnb-base", "plugin:node/recommended"],
+  "plugins": ["jest"],
+  "extends": ["eslint-config-airbnb-base", "plugin:node/recommended", "plugin:jest/recommended"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
