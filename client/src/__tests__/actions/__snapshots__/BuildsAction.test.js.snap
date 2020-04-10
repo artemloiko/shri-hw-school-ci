@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`builds actions fetching builds list fail 1`] = `
+Array [
+  Object {
+    "type": "GET_BUILDS_LIST_REQUEST",
+  },
+  Object {
+    "error": true,
+    "payload": "Internal server error",
+    "type": "GET_BUILDS_LIST_FAIL",
+  },
+]
+`;
+
+exports[`builds actions fetching builds list success 1`] = `
+Array [
+  Object {
+    "type": "GET_BUILDS_LIST_REQUEST",
+  },
+  Object {
+    "payload": Array [
+      Object {
+        "authorName": "Artem Loiko",
+        "branchName": "master",
+        "buildNumber": 3,
+        "commitHash": "a63f2b3",
+        "commitMessage": "Add option to work with async fn",
+        "configurationId": "2906e339-bc49-4e86-9e44-eda86bf0a971",
+        "duration": 4549,
+        "id": "7e6a4f9b-fb65-489d-ad96-566f177f3479",
+        "start": "2020-04-10T06:58:06.766",
+        "status": "Success",
+      },
+      Object {
+        "authorName": "Artem Loiko",
+        "branchName": "master",
+        "buildNumber": 2,
+        "commitHash": "a63f2b3",
+        "commitMessage": "Add option to work with async fn",
+        "configurationId": "2906e339-bc49-4e86-9e44-eda86bf0a971",
+        "duration": 518,
+        "id": "ba77d958-3ae8-4087-84be-8b1af5451e00",
+        "start": "2020-04-09T15:51:08.548",
+        "status": "Success",
+      },
+    ],
+    "type": "GET_BUILDS_LIST_SUCCESS",
+  },
+]
+`;
+
+exports[`builds actions fetching more builds success 1`] = `
+Array [
+  Object {
+    "type": "LOAD_MORE_BUILDS_REQUEST",
+  },
+  Object {
+    "payload": Array [
+      Object {
+        "authorName": "Artem Loiko",
+        "branchName": "master",
+        "buildNumber": 1,
+        "commitHash": "a63f2b3",
+        "commitMessage": "Add option to work with async fn",
+        "configurationId": "2906e339-bc49-4e86-9e44-eda86bf0a971",
+        "duration": 4934,
+        "id": "e59f7715-8da8-4e46-9312-bcba770d2c0f",
+        "start": "2020-04-09T15:45:58.471",
+        "status": "Success",
+      },
+    ],
+    "type": "LOAD_MORE_BUILDS_SUCCESS",
+  },
+]
+`;
+
+exports[`builds actions update builds list 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "authorName": "Artem Loiko",
+      "branchName": "master",
+      "buildNumber": 4,
+      "commitHash": "a63f2b3",
+      "commitMessage": "Add option to work with async fn",
+      "configurationId": "2906e339-bc49-4e86-9e44-eda86bf0a971",
+      "id": "b6eef618-014a-45da-a3a6-3c05851f65bc",
+      "status": "Waiting",
+    },
+    "type": "GET_BUILDS_LIST_UPDATE",
+  },
+]
+`;
