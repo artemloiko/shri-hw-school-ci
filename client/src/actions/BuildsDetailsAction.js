@@ -95,7 +95,9 @@ export function getBuildDetails(buildId) {
       dispatch(getBuildDetailsSuccess(buildId, currentBuild));
     }
 
-    dispatch(fetchBuildDetailsIfNeeded(buildId));
-    dispatch(fetchBuildLogsIfNeeded(buildId));
+    return Promise.all([
+      dispatch(fetchBuildDetailsIfNeeded(buildId)),
+      dispatch(fetchBuildLogsIfNeeded(buildId)),
+    ]);
   };
 }
