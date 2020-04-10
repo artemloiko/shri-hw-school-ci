@@ -4,7 +4,8 @@
   "description": "School CI. Server.",
   "main": "server.js",
   "scripts": {
-    "test": "jest --watch",
+    "test": "jest --forceExit",
+    "test:watch": "jest --watch",
     "start": "nodemon server.js",
     "start:debug": "nodemon --inspect-brk server.js",
     "start:prod": "cross-env NODE_ENV=production node server.js",
