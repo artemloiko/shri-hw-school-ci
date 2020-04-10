@@ -1,11 +1,10 @@
 const GitService = require('./gitService');
 const buildQueue = require('../models/buildQueue');
 
-const gitService = new GitService();
-
 class BuildsService {
   constructor(storage) {
     this.storage = storage;
+    this.gitService = new GitService();
   }
 
   async getBuildsList(offset = 0, limit = 25) {
@@ -13,7 +12,7 @@ class BuildsService {
   }
 
   async addToBuildQueue(commitHash) {
-    const commitDetails = await gitService.getCommitDetails(commitHash);
+    const commitDetails = await this.gitService.getCommitDetails(commitHash);
     const data = await this.storage.buildInit(commitDetails);
     const buildId = data.data.id;
     await buildQueue.enqueue({ commitHash, buildId });
