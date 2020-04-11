@@ -2,7 +2,7 @@ const fs = require('fs-extra');
 
 class BuildQueue {
   constructor(initQueue = []) {
-    this.buildQueue = initQueue;
+    this.buildQueue = [...initQueue];
   }
 
   async saveQueueToFile(buildQueue) {
