@@ -1,5 +1,5 @@
 const GitService = require('./gitService');
-const buildQueue = require('../models/buildQueue');
+const { buildQueue } = require('../models/buildQueue');
 
 class BuildsService {
   constructor(storage) {

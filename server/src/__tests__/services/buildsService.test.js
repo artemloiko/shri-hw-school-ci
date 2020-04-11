@@ -1,6 +1,6 @@
 const BuildsService = require('../../services/buildsService');
 const GitService = require('../../services/gitService');
-const buildQueue = require('../../models/buildQueue');
+const { buildQueue } = require('../../models/buildQueue');
 
 const storageMock = {
   getBuildsList: jest.fn(),

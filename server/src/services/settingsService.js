@@ -1,4 +1,4 @@
-const buildQueue = require('../models/buildQueue');
+const { buildQueue } = require('../models/buildQueue');
 const GitService = require('./gitService');
 
 class SettingsService {
