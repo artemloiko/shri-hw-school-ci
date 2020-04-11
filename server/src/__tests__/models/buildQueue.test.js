@@ -34,6 +34,7 @@ describe('BuildQueue', () => {
     beforeEach(() => {
       queue = new BuildQueue(queueElements);
       queue.saveQueueToFile = jest.fn().mockResolvedValue();
+      jest.spyOn(console, 'log').mockImplementation(() => {});
     });
     test('enqueue() syncs queue to file', async () => {
       await queue.enqueue(queueElem);
