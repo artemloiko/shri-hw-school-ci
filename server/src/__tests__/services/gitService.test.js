@@ -18,10 +18,10 @@ describe('Git Service', () => {
   describe('updateBranch', () => {
     test("Doesn't throw error for existing branch", async () => {
       await expect(gitService.updateBranch('master')).resolves.not.toThrow();
-    });
+    }, 10000);
     test('Throw error for non existing branch', async () => {
       await expect(gitService.updateBranch('moster')).rejects.toThrow('Cannot find branch moster');
-    });
+    }, 10000);
   });
   // TODO: describe('cloneRepository', () => {});
   describe('checkIfRepositoryExists', () => {
@@ -54,10 +54,11 @@ describe('Git Service', () => {
       expect(commitHash).toBe('914f07e');
     });
     test('Return correct last commit hash for dev branch', async () => {
+      await gitService.updateBranch('dev');
       const commitHash = await gitService.getLastCommitHash('dev');
 
       expect(commitHash).toBe('94dc970');
-    });
+    }, 10000);
   });
   describe('getCommitDetails', () => {
     test('Return correct details for commit 94dc970', async () => {
