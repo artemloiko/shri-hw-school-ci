@@ -21,6 +21,29 @@ git clone https://github.com/artuom130/school-ci-test-repo.git src/__tests__/tes
 npm run test
 ```
 
+Интеграционные тесты я запускал локально с помощью Docker и WSL
+node v12.16.1
+npm v6.14.4
+
+Для hermione нужен запущенный selenium standalone, я использовал докер контейнер selenium standalone с установленным chrome
+https://github.com/SeleniumHQ/docker-selenium  
+Комманда для запуска  
+`docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:3.141.59-20200409`
+
+После запуска selenium standalone, нужно также запустить локально сервер.
+Для этого нужно установить все зависимости, в корне, клиенте и сервере.
+И в корне проекта выполнить комманду  
+`npm run prod:test`
+Еще есть комманда, которая только запускат сервер. Не билдит при этом клиент.  
+`npm run prod:t`
+
+Еще у меня возникла проблема с загрузкой http://localhost:3001 в chromeDriver, не знаю почему, но он тупо не грузил его.  
+Для этого в .hermione.conf.js в baseUrl я вставлял url полученный с помощью ngrok, который расшаривает localhost в интернет.
+Получился дикий костыль, который грузит localhost через интернет, но на винде иначе и не получается :sob:
+
+После запуска сервера, для запуска интеграционных тестов выполните комманду  
+`npm run test:e2e` или режим html-reporter gui `npm run test:gui`
+
 ## Из каких логических блоков состоит ваше приложение и какие их сценарии вы проверяете модульными тестами?
 
 #### Юнит тесты на клиенте

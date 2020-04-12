@@ -1,0 +1,9 @@
+{
+  "port": 3001,
+  "urls": {
+      "client": {
+        "root": "http://localhost:3001"
+      },
+      "storage": "https://hw.shri.yandex/api"
+  }
+}

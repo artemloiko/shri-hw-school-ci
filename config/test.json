@@ -1,0 +1,11 @@
+{
+  "urls": {
+    "client": {
+      "root": "https://b8a89f82.ngrok.io"
+    },
+    "storage": "https://hw.shri.yandex/api"
+  },
+  "tokens": {
+    "storage": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjQyMjgxMTU0IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImNoaWJpMTMwIiwidXJuOmdpdGh1Yjp1cmwiOiJodHRwczovL2FwaS5naXRodWIuY29tL3VzZXJzL2NoaWJpMTMwIiwibmJmIjoxNTg2Njc5OTE3LCJleHAiOjE1ODkyNzE5MTcsImlzcyI6IlNocmktSG9tZXdvcmsiLCJhdWQiOiJTaHJpLUhvbWV3b3JrIn0.Cf-oKaqRjMuOdtfZqIs75jg4_JNSSZZjm6LNDaS6OcU"
+  }
+}
