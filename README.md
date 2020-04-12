@@ -38,3 +38,5 @@ STORAGE_API_KEY=Bearer your_api_key # your_api_key - apiKey от вашего х
 npm run dev # паралельный запуск клиента и сервера в дев режимах
 npm run prod # запуск сервера в прод режиме с SSR клиента
 ```
+
+### Подробности о тестировании в [TESTING.md](TESTING.md)
