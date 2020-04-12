@@ -1,6 +1,8 @@
 const dotenv = require('dotenv');
 
-const envFound = dotenv.config();
+const envFile = process.env.NODE_TEST ? '.env.test' : '.env';
+
+const envFound = dotenv.config({ path: envFile });
 
 if (envFound.error) {
   // This error should crash whole process
