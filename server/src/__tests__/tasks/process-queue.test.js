@@ -1,8 +1,8 @@
-const { buildQueueRunProcessing } = require('../../tasks/process-queueu');
+const { buildQueueRunProcessing } = require('../../tasks/process-queue');
 const { buildQueue } = require('../../models/buildQueue');
 const storage = require('../../models/storage');
 
-jest.mock('../../tasks/process-queueu/builder', () => ({
+jest.mock('../../tasks/process-queue/builder', () => ({
   builder: jest.fn().mockResolvedValue({
     duration: 6000,
     success: true,
