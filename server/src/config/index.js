@@ -1,12 +1,10 @@
 const dotenv = require('dotenv');
+const findConfig = require('find-config');
 
-const envFile = process.env.NODE_ENV === 'test' || process.env.NODE_TEST ? '.env.test' : '.env';
-
-const envFound = dotenv.config({ path: envFile });
+const envFile = process.env.NODE_TEST === 'test' ? '.env.test' : '.env';
+const envFound = dotenv.config({ path: findConfig(envFile) });
 
 if (envFound.error) {
-  // This error should crash whole process
-
   throw new Error("⚠️  Couldn't find .env file  ⚠️");
 }
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';

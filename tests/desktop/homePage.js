@@ -1,15 +1,14 @@
 const config = require('config');
 const assert = require('chai').assert;
 const home = require('../pageObjects/homePage');
-// const storage = require('../../server/src/models/storage');
+const storage = require('../../server/src/models/storage');
 
-const url = config.get('urls.client');
+const url = config.get('client.urls');
 
 describe('Page loaded without settings', function() {
-  // beforeEach(function(done) {
-  //   storage.deleteSettings().then(done);
-  // });
-  console.log('urls', url, process.env.NODE_ENV);
+  beforeEach(function(done) {
+    storage.deleteSettings().then(done);
+  });
 
   it('should find header', function() {
     return this.browser
