@@ -1,0 +1,13 @@
+# To execute this docker-compose yml file use `docker-compose up`
+# Add the `-d` flag at the end for detached execution
+version: '3'
+services:
+  chrome:
+    image: selenium/standalone-chrome:3.141.59-20200326
+    ports:
+      - '4444:4444'
+    volumes:
+      - /dev/shm:/dev/shm
+    # environment:
+    #   - SCREEN_WIDTH=1024
+    #   - SCREEN_HEIGHT=768
