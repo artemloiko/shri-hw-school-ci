@@ -1,4 +1,6 @@
 module.exports = {
+  screenshotsDir: 'tests/hermione/screens',
+
   sets: {
     desktop: {
       files: 'tests/desktop',
@@ -14,6 +16,7 @@ module.exports = {
   },
 
   plugins: {
+    'hermione-custom-assert': true,
     'html-reporter/hermione': {
       enabled: true,
       path: 'tests/hermione-reports',

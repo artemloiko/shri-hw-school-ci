@@ -38,6 +38,7 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "chai": "^4.2.0",
     "hermione": "^3.1.0",
+    "hermione-custom-assert": "file:tests/hermione/plugins/hermione-custom-assert",
     "html-reporter": "^5.15.2",
     "ignore-styles": "^5.0.1"
   }
