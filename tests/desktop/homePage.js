@@ -1,7 +1,9 @@
 const config = require('config');
 const expect = require('chai').expect;
-const page = require('../utils/pageObject');
 const storage = require('../../server/src/models/storage');
+
+const page = require('../utils/pageObject');
+const { home, settings, buildModal, details } = page;
 
 const url = config.get('client.urls');
 
@@ -10,29 +12,24 @@ describe('Home page without settings', function() {
     storage.deleteSettings().then(done);
   });
 
-  it('should find header', function() {
-    return this.browser
-      .url(url.root)
-      .getText(page.header)
-      .then(function(title) {
-        expect(title, 'Page title').to.equal('School CI server');
-      });
+  beforeEach(function() {
+    return this.browser.url(url.root).waitForExist(home.getStarted);
   });
 
-  it('should find getStarted block', function() {
-    return this.browser
-      .url(url.root)
-      .waitForExist(page.home.getStarted)
-      .then(function(v) {
-        expect(v).to.be.true;
-      });
+  it('Header should have default value', function() {
+    return this.browser.getText(page.header).then(function(title) {
+      expect(title, 'Page title').to.equal('School CI server');
+    });
   });
 
-  it('getStarted block button should open settings', function() {
+  it('Get started block should be shown', function() {
+    return this.browser.assertExist(home.getStarted);
+  });
+
+  it('Get started block button should open settings', function() {
     return this.browser
-      .url(url.root)
-      .click(page.home.getStartedButton)
-      .waitForExist(page.settings.settingsBlock)
+      .click(home.getStartedButton)
+      .waitForExist(settings.block)
       .getUrl()
       .then(function(v) {
         expect(v).to.equal(url.settings);
@@ -40,7 +37,7 @@ describe('Home page without settings', function() {
   });
 });
 
-describe('Home page with settings', function() {
+describe('Home page with specified settings', function() {
   const ciSettings = {
     id: 'c42db8b8-128a-4194-a19b-7974cabccf4f',
     repoName: 'artuom130/shri-hw-async',
@@ -51,32 +48,92 @@ describe('Home page with settings', function() {
   beforeEach(function(done) {
     storage.setSettings(ciSettings).then(done);
   });
-
-  it('should find header', function() {
-    return this.browser
-      .url(url.root)
-      .getText(page.header)
-      .then(function(title) {
-        expect(title, 'Page title').to.equal(ciSettings.repoName);
-      });
+  beforeEach(function() {
+    return this.browser.url(url.root).waitForExist(home.history, 3000);
   });
 
-  it('should find history block', function() {
-    return this.browser
-      .url(url.root)
-      .waitForExist(page.home.history)
-      .then(function(v) {
-        expect(v).to.be.true;
-      });
+  it('Header should contain repository name', function() {
+    return this.browser.getText(page.header).then(function(title) {
+      expect(title, 'Page title').to.equal(ciSettings.repoName);
+    });
   });
 
-  it('history should be empty', function() {
-    return this.browser
-      .url(url.root)
-      .waitForExist(page.home.history)
-      .isExisting(page.home.historyCard)
-      .then(function(v) {
-        expect(v).to.be.false;
-      });
+  it('History block should be shown', function() {
+    return this.browser.assertExist(home.history, "History block doesn't exist");
+  });
+
+  it('History block should be empty', function() {
+    return this.browser.assertNotExist(home.historyCard, 'History card exists');
+  });
+});
+
+describe('Home page build modal', () => {
+  beforeEach(function() {
+    return this.browser.url(url.root).waitForExist(home.history, 3000);
+  });
+
+  it('Run build button should exist', function() {
+    return this.browser.assertExist(home.runBuild, "Run build button doesn't exist");
+  });
+
+  describe('Build modal', function() {
+    beforeEach(function() {
+      return this.browser.click(home.runBuild).waitForVisible(buildModal.block);
+    });
+
+    it('Build modal should be opened on run build click', function() {
+      return this.browser.assertExist(buildModal.block, "Modal doesn't exist");
+    });
+
+    it('Build modal should be closed on run cancel click', function() {
+      return this.browser
+        .click(buildModal.cancel)
+        .waitForVisible(buildModal.block, 1000, true)
+        .assertNotExist(buildModal.block, "Modal doesn't hide");
+    });
+
+    it('Cannot send empty build form', function() {
+      return this.browser
+        .click(buildModal.submit)
+        .assertEnabled(buildModal.submit)
+        .assertNotExist(buildModal.loader, 'Loader should not be shown');
+    });
+
+    it('Cannot send invalid commits', function() {
+      return this.browser
+        .setValue(buildModal.input, 'a0')
+        .click(buildModal.submit)
+        .assertEnabled(buildModal.submit)
+        .assertNotExist(buildModal.loader, 'Loader should not be shown')
+        .saveScreenshot('./test1.png')
+        .clearElement(buildModal.input)
+        .setValue(buildModal.input, 'hash')
+        .click(buildModal.submit)
+        .saveScreenshot('./test2.png')
+        .assertEnabled(buildModal.submit)
+        .assertNotExist(buildModal.loader, 'Loader should not be shown');
+    });
+
+    it('Error is shown if wrong commit was sent', function() {
+      return this.browser
+        .setValue(buildModal.input, 'ababab')
+        .click(buildModal.submit)
+        .waitForExist(page.errorModal)
+        .assertExist(page.errorModal);
+    });
+
+    it('Should redirect on build details if correct commit was sent', function() {
+      return this.browser
+        .setValue(buildModal.input, 'a63f2b3')
+        .click(buildModal.submit)
+        .assertDisabled(buildModal.submit, 'Button should be disabled while sending')
+        .assertExist(buildModal.loader, 'Loader should be shown')
+        .waitForExist(details.block)
+        .assertExist(details.block, 'Details should be shown')
+        .getText(details.commitHash)
+        .then((v) => {
+          expect(v).to.equal('a63f2b3', 'Should be shown the same commit');
+        });
+    });
   });
 });
