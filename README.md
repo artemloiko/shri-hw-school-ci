@@ -12,12 +12,12 @@ cd client && npm install
 cd server && npm install
 ```
 
-В папке server создайте файл .env с полями
+В корне проекта создайте файл .env с полями
 
 ```conf
 PORT=3001
 STORAGE_URL=https://hw.shri.yandex/api/ # URL вашего хранилища
-STORAGE_API_KEY=Bearer your_api_key # your_api_key - apiKey от вашего хранилища
+STORAGE_API_KEY=your_api_key # your_api_key - apiKey от вашего хранилища
 ```
 
 Токен можно получить здесь -> https://hw.shri.yandex/  
