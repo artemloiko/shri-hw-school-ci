@@ -7,7 +7,7 @@ const { settings, home } = page;
 
 const url = config.get('client.urls');
 
-describe('Settings page without settings', function() {
+describe('Settings page without saved settings', function() {
   beforeEach(function(done) {
     storage.deleteSettings().then(done);
   });
@@ -36,7 +36,7 @@ describe('Settings page without settings', function() {
       .assertExist(settings.errorMessage, 'Should display form error message');
   });
 
-  it('Cannot save incorrect the settings', function() {
+  it('Cannot save incorrect settings', function() {
     const ciSettings = {
       repoName: 'shri-hw-asyncs',
       buildCommand: 'npm run build',
@@ -56,7 +56,7 @@ describe('Settings page without settings', function() {
       .click(page.errorModalCloseButton);
   });
 
-  it('Can save correct the settings', function() {
+  it('Can save correct settings', function() {
     const ciSettings = {
       repoName: 'artuom130/shri-hw-async',
       buildCommand: 'npm run build',
@@ -76,7 +76,7 @@ describe('Settings page without settings', function() {
   });
 });
 
-describe('Settings page with settings', function() {
+describe('Settings page with saved settings', function() {
   const ciSettings = {
     repoName: 'artuom130/shri-hw-async',
     buildCommand: 'npm run build',
@@ -95,7 +95,7 @@ describe('Settings page with settings', function() {
     return this.browser.assertExist(settings.block);
   });
 
-  it('Inputs filled with specified values', function() {
+  it('Inputs filled with saved values', function() {
     return this.browser
       .assertValue(settings.repoNameInput, ciSettings.repoName)
       .assertValue(settings.buildCommandInput, ciSettings.buildCommand)
