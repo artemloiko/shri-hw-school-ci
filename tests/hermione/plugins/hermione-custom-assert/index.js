@@ -14,5 +14,11 @@ module.exports = (hermione, opts) => {
     browser.addCommand('assertDisabled', (selector, msg) => {
       return browser.isEnabled(selector).then((v) => assert.strictEqual(v, false, msg));
     });
+    browser.addCommand('assertText', (selector, text, msg) => {
+      return browser.getText(selector).then((v) => assert.equal(v, text, msg));
+    });
+    browser.addCommand('assertValue', (selector, text, msg) => {
+      return browser.getValue(selector).then((v) => assert.equal(v, text, msg));
+    });
   });
 };
