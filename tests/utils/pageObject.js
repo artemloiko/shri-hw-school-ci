@@ -28,6 +28,8 @@ module.exports = {
     mainBranchInput: '#mainBranch',
     periodInput: '#period',
     repoNameClear: '#repoName + .input__clear-btn',
+    buildCommandClear: '#buildCommand + .input__clear-btn',
+    mainBranchClear: '#mainBranch + .input__clear-btn',
     submit: '.settings .form__submit-group .button_action.button[type=submit]',
     cancel: '.settings .form__submit-group a.button',
     errorMessage: '.form__error',

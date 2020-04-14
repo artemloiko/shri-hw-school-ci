@@ -104,16 +104,14 @@ describe('Settings page with settings', function() {
 
   it('Can update settings', function() {
     return this.browser
-      .click(settings.repoNameClear)
-      .assertValue(settings.repoNameInput, '')
-      .setValue(settings.repoNameInput, 'artuom130/isItReal')
+      .click(settings.buildCommandClear)
+      .assertValue(settings.buildCommandInput, '')
+      .setValue(settings.buildCommandInput, 'npm run build:prod')
       .click(settings.submit)
       .assertDisabled(settings.submit, 'Buttons are not disabled while sending')
       .assertExist(settings.loader, 'Loader is not shown while sending')
       .waitForExist(settings.loader, 20000, true)
       .assertNotExist(page.errorModal, 'Error shoul not be shown')
-      .click(settings.cancel)
-      .waitForExist(home.history)
-      .assertText(page.header, 'artuom130/isItReal', 'Should show updated repository name');
+      .assertValue(settings.buildCommandInput, 'npm run build:prod');
   });
 });

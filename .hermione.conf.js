@@ -1,5 +1,7 @@
 module.exports = {
   screenshotsDir: 'tests/hermione/screens',
+  retry: 3,
+  waitTimeout: 2000,
 
   sets: {
     desktop: {

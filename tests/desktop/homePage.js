@@ -119,7 +119,8 @@ describe('Home page build modal', () => {
         .setValue(buildModal.input, 'ababab')
         .click(buildModal.submit)
         .waitForExist(page.errorModal)
-        .assertExist(page.errorModal);
+        .assertExist(page.errorModal)
+        .click(page.errorModalCloseButton);
     });
 
     it('Should redirect on build details if correct commit was sent', function() {
