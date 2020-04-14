@@ -38,7 +38,7 @@ describe('Settings page without settings', function() {
 
   it('Cannot save incorrect the settings', function() {
     const ciSettings = {
-      repoName: 'artuom130/shri-hw-asyncs',
+      repoName: 'shri-hw-asyncs',
       buildCommand: 'npm run build',
       mainBranch: 'master',
       period: 0,
