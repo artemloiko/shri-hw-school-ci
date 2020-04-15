@@ -1,0 +1,28 @@
+{
+  "name": "build-server",
+  "version": "1.0.0",
+  "description": "Build server for school ci",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "dev:debug": "nodemon --inspect-brk index.js",
+    "test": "jest -o"
+  },
+  "author": "Artem Loiko",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^25.3.0",
+    "nodemon": "^2.0.3"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "config": "^3.3.1",
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "^12.16.1",
+    "npm": "^6.13.4"
+  },
+  "engineStrict": true
+}
