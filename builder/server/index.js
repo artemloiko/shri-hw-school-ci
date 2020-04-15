@@ -1,10 +1,5 @@
 const express = require('express');
-const config = require('./server-conf.json');
-
-const configError = !config.port || !config.apiToken || !config.apiBaseUrl;
-if (configError) {
-  throw new Error("⚠️  Couldn't find required fields (port, apiToken, apiBaseUrl)  ⚠️");
-}
+const config = require('./src/config');
 
 async function bootstrap() {
   const server = express();
