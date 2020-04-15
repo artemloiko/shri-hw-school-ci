@@ -1,0 +1,18 @@
+{
+  "env": {
+    "commonjs": true,
+    "node": true
+  },
+  "plugins": ["jest"],
+  "extends": ["eslint-config-airbnb-base", "plugin:node/recommended", "plugin:jest/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "rules": {
+    "linebreak-style": "off",
+    "consistent-return": "off",
+    "object-curly-newline": "off",
+    "no-console": "off",
+    "no-unused-vars": "warn"
+  }
+}
