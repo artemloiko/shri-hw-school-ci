@@ -11,6 +11,11 @@ async function bootstrap() {
 
   const builderService = new BuilderService(serverUrl, port);
 
+  server.get('/build', (req, res) => {
+    const { isBuilding } = builderService;
+    res.status(200).send(isBuilding);
+  });
+
   server.post('/build', (req, res) => {
     builderService.startBuild(req.body);
     res.end();

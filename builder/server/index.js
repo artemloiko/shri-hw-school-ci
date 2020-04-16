@@ -43,9 +43,8 @@ async function bootstrap() {
     queueHandler.runQueueProcessing();
   });
 
-  // TODO: add loop for checking falled agents
-  queueHandler.runQueueProcessing();
   server.listen(config.port, () => console.log(`Server listening on port ${config.port}!`));
+  queueHandler.init();
 }
 
 bootstrap();

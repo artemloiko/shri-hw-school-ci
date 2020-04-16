@@ -30,7 +30,7 @@ class BuildAgent {
   }
 
   async check() {
-    return axios.get(`${this.host}:${this.port}/build`);
+    return axios.get(`http://${this.host}:${this.port}/build`);
   }
 
   clear() {

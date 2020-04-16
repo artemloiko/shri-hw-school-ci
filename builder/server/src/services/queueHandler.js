@@ -3,6 +3,7 @@ const logger = require('../utils/logger');
 const { buildServer } = require('./buildServer');
 
 const CHECK_QUEUE_INTERVAL = 60000;
+const CHECK_AGENT_INTERVAL = 60000;
 
 class QueueHandler {
   constructor(storage) {
@@ -11,6 +12,11 @@ class QueueHandler {
     this.waitingBuilds = [];
     this.timerID = null;
     this.isQueueProsessing = false;
+  }
+
+  init() {
+    this.checkAgents();
+    this.runQueueProcessing();
   }
 
   runQueueProcessing() {
@@ -131,6 +137,23 @@ class QueueHandler {
 
   enqueueBuild(build) {
     this.waitingBuilds.unshift(build);
+  }
+
+  async checkAgents() {
+    logger.info('[CHECKING AGENTS]');
+    await Promise.all(
+      this.buildServer.agents.map(async (agent) => {
+        try {
+          await agent.check();
+        } catch (e) {
+          logger.error('[AGENT BROKEN]', agent.id, agent.port, e.message);
+          if (agent.currentBuild) this.enqueueBuild(agent.currentBuild);
+          this.buildServer.deleteAgent(agent.id);
+          this.runQueueProcessing();
+        }
+      }),
+    );
+    setTimeout(() => this.checkAgents(), CHECK_AGENT_INTERVAL);
   }
 }
 
