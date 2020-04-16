@@ -95,10 +95,10 @@ describe('BuildServer', () => {
     });
   });
 
-  test('Method getAgent returns agent by agentId', () => {
+  test('Method getAgentById returns agent by agentId', () => {
     const agent = buildServer.agents[0];
 
-    const returnedAgent = buildServer.getAgent(agent.id);
+    const returnedAgent = buildServer.getAgentById(agent.id);
 
     expect(returnedAgent).toEqual(agent);
   });

@@ -2,7 +2,7 @@ const storageSingletone = require('../models/storage');
 const logger = require('../utils/logger');
 const { buildServer } = require('./buildServer');
 
-const CHECK_QUEUE_INTERVAL_MINUTES = 2;
+const CHECK_QUEUE_INTERVAL = 60000;
 
 class QueueHandler {
   constructor(storage) {
@@ -10,14 +10,17 @@ class QueueHandler {
     this.buildServer = buildServer;
     this.waitingBuilds = [];
     this.timerID = null;
+    this.isQueueProsessing = false;
   }
 
   runQueueProcessing() {
+    if (this.isQueueProsessing) return;
     if (this.timerID) {
       clearTimeout(this.timerID);
       this.timerID = null;
     }
     this.processBuildQueue();
+    this.isQueueProsessing = true;
   }
 
   async processBuildQueue() {
@@ -28,7 +31,7 @@ class QueueHandler {
       // eslint-disable-next-line no-await-in-loop
       const sent = await this.sendBuildToAgent(currentBuild);
       if (!sent) {
-        logger.info('[NO MORE FREE AGENTS FOUND]');
+        logger.info('[NO FREE AGENTS FOUND]');
         break;
       }
 
@@ -40,7 +43,7 @@ class QueueHandler {
 
   async updateWaitingBuilds() {
     try {
-      const settings = await this.getSettings();
+      const settings = await this.storage.getSettings();
       const waitingBuilds = await this.getWaitingBuilds();
       // reverse changes sort to oldest -> newest
       const waitingBuildDTOs = waitingBuilds.reverse().map((build) => {
@@ -96,15 +99,6 @@ class QueueHandler {
     }
   }
 
-  async getSettings() {
-    try {
-      const settings = await this.storage.getSettings();
-      return settings;
-    } catch (e) {
-      logger.error('[STORAGE ERROR] Something wrong with storage, please check storage!');
-    }
-  }
-
   async getWaitingBuilds(offset = 0) {
     const LIMIT = 50;
 
@@ -118,9 +112,9 @@ class QueueHandler {
     return waitingBuilds;
   }
 
-  startQueueProcessingTimeout(intervalMin = CHECK_QUEUE_INTERVAL_MINUTES) {
-    const intervalMs = intervalMin * 60 * 1000;
-    this.timerID = setTimeout(() => this.processBuildQueue(), intervalMs);
+  startQueueProcessingTimeout(interval = CHECK_QUEUE_INTERVAL) {
+    this.isQueueProsessing = false;
+    this.timerID = setTimeout(() => this.processBuildQueue(), interval);
   }
 
   enqueueBuild(build) {

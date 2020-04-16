@@ -11,15 +11,19 @@ async function bootstrap() {
   server.post('/notify-agent', async (req, res) => {
     const { port, buildDTO } = req.body;
     const { hostname } = req;
-    logger.info('[ADD NEW AGENT]', `${hostname}:${port}`, 'isReconnected', !!buildDTO);
     const agentId = buildServer.addNewAgent(port, hostname, buildDTO);
+    logger.info(
+      '[ADD NEW AGENT]',
+      `${agentId.slice(0, 8)} - ${hostname}:${port}`,
+      buildServer.agents.length,
+    );
     res.type('text/plain').send(agentId);
     queueHandler.runQueueProcessing();
   });
 
   server.post('/notify-build-result', async (req, res) => {
     const { agentId, data } = req.body;
-    const agent = buildServer.getAgent(agentId);
+    const agent = buildServer.getAgentById(agentId);
 
     if (!agent) {
       res.status(403).end();

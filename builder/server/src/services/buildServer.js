@@ -34,6 +34,8 @@ class BuildServer {
   }
 
   addNewAgent(port, host, buildDTO) {
+    const savedAgent = this.getAgentByPortHost(port, host);
+    if (savedAgent) return savedAgent.id;
     const agentId = uuidv4();
     const newAgent = new BuildAgent(agentId, port, host, buildDTO);
 
@@ -46,7 +48,11 @@ class BuildServer {
     return this.agents.find((agent) => !agent.isBuilding);
   }
 
-  getAgent(agentId) {
+  getAgentByPortHost(port, host) {
+    return this.agents.find((agent) => agent.port === port && agent.host === host);
+  }
+
+  getAgentById(agentId) {
     return this.agents.find((agent) => agent.id === agentId);
   }
 
