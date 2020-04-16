@@ -9,10 +9,10 @@ async function bootstrap() {
   server.use(express.json());
 
   server.post('/notify-agent', async (req, res) => {
-    const { port } = req.body;
+    const { port, buildDTO } = req.body;
     const { hostname } = req;
-    logger.info('[ADD NEW AGENT]', `${hostname}:${port}`);
-    const agentId = buildServer.addNewAgent(port, hostname);
+    logger.info('[ADD NEW AGENT]', `${hostname}:${port}`, 'isBuilding', !!buildDTO);
+    const agentId = buildServer.addNewAgent(port, hostname, buildDTO);
     res.type('text/plain').send(agentId);
   });
 
@@ -28,13 +28,17 @@ async function bootstrap() {
 
     try {
       await queueHandler.saveBuildFinish(data);
+      logger.info('[SAVED BUILD]', data.buildId);
     } catch (e) {
-      logger.warn('[ENQUEUE BUILD AGAIN]', agentId);
+      logger.warn('[ENQUEUE BUILD AGAIN]', agent.currentBuild.buildId);
       queueHandler.enqueueBuild(agent.currentBuild);
     }
     agent.clear();
+    res.end();
   });
 
+  // TODO: add loop for checking falled agents
+  // TODO: add possibility to restart init on agent adding
   queueHandler.init();
   server.listen(config.port, () => console.log(`Server listening on port ${config.port}!`));
 }

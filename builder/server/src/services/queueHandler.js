@@ -87,6 +87,7 @@ class QueueHandler {
       return res;
     } catch (e) {
       logger.error('Something wrong with storage, please check storage!');
+      throw e;
     }
   }
 

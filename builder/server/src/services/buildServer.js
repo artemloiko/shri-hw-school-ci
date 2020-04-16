@@ -2,18 +2,18 @@ const uuidv4 = require('uuid').v4;
 const axios = require('axios');
 
 class BuildAgent {
-  constructor(id, port, host = '127.0.0.1') {
+  constructor(id, port, host = '127.0.0.1', buildDTO) {
     this.id = id;
     this.port = port;
     this.host = host;
-    this.isBuilding = false;
-    this.currentBuild = null;
+    this.isBuilding = !!buildDTO || false;
+    this.currentBuild = buildDTO || null;
   }
 
   async build(buildDTO) {
     const res = await axios.post(`http://${this.host}:${this.port}/build`, buildDTO);
     this.isBuilding = true;
-    this.currentBuild = buildDTO;
+    if (res.status === 200) this.currentBuild = buildDTO;
 
     return res;
   }
@@ -33,9 +33,10 @@ class BuildServer {
     this.agents = [];
   }
 
-  addNewAgent(port, host) {
+  addNewAgent(port, host, buildDTO) {
     const agentId = uuidv4();
-    const newAgent = new BuildAgent(agentId, port, host);
+    const newAgent = new BuildAgent(agentId, port, host, buildDTO);
+
     this.agents = this.agents.concat(newAgent);
 
     return agentId;
