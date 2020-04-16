@@ -7,7 +7,7 @@ async function fakeBuilder() {
     "\n> school-ci-client@0.3.0 build C:\\Users\\artem\\code\\shri-homeworks\\shri-hw-school-ci\\client\n> react-scripts build\n\nCreating an optimized production build...\n\u001b[31mFailed to compile.\u001b[39m\n\u001b[31m\u001b[39m\n\u001b[7m./src/components/common/BuildHistory/BuildHistory.js\u001b[27m\n  \u001b[1mLine 16:8:\u001b[22m  'Buttons' is not defined  \u001b[31m\u001b[4mreact/jsx-no-undef\u001b[24m\u001b[39m\n\nSearch for the \u001b[4m\u001b[31mkeywords\u001b[39m\u001b[24m to learn more about each error.\n\n\nnpm ERR! code ELIFECYCLE\nnpm ERR! errno 1\nnpm ERR! school-ci-client@0.3.0 build: `react-scripts build`\nnpm ERR! Exit status 1\nnpm ERR! \nnpm ERR! Failed at the school-ci-client@0.3.0 build script.\nnpm ERR! This is probably not a problem with npm. There is likely additional logging output above.\n\nnpm ERR! A complete log of this run can be found in:\nnpm ERR!     C:\\Users\\artem\\AppData\\Roaming\\npm-cache\\_logs\\2020-03-28T11_37_41_101Z-debug.log\n";
   const isSuccess = Math.random() < 0.7;
 
-  await new Promise((resolve) => setTimeout(resolve, Math.random() * 1000));
+  await new Promise((resolve) => setTimeout(resolve, 15000));
 
   return {
     duration: Math.round(Math.random() * 60000),

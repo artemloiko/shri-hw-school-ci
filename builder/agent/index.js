@@ -1,6 +1,5 @@
 const express = require('express');
 const config = require('./src/config');
-const logger = require('./src/utils/logger');
 const { BuilderService } = require('./src/services/builderService');
 
 async function bootstrap() {
@@ -11,7 +10,6 @@ async function bootstrap() {
   const serverUrl = `http://${serverHost}:${serverPort}`;
 
   const builderService = new BuilderService(serverUrl, port);
-  await builderService.init();
 
   server.post('/build', (req, res) => {
     builderService.startBuild(req.body);
@@ -19,7 +17,7 @@ async function bootstrap() {
   });
 
   server.listen(config.port, () => console.log(`Server listening on port ${config.port}!`));
+  builderService.init();
 }
 
-// bootstrap();
-bootstrap().catch(logger.error);
+bootstrap();

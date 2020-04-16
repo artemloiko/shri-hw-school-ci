@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "start:2": "set PORT=5051 && node index.js",
     "dev": "nodemon index.js",
     "dev:debug": "nodemon --inspect-brk index.js",
     "test": "jest -o"

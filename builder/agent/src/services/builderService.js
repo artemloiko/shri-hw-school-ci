@@ -26,8 +26,10 @@ class BuilderService {
       this.agentId = agentId;
       logger.info('[REGISTERED]', agentId);
     } catch (e) {
-      const errMessage = `${e.message}.\nServer ${this.serverUrl} is down. Please check build server`;
-      throw new Error(errMessage);
+      const errMessage = `${e.message}.\nServer ${this.serverUrl} is down. Please check build server\n`;
+      logger.error(errMessage);
+      // eslint-disable-next-line no-process-exit
+      process.exit(-1);
     }
   }
 
@@ -52,12 +54,14 @@ class BuilderService {
     } catch (e) {
       const { response } = e;
 
-      if (response.status === 403) {
-        logger.warn('Server was down. Recconect to server');
+      logger.warn('[RECONNECT] Server is down. Recconect to server');
+      if (response && response.status === 403) {
         await this.registerAgent(this.buildDTO);
         await this.saveBuild();
         return;
       }
+
+      await this.registerAgent();
     }
 
     logger.info('[SAVED BUILD]', this.buildResult.buildId);
