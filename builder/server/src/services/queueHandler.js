@@ -44,16 +44,16 @@ class QueueHandler {
   async updateWaitingBuilds() {
     try {
       const settings = await this.storage.getSettings();
-      const waitingBuilds = await this.getWaitingBuilds();
+      const builds = await this.getWaitingBuilds();
       // reverse changes sort to oldest -> newest
-      const waitingBuildDTOs = waitingBuilds.reverse().map((build) => {
+      const waitingBuilds = builds.reverse().map((build) => {
         const { id, commitHash } = build;
         const { repoName, buildCommand } = settings;
 
         return { buildId: id, commitHash, repoName, buildCommand };
       });
-      logger.info('[UPDATE WAITING BUILDS]', waitingBuildDTOs.length);
-      this.waitingBuilds = waitingBuildDTOs;
+      logger.info('[UPDATE WAITING BUILDS]', waitingBuilds.length);
+      this.waitingBuilds = waitingBuilds;
     } catch (e) {
       logger.error('[STORAGE ERROR] Something wrong with storage, please check storage!');
     }

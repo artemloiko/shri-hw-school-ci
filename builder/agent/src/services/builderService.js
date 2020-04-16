@@ -15,13 +15,12 @@ class BuilderService {
     return this.registerAgent();
   }
 
-  async registerAgent(buildDTO) {
+  async registerAgent() {
     logger.info('[REGISTER AGENT]');
 
     try {
       const { data: agentId } = await axios.post(`${this.serverUrl}/notify-agent`, {
         port: this.agentPort,
-        buildDTO,
       });
       this.agentId = agentId;
       logger.info('[REGISTERED]', agentId);
@@ -36,7 +35,6 @@ class BuilderService {
   async startBuild(buildDTO) {
     logger.info('[START BUILD]', buildDTO.buildId);
     this.isBuilding = true;
-    this.buildDTO = buildDTO;
 
     const { buildId } = buildDTO;
     const { duration, success, buildLog } = await builder(buildDTO);
@@ -51,22 +49,21 @@ class BuilderService {
         agentId: this.agentId,
         data: this.buildResult,
       });
+      logger.info('[SAVED BUILD]', this.buildResult.buildId);
     } catch (e) {
       const { response } = e;
 
       logger.warn('[RECONNECT] Server is down. Recconect to server');
       if (response && response.status === 403) {
-        await this.registerAgent(this.buildDTO);
-        await this.saveBuild();
-        return;
+        this.buildResult = null;
+        this.isBuilding = false;
       }
 
       await this.registerAgent();
+      return;
     }
 
-    logger.info('[SAVED BUILD]', this.buildResult.buildId);
     this.buildResult = null;
-    this.buildDTO = null;
     this.isBuilding = false;
   }
 }
