@@ -57,10 +57,7 @@ class QueueHandler {
       logger.info('[UPDATE WAITING BUILDS]', waitingBuilds.length);
       this.waitingBuilds = waitingBuilds;
     } catch (e) {
-      logger.error(
-        '[STORAGE ERROR] Something wrong with storage, please check storage!',
-        e.message,
-      );
+      logger.error('[STORAGE ERROR] Please check storage!', e.message);
     }
   }
 
@@ -78,8 +75,8 @@ class QueueHandler {
 
       return true;
     } catch (e) {
-      logger.error('[AGENT BROKEN]', agent.id, agent.port);
-      this.buildServer.deleteAgent(agent.id);
+      logger.error('[AGENT BROKEN]', agent.id, agent.port, e.message);
+      await this.buildServer.deleteAgent(agent.id);
       return this.sendBuildToAgent(buildDTO);
     }
   }
@@ -99,7 +96,7 @@ class QueueHandler {
       const res = await this.storage.buildFinish(buildFinishDTO);
       return res;
     } catch (e) {
-      logger.error('[STORAGE ERROR] Something wrong with storage, please check storage!');
+      logger.error('[STORAGE ERROR] Please check storage!', e.message);
       throw e;
     }
   }
@@ -112,7 +109,7 @@ class QueueHandler {
     const startedBuilds = allBuilds.filter((build) => build.status === 'InProgress');
     const isBuildNotSentToAgent = ({ id }) => {
       const agentBuildingCurrentBuild = this.buildServer.agents.find(
-        ({ currentBuild }) => currentBuild.buildId === id,
+        ({ currentBuild }) => currentBuild && currentBuild.buildId === id,
       );
       return !agentBuildingCurrentBuild;
     };
