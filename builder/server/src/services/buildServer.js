@@ -24,7 +24,7 @@ class BuildAgent {
   async build(buildDTO) {
     const res = await axios.post(`http://${this.host}:${this.port}/build`, buildDTO);
     this.isBuilding = true;
-    if (res.status === 200) this.currentBuild = buildDTO;
+    if (res.status === 201) this.currentBuild = buildDTO;
 
     return res;
   }

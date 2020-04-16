@@ -10,6 +10,7 @@ describe('BuildAgent', () => {
   const host = '127.0.0.1';
   beforeEach(() => {
     buildAgent = new BuildAgent(id, port, host);
+    axiosMock.post.mockResolvedValueOnce({ status: 201 });
   });
 
   test('Should create agent with all required fields', () => {
@@ -29,6 +30,7 @@ describe('BuildAgent', () => {
       repoName: 'artuom130/shri-hw-async',
       buildCommand: 'npm run build',
     };
+
     await buildAgent.build(buildData);
 
     expect(axiosMock.post).toHaveBeenCalledWith(`http://${host}:${port}/build`, buildData);

@@ -18,7 +18,7 @@ async function bootstrap() {
 
   server.post('/build', (req, res) => {
     builderService.startBuild(req.body);
-    res.end();
+    res.status(201).end();
   });
 
   server.listen(config.port, () => console.log(`Server listening on port ${config.port}!`));
