@@ -1,4 +1,5 @@
 const storageSingletone = require('../models/storage');
+const logger = require('../utils/logger');
 const { buildServer } = require('./buildServer');
 
 const CHECK_QUEUE_INTERVAL_MINUTES = 2;
@@ -21,7 +22,10 @@ class QueueHandler {
       const currentBuild = this.waitingBuilds[0];
       // eslint-disable-next-line no-await-in-loop
       const sent = await this.sendBuildToAgent(currentBuild);
-      if (!sent) break;
+      if (!sent) {
+        logger.info('[NO FREE AGENTS FOUND]');
+        break;
+      }
 
       this.waitingBuilds.shift();
     }
@@ -40,10 +44,10 @@ class QueueHandler {
 
         return { buildId: id, commitHash, repoName, buildCommand };
       });
-      console.log('[UPDATE WAITING BUILDS]', waitingBuildDTOs.slice(0, 2));
+      logger.info('[UPDATE WAITING BUILDS]', waitingBuildDTOs.length);
       this.waitingBuilds = waitingBuildDTOs;
     } catch (e) {
-      console.error('⚠️ Something wrong with storage, please check storage!');
+      logger.error('Something wrong with storage, please check storage!');
     }
   }
 
@@ -55,13 +59,13 @@ class QueueHandler {
     }
 
     try {
-      console.log(['AGENT START BUILD', agent, buildDTO]);
+      logger.info('[AGENT START BUILD]', `agent:${agent.port}`, buildDTO.buildId);
       await agent.build(buildDTO);
       await this.saveBuildStart(buildDTO.buildId);
 
       return true;
     } catch (e) {
-      console.error('Agent is broken', agent.id);
+      logger.error('Agent is broken', agent.id, agent.port);
       this.buildServer.deleteAgent(agent.id);
       return this.sendBuildToAgent(buildDTO);
     }
@@ -73,17 +77,26 @@ class QueueHandler {
 
       await this.storage.buildStart({ buildId, dateTime });
     } catch (e) {
-      console.log('Build is started', buildId);
+      logger.warn('build is started', buildId);
+    }
+  }
+
+  async saveBuildFinish(buildFinishDTO) {
+    try {
+      const res = await this.storage.buildFinish(buildFinishDTO);
+      return res;
+    } catch (e) {
+      logger.error('Something wrong with storage, please check storage!');
     }
   }
 
   async getSettings() {
-    console.log('[GET SETTINGS]');
+    logger.info('[GET SETTINGS]');
     try {
       const settings = await this.storage.getSettings();
       return settings;
     } catch (e) {
-      console.error('⚠️ Something wrong with storage, please check storage!');
+      logger.error('Something wrong with storage, please check storage!');
     }
   }
 
@@ -101,9 +114,13 @@ class QueueHandler {
   }
 
   startQueueProcessingTimeout(intervalMin = CHECK_QUEUE_INTERVAL_MINUTES) {
-    console.log('[START PROCESSING TIMEOUT]');
+    logger.info('[START PROCESSING TIMEOUT]');
     const intervalMs = intervalMin * 60 * 1000;
     setTimeout(() => this.processBuildQueue(), intervalMs);
+  }
+
+  enqueueBuild(build) {
+    this.waitingBuilds.unshift(build);
   }
 }
 
