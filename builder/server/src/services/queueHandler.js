@@ -14,6 +14,8 @@ class QueueHandler {
   }
 
   runQueueProcessing() {
+    // isQueueProsessing is added to prevent parallel recursions,
+    // because runQueueProcessing can be called any time
     if (this.isQueueProsessing) return;
     if (this.timerID) {
       clearTimeout(this.timerID);
@@ -55,7 +57,10 @@ class QueueHandler {
       logger.info('[UPDATE WAITING BUILDS]', waitingBuilds.length);
       this.waitingBuilds = waitingBuilds;
     } catch (e) {
-      logger.error('[STORAGE ERROR] Something wrong with storage, please check storage!');
+      logger.error(
+        '[STORAGE ERROR] Something wrong with storage, please check storage!',
+        e.message,
+      );
     }
   }
 
@@ -103,13 +108,23 @@ class QueueHandler {
     const LIMIT = 50;
 
     const allBuilds = await this.storage.getBuildsList(offset, LIMIT);
-    let waitingBuilds = allBuilds.filter((build) => build.status === 'Waiting');
 
+    const startedBuilds = allBuilds.filter((build) => build.status === 'InProgress');
+    const isBuildNotSentToAgent = ({ id }) => {
+      const agentBuildingCurrentBuild = this.buildServer.agents.find(
+        ({ currentBuild }) => currentBuild.buildId === id,
+      );
+      return !agentBuildingCurrentBuild;
+    };
+    const startedBuildsMissedInAgents = startedBuilds.filter(isBuildNotSentToAgent);
+
+    let waitingBuilds = allBuilds.filter((build) => build.status === 'Waiting');
     if (waitingBuilds.length === LIMIT) {
-      waitingBuilds = waitingBuilds.concat(await this.loadWaitingBuilds(offset + allBuilds.length));
+      const nextPageWaitingBuilds = await this.getWaitingBuilds(offset + allBuilds.length);
+      waitingBuilds = [...waitingBuilds, ...nextPageWaitingBuilds];
     }
 
-    return waitingBuilds;
+    return [...waitingBuilds, ...startedBuildsMissedInAgents];
   }
 
   startQueueProcessingTimeout(interval = CHECK_QUEUE_INTERVAL) {
