@@ -11,9 +11,10 @@ async function bootstrap() {
   server.post('/notify-agent', async (req, res) => {
     const { port, buildDTO } = req.body;
     const { hostname } = req;
-    logger.info('[ADD NEW AGENT]', `${hostname}:${port}`, 'isBuilding', !!buildDTO);
+    logger.info('[ADD NEW AGENT]', `${hostname}:${port}`, 'isReconnected', !!buildDTO);
     const agentId = buildServer.addNewAgent(port, hostname, buildDTO);
     res.type('text/plain').send(agentId);
+    queueHandler.runQueueProcessing();
   });
 
   server.post('/notify-build-result', async (req, res) => {
@@ -28,18 +29,18 @@ async function bootstrap() {
 
     try {
       await queueHandler.saveBuildFinish(data);
-      logger.info('[SAVED BUILD]', data.buildId);
+      logger.success('[SAVED BUILD]', data.buildId);
     } catch (e) {
       logger.warn('[ENQUEUE BUILD AGAIN]', agent.currentBuild.buildId);
       queueHandler.enqueueBuild(agent.currentBuild);
     }
     agent.clear();
     res.end();
+    queueHandler.runQueueProcessing();
   });
 
   // TODO: add loop for checking falled agents
-  // TODO: add possibility to restart init on agent adding
-  queueHandler.init();
+  queueHandler.runQueueProcessing();
   server.listen(config.port, () => console.log(`Server listening on port ${config.port}!`));
 }
 

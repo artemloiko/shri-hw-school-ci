@@ -9,9 +9,14 @@ class QueueHandler {
     this.storage = storage;
     this.buildServer = buildServer;
     this.waitingBuilds = [];
+    this.timerID = null;
   }
 
-  init() {
+  runQueueProcessing() {
+    if (this.timerID) {
+      clearTimeout(this.timerID);
+      this.timerID = null;
+    }
     this.processBuildQueue();
   }
 
@@ -23,7 +28,7 @@ class QueueHandler {
       // eslint-disable-next-line no-await-in-loop
       const sent = await this.sendBuildToAgent(currentBuild);
       if (!sent) {
-        logger.info('[NO FREE AGENTS FOUND]');
+        logger.info('[NO MORE FREE AGENTS FOUND]');
         break;
       }
 
@@ -47,7 +52,7 @@ class QueueHandler {
       logger.info('[UPDATE WAITING BUILDS]', waitingBuildDTOs.length);
       this.waitingBuilds = waitingBuildDTOs;
     } catch (e) {
-      logger.error('Something wrong with storage, please check storage!');
+      logger.error('[STORAGE ERROR] Something wrong with storage, please check storage!');
     }
   }
 
@@ -65,7 +70,7 @@ class QueueHandler {
 
       return true;
     } catch (e) {
-      logger.error('Agent is broken', agent.id, agent.port);
+      logger.error('[AGENT BROKEN]', agent.id, agent.port);
       this.buildServer.deleteAgent(agent.id);
       return this.sendBuildToAgent(buildDTO);
     }
@@ -77,7 +82,7 @@ class QueueHandler {
 
       await this.storage.buildStart({ buildId, dateTime });
     } catch (e) {
-      logger.warn('build is started', buildId);
+      logger.warn('[BUILD ALREADY STARTED]', buildId);
     }
   }
 
@@ -86,18 +91,17 @@ class QueueHandler {
       const res = await this.storage.buildFinish(buildFinishDTO);
       return res;
     } catch (e) {
-      logger.error('Something wrong with storage, please check storage!');
+      logger.error('[STORAGE ERROR] Something wrong with storage, please check storage!');
       throw e;
     }
   }
 
   async getSettings() {
-    logger.info('[GET SETTINGS]');
     try {
       const settings = await this.storage.getSettings();
       return settings;
     } catch (e) {
-      logger.error('Something wrong with storage, please check storage!');
+      logger.error('[STORAGE ERROR] Something wrong with storage, please check storage!');
     }
   }
 
@@ -115,9 +119,8 @@ class QueueHandler {
   }
 
   startQueueProcessingTimeout(intervalMin = CHECK_QUEUE_INTERVAL_MINUTES) {
-    logger.info('[START PROCESSING TIMEOUT]');
     const intervalMs = intervalMin * 60 * 1000;
-    setTimeout(() => this.processBuildQueue(), intervalMs);
+    this.timerID = setTimeout(() => this.processBuildQueue(), intervalMs);
   }
 
   enqueueBuild(build) {
