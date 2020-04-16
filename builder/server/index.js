@@ -11,7 +11,7 @@ async function bootstrap() {
   server.post('/notify-agent', async (req, res) => {
     const { port } = req.body;
     const { hostname } = req;
-    const agentId = buildServer.addNewAgent(port, hostname);
+    const agentId = await buildServer.addNewAgent(port, hostname);
     logger.info(
       '[ADD NEW AGENT]',
       `${agentId.slice(0, 8)} - ${hostname}:${port}`,

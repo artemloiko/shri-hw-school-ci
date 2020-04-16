@@ -1,5 +1,16 @@
 const uuidv4 = require('uuid').v4;
 const axios = require('axios');
+const fse = require('fs-extra');
+const logger = require('../utils/logger');
+
+async function saveAgentsToFile(agents) {
+  try {
+    await fse.ensureFile('./temp/agents.json');
+  } catch (err) {
+    await fse.mkdir('./temp');
+  }
+  return fse.writeJSON('./temp/agents.json', agents);
+}
 
 class BuildAgent {
   constructor(id, port, host = '127.0.0.1') {
@@ -29,17 +40,18 @@ class BuildAgent {
 }
 
 class BuildServer {
-  constructor() {
-    this.agents = [];
+  constructor(agents = []) {
+    this.agents = agents;
   }
 
-  addNewAgent(port, host) {
+  async addNewAgent(port, host) {
     const savedAgent = this.getAgentByPortHost(port, host);
     if (savedAgent) return savedAgent.id;
     const agentId = uuidv4();
     const newAgent = new BuildAgent(agentId, port, host);
 
     this.agents = this.agents.concat(newAgent);
+    await saveAgentsToFile(this.agents);
 
     return agentId;
   }
@@ -56,12 +68,28 @@ class BuildServer {
     return this.agents.find((agent) => agent.id === agentId);
   }
 
-  deleteAgent(agentId) {
+  async deleteAgent(agentId) {
     this.agents = this.agents.filter((agent) => agent.id !== agentId);
+    await saveAgentsToFile(this.agents);
   }
 }
 
-const buildServer = new BuildServer();
+let savedAgents = [];
+try {
+  savedAgents = JSON.parse(fse.readFileSync('./temp/agents.json', 'utf-8'));
+} catch (error) {
+  fse.ensureDirSync('./temp');
+  fse.writeJSONSync('./temp/agents.json', []);
+}
+const restoredAgents = savedAgents.map(({ id, port, host }) => new BuildAgent(id, port, host));
+if (restoredAgents.length) {
+  logger.info(
+    '[RESTORED AGENTS]',
+    restoredAgents.map((agent) => agent.port),
+  );
+}
+
+const buildServer = new BuildServer(restoredAgents);
 
 module.exports = {
   BuildServer,

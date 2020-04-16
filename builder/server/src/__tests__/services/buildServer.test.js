@@ -68,10 +68,10 @@ describe('BuildAgent', () => {
 
 describe('BuildServer', () => {
   let buildServer;
-  beforeEach(() => {
+  beforeEach(async () => {
     buildServer = new BuildServer();
-    buildServer.addNewAgent(5050, '127.0.0.1');
-    buildServer.addNewAgent(5051, '127.0.0.1');
+    await buildServer.addNewAgent(5050, '127.0.0.1');
+    await buildServer.addNewAgent(5051, '127.0.0.1');
   });
 
   test('Method addNewAgent create and add agent to agents list', () => {
