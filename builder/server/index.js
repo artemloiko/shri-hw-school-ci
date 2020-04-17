@@ -6,7 +6,7 @@ const { queueHandler } = require('./src/services/queueHandler');
 
 async function bootstrap() {
   const server = express();
-  server.use(express.json());
+  server.use(express.json({ limit: '10MB' }));
 
   server.post('/notify-agent', async (req, res) => {
     const { port } = req.body;

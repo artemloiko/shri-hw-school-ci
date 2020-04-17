@@ -2,7 +2,7 @@ const storageSingletone = require('../models/storage');
 const logger = require('../utils/logger');
 const { buildServer } = require('./buildServer');
 
-const CHECK_QUEUE_INTERVAL = 60000;
+const CHECK_QUEUE_INTERVAL = 30000;
 const CHECK_AGENT_INTERVAL = 60000;
 
 class QueueHandler {
