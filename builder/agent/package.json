@@ -5,11 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "build-docker-image": "docker build -t school-ci-build-agent .",
-    "start:2": "set PORT=5051 && node index.js",
     "dev": "nodemon index.js",
     "dev:debug": "nodemon --inspect-brk index.js",
-    "test": "jest -o"
+    "build-docker-image": "docker build -t school-ci-build-agent ."
   },
   "author": "Artem Loiko",
   "license": "ISC",
