@@ -2,13 +2,14 @@
   "name": "school-ci-server",
   "version": "0.0.1",
   "description": "School CI. Server.",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
+    "start": "cross-env NODE_ENV=production ts-node server.ts",
+    "dev": "nodemon server.ts",
+    "dev:debug": "nodemon --inspect server.ts",
+    "build": "tsc",
     "test": "jest --forceExit",
     "test:watch": "jest --watch",
-    "start": "nodemon server.js",
-    "start:debug": "nodemon --inspect-brk server.js",
-    "start:prod": "cross-env NODE_ENV=production node server.js",
     "lint": "eslint ./"
   },
   "engines": {
@@ -31,19 +32,29 @@
     "node-cron": "^2.0.3"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.6",
+    "@types/morgan": "^1.9.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-node": "^11.0.0",
     "jest": "^25.3.0",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "ts-node": "^8.9.0",
+    "typescript": "^3.8.3"
   },
   "nodemonConfig": {
     "ignore": [
       "repo/*",
       "temp/*"
-    ]
+    ],
+    "execMap": {
+      "ts": "node --require ts-node/register"
+    },
+    "ext": "js,json,ts"
   },
   "jest": {
     "testEnvironment": "node"

@@ -14,9 +14,9 @@ npm install
 Для разработки используется nodemon
 
 ```bash
-npm run start // запуск nodemon
-npm run start:debug // запуск nodemon в дебаг режиме
-npm run start:prod // запуск сервера в прод режиме
+npm run dev // запуск nodemon
+npm run dev:debug // запуск nodemon в дебаг режиме
+npm run start // запуск сервера в прод режиме
 ```
 
 Сервер использует конфиг заданный в .env, поэтому перед стартом нужно его создать.
