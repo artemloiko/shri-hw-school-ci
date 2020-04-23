@@ -1,8 +1,9 @@
-const dotenv = require('dotenv');
-const findConfig = require('find-config');
+import dotenv from 'dotenv';
+import findConfig from 'find-config';
 
 const envFile = process.env.NODE_TEST === 'test' ? '.env.test' : '.env';
-const envFound = dotenv.config({ path: findConfig(envFile) });
+const pathToEnv = findConfig(envFile) || envFile;
+const envFound = dotenv.config({ path: pathToEnv });
 
 if (envFound.error) {
   throw new Error("⚠️  Couldn't find .env file  ⚠️");
@@ -10,10 +11,12 @@ if (envFound.error) {
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 process.env.REPO_PATH = 'repo';
 
-module.exports = {
+const config = {
   nodeEnv: process.env.NODE_ENV,
   port: process.env.PORT || '3000',
   storageURL: process.env.STORAGE_URL,
   storageApikey: process.env.STORAGE_API_KEY,
   repoPath: process.env.REPO_PATH,
 };
+
+export default config;
