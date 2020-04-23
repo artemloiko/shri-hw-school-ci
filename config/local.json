@@ -1,0 +1,9 @@
+{
+  "client": {
+    "urls": {
+      "root": "http://host.docker.internal:3001",
+      "settings": "http://host.docker.internal:3001/settings",
+      "details": "http://host.docker.internal:3001/details"
+    }
+  }
+}

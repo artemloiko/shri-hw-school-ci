@@ -1,9 +1,13 @@
 const fs = require('fs-extra');
+const path = require('path');
 const { exec: execCb } = require('child_process');
 const { promisify } = require('util');
 const { HttpError } = require('../utils/customErrors');
+const config = require('../config');
+const GitOutputParser = require('./GitOutputParser');
 
 const exec = promisify(execCb);
+const { repoPath } = config;
 
 class GitService {
   async updateRepository(repoName, mainBranch) {
@@ -19,7 +23,7 @@ class GitService {
 
   async updateBranch(branchName) {
     try {
-      await exec(`cd repo && git fetch && git checkout ${branchName} && git pull`);
+      await exec(`cd ${repoPath} && git fetch && git checkout ${branchName} && git pull`);
     } catch (error) {
       console.error('GitService.updateRepository error\n', error.stderr);
       throw new HttpError(
@@ -36,8 +40,8 @@ class GitService {
       if (!(await this.checkIfRepositoryExists(repoUrl))) {
         throw new Error('Repository does not exist');
       }
-      await fs.remove('./repo');
-      await exec(`git clone ${repoUrl} repo`);
+      await fs.remove(path.join('./', repoPath));
+      await exec(`git clone ${repoUrl} ${repoPath}`);
     } catch (error) {
       console.error('GitService.updateRepository error\n', error.stderr);
       throw new HttpError(`Cannot find ${repoName} repository`, 400, 'GIT_CANNOT_FIND_REPO');
@@ -55,13 +59,8 @@ class GitService {
 
   async getCurrentRepositoryName() {
     try {
-      const result = await exec('cd repo && git remote get-url origin');
-      // /(?<=\/\/.+\..+\/).+\/.+(?=\.git\n?$)/ matches from url https://example.com/user-name/repo-name.git
-      // /(?<=git@.+:).+\/.+(?=\.git\n?$)/ matches from ssh git@example.com:user-name/repo-name.git
-      const matchRepoNameRegex = /(?<=\/\/.+\..+\/).+\/.+(?=\.git\n?$)|(?<=git@.+:).+\/.+(?=\.git\n?$)/;
-      const repoOriginLink = result.stdout;
-      const nameMatch = repoOriginLink.match(matchRepoNameRegex);
-      return nameMatch ? nameMatch[0] : '';
+      const { stdout } = await exec(`cd ${repoPath} && git remote get-url origin`);
+      return GitOutputParser.parseRepositoryName(stdout);
     } catch (error) {
       return '';
     }
@@ -69,7 +68,9 @@ class GitService {
 
   async getLastCommitHash(branchName) {
     try {
-      const { stdout: hash } = await exec(`cd repo && git log --pretty=format:%h -1 ${branchName}`);
+      const { stdout: hash } = await exec(
+        `cd ${repoPath} && git log --pretty=format:%h -1 ${branchName}`,
+      );
       return hash;
     } catch (error) {
       console.error('GitService.getLastCommitHash error\n', error.stderr);
@@ -84,28 +85,17 @@ class GitService {
   async getCommitDetails(commitHash) {
     try {
       const SPLITTER = '{SPLIT}';
-      const { stdout: logInfo } = await exec(
-        `cd repo && git log --pretty="%an${SPLITTER}%s${SPLITTER}%D" -1 ${commitHash}`,
+      const { stdout: log } = await exec(
+        `cd ${repoPath} && git log --pretty="%an${SPLITTER}%s${SPLITTER}%D" -1 ${commitHash}`,
       );
-      const authorName = logInfo.split(SPLITTER)[0];
-      const commitMessage = logInfo.split(SPLITTER)[1];
-      const branches = logInfo.split(SPLITTER)[2];
-      // branches example "HEAD -> branch, origin/branch, branch"
-      let branchName = branches
-        .split(', ')[0]
-        .trim()
-        .replace(/\w+\s->\s/, '')
-        .replace(/origin\//, '');
+      const parsedData = GitOutputParser.parseLog(log, SPLITTER);
+      let { branchName } = parsedData;
+
       if (!branchName) {
-        const { stdout } = await exec(`cd repo && git name-rev ${commitHash}`);
-        const branchInfo = stdout.split(' ')[1];
-        branchName = branchInfo
-          .trim()
-          .replace(/origin\//, '')
-          .replace(/remotes\//, '')
-          .replace(/[~^].+$/, '');
+        const { stdout } = await exec(`cd ${repoPath} && git name-rev ${commitHash}`);
+        branchName = GitOutputParser.parseBranch(stdout);
       }
-      return { commitHash, commitMessage, authorName, branchName };
+      return { ...parsedData, commitHash, branchName };
     } catch (error) {
       console.error('GitService.getCommitDetails error\n', error.stderr);
       throw new HttpError(

@@ -4,7 +4,8 @@
   "description": "School CI. Server.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --forceExit",
+    "test:watch": "jest --watch",
     "start": "nodemon server.js",
     "start:debug": "nodemon --inspect-brk server.js",
     "start:prod": "cross-env NODE_ENV=production node server.js",
@@ -25,6 +26,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fs-extra": "^8.1.0",
+    "find-config": "^1.0.0",
     "morgan": "^1.9.1",
     "node-cron": "^2.0.3"
   },
@@ -32,7 +34,9 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-node": "^11.0.0",
+    "jest": "^25.3.0",
     "nodemon": "^2.0.2"
   },
   "nodemonConfig": {
@@ -40,5 +44,8 @@
       "repo/*",
       "temp/*"
     ]
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

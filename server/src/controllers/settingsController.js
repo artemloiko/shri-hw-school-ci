@@ -4,7 +4,7 @@ const { HttpError } = require('../utils/customErrors');
 const { logResponseError } = require('../utils/logger');
 
 const settingsService = new SettingsSevice(storage);
-const syncCommitsCron = require('../crones/sync-commits-cron');
+const syncCommitsCron = require('../tasks/sync-commits-cron');
 
 const getSettings = async (req, res, next) => {
   try {

@@ -7,7 +7,7 @@ import {
   RESET_SETTINGS_ERROR,
 } from '../actions/SettingsAction';
 
-const initialState = {
+export const initialState = {
   isFetching: false,
   isLoaded: false,
 };

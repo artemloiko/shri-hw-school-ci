@@ -3,10 +3,16 @@
   "version": "0.0.1",
   "description": "School CI. SHRI homework project.",
   "scripts": {
-    "prod": "cd client && npm run build && cd ../server && npm run start:prod",
     "dev:client": "cd client && npm run start",
     "dev:server": "cd server && npm run start",
-    "dev": "npm-run-all --parallel dev:client dev:server"
+    "dev": "npm-run-all --parallel dev:client dev:server",
+    "build:client": "cd client && npm run build",
+    "prod:server": "cd server && npm run start:prod",
+    "prod": "npm run build:client && npm run prod:server",
+    "prod:test": "npm run build:client && cross-env NODE_TEST=test npm run prod:server",
+    "prod:t": "cross-env NODE_TEST=test npm run prod:server",
+    "test:e2e": "cross-env NODE_TEST=test hermione",
+    "test:gui": "cross-env NODE_TEST=test hermione gui"
   },
   "repository": {
     "type": "git",
@@ -19,6 +25,8 @@
   },
   "homepage": "https://github.com/artuom130/shri-hw-school-ci#readme",
   "devDependencies": {
+    "config": "^3.3.1",
+    "cross-env": "^7.0.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1"
   },
@@ -28,6 +36,10 @@
     "@babel/preset-react": "^7.9.4",
     "@babel/register": "^7.9.0",
     "babel-plugin-module-resolver": "^4.0.0",
+    "chai": "^4.2.0",
+    "hermione": "^3.1.0",
+    "hermione-custom-assert": "file:tests/hermione/plugins/hermione-custom-assert",
+    "html-reporter": "^5.15.2",
     "ignore-styles": "^5.0.1"
   }
 }

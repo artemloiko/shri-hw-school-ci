@@ -1,14 +1,3 @@
-const buildQueue = require('../models/buildQueue');
-const storage = require('../models/storage');
-
-/**
- * @param {object} buildFinishDTO Information about finished build process
- * @param {string} buildFinishDTO.buildId
- * @param {number} buildFinishDTO.duration duration in sec
- * @param {boolean} buildFinishDTO.success
- * @param {string} buildFinishDTO.buildLog
- */
-
 async function fakeBuilder() {
   // eslint-disable-next-line operator-linebreak
   const successLog =
@@ -27,47 +16,4 @@ async function fakeBuilder() {
   };
 }
 
-async function buildQueueRunProcessing() {
-  const setCheckInterval = () => {
-    const intervalId = setInterval(() => {
-      if (buildQueue.front()) {
-        clearInterval(intervalId);
-
-        buildQueueRunProcessing();
-      }
-    }, 10000);
-  };
-  if (!buildQueue.front()) {
-    setCheckInterval();
-    return;
-  }
-  const { commitHash, buildId } = buildQueue.front();
-  const buildStartTime = new Date();
-
-  console.log('[BUILD_START]', buildId, buildStartTime.toISOString());
-  try {
-    await storage.buildStart({ buildId, dateTime: buildStartTime.toISOString() });
-  } catch (err) {
-    console.log('[BUILD_START_ERR]', buildId, 'is already started');
-  }
-
-  const { duration, success, buildLog } = await fakeBuilder();
-
-  console.log('[BUILD_FINISH]', buildId, commitHash, success, duration);
-
-  await storage.buildFinish({ buildId, duration, success, buildLog });
-
-  await buildQueue.dequeue();
-
-  if (buildQueue.front()) {
-    buildQueueRunProcessing();
-  } else {
-    setCheckInterval();
-  }
-}
-
-module.exports = {
-  init: () => {
-    buildQueueRunProcessing();
-  },
-};
+module.exports.builder = fakeBuilder;

@@ -7,7 +7,7 @@ const axiosAPI = axios.create({
   httpsAgent: new https.Agent({
     rejectUnauthorized: false,
   }),
-  headers: { Authorization: config.storageApikey },
+  headers: { Authorization: `Bearer ${config.storageApikey}` },
 });
 
 class Storage {
@@ -17,6 +17,11 @@ class Storage {
 
   async getSettings() {
     const response = await this.axiosInstance.get('/conf');
+    return response.data;
+  }
+
+  async deleteSettings() {
+    const response = await this.axiosInstance.delete('/conf');
     return response.data;
   }
 

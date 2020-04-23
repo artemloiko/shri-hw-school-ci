@@ -19,17 +19,8 @@ npm run start:debug // запуск nodemon в дебаг режиме
 npm run start:prod // запуск сервера в прод режиме
 ```
 
-Параметры конфига задаются в .env  
-Создайте файл .env в папке server с полями
-
-```conf
-PORT=3001
-STORAGE_URL=https://hw.shri.yandex/api/ # URL вашего хранилища
-STORAGE_API_KEY=Bearer your_api_key # your_api_key - apiKey от вашего хранилища
-```
-
-Токен можно получить здесь -> https://hw.shri.yandex/
-Нужно будет войти через гитхаб
+Сервер использует конфиг заданный в .env, поэтому перед стартом нужно его создать.
+Создание файла .env описано в корневом [README.md](../README.md)
 
 ## About
 

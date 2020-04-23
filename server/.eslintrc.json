@@ -4,7 +4,8 @@
     "es6": true,
     "node": true
   },
-  "extends": ["eslint-config-airbnb-base", "plugin:node/recommended"],
+  "plugins": ["jest"],
+  "extends": ["eslint-config-airbnb-base", "plugin:node/recommended", "plugin:jest/recommended"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -18,6 +19,7 @@
     "object-curly-newline": "off",
     "no-console": "off",
     "class-methods-use-this": "off",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "no-underscore-dangle": "off"
   }
 }

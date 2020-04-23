@@ -30,9 +30,10 @@ IconText.propTypes = {
     'play',
     'settings',
   ]).isRequired,
-  text: PropTypes.string,
+  text: PropTypes.string.isRequired,
   secondaryText: PropTypes.string,
-  children: PropTypes.string,
+  className: PropTypes.string,
+  mix: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default IconText;

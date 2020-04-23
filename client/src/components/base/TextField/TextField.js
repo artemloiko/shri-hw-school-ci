@@ -22,6 +22,7 @@ TextField.propTypes = {
   label: PropTypes.string,
   htmlFor: PropTypes.string,
   children: PropTypes.element,
+  appendText: PropTypes.string,
 
   className: PropTypes.string,
   mods: PropTypes.shape({

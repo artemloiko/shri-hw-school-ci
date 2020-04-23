@@ -5,8 +5,8 @@ const cors = require('cors');
 
 const config = require('./src/config');
 const routes = require('./src/routes');
-const syncCommitsCron = require('./src/crones/sync-commits-cron');
-const buildQueueCron = require('./src/crones/process-queue-cron');
+const syncCommitsCron = require('./src/tasks/sync-commits-cron');
+const buildQueueCron = require('./src/tasks/process-queue');
 
 async function bootstrap() {
   const server = express();

@@ -8,14 +8,23 @@ import Icon from 'components/base/Icon/Icon';
 import './Button.css';
 
 function Button(props) {
-  const { type = 'button', to = '', children, iconType, mods = {}, ...buttonProps } = props;
+  const {
+    type = 'button',
+    to = '',
+    children,
+    iconType,
+    mods = {},
+    className,
+    mix,
+    ...buttonProps
+  } = props;
   if (iconType) mods.icon = true;
 
   return to ? (
     <Link
       {...buttonProps}
       to={to}
-      className={cn('button', { ...props, mods })}
+      className={cn('button', { className, mods, mix })}
       tabIndex={mods.disabled ? -1 : 0}
     >
       {iconType && <Icon mods={{ size: 'small', type: iconType }} mix={['button']} />}
@@ -25,7 +34,7 @@ function Button(props) {
     <button
       {...buttonProps}
       type={type}
-      className={cn('button', { ...props, mods })}
+      className={cn('button', { className, mods, mix })}
       disabled={mods.disabled}
     >
       {iconType && <Icon mods={{ size: 'small', type: iconType }} mix={['button']} />}

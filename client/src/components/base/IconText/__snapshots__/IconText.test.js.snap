@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconText with all possible props matches the snapshot 1`] = `
+<div
+  className="block icon-text block__icon-text"
+>
+  <div
+    className="icon icon_type_commit icon-text__icon"
+  />
+  <div
+    className="icon-text__text"
+  >
+    master
+  </div>
+  <div
+    className="icon-text__text icon-text__secondary-text"
+  >
+    90e1126
+  </div>
+</div>
+`;
+
+exports[`IconText with required props matches the snapshot 1`] = `
+<div
+  className="icon-text"
+>
+  <div
+    className="icon icon_type_commit icon-text__icon"
+  />
+  <div
+    className="icon-text__text"
+  >
+    master
+  </div>
+</div>
+`;

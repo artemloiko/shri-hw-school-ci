@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`builds details actions fetching builds details fail 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "id": "30c10a6a-087e-4a6b-aed8-8a809169a305",
+    },
+    "type": "GET_BUILD_DETAILS_REQUEST",
+  },
+  Object {
+    "payload": Object {
+      "id": "30c10a6a-087e-4a6b-aed8-8a809169a305",
+    },
+    "type": "GET_BUILD_LOGS_REQUEST",
+  },
+  Object {
+    "error": true,
+    "payload": Object {
+      "error": Object {
+        "message": "Request failed with status code 500",
+      },
+      "id": "30c10a6a-087e-4a6b-aed8-8a809169a305",
+    },
+    "type": "GET_BUILD_DETAILS_FAIL",
+  },
+  Object {
+    "error": true,
+    "payload": Object {
+      "error": Object {
+        "message": "Request failed with status code 500",
+      },
+      "id": "30c10a6a-087e-4a6b-aed8-8a809169a305",
+    },
+    "type": "GET_BUILD_LOGS_FAIL",
+  },
+]
+`;
+
+exports[`builds details actions fetching builds details success 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "id": "30c10a6a-087e-4a6b-aed8-8a809169a305",
+    },
+    "type": "GET_BUILD_DETAILS_REQUEST",
+  },
+  Object {
+    "payload": Object {
+      "id": "30c10a6a-087e-4a6b-aed8-8a809169a305",
+    },
+    "type": "GET_BUILD_LOGS_REQUEST",
+  },
+  Object {
+    "payload": Object {
+      "data": Object {
+        "authorName": "Artem Loiko",
+        "branchName": "master",
+        "buildNumber": 1,
+        "commitHash": "a63f2b3",
+        "commitMessage": "Add option to work with async fn",
+        "configurationId": "e4a75284-3cbb-4676-8db6-4e3012958328",
+        "duration": 3254,
+        "id": "30c10a6a-087e-4a6b-aed8-8a809169a305",
+        "start": "2020-04-10T07:07:14.337",
+        "status": "Success",
+      },
+      "id": "30c10a6a-087e-4a6b-aed8-8a809169a305",
+    },
+    "type": "GET_BUILD_DETAILS_SUCCESS",
+  },
+  Object {
+    "payload": Object {
+      "data": "[32mCompiled successfully.[39m[32m[39m",
+      "id": "30c10a6a-087e-4a6b-aed8-8a809169a305",
+    },
+    "type": "GET_BUILD_LOGS_SUCCESS",
+  },
+]
+`;

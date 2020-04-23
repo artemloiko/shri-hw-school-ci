@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Icon with all possible props matches the snapshot 1`] = `
+<div
+  className="block icon icon_type_calendar icon_size_small block__icon"
+/>
+`;
+
+exports[`Icon with required props matches the snapshot 1`] = `
+<div
+  className="icon icon_type_calendar"
+/>
+`;
