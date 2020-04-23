@@ -1,8 +1,10 @@
-const apiRoutes = require('./api');
+import { Express, NextFunction, Request, Response } from 'express';
+import apiRoutes from './api';
+import { HttpError } from 'src/utils/customErrors';
 // eslint-disable-next-line node/no-unpublished-require
 const { clientSSR } = require('../../../client/server/index.js');
 
-const init = (server) => {
+const init = (server: Express): void => {
   server.use('/api', apiRoutes);
 
   if (process.env.NODE_ENV === 'production') {
@@ -10,7 +12,7 @@ const init = (server) => {
   }
 
   // eslint-disable-next-line no-unused-vars
-  server.use((err, req, res, next) => {
+  server.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
     res.status(err.status || 500);
     res.json({
       error: {
@@ -21,6 +23,8 @@ const init = (server) => {
   });
 };
 
-module.exports = {
+const routes = {
   init,
 };
+
+export default routes;

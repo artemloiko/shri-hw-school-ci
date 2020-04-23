@@ -1,11 +1,17 @@
-const fs = require('fs-extra');
+import fs from 'fs-extra';
+
+export interface BuildQueueElem {
+  commitHash: string;
+  buildId: string;
+}
 
 class BuildQueue {
-  constructor(initQueue = []) {
+  buildQueue: BuildQueueElem[];
+  constructor(initQueue: BuildQueueElem[] = []) {
     this.buildQueue = [...initQueue];
   }
 
-  async saveQueueToFile(buildQueue) {
+  async saveQueueToFile(buildQueue: BuildQueueElem[]) {
     try {
       await fs.ensureFile('./temp/buildQueue.json');
     } catch (err) {
@@ -14,7 +20,7 @@ class BuildQueue {
     return fs.writeJSON('./temp/buildQueue.json', buildQueue);
   }
 
-  async enqueue(queueElem) {
+  async enqueue(queueElem: BuildQueueElem) {
     this.buildQueue.push(queueElem);
     await this.saveQueueToFile(this.buildQueue);
     console.log(`New build ${queueElem.commitHash} - ${queueElem.buildId} added to buildQueue!`);
@@ -26,13 +32,11 @@ class BuildQueue {
     return dequeuedElem;
   }
 
-  has({ commitHash, buildId }) {
-    return this.buildQueue.some(
-      (elem) => elem.commitHash === commitHash || elem.buildId === buildId,
-    );
+  has(commitHash: string) {
+    return this.buildQueue.some((elem) => elem.commitHash === commitHash);
   }
 
-  async remove({ commitHash, buildId }) {
+  async remove({ commitHash, buildId }: BuildQueueElem) {
     this.buildQueue = this.buildQueue.filter(
       (elem) => elem.commitHash !== commitHash || elem.buildId !== buildId,
     );
@@ -56,7 +60,7 @@ class BuildQueue {
   }
 }
 
-let savedQueue;
+let savedQueue: BuildQueueElem[] | undefined;
 try {
   savedQueue = JSON.parse(fs.readFileSync('./temp/buildQueue.json', 'utf-8'));
 } catch (error) {
@@ -66,5 +70,4 @@ try {
 
 const buildQueue = new BuildQueue(savedQueue);
 
-module.exports.BuildQueue = BuildQueue;
-module.exports.buildQueue = buildQueue;
+export { BuildQueue, buildQueue };

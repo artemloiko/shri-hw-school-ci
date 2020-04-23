@@ -1,6 +1,6 @@
-const { buildQueueRunProcessing } = require('../../tasks/process-queue');
-const { buildQueue } = require('../../models/buildQueue');
-const storage = require('../../models/storage');
+import { buildQueueRunProcessing } from '../../tasks/process-queue';
+import { buildQueue, BuildQueue } from '../../models/buildQueue';
+import storage from '../../models/storage';
 
 jest.mock('../../tasks/process-queue/builder', () => ({
   builder: jest.fn().mockResolvedValue({
@@ -10,17 +10,14 @@ jest.mock('../../tasks/process-queue/builder', () => ({
   }),
 }));
 jest.mock('../../models/buildQueue', () => ({
-  buildQueue: { front: jest.fn().mockName('front'), dequeue: jest.fn().mockName('dequeue') },
+  buildQueue: {
+    front: jest.fn().mockName('front'),
+    dequeue: jest.fn().mockName('dequeue'),
+  },
 }));
 jest.mock('../../models/storage', () => ({
-  buildStart: jest
-    .fn()
-    .mockResolvedValue()
-    .mockName('buildStart'),
-  buildFinish: jest
-    .fn()
-    .mockResolvedValue()
-    .mockName('buildFinish'),
+  buildStart: jest.fn().mockName('buildStart'),
+  buildFinish: jest.fn().mockName('buildFinish'),
 }));
 
 const queueElem = {
@@ -36,9 +33,13 @@ describe('Build Queue Processing', () => {
 
   afterEach(() => {
     jest.clearAllTimers();
+    // @ts-ignore
     buildQueue.front.mockReset();
+    // @ts-ignore
     buildQueue.dequeue.mockReset();
+    // @ts-ignore
     storage.buildStart.mockClear();
+    // @ts-ignore
     storage.buildFinish.mockClear();
   });
 
@@ -58,6 +59,7 @@ describe('Build Queue Processing', () => {
 
   test('Clears interval on queue element adding', () => {
     buildQueueRunProcessing();
+    // @ts-ignore
     buildQueue.front.mockImplementationOnce(() => queueElem);
     jest.runOnlyPendingTimers();
 
@@ -66,6 +68,7 @@ describe('Build Queue Processing', () => {
 
   test('Runs processing on queue element adding', () => {
     buildQueueRunProcessing();
+    // @ts-ignore
     buildQueue.front.mockImplementation(() => queueElem);
     jest.runOnlyPendingTimers();
 
@@ -73,6 +76,7 @@ describe('Build Queue Processing', () => {
   });
 
   test('Add waiting interval after processing all items in queue', async () => {
+    // @ts-ignore
     buildQueue.front.mockImplementationOnce(() => queueElem);
 
     await buildQueueRunProcessing();
@@ -82,6 +86,7 @@ describe('Build Queue Processing', () => {
 
   test('Saves build info to storage (buildStart, buildFinish)', async () => {
     expect(buildQueue.front()).toBeUndefined();
+    // @ts-ignore
     buildQueue.front.mockImplementationOnce(() => queueElem);
 
     await buildQueueRunProcessing();
@@ -91,6 +96,7 @@ describe('Build Queue Processing', () => {
   });
 
   test('Dequeues element in the end of the build', async () => {
+    // @ts-ignore
     buildQueue.front.mockImplementationOnce(() => queueElem);
 
     await buildQueueRunProcessing();
@@ -100,6 +106,7 @@ describe('Build Queue Processing', () => {
 
   test('Process all elements in queue', async () => {
     buildQueue.front
+      // @ts-ignore
       .mockImplementationOnce(() => queueElem)
       .mockImplementationOnce(() => queueElem)
       .mockImplementationOnce(() => queueElem)

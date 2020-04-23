@@ -1,8 +1,8 @@
-const { buildQueue } = require('../../models/buildQueue');
-const storage = require('../../models/storage');
-const { builder } = require('./builder');
+import { buildQueue } from '../../models/buildQueue';
+import storage from '../../models/storage';
+import { builder } from './builder';
 
-async function buildQueueRunProcessing() {
+async function buildQueueRunProcessing(): Promise<void> {
   const setCheckInterval = () => {
     const intervalId = setInterval(() => {
       if (buildQueue.front()) {
@@ -43,7 +43,9 @@ async function buildQueueRunProcessing() {
   setCheckInterval();
 }
 
-module.exports = {
+const QueueProcessing = {
   init: buildQueueRunProcessing,
-  buildQueueRunProcessing,
 };
+
+export { buildQueueRunProcessing };
+export default QueueProcessing;

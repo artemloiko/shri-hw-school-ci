@@ -1,16 +1,17 @@
-const fs = require('fs-extra');
-const path = require('path');
-const { exec: execCb } = require('child_process');
-const { promisify } = require('util');
-const { HttpError } = require('../utils/customErrors');
-const config = require('../config');
-const GitOutputParser = require('./GitOutputParser');
+import fs from 'fs-extra';
+import path from 'path';
+import { exec as execCb } from 'child_process';
+import { promisify } from 'util';
+
+import config from '../config';
+import GitOutputParser from './GitOutputParser';
+import { HttpError, ErrorCode } from '../utils/customErrors';
 
 const exec = promisify(execCb);
 const { repoPath } = config;
 
-class GitService {
-  async updateRepository(repoName, mainBranch) {
+export default class GitService {
+  async updateRepository(repoName: string, mainBranch: string) {
     const currentRepoName = await this.getCurrentRepositoryName();
     if (currentRepoName === repoName) {
       await this.updateBranch(mainBranch);
@@ -21,7 +22,7 @@ class GitService {
     await this.updateBranch(mainBranch);
   }
 
-  async updateBranch(branchName) {
+  async updateBranch(branchName: string) {
     try {
       await exec(`cd ${repoPath} && git fetch && git checkout ${branchName} && git pull`);
     } catch (error) {
@@ -29,12 +30,12 @@ class GitService {
       throw new HttpError(
         `Cannot find branch ${branchName} in repo`,
         400,
-        'GIT_CANNOT_FIND_BRANCH',
+        ErrorCode.GIT_CANNOT_FIND_BRANCH,
       );
     }
   }
 
-  async cloneRepository(repoName) {
+  async cloneRepository(repoName: string) {
     try {
       const repoUrl = `https://github.com/${repoName}.git`;
       if (!(await this.checkIfRepositoryExists(repoUrl))) {
@@ -44,11 +45,15 @@ class GitService {
       await exec(`git clone ${repoUrl} ${repoPath}`);
     } catch (error) {
       console.error('GitService.updateRepository error\n', error.stderr);
-      throw new HttpError(`Cannot find ${repoName} repository`, 400, 'GIT_CANNOT_FIND_REPO');
+      throw new HttpError(
+        `Cannot find ${repoName} repository`,
+        400,
+        ErrorCode.GIT_CANNOT_FIND_REPO,
+      );
     }
   }
 
-  async checkIfRepositoryExists(repoUrl) {
+  async checkIfRepositoryExists(repoUrl: string) {
     try {
       await exec(`git ls-remote ${repoUrl}`);
       return true;
@@ -66,7 +71,7 @@ class GitService {
     }
   }
 
-  async getLastCommitHash(branchName) {
+  async getLastCommitHash(branchName: string) {
     try {
       const { stdout: hash } = await exec(
         `cd ${repoPath} && git log --pretty=format:%h -1 ${branchName}`,
@@ -77,12 +82,12 @@ class GitService {
       throw new HttpError(
         `Cannot find branch ${branchName} in repo`,
         400,
-        'GIT_CANNOT_FIND_BRANCH',
+        ErrorCode.GIT_CANNOT_FIND_BRANCH,
       );
     }
   }
 
-  async getCommitDetails(commitHash) {
+  async getCommitDetails(commitHash: string) {
     try {
       const SPLITTER = '{SPLIT}';
       const { stdout: log } = await exec(
@@ -101,10 +106,8 @@ class GitService {
       throw new HttpError(
         `Cannot get detils of commit ${commitHash}`,
         400,
-        'GIT_CANNOT_FIND_COMMIT',
+        ErrorCode.GIT_CANNOT_FIND_COMMIT,
       );
     }
   }
 }
-
-module.exports = GitService;

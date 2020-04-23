@@ -1,8 +1,12 @@
-const { buildQueue } = require('../models/buildQueue');
-const GitService = require('./gitService');
+import GitService from './gitService';
+import { buildQueue } from '../models/buildQueue';
+import { ConfigurationDTO, BuildModel } from '@i/storage.interfaces';
 
-class SettingsService {
-  constructor(storage) {
+import { Storage } from '../models/storage';
+
+export default class SettingsService {
+  gitService: GitService;
+  constructor(private storage: Storage) {
     this.storage = storage;
     this.gitService = new GitService();
   }
@@ -11,22 +15,22 @@ class SettingsService {
     return this.storage.getSettings();
   }
 
-  async setSettings(settingsDTO) {
+  async setSettings(settingsDTO: ConfigurationDTO) {
     return this.storage.setSettings(settingsDTO);
   }
 
-  async updateRepository(settingsDTO) {
+  async updateRepository(settingsDTO: ConfigurationDTO) {
     const { repoName, mainBranch } = settingsDTO;
     await this.gitService.updateRepository(repoName, mainBranch);
   }
 
-  async addLastCommitToQueue(settingsDTO) {
+  async addLastCommitToQueue(settingsDTO: ConfigurationDTO) {
     try {
       const { mainBranch } = settingsDTO;
       const lastCommitHash = await this.gitService.getLastCommitHash(mainBranch);
 
-      const isAlredyBuilt = await this.__checkIfCommitIsBuilt(lastCommitHash);
-      const isAlreadyInQueue = buildQueue.has({ commitHash: lastCommitHash });
+      const isAlredyBuilt = await this.checkIfCommitIsBuilt(lastCommitHash);
+      const isAlreadyInQueue = buildQueue.has(lastCommitHash);
 
       if (!isAlreadyInQueue && !isAlredyBuilt) {
         const commitDetails = await this.gitService.getCommitDetails(lastCommitHash);
@@ -39,14 +43,12 @@ class SettingsService {
     }
   }
 
-  async __checkIfCommitIsBuilt(commitHash) {
+  private async checkIfCommitIsBuilt(commitHash: string) {
     try {
       const { data: buildList } = await this.storage.getBuildsList();
-      return buildList.some((build) => build.commitHash === commitHash);
+      return buildList.some((build: BuildModel) => build.commitHash === commitHash);
     } catch (err) {
       return false;
     }
   }
 }
-
-module.exports = SettingsService;

@@ -1,8 +1,10 @@
-const GitService = require('./gitService');
-const { buildQueue } = require('../models/buildQueue');
+import GitService from './gitService';
+import { buildQueue } from '../models/buildQueue';
+import { Storage } from 'src/models/storage';
 
-class BuildsService {
-  constructor(storage) {
+export default class BuildsService {
+  gitService: GitService;
+  constructor(private storage: Storage) {
     this.storage = storage;
     this.gitService = new GitService();
   }
@@ -11,7 +13,7 @@ class BuildsService {
     return this.storage.getBuildsList(offset, limit);
   }
 
-  async addToBuildQueue(commitHash) {
+  async addToBuildQueue(commitHash: string) {
     const commitDetails = await this.gitService.getCommitDetails(commitHash);
     const data = await this.storage.buildInit(commitDetails);
     const buildId = data.data.id;
@@ -19,13 +21,11 @@ class BuildsService {
     return buildId;
   }
 
-  async getBuildDetails(buildId) {
+  async getBuildDetails(buildId: string) {
     return this.storage.getBuildDetails(buildId);
   }
 
-  async getBuildLog(buildId) {
+  async getBuildLog(buildId: string) {
     return this.storage.getBuildLog(buildId);
   }
 }
-
-module.exports = BuildsService;

@@ -1,4 +1,6 @@
-function logResponseError(message, err) {
+import { AxiosError } from 'axios';
+
+export function logResponseError(message: string, err: AxiosError) {
   let errorResponse;
   if (err.response) {
     const { status, statusText, headers, data } = err.response;
@@ -11,5 +13,3 @@ function logResponseError(message, err) {
   };
   console.error(message, error);
 }
-
-exports.logResponseError = logResponseError;

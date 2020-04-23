@@ -1,10 +1,25 @@
-const storage = require('../models/storage');
-const BuildsSevice = require('../services/buildsService.js');
-const { logResponseError } = require('../utils/logger');
+import { Request, Response, NextFunction } from 'express';
+import storage from '../models/storage';
+import BuildsSevice from '../services/buildsService';
+import { logResponseError } from '../utils/logger';
+import { StorageResponce, BuildModel } from '@i/storage.interfaces';
 
 const buildsService = new BuildsSevice(storage);
 
-const getBuildList = async (req, res, next) => {
+interface BuildListQuery {
+  limit: number;
+  offset: number;
+}
+
+type BuildParam = {
+  commitHash: string;
+};
+
+const getBuildList = async (
+  req: Request<{}, {}, {}, BuildListQuery>,
+  res: Response<StorageResponce<BuildModel[]>>,
+  next: NextFunction,
+) => {
   const { limit, offset } = req.query;
   try {
     const currentBuilds = await buildsService.getBuildsList(offset, limit);
@@ -14,7 +29,11 @@ const getBuildList = async (req, res, next) => {
   }
 };
 
-const addBuild = async (req, res, next) => {
+const addBuild = async (
+  req: Request<BuildParam>,
+  res: Response<StorageResponce<BuildModel>>,
+  next: NextFunction,
+) => {
   const { commitHash } = req.params;
   try {
     const buildId = await buildsService.addToBuildQueue(commitHash);
@@ -26,7 +45,11 @@ const addBuild = async (req, res, next) => {
   }
 };
 
-const getBuildDetails = async (req, res, next) => {
+const getBuildDetails = async (
+  req: Request<BuildParam>,
+  res: Response<StorageResponce<BuildModel>>,
+  next: NextFunction,
+) => {
   const { commitHash } = req.params;
   try {
     const data = await buildsService.getBuildDetails(commitHash);
@@ -37,7 +60,11 @@ const getBuildDetails = async (req, res, next) => {
   }
 };
 
-const getBuildLog = async (req, res, next) => {
+const getBuildLog = async (
+  req: Request<BuildParam>,
+  res: Response<StorageResponce<string>>,
+  next: NextFunction,
+) => {
   const { commitHash } = req.params;
   try {
     const data = await buildsService.getBuildLog(commitHash);
@@ -48,9 +75,4 @@ const getBuildLog = async (req, res, next) => {
   }
 };
 
-module.exports = {
-  getBuildList,
-  addBuild,
-  getBuildDetails,
-  getBuildLog,
-};
+export { getBuildList, addBuild, getBuildDetails, getBuildLog };

@@ -1,4 +1,4 @@
-const GitService = require('../../services/gitService');
+import GitService from '../../services/gitService';
 
 const gitService = new GitService();
 
@@ -11,6 +11,7 @@ beforeAll(() => {
 });
 
 afterAll(() => {
+  // @ts-ignore
   global.console.error.mockRestore();
 });
 
@@ -23,7 +24,6 @@ describe('Git Service', () => {
       await expect(gitService.updateBranch('moster')).rejects.toThrow('Cannot find branch moster');
     }, 10000);
   });
-  // TODO: describe('cloneRepository', () => {});
   describe('checkIfRepositoryExists', () => {
     test('Return true for existing repo', async () => {
       const exist = await gitService.checkIfRepositoryExists(

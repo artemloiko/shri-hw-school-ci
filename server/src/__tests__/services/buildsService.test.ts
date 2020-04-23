@@ -1,23 +1,28 @@
-const BuildsService = require('../../services/buildsService');
-const GitService = require('../../services/gitService');
-const { buildQueue } = require('../../models/buildQueue');
+import { mocked } from 'ts-jest/utils';
+import BuildsService from '../../services/buildsService';
+import GitService from '../../services/gitService';
+import { buildQueue } from '../../models/buildQueue';
+import storage from '../../models/storage';
 
-const storageMock = {
+const storageMock = mocked(storage);
+
+jest.mock('../../models/storage', () => ({
   getBuildsList: jest.fn(),
   getBuildDetails: jest.fn(),
   getBuildLog: jest.fn(),
-};
+}));
 jest.mock('../../services/gitService');
 jest.mock('../../models/buildQueue');
 
 const buildId = '30c10a6a-087e-4a6b-aed8-8a809169a305';
 
 describe('Builds Service', () => {
-  let buildsService;
+  let buildsService: BuildsService;
 
   beforeEach(() => {
-    GitService.mockClear();
+    mocked(GitService).mockClear();
     storageMock.getBuildsList.mockClear();
+    // @ts-ignore
     buildsService = new BuildsService(storageMock);
   });
 
@@ -48,7 +53,8 @@ describe('Builds Service', () => {
   test('addToBuildQueue adds commit to queue and storage', async () => {
     const commitHash = '94dc970';
     storageMock.buildInit = jest.fn().mockResolvedValue({ data: { id: buildId } });
-    GitService.mockImplementationOnce(() => ({
+    mocked(GitService).mockImplementationOnce(() => ({
+      // @ts-ignore
       getCommitDetails: () => {},
     }));
 

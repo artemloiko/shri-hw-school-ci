@@ -10,7 +10,8 @@ import {
   BuildStartDTO,
   BuildFinishDTO,
   BuildCancelDTO,
-} from '../../../typings/storage.types';
+  BuildInitResponse,
+} from '@i/storage.interfaces';
 
 const axiosAPI = axios.create({
   baseURL: config.storageURL,
@@ -20,63 +21,67 @@ const axiosAPI = axios.create({
   headers: { Authorization: `Bearer ${config.storageApikey}` },
 });
 
-class Storage {
+export class Storage {
   constructor(private axiosInstance: AxiosInstance) {}
 
-  async getSettings(): Promise<StorageResponce<ConfigurationModel>> {
-    const response = await this.axiosInstance.get('/conf');
+  async getSettings() {
+    const response = await this.axiosInstance.get<StorageResponce<ConfigurationModel>>('/conf');
     return response.data;
   }
 
-  async deleteSettings(): Promise<void> {
-    const response = await this.axiosInstance.delete('/conf');
+  async deleteSettings() {
+    await this.axiosInstance.delete('/conf');
+  }
+
+  async setSettings(settingsDTO: ConfigurationDTO) {
+    await this.axiosInstance.post('/conf', settingsDTO);
+  }
+
+  async getBuildsList(offset: number = 0, limit: number = 25) {
+    const response = await this.axiosInstance.get<StorageResponce<BuildModel[]>>(
+      `/build/list?offset=${offset}&limit=${limit}`,
+    );
     return response.data;
   }
 
-  async setSettings(settingsDTO: ConfigurationDTO): Promise<void> {
-    const response = await this.axiosInstance.post('/conf', settingsDTO);
+  async getBuildLog(buildId: string) {
+    const response = await this.axiosInstance.get<StorageResponce<string>>(
+      `/build/log?buildId=${buildId}`,
+    );
     return response.data;
   }
 
-  async getBuildsList(offset: number, limit: number): Promise<StorageResponce<BuildModel[]>> {
-    const response = await this.axiosInstance.get(`/build/list?offset=${offset}&limit=${limit}`);
+  async getBuildDetails(buildId: string) {
+    const response = await this.axiosInstance.get<StorageResponce<BuildModel>>(
+      `/build/details?buildId=${buildId}`,
+    );
     return response.data;
   }
 
-  async getBuildLog(buildId: string): Promise<StorageResponce<string>> {
-    const response = await this.axiosInstance.get(`/build/log?buildId=${buildId}`);
-    return response.data;
-  }
-
-  async getBuildDetails(buildId: string): Promise<StorageResponce<BuildModel>> {
-    const response = await this.axiosInstance.get(`/build/details?buildId=${buildId}`);
-    return response.data;
-  }
-
-  async buildInit(buildCreateDTO: BuildInitDTO): Promise<void> {
-    const response = await this.axiosInstance.post('/build/request', buildCreateDTO);
+  async buildInit(buildCreateDTO: BuildInitDTO) {
+    const response = await this.axiosInstance.post<StorageResponce<BuildInitResponse>>(
+      '/build/request',
+      buildCreateDTO,
+    );
     return response.data;
   }
 
   /**
    * dateTime is stored in ISO format 2020-03-14T07:56:21.843Z
    */
-  async buildStart(buildStartDTO: BuildStartDTO): Promise<void> {
-    const response = await this.axiosInstance.post('/build/start', buildStartDTO);
-    return response.data;
+  async buildStart(buildStartDTO: BuildStartDTO) {
+    await this.axiosInstance.post('/build/start', buildStartDTO);
   }
 
   /**
    * duration should be specified in seconds
    */
-  async buildFinish(buildFinishDTO: BuildFinishDTO): Promise<void> {
-    const response = await this.axiosInstance.post('/build/finish', buildFinishDTO);
-    return response.data;
+  async buildFinish(buildFinishDTO: BuildFinishDTO) {
+    await this.axiosInstance.post('/build/finish', buildFinishDTO);
   }
 
-  async buildCancel(buildCancelDTO: BuildCancelDTO): Promise<void> {
-    const response = await this.axiosInstance.post('/build/Cancel', buildCancelDTO);
-    return response.data;
+  async buildCancel(buildCancelDTO: BuildCancelDTO) {
+    await this.axiosInstance.post('/build/Cancel', buildCancelDTO);
   }
 }
 

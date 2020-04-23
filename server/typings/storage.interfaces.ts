@@ -39,6 +39,12 @@ export interface BuildInitDTO {
   authorName: string;
 }
 
+export interface BuildInitResponse {
+  id: string;
+  buildNumber: number;
+  status: BuildStatus;
+}
+
 export interface BuildStartDTO {
   buildId: string;
   dateTime: string;

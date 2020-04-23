@@ -1,4 +1,4 @@
-const { BuildQueue } = require('../../models/buildQueue');
+import { BuildQueue } from '../../models/buildQueue';
 
 describe('BuildQueue', () => {
   const queueElements = [
@@ -30,10 +30,10 @@ describe('BuildQueue', () => {
       commitHash: '0520796',
       buildId: 'e59f7715-8da8-4e46-9312-bcba770d2c0f',
     };
-    let queue;
+    let queue: BuildQueue;
     beforeEach(() => {
       queue = new BuildQueue(queueElements);
-      queue.saveQueueToFile = jest.fn().mockResolvedValue();
+      queue.saveQueueToFile = jest.fn();
       jest.spyOn(console, 'log').mockImplementation(() => {});
     });
     test('enqueue() syncs queue to file', async () => {
@@ -70,7 +70,7 @@ describe('BuildQueue', () => {
 
   describe('Get methods', () => {
     const queue = new BuildQueue(queueElements);
-    queue.saveQueueToFile = jest.fn().mockResolvedValue();
+    queue.saveQueueToFile = jest.fn();
 
     const queueElem = {
       commitHash: '0520796',
@@ -78,10 +78,10 @@ describe('BuildQueue', () => {
     };
 
     test('has() returns true if queue contains specified elem', () => {
-      expect(queue.has(queueElements[0])).toBe(true);
+      expect(queue.has(queueElements[0].commitHash)).toBe(true);
     });
     test("has() returns false if queue doesn't contain specified elem", () => {
-      expect(queue.has(queueElem)).toBe(false);
+      expect(queue.has(queueElem.commitHash)).toBe(false);
     });
     test('size() returns size of the queue', () => {
       expect(queue.size()).toBe(queue.buildQueue.length);

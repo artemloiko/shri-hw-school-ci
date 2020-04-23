@@ -1,10 +1,10 @@
-const express = require('express');
-const {
+import express from 'express';
+import {
   getBuildList,
   addBuild,
   getBuildDetails,
   getBuildLog,
-} = require('../../controllers/buildsController');
+} from '../../controllers/buildsController';
 
 const router = express.Router();
 
@@ -13,4 +13,4 @@ router.post('/:commitHash', addBuild);
 router.get('/:commitHash', getBuildDetails);
 router.get('/:commitHash/logs', getBuildLog);
 
-module.exports = router;
+export default router;

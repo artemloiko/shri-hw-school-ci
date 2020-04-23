@@ -1,6 +1,10 @@
-const SettingsService = require('../../services/settingsService');
-const GitService = require('../../services/gitService');
-const { buildQueue } = require('../../models/buildQueue');
+import { mocked } from 'ts-jest/utils';
+
+import SettingsService from '../../services/settingsService';
+import GitService from '../../services/gitService';
+import { buildQueue } from '../../models/buildQueue';
+
+const GitServiceMock = mocked(GitService);
 
 const storageMock = {
   getSettings: jest.fn(),
@@ -18,10 +22,11 @@ const settingsDTO = {
 };
 
 describe('Settings Service', () => {
-  let settingsService;
+  let settingsService: SettingsService;
 
   beforeEach(() => {
-    GitService.mockClear();
+    GitServiceMock.mockClear();
+    // @ts-ignore
     settingsService = new SettingsService(storageMock);
   });
 
@@ -40,7 +45,7 @@ describe('Settings Service', () => {
   test('updateRepository calls gitService method', async () => {
     await settingsService.updateRepository(settingsDTO);
 
-    expect(GitService.mock.instances[0].updateRepository).toHaveBeenCalledWith(
+    expect(GitServiceMock.mock.instances[0].updateRepository).toHaveBeenCalledWith(
       settingsDTO.repoName,
       settingsDTO.mainBranch,
     );
@@ -49,20 +54,27 @@ describe('Settings Service', () => {
   describe('addLastCommitToQueue', () => {
     const commitHash = '94dc970';
     const buildId = '30c10a6a-087e-4a6b-aed8-8a809169a305';
+    // @ts-ignore
     storageMock.buildInit = jest.fn().mockResolvedValue({ data: { id: buildId } });
 
     beforeEach(() => {
-      GitService.mockImplementationOnce(() => ({
+      GitServiceMock.mockImplementationOnce(() => ({
+        // @ts-ignore
         getLastCommitHash: () => commitHash,
+        // @ts-ignore
         getCommitDetails: () => {},
       }));
+      // @ts-ignore
       settingsService = new SettingsService(storageMock);
-      settingsService.__checkIfCommitIsBuilt = jest.fn();
+      // @ts-ignore
+      settingsService.checkIfCommitIsBuilt = jest.fn();
     });
 
     test("Add commit to queue if it's not built nor in queue", async () => {
+      // @ts-ignore
       buildQueue.has.mockImplementationOnce(() => false);
-      settingsService.__checkIfCommitIsBuilt.mockResolvedValueOnce(false);
+      // @ts-ignore
+      settingsService.checkIfCommitIsBuilt.mockResolvedValueOnce(false);
 
       await settingsService.addLastCommitToQueue(settingsDTO);
 
@@ -70,7 +82,8 @@ describe('Settings Service', () => {
     });
 
     test("Don't add commit to queue if it's built recently", async () => {
-      settingsService.__checkIfCommitIsBuilt.mockResolvedValueOnce(true);
+      // @ts-ignore
+      settingsService.checkIfCommitIsBuilt.mockResolvedValueOnce(true);
 
       await settingsService.addLastCommitToQueue(settingsDTO);
 
@@ -78,8 +91,10 @@ describe('Settings Service', () => {
     });
 
     test("Don't add commit to queue if it's already in queue", async () => {
+      // @ts-ignore
       buildQueue.has.mockImplementationOnce(() => true);
-      settingsService.__checkIfCommitIsBuilt.mockResolvedValueOnce(false);
+      // @ts-ignore
+      settingsService.checkIfCommitIsBuilt.mockResolvedValueOnce(false);
 
       await settingsService.addLastCommitToQueue(settingsDTO);
 

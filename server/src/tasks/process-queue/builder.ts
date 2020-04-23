@@ -1,4 +1,9 @@
-async function fakeBuilder() {
+interface BuilderResult {
+  duration: number;
+  success: boolean;
+  buildLog: string;
+}
+async function fakeBuilder(): Promise<BuilderResult> {
   // eslint-disable-next-line operator-linebreak
   const successLog =
     '\n> school-ci-client@0.3.0 build C:\\Users\\artem\\code\\shri-homeworks\\shri-hw-school-ci\\client\n> react-scripts build\n\nCreating an optimized production build...\n\u001b[32mCompiled successfully.\u001b[39m\n\u001b[32m\u001b[39m\nFile sizes after gzip:\n\n  69.83 KB  \u001b[2mbuild\\static\\js\\\u001b[22m\u001b[36m2.bcd446fa.chunk.js\u001b[39m\n  5.71 KB   \u001b[2mbuild\\static\\js\\\u001b[22m\u001b[36mmain.7d8e8b80.chunk.js\u001b[39m\n  3.84 KB   \u001b[2mbuild\\static\\css\\\u001b[22m\u001b[36mmain.90137828.chunk.css\u001b[39m\n  783 B     \u001b[2mbuild\\static\\js\\\u001b[22m\u001b[36mruntime-main.d9a802f9.js\u001b[39m\n\nThe project was built assuming it is hosted at \u001b[32m/\u001b[39m.\nYou can control this with the \u001b[32mhomepage\u001b[39m field in your \u001b[36mpackage.json\u001b[39m.\n\nThe \u001b[36mbuild\u001b[39m folder is ready to be deployed.\nYou may serve it with a static server:\n\n  \u001b[36mnpm\u001b[39m install -g serve\n  \u001b[36mserve\u001b[39m -s build\n\nFind out more about deployment here:\n\n  \u001b[33mbit.ly/CRA-deploy\u001b[39m\n\n';
@@ -16,4 +21,4 @@ async function fakeBuilder() {
   };
 }
 
-module.exports.builder = fakeBuilder;
+export { fakeBuilder as builder };

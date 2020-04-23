@@ -1,4 +1,4 @@
-const GitOutputParser = require('../../services/GitOutputParser');
+import GitOutputParser from '../../services/GitOutputParser';
 
 describe('GitOutputParser service', () => {
   describe('parseLog', () => {
