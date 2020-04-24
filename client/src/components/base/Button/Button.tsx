@@ -1,13 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from '@reach/router';
-import { cn } from 'utils/bem-cn';
+import { cn, CNProps } from 'utils/bem-cn';
 
-import Icon from 'components/base/Icon/Icon';
+import Icon, { IconTypes } from 'components/base/Icon/Icon';
 
 import './Button.css';
 
-function Button(props) {
+export type ButtonMods = {
+  size?: 'small';
+  icon?: boolean;
+  action?: boolean;
+  'mini-desktop'?: boolean;
+  'icon-only'?: boolean;
+  disabled?: boolean;
+};
+
+export interface ButtonProps {
+  type?: 'submit' | 'reset' | 'button' | undefined;
+  to?: string;
+  children: string;
+  iconType: IconTypes;
+}
+
+const Button: React.FC<ButtonProps & CNProps<ButtonMods>> = (props) => {
   const {
     type = 'button',
     to = '',
@@ -41,30 +56,6 @@ function Button(props) {
       <div className="button__text">{children}</div>
     </button>
   );
-}
-
-Button.propTypes = {
-  type: PropTypes.string,
-  to: PropTypes.string,
-  children: PropTypes.string,
-  iconType: PropTypes.oneOf([
-    'commit',
-    'calendar',
-    'stopwatch',
-    'user',
-    'rebuild',
-    'play',
-    'settings',
-  ]),
-
-  className: PropTypes.string,
-  mods: PropTypes.shape({
-    size: PropTypes.oneOf(['small']),
-    icon: PropTypes.bool,
-    action: PropTypes.bool,
-    'mini-desktop': PropTypes.bool,
-  }),
-  mix: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default Button;

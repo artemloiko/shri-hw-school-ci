@@ -1,11 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link as RouterLink } from '@reach/router';
-import { cn } from 'utils/bem-cn';
+import { cn, CNProps } from 'utils/bem-cn';
 
 import './Link.css';
 
-function Link(props) {
+export type LinkProps = { to?: string; children: any } & CNProps;
+
+const Link: React.FC<LinkProps> = (props) => {
   const { to = '', children } = props;
 
   return (
@@ -13,13 +14,6 @@ function Link(props) {
       {children}
     </RouterLink>
   );
-}
-
-Link.propTypes = {
-  to: PropTypes.string,
-  children: PropTypes.any.isRequired,
-  className: PropTypes.string,
-  mix: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default Link;

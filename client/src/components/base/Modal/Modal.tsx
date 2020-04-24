@@ -1,13 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
-import { cn } from 'utils/bem-cn';
+import { cn, CNProps } from 'utils/bem-cn';
 
 import './Modal.css';
 
 ReactModal.setAppElement('#root');
 
-function Modal(props) {
+export type ModalProps = ReactModal.Props & CNProps;
+
+const Modal: React.FC<ModalProps> = (props) => {
   const { children, ...modalProps } = props;
   return (
     <ReactModal
@@ -18,13 +19,6 @@ function Modal(props) {
       {children || 'Example Modal'}
     </ReactModal>
   );
-}
-
-Modal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  children: PropTypes.any,
-  className: PropTypes.string,
-  mix: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default Modal;

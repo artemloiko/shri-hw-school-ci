@@ -1,13 +1,26 @@
 import React, { useCallback, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { cn } from 'utils/bem-cn';
+import { cn, CNProps } from 'utils/bem-cn';
 
 import './Input.css';
 
-function Input(props) {
+export type InputMods = {
+  fullwidth?: boolean;
+  clear?: boolean;
+  counter?: boolean;
+};
+
+type Props = {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  setFieldValue: (name: string, value: any) => void;
+};
+
+export type InputProps = React.HTMLProps<HTMLInputElement> & CNProps<InputMods> & Props;
+
+const Input: React.FC<InputProps> = (props) => {
   const { setFieldValue, mods = {}, className, mix, ...inputProps } = props;
   const { name, onBlur } = inputProps;
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClear = useCallback(
     (e) => {
@@ -15,15 +28,15 @@ function Input(props) {
         return;
       }
       e.preventDefault();
-      setFieldValue(name, '');
-      inputRef.current.focus();
+      name && setFieldValue(name, '');
+      inputRef?.current?.focus();
     },
     [setFieldValue, name],
   );
 
   const handleBlur = useCallback(
     (e) => {
-      if (e.target.value) {
+      if (e.target.value && name) {
         setFieldValue(name, e.target.value.trim());
       }
       onBlur(e);
@@ -37,7 +50,7 @@ function Input(props) {
       {mods.clear && (
         <div
           className="input__clear-btn"
-          tabIndex="0"
+          tabIndex={0}
           onClick={handleClear}
           onKeyDown={handleClear}
           role="button"
@@ -46,30 +59,6 @@ function Input(props) {
       )}
     </div>
   );
-}
-
-Input.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  placeholder: PropTypes.string,
-  type: PropTypes.string,
-  inputMode: PropTypes.string,
-  required: PropTypes.bool,
-  pattern: PropTypes.string,
-  title: PropTypes.string,
-  value: PropTypes.any,
-
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired,
-  setFieldValue: PropTypes.func.isRequired,
-
-  className: PropTypes.string,
-  mods: PropTypes.shape({
-    fullwidth: PropTypes.bool,
-    clear: PropTypes.bool,
-    counter: PropTypes.bool,
-  }),
-  mix: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default Input;
