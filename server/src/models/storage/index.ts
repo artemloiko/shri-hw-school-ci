@@ -37,7 +37,7 @@ export class Storage {
     await this.axiosInstance.post('/conf', settingsDTO);
   }
 
-  async getBuildsList(offset: number = 0, limit: number = 25) {
+  async getBuildsList(offset = 0, limit = 25) {
     const response = await this.axiosInstance.get<StorageResponce<BuildModel[]>>(
       `/build/list?offset=${offset}&limit=${limit}`,
     );

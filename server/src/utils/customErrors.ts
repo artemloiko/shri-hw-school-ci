@@ -7,7 +7,7 @@ export enum ErrorCode {
 export class HttpError extends Error {
   status: number;
   errorCode: ErrorCode;
-  constructor(message: string, status: number = 500, errorCode: ErrorCode) {
+  constructor(message: string, status = 500, errorCode: ErrorCode) {
     super(message);
     this.status = status;
     this.errorCode = errorCode;

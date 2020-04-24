@@ -1,8 +1,9 @@
 import { Express, NextFunction, Request, Response } from 'express';
 import apiRoutes from './api';
 import { HttpError } from 'src/utils/customErrors';
-// eslint-disable-next-line node/no-unpublished-require
-const { clientSSR } = require('../../../client/server/index.js');
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import { clientSSR } from '../../../client/server/index.js';
 
 const init = (server: Express): void => {
   server.use('/api', apiRoutes);
@@ -11,7 +12,7 @@ const init = (server: Express): void => {
     server.use(clientSSR);
   }
 
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   server.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
     res.status(err.status || 500);
     res.json({

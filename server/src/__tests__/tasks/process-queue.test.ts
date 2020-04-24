@@ -1,5 +1,5 @@
 import { buildQueueRunProcessing } from '../../tasks/process-queue';
-import { buildQueue, BuildQueue } from '../../models/buildQueue';
+import { buildQueue } from '../../models/buildQueue';
 import storage from '../../models/storage';
 
 jest.mock('../../tasks/process-queue/builder', () => ({
