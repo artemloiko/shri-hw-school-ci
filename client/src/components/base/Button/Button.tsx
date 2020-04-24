@@ -19,10 +19,13 @@ export interface ButtonProps {
   type?: 'submit' | 'reset' | 'button' | undefined;
   to?: string;
   children: string;
-  iconType: IconTypes;
+  iconType?: IconTypes;
+  onClick?: (ev: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
 }
 
-const Button: React.FC<ButtonProps & CNProps<ButtonMods>> = (props) => {
+const Button: React.HTMLProps<HTMLButtonElement> & React.FC<ButtonProps & CNProps<ButtonMods>> = (
+  props,
+) => {
   const {
     type = 'button',
     to = '',

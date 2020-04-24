@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactElement } from 'react';
 import clsx from 'clsx';
 
 import Footer from 'components/common/Footer/Footer';
@@ -7,7 +6,16 @@ import Header from 'components/common/Header/Header';
 
 import './Page.css';
 
-function Page({ children, contentClass, headerControls, headerText }) {
+type Elements = ReactElement | ReactElement[];
+
+export interface PageProps {
+  children: Elements;
+  headerControls?: Elements;
+  contentClass?: string;
+  headerText?: string;
+}
+
+const Page: React.FC<PageProps> = ({ children, contentClass, headerControls, headerText }) => {
   return (
     <div className="typography page">
       <Header controls={headerControls} text={headerText} />
@@ -15,13 +23,6 @@ function Page({ children, contentClass, headerControls, headerText }) {
       <Footer />
     </div>
   );
-}
-
-Page.propTypes = {
-  children: PropTypes.any.isRequired,
-  contentClass: PropTypes.string,
-  headerControls: PropTypes.element,
-  headerText: PropTypes.string,
 };
 
 export default Page;

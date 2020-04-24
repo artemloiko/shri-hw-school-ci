@@ -1,16 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { Link } from '@reach/router';
-import { cn } from 'utils/bem-cn';
+import { cn, CNProps } from 'utils/bem-cn';
 import { formatTime } from 'utils/formatTime';
 import { format } from 'date-fns';
 
 import IconText from 'components/base/IconText/IconText';
 
 import './CardCiRun.css';
+import { BuildModel } from 'typings';
 
-function CardCiRun(props) {
+type CardCiRunMods = {
+  details?: boolean;
+};
+
+export type CardCiRunProps = {
+  buildInfo: BuildModel;
+} & CNProps<CardCiRunMods>;
+
+const CardCiRun: React.FC<CardCiRunProps> = (props) => {
   const { buildInfo } = props;
   const {
     id,
@@ -34,7 +42,7 @@ function CardCiRun(props) {
     <Link
       to={`/details/${id}`}
       className={clsx(cn('card-ci-run', props), cardStatusClasses)}
-      tabIndex="0"
+      tabIndex={0}
     >
       <span className="icon card-ci-run__status-icon"></span>
       <div className="card-ci-run__info">
@@ -74,24 +82,6 @@ function CardCiRun(props) {
       )}
     </Link>
   );
-}
-
-CardCiRun.propTypes = {
-  buildInfo: PropTypes.shape({
-    id: PropTypes.string,
-    buildNumber: PropTypes.number,
-    commitMessage: PropTypes.string,
-    commitHash: PropTypes.string,
-    branchName: PropTypes.string,
-    authorName: PropTypes.string,
-    status: PropTypes.string,
-    start: PropTypes.string,
-    duration: PropTypes.number,
-  }).isRequired,
-  mods: PropTypes.shape({
-    details: PropTypes.bool,
-  }),
-  mix: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default CardCiRun;

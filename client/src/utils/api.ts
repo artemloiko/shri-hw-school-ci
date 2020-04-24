@@ -1,10 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import {
-  ConfigurationDTO,
-  StorageResponce,
-  ConfigurationModel,
-  BuildModel,
-} from '../../../server/typings/storage.interfaces';
+import { ConfigurationDTO, StorageResponce, ConfigurationModel, BuildModel } from 'typings';
 
 const axiosAPI = axios.create({
   baseURL: '/api',

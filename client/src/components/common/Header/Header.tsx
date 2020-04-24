@@ -1,10 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactElement } from 'react';
 import { Link } from '@reach/router';
 
 import './Header.css';
 
-function Header(props) {
+export interface HeaderProps {
+  text?: string;
+  controls?: ReactElement | ReactElement[];
+}
+
+const Header: React.FC<HeaderProps> = (props) => {
   const { text, controls } = props;
 
   return (
@@ -19,11 +23,6 @@ function Header(props) {
       </div>
     </header>
   );
-}
-
-Header.propTypes = {
-  text: PropTypes.string,
-  controls: PropTypes.element,
 };
 
 export default Header;

@@ -1,10 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { cn } from 'utils/bem-cn';
+import React, { ReactElement } from 'react';
+import { cn, CNProps } from 'utils/bem-cn';
 
 import './Loader.css';
 
-function Loader(props) {
+type LoaderMods = {
+  static?: boolean;
+  animate?: boolean;
+};
+
+export type LoaderProps = {
+  children: ReactElement | ReactElement[];
+  isLoading: boolean;
+  showContent?: boolean;
+} & CNProps<LoaderMods>;
+
+const Loader: React.FC<LoaderProps> = (props) => {
   const { children, isLoading, showContent, ...loaderProps } = props;
   return (
     <>
@@ -21,16 +31,6 @@ function Loader(props) {
       {isLoading && !showContent ? null : children}
     </>
   );
-}
-
-Loader.propTypes = {
-  children: PropTypes.any,
-  isLoading: PropTypes.bool.isRequired,
-  showContent: PropTypes.bool,
-  mods: PropTypes.shape({
-    static: PropTypes.bool,
-    animate: PropTypes.bool,
-  }),
 };
 
 export default Loader;

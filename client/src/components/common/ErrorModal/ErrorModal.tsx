@@ -1,12 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import Modal from 'components/base/Modal/Modal';
+import Modal, { ModalProps } from 'components/base/Modal/Modal';
 import Button from 'components/base/Button/Button';
 
 import './ErrorModal.css';
 
-function ErrorModal(props) {
+export interface ErrorModalProps extends ModalProps {
+  closeModal: () => void;
+  errorMessage?: string;
+}
+
+const ErrorModal: React.FC<ErrorModalProps> = (props) => {
   const { errorMessage = 'Something get wrong!', closeModal } = props;
 
   return (
@@ -31,12 +35,6 @@ function ErrorModal(props) {
       </Button>
     </Modal>
   );
-}
-
-ErrorModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  errorMessage: PropTypes.string,
-  closeModal: PropTypes.func,
 };
 
 export default ErrorModal;

@@ -1,12 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
+import Convert from 'ansi-to-html';
 import './Log.css';
 
-const Convert = require('ansi-to-html');
 const ansiConverter = new Convert({ fg: '#000', bg: '#000' });
 
-function Log(props) {
+export interface LogProps {
+  log?: string;
+}
+
+const Log: React.FC<LogProps> = (props) => {
   const { log = '' } = props;
   return (
     <div className="log">
@@ -18,11 +20,6 @@ function Log(props) {
       )}
     </div>
   );
-}
-
-Log.propTypes = {
-  children: PropTypes.any,
-  log: PropTypes.string,
 };
 
 export default Log;

@@ -3,7 +3,7 @@ import Link from 'components/base/Link/Link';
 
 import './Footer.css';
 
-function Footer() {
+const Footer: React.FC = () => {
   return (
     <footer className="footer">
       <div className="container footer__container">
@@ -23,6 +23,6 @@ function Footer() {
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;
