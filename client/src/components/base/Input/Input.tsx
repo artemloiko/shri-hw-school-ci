@@ -12,7 +12,7 @@ export type InputMods = {
 type Props = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
-  setFieldValue: (name: string, value: any) => void;
+  setFieldValue: (name: string, value: string | number) => void;
 };
 
 export type InputProps = React.HTMLProps<HTMLInputElement> & CNProps<InputMods> & Props;

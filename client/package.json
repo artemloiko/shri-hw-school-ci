@@ -34,6 +34,8 @@
     "@types/react-modal": "^3.10.5",
     "@types/react-redux": "^7.1.7",
     "@types/redux-logger": "^3.0.7",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
     "cross-env": "^7.0.2",
     "react-test-renderer": "^16.13.1",
     "redux-mock-store": "^1.5.4",
@@ -43,10 +45,22 @@
     "start": "react-scripts start",
     "build": "cross-env PUBLIC_URL=/static react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src --ext js,jsx,ts,tsx"
   },
   "eslintConfig": {
-    "extends": "react-app",
+    "extends": [
+      "react-app",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "off"
+    },
     "settings": {
       "import/resolver": {
         "node": {
