@@ -1,11 +1,11 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Link } from '@reach/router';
-import { cn, CNProps } from 'utils/bem-cn';
-import { formatTime } from 'utils/formatTime';
+import { cn, CNProps } from '../../../utils/bem-cn';
+import { formatTime } from '../../../utils/formatTime';
 import { format } from 'date-fns';
 
-import IconText from 'components/base/IconText/IconText';
+import IconText from '../../base/IconText/IconText';
 
 import './CardCiRun.css';
 import { BuildModel } from 'typings';

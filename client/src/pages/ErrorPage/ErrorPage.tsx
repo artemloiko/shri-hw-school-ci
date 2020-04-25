@@ -1,5 +1,5 @@
 import React from 'react';
-import Page from 'components/common/Page/Page';
+import Page from '../../components/common/Page/Page';
 import { RouteComponentProps } from '@reach/router';
 
 import './ErrorPage.css';

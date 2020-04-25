@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import { cn, CNProps } from 'utils/bem-cn';
+import { cn, CNProps } from '../../../utils/bem-cn';
 
 import './Modal.css';
 

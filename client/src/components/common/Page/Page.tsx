@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
 import clsx from 'clsx';
 
-import Footer from 'components/common/Footer/Footer';
-import Header from 'components/common/Header/Header';
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 
 import './Page.css';
 

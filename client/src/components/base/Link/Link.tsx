@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from '@reach/router';
-import { cn, CNProps } from 'utils/bem-cn';
+import { cn, CNProps } from '../../../utils/bem-cn';
 
 import './Link.css';
 

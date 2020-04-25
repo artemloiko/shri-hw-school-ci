@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps } from '@reach/router';
 
-import Page from 'components/common/Page/Page';
-import Loader from 'components/common/Loader/Loader';
-import ErrorModal from 'components/common/ErrorModal/ErrorModal';
-import SettingsForm from 'pages/Settings/components/SettingsForm/SettingsForm';
+import Page from '../../components/common/Page/Page';
+import Loader from '../../components/common/Loader/Loader';
+import ErrorModal from '../../components/common/ErrorModal/ErrorModal';
+import SettingsForm from './components/SettingsForm/SettingsForm';
 
-import { fetchSettingsIfNeeded, resetSettingsError } from 'actions/SettingsAction';
+import { fetchSettingsIfNeeded, resetSettingsError } from '../../actions/SettingsAction';
 import { RootState } from 'reducers';
 
 import './Settings.css';

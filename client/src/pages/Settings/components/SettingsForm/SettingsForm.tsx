@@ -2,14 +2,14 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, FormikErrors } from 'formik';
 
-import Input from 'components/base/Input/Input';
-import Button from 'components/base/Button/Button';
-import TextField from 'components/base/TextField/TextField';
-import Loader from 'components/common/Loader/Loader';
-import Form, { FormInputGroup, FormSubmitGroup } from 'components/common/Form/Form';
+import Input from '../../../../components/base/Input/Input';
+import Button from '../../../../components/base/Button/Button';
+import TextField from '../../../../components/base/TextField/TextField';
+import Loader from '../../../../components/common/Loader/Loader';
+import Form, { FormInputGroup, FormSubmitGroup } from '../../../../components/common/Form/Form';
 
-import { updateSettings, updateSettingsFail } from 'actions/SettingsAction';
-import { fetchBuildsListIfNeeded } from 'actions/BuildsAction';
+import { updateSettings, updateSettingsFail } from '../../../../actions/SettingsAction';
+import { fetchBuildsListIfNeeded } from '../../../../actions/BuildsAction';
 import { RootState } from 'reducers';
 import api from 'utils/api';
 
@@ -29,7 +29,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
     repoName: settings.repoName || '',
     buildCommand: settings.buildCommand || '',
     mainBranch: settings.mainBranch || '',
-    period: String(settings.period) || '',
+    period: settings.period ? String(settings.period) : '',
   };
 
   return (

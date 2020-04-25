@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'components/base/Button/Button';
+import Button from '../../../../components/base/Button/Button';
 
 import introImage from 'images/intro.svg';
 import './GetStarted.css';

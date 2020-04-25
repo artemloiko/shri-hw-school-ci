@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Modal, { ModalProps } from 'components/base/Modal/Modal';
-import Button from 'components/base/Button/Button';
+import Modal, { ModalProps } from '../../base/Modal/Modal';
+import Button from '../../base/Button/Button';
 
 import './ErrorModal.css';
 

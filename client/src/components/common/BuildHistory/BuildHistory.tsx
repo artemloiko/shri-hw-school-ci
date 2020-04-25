@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Button from 'components/base/Button/Button';
-import CardCiRun from 'components/common/CardCiRun/CardCiRun';
+import Button from '../../base/Button/Button';
+import CardCiRun from '../CardCiRun/CardCiRun';
 
 import './BuildHistory.css';
 import { BuildModel } from 'typings';

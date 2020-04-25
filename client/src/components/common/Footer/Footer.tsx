@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'components/base/Link/Link';
+import Link from '../../base/Link/Link';
 
 import './Footer.css';
 

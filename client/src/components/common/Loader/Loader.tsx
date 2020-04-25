@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { cn, CNProps } from 'utils/bem-cn';
+import { cn, CNProps } from '../../../utils/bem-cn';
 
 import './Loader.css';
 

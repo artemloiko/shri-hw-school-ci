@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps } from '@reach/router';
-import { fetchSettingsIfNeeded } from 'actions/SettingsAction';
-import { fetchBuildsListIfNeeded, fetchMoreBuilds } from 'actions/BuildsAction';
+import { fetchSettingsIfNeeded } from '../../actions/SettingsAction';
+import { fetchBuildsListIfNeeded, fetchMoreBuilds } from '../../actions/BuildsAction';
 import { RootState } from 'reducers';
 
-import Button from 'components/base/Button/Button';
-import Page from 'components/common/Page/Page';
-import Loader from 'components/common/Loader/Loader';
-import BuildHistory from 'components/common/BuildHistory/BuildHistory';
-import GetStarted from 'pages/Home/components/GetStarted/GetStarted';
-import BuildModal from 'pages/Home/components/BuildModal/BuildModal';
+import Button from '../../components/base/Button/Button';
+import Page from '../../components/common/Page/Page';
+import Loader from '../../components/common/Loader/Loader';
+import BuildHistory from '../../components/common/BuildHistory/BuildHistory';
+import GetStarted from './components/GetStarted/GetStarted';
+import BuildModal from './components/BuildModal/BuildModal';
 
 import './Home.css';
 

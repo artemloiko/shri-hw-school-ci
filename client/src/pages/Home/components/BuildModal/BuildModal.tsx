@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Modal from 'components/base/Modal/Modal';
-import BuildForm from 'pages/Home/components/BuildForm/BuildForm';
+import Modal from '../../../../components/base/Modal/Modal';
+import BuildForm from '../BuildForm/BuildForm';
 
 import './BuildModal.css';
 

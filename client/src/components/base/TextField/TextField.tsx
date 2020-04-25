@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn, CNProps } from 'utils/bem-cn';
+import { cn, CNProps } from '../../../utils/bem-cn';
 
 import './TextField.css';
 

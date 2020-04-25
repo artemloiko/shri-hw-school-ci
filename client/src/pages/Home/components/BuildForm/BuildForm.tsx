@@ -3,12 +3,12 @@ import { useDispatch } from 'react-redux';
 import { navigate } from '@reach/router';
 import { Formik, FormikErrors } from 'formik';
 
-import Input from 'components/base/Input/Input';
-import Button from 'components/base/Button/Button';
-import Loader from 'components/common/Loader/Loader';
-import ErrorModal from 'components/common/ErrorModal/ErrorModal';
+import Input from '../../../../components/base/Input/Input';
+import Button from '../../../../components/base/Button/Button';
+import Loader from '../../../../components/common/Loader/Loader';
+import ErrorModal from '../../../../components/common/ErrorModal/ErrorModal';
 
-import { addBuild, updateBuildsList } from 'actions/BuildsAction';
+import { addBuild, updateBuildsList } from '../../../../actions/BuildsAction';
 
 import './BuildForm.css';
 

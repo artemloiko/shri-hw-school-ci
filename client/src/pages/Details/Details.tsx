@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { navigate, RouteComponentProps } from '@reach/router';
 
-import Button from 'components/base/Button/Button';
-import Log from 'components/common/Log/Log';
-import Page from 'components/common/Page/Page';
-import Loader from 'components/common/Loader/Loader';
-import CardCiRun from 'components/common/CardCiRun/CardCiRun';
-import ErrorModal from 'components/common/ErrorModal/ErrorModal';
+import Button from '../../components/base/Button/Button';
+import Log from '../../components/common/Log/Log';
+import Page from '../../components/common/Page/Page';
+import Loader from '../../components/common/Loader/Loader';
+import CardCiRun from '../../components/common/CardCiRun/CardCiRun';
+import ErrorModal from '../../components/common/ErrorModal/ErrorModal';
 
-import { getBuildDetails } from 'actions/BuildsDetailsAction';
-import { updateBuildsList, addBuild } from 'actions/BuildsAction';
+import { getBuildDetails } from '../../actions/BuildsDetailsAction';
+import { updateBuildsList, addBuild } from '../../actions/BuildsAction';
 import { RootState } from 'reducers';
 
 import './Details.css';

@@ -1,7 +1,7 @@
 import React from 'react';
-import { cn, CNProps } from 'utils/bem-cn';
+import { cn, CNProps } from '../../../utils/bem-cn';
 
-import Icon, { IconTypes } from 'components/base/Icon/Icon';
+import Icon, { IconTypes } from '../Icon/Icon';
 
 import './IconText.css';
 
