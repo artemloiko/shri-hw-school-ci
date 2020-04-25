@@ -71,7 +71,7 @@ const CardCiRun: React.FC<CardCiRunProps> = (props) => {
             iconType="calendar"
             text={format(new Date(start), 'dd LLL, kk:mm')}
           ></IconText>
-          {duration && (
+          {typeof duration === 'number' && (
             <IconText
               className="card-ci-run__meta-elem"
               iconType="stopwatch"
