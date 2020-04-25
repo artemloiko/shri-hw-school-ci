@@ -68,7 +68,7 @@ const getBuildLog = async (
   const { commitHash } = req.params;
   try {
     const data = await buildsService.getBuildLog(commitHash);
-    return res.json(data);
+    return res.json({ data });
   } catch (err) {
     logResponseError('Error /api/builds/:commitHash/logs GET', err);
     next(err);

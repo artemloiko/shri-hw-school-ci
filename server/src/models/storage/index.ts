@@ -45,9 +45,7 @@ export class Storage {
   }
 
   async getBuildLog(buildId: string) {
-    const response = await this.axiosInstance.get<StorageResponce<string>>(
-      `/build/log?buildId=${buildId}`,
-    );
+    const response = await this.axiosInstance.get<string>(`/build/log?buildId=${buildId}`);
     return response.data;
   }
 
