@@ -6,10 +6,6 @@ dist
 .vscode
 .env
 
-#configs
-server-conf.json
-agent-conf.json
-
 #node.js server temp fodlers
 repo
 temp

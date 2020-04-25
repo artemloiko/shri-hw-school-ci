@@ -10,6 +10,7 @@
 cd $dir && npm ci #dirs = [server, agent]
 ```
 
+В корневом [README.md](../README.md) описан запуск клиент и клиент-сервера.  
 Для разработки используется nodemon
 
 ```bash
@@ -25,20 +26,22 @@ npm i
 npm run lint # запустить линтера для всего проекта билдера
 ```
 
-Конфигурация билд-сервера
+Конфигурация билд-сервера. Примеры конфигурации уже созданы, нужно только подставить свой токен (API_TOKEN).  
+Токен можно получить здесь -> https://hw.shri.yandex/  
+Нужно будет войти через гитхаб
 
 ```js
 // файл server/server-conf.json
 {
-    "port": 12345,
+    "port": 8080,
     "apiBaseUrl": "https://hw.shri.yandex/api/",
-    "apiToken": "asdfgh"
+    "apiToken": "API_TOKEN"
 }
 
 // либо передать переменные окружения
-PORT=12345
+PORT=8080
 API_BASE_URL="https://hw.shri.yandex/api/"
-API_TOKEN="asdfgh"
+API_TOKEN="API_TOKEN"
 ```
 
 Конфигурация билд-агента
@@ -46,13 +49,13 @@ API_TOKEN="asdfgh"
 ```js
 // файл agent/agent-conf.json
 {
-    "port": 12345,
+    "port": 5050,
     "serverHost": "127.0.0.1",
     "serverPort": 8080
 }
 
 // либо передать переменные окружения
-PORT=12345
+PORT=5050
 SERVER_HOST="127.0.0.1"
 SERVER_PORT=8080
 ```
