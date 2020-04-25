@@ -12,7 +12,8 @@ export type LoaderProps = {
   children: ReactElement | ReactElement[];
   isLoading: boolean;
   showContent?: boolean;
-} & CNProps<LoaderMods>;
+} & CNProps<LoaderMods> &
+  React.HTMLProps<HTMLDivElement>;
 
 const Loader: React.FC<LoaderProps> = (props) => {
   const { children, isLoading, showContent, ...loaderProps } = props;

@@ -1,12 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Modal from 'components/base/Modal/Modal';
 import BuildForm from 'pages/Home/components/BuildForm/BuildForm';
 
 import './BuildModal.css';
 
-function BuildModal(props) {
+type BuildModalProps = {
+  isOpen: boolean;
+  closeModal: () => void;
+};
+
+const BuildModal: React.FC<BuildModalProps> = (props) => {
   const { closeModal, isOpen } = props;
 
   return (
@@ -23,11 +27,6 @@ function BuildModal(props) {
       <BuildForm closeModal={closeModal} />
     </Modal>
   );
-}
-
-BuildModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  closeModal: PropTypes.func,
 };
 
 export default BuildModal;

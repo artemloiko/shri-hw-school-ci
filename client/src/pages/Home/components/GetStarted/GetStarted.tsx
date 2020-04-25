@@ -4,7 +4,7 @@ import Button from 'components/base/Button/Button';
 import introImage from 'images/intro.svg';
 import './GetStarted.css';
 
-function GetStarted() {
+const GetStarted: React.FC<{}> = () => {
   return (
     <div className="get-started">
       <img src={introImage} alt="Configure settings" className="get-started__image" />
@@ -18,6 +18,6 @@ function GetStarted() {
       </Button>
     </div>
   );
-}
+};
 
 export default GetStarted;

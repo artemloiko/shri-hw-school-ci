@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { navigate } from '@reach/router';
+import { navigate, RouteComponentProps } from '@reach/router';
 
 import Button from 'components/base/Button/Button';
 import Log from 'components/common/Log/Log';
@@ -12,29 +11,33 @@ import ErrorModal from 'components/common/ErrorModal/ErrorModal';
 
 import { getBuildDetails } from 'actions/BuildsDetailsAction';
 import { updateBuildsList, addBuild } from 'actions/BuildsAction';
+import { RootState } from 'reducers';
 
 import './Details.css';
 
-function Details(props) {
+export interface DetailsProps extends RouteComponentProps {
+  buildId?: string;
+}
+
+const Details: React.FC<DetailsProps> = (props) => {
   const dispatch = useDispatch();
-  const { buildId } = props;
+  const { buildId = '' } = props;
 
   useEffect(() => {
     dispatch(getBuildDetails(buildId));
   }, [buildId, dispatch]);
 
-  const currentBuild = useSelector((state) => state.buildsDetails[buildId]);
-  const settings = useSelector((state) => state.settings);
+  const currentBuild = useSelector((state: RootState) => state.buildsDetails[buildId]);
+  const settings = useSelector((state: RootState) => state.settings);
 
   const [isRebuildSubmitting, setIsRebuildSubmitting] = useState(false);
-  const [rebuildError, setRebuildError] = useState();
+  const [rebuildError, setRebuildError] = useState<string>('');
 
   const handleRebuild = async () => {
-    const commitHash = currentBuild?.details?.commitHash;
-    if (!commitHash) return;
+    if (!currentBuild?.details?.data?.commitHash) return;
     try {
       setIsRebuildSubmitting(true);
-      const data = await addBuild(currentBuild.details.commitHash);
+      const data = await addBuild(currentBuild.details.data.commitHash);
       dispatch(updateBuildsList(data));
       navigate(`/details/${data.id}`);
     } catch (error) {
@@ -75,8 +78,8 @@ function Details(props) {
     >
       <Loader isLoading={isDetailsLoading} mods={{ animate: true }}>
         <div className="container container_shrink">
-          {currentBuild?.details && (
-            <CardCiRun mods={{ details: true }} buildInfo={currentBuild.details}></CardCiRun>
+          {currentBuild?.details?.data && (
+            <CardCiRun mods={{ details: true }} buildInfo={currentBuild.details.data}></CardCiRun>
           )}
         </div>
         <Loader isLoading={isLogsLoading} mods={{ static: true }}>
@@ -85,16 +88,12 @@ function Details(props) {
       </Loader>
 
       <ErrorModal
-        closeModal={() => setRebuildError()}
+        closeModal={() => setRebuildError('')}
         isOpen={Boolean(rebuildError)}
         errorMessage={rebuildError}
       ></ErrorModal>
     </Page>
   );
-}
-
-Details.propTypes = {
-  buildId: PropTypes.string,
 };
 
 export default Details;

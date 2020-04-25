@@ -1,9 +1,15 @@
 import React from 'react';
 import Page from 'components/common/Page/Page';
+import { RouteComponentProps } from '@reach/router';
 
 import './ErrorPage.css';
 
-function ErrorPage(props) {
+export interface ErrorPageProps extends RouteComponentProps {
+  errorHeading?: string;
+  errorText?: string;
+}
+
+const ErrorPage: React.FC<ErrorPageProps> = (props) => {
   const { errorHeading = '404', errorText = 'Not found' } = props;
 
   return (
@@ -14,6 +20,6 @@ function ErrorPage(props) {
       </div>
     </Page>
   );
-}
+};
 
 export default ErrorPage;

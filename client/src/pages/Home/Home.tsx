@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { RouteComponentProps } from '@reach/router';
 import { fetchSettingsIfNeeded } from 'actions/SettingsAction';
 import { fetchBuildsListIfNeeded, fetchMoreBuilds } from 'actions/BuildsAction';
+import { RootState } from 'reducers';
 
 import Button from 'components/base/Button/Button';
 import Page from 'components/common/Page/Page';
@@ -12,9 +14,9 @@ import BuildModal from 'pages/Home/components/BuildModal/BuildModal';
 
 import './Home.css';
 
-function Home(props) {
-  const settings = useSelector((state) => state.settings);
-  const builds = useSelector((state) => state.builds);
+const Home: React.FC<RouteComponentProps> = () => {
+  const settings = useSelector((state: RootState) => state.settings);
+  const builds = useSelector((state: RootState) => state.builds);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -86,6 +88,6 @@ function Home(props) {
       <BuildModal isOpen={buildModalOpen} closeModal={handleBuildModalClose}></BuildModal>
     </Page>
   );
-}
+};
 
 export default Home;

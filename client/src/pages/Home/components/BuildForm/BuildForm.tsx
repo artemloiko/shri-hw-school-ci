@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { navigate } from '@reach/router';
-import { Formik } from 'formik';
+import { Formik, FormikErrors } from 'formik';
 
 import Input from 'components/base/Input/Input';
 import Button from 'components/base/Button/Button';
@@ -13,22 +12,38 @@ import { addBuild, updateBuildsList } from 'actions/BuildsAction';
 
 import './BuildForm.css';
 
-function BuildForm(props) {
-  const { closeModal, className } = props;
+interface BuildFormValues {
+  commitHash: string;
+}
+
+interface ModalErrorState {
+  isOpen: boolean;
+  message?: string;
+}
+
+type BuildFormProps = {
+  closeModal: () => void;
+  className?: string;
+};
+
+const BuildForm: React.FC<BuildFormProps> = (props) => {
+  const { closeModal, className = '' } = props;
 
   const dispatch = useDispatch();
-  const [error, setError] = useState({ isOpen: false });
+  const [error, setError] = useState<ModalErrorState>({ isOpen: false });
+
+  const initialValues: BuildFormValues = {
+    commitHash: '',
+  };
 
   return (
     <>
       <Formik
-        initialValues={{
-          commitHash: '',
-        }}
+        initialValues={initialValues}
         validate={(values) => {
-          const errors = {};
+          const errors: FormikErrors<BuildFormValues> = {};
           if (!values.commitHash) {
-            errors.period = 'Commit hash is required';
+            errors.commitHash = 'Commit hash is required';
           }
           return errors;
         }}
@@ -89,11 +104,6 @@ function BuildForm(props) {
       ></ErrorModal>
     </>
   );
-}
-
-BuildForm.propTypes = {
-  closeModal: PropTypes.func,
-  className: PropTypes.string,
 };
 
 export default BuildForm;

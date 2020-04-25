@@ -12,6 +12,7 @@ import { ConfigurationModel } from 'typings';
 export interface SettingsState extends Partial<ConfigurationModel> {
   isFetching: boolean;
   isLoaded: boolean;
+  error?: string;
 }
 
 export const initialState: SettingsState = {

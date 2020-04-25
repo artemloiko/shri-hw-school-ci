@@ -16,10 +16,11 @@ interface Logs {
   log?: string;
   error?: string;
 }
-interface Details extends Partial<BuildModel> {
+interface Details {
   isFetching: boolean;
   isLoaded: boolean;
   error?: string;
+  data?: BuildModel;
 }
 
 export interface BuildDetailsState {
@@ -61,7 +62,11 @@ export function buildsDetailsReducer(state = initialState, action: BuildDetailsA
     case GET_BUILD_DETAILS_REQUEST:
       return updateStateWithDetails({ isFetching: false, isLoaded: false });
     case GET_BUILD_DETAILS_SUCCESS:
-      return updateStateWithDetails({ ...action.payload.data, isFetching: false, isLoaded: true });
+      return updateStateWithDetails({
+        data: action.payload.data,
+        isFetching: false,
+        isLoaded: true,
+      });
     case GET_BUILD_DETAILS_FAIL:
       return updateStateWithDetails({
         error: action.payload.error,

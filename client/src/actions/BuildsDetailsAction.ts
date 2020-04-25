@@ -114,7 +114,7 @@ function fetchBuildLogsIfNeeded(
       return;
     }
 
-    if (details.status === 'Waiting' || details.status === 'InProgress') {
+    if (details?.data?.status === 'Waiting' || details?.data?.status === 'InProgress') {
       dispatch(getBuildLogsSuccess(buildId, ''));
       return;
     }

@@ -3,7 +3,9 @@ import { cn, CNProps } from 'utils/bem-cn';
 
 import './Form.css';
 
-const Form: React.FC<CNProps> = (props) => {
+export type FormProps = CNProps & React.PropsWithoutRef<JSX.IntrinsicElements['form']>;
+
+const Form: React.FC<FormProps> = (props) => {
   const { children } = props;
   return (
     <form {...props} className={cn('form', props)}>

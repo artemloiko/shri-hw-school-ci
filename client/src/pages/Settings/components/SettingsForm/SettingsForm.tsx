@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { Formik } from 'formik';
+import { Formik, FormikErrors } from 'formik';
 
 import Input from 'components/base/Input/Input';
 import Button from 'components/base/Button/Button';
@@ -11,23 +10,38 @@ import Form, { FormInputGroup, FormSubmitGroup } from 'components/common/Form/Fo
 
 import { updateSettings, updateSettingsFail } from 'actions/SettingsAction';
 import { fetchBuildsListIfNeeded } from 'actions/BuildsAction';
+import { RootState } from 'reducers';
 import api from 'utils/api';
 
-function SettingsForm(props) {
-  const settings = useSelector((state) => state.settings);
+type SettingsFormProps = React.ComponentProps<typeof Form>;
+
+interface SettingsFormValues {
+  repoName: string;
+  buildCommand: string;
+  mainBranch: string;
+  period: string;
+}
+
+const SettingsForm: React.FC<SettingsFormProps> = (props) => {
+  const settings = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch();
+  const initialValues: SettingsFormValues = {
+    repoName: settings.repoName || '',
+    buildCommand: settings.buildCommand || '',
+    mainBranch: settings.mainBranch || '',
+    period: String(settings.period) || '',
+  };
 
   return (
     <Formik
-      initialValues={{
-        repoName: settings.repoName || '',
-        buildCommand: settings.buildCommand || '',
-        mainBranch: settings.mainBranch || '',
-        period: settings.period || '',
-      }}
+      initialValues={initialValues}
       validate={(values) => {
-        const errors = {};
-        const requiredFields = ['repoName', 'buildCommand', 'mainBranch'];
+        const errors: FormikErrors<SettingsFormValues> = {};
+        const requiredFields: (keyof SettingsFormValues)[] = [
+          'repoName',
+          'buildCommand',
+          'mainBranch',
+        ];
         const requiredFieldsLabels = ['Repository name', 'Build Command', 'Main branch'];
         requiredFields.forEach((field, i) => {
           if (!values[field]) errors[field] = `${requiredFieldsLabels[i]} is required`;
@@ -43,7 +57,7 @@ function SettingsForm(props) {
         try {
           await api.setSettings(settingsDTO);
           dispatch(updateSettings(settingsDTO));
-          dispatch(fetchBuildsListIfNeeded(true));
+          dispatch(fetchBuildsListIfNeeded());
         } catch (err) {
           const { response } = err;
           const error = response?.data?.error || err;
@@ -173,11 +187,6 @@ function SettingsForm(props) {
       }}
     </Formik>
   );
-}
-
-SettingsForm.propTypes = {
-  className: PropTypes.string,
-  settings: PropTypes.object,
 };
 
 export default SettingsForm;
