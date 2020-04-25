@@ -1,9 +1,7 @@
 import { Express, NextFunction, Request, Response } from 'express';
 import apiRoutes from './api';
 import { HttpError } from 'src/utils/customErrors';
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
-import { clientSSR } from '../../../client/server/index.js';
+import clientSSR from './clientSSR';
 
 const init = (server: Express): void => {
   server.use('/api', apiRoutes);
