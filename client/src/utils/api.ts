@@ -44,10 +44,16 @@ class API {
     const response = await this.axiosInstance.get<StorageResponce<string>>(
       `/builds/${buildId}/logs`,
     );
-    return response.data;
+    return response.data.data;
   }
 }
 
 const ApiInstance = new API(axiosAPI);
+
+export interface HttpError {
+  errorCode: string;
+  message: string;
+  status: number;
+}
 
 export default ApiInstance;

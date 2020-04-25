@@ -7,3 +7,5 @@ export const rootReducer = combineReducers({
   settings: settingsReducer,
   buildsDetails: buildsDetailsReducer,
 });
+
+export type RootState = ReturnType<typeof rootReducer>;

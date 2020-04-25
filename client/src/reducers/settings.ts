@@ -5,14 +5,21 @@ import {
   SET_SETTINGS,
   SET_SETTINGS_FAIL,
   RESET_SETTINGS_ERROR,
+  SettingsActions,
 } from '../actions/SettingsAction';
+import { ConfigurationModel } from 'typings';
 
-export const initialState = {
+export interface SettingsState extends Partial<ConfigurationModel> {
+  isFetching: boolean;
+  isLoaded: boolean;
+}
+
+export const initialState: SettingsState = {
   isFetching: false,
   isLoaded: false,
 };
 
-export function settingsReducer(state = initialState, action) {
+export function settingsReducer(state = initialState, action: SettingsActions) {
   switch (action.type) {
     case GET_SETTINGS_REQUEST:
       return { ...state, isFetching: true };
