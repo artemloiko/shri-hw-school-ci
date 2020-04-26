@@ -1,7 +1,6 @@
 import { mocked } from 'ts-jest/utils';
 import BuildsService from '../../services/buildsService';
 import GitService from '../../services/gitService';
-import { buildQueue } from '../../models/buildQueue';
 import storage from '../../models/storage';
 
 const storageMock = mocked(storage);
@@ -22,8 +21,7 @@ describe('Builds Service', () => {
   beforeEach(() => {
     mocked(GitService).mockClear();
     storageMock.getBuildsList.mockClear();
-    // @ts-ignore
-    buildsService = new BuildsService(storageMock);
+    buildsService = new BuildsService(storage);
   });
 
   test('getBuildsList is proxied to storage with default params', async () => {
@@ -48,19 +46,5 @@ describe('Builds Service', () => {
     await buildsService.getBuildLog(buildId);
 
     expect(storageMock.getBuildLog).toHaveBeenCalledWith(buildId);
-  });
-
-  test('addToBuildQueue adds commit to queue and storage', async () => {
-    const commitHash = '94dc970';
-    storageMock.buildInit = jest.fn().mockResolvedValue({ data: { id: buildId } });
-    mocked(GitService).mockImplementationOnce(() => ({
-      // @ts-ignore
-      getCommitDetails: () => {},
-    }));
-
-    await buildsService.addToBuildQueue(commitHash);
-
-    expect(storageMock.buildInit).toHaveBeenCalled();
-    expect(buildQueue.enqueue).toHaveBeenCalledWith({ commitHash, buildId });
   });
 });

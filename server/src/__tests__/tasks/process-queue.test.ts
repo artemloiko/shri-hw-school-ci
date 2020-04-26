@@ -1,6 +1,7 @@
 import { buildQueueRunProcessing } from '../../tasks/process-queue';
 import { buildQueue } from '../../models/buildQueue';
 import storage from '../../models/storage';
+import { mocked } from 'ts-jest/utils';
 
 jest.mock('../../tasks/process-queue/builder', () => ({
   builder: jest.fn().mockResolvedValue({
@@ -33,14 +34,14 @@ describe('Build Queue Processing', () => {
 
   afterEach(() => {
     jest.clearAllTimers();
-    // @ts-ignore
-    buildQueue.front.mockReset();
-    // @ts-ignore
-    buildQueue.dequeue.mockReset();
-    // @ts-ignore
-    storage.buildStart.mockClear();
-    // @ts-ignore
-    storage.buildFinish.mockClear();
+
+    mocked(buildQueue.front).mockReset();
+
+    mocked(buildQueue.dequeue).mockReset();
+
+    mocked(storage.buildStart).mockClear();
+
+    mocked(storage.buildFinish).mockClear();
   });
 
   test('Creates setInterval for checking queue if no elements in queue are present', () => {
@@ -59,8 +60,8 @@ describe('Build Queue Processing', () => {
 
   test('Clears interval on queue element adding', () => {
     buildQueueRunProcessing();
-    // @ts-ignore
-    buildQueue.front.mockImplementationOnce(() => queueElem);
+
+    mocked(buildQueue.front).mockImplementationOnce(() => queueElem);
     jest.runOnlyPendingTimers();
 
     expect(clearInterval).toHaveBeenCalled();
@@ -68,16 +69,15 @@ describe('Build Queue Processing', () => {
 
   test('Runs processing on queue element adding', () => {
     buildQueueRunProcessing();
-    // @ts-ignore
-    buildQueue.front.mockImplementation(() => queueElem);
+
+    mocked(buildQueue.front).mockImplementation(() => queueElem);
     jest.runOnlyPendingTimers();
 
     expect(storage.buildStart).toHaveBeenCalled();
   });
 
   test('Add waiting interval after processing all items in queue', async () => {
-    // @ts-ignore
-    buildQueue.front.mockImplementationOnce(() => queueElem);
+    mocked(buildQueue.front).mockImplementationOnce(() => queueElem);
 
     await buildQueueRunProcessing();
 
@@ -86,8 +86,8 @@ describe('Build Queue Processing', () => {
 
   test('Saves build info to storage (buildStart, buildFinish)', async () => {
     expect(buildQueue.front()).toBeUndefined();
-    // @ts-ignore
-    buildQueue.front.mockImplementationOnce(() => queueElem);
+
+    mocked(buildQueue.front).mockImplementationOnce(() => queueElem);
 
     await buildQueueRunProcessing();
 
@@ -96,8 +96,7 @@ describe('Build Queue Processing', () => {
   });
 
   test('Dequeues element in the end of the build', async () => {
-    // @ts-ignore
-    buildQueue.front.mockImplementationOnce(() => queueElem);
+    mocked(buildQueue.front).mockImplementationOnce(() => queueElem);
 
     await buildQueueRunProcessing();
 
@@ -105,8 +104,7 @@ describe('Build Queue Processing', () => {
   });
 
   test('Process all elements in queue', async () => {
-    buildQueue.front
-      // @ts-ignore
+    mocked(buildQueue.front)
       .mockImplementationOnce(() => queueElem)
       .mockImplementationOnce(() => queueElem)
       .mockImplementationOnce(() => queueElem)

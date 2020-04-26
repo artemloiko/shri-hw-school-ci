@@ -43,7 +43,7 @@ export default class SettingsService {
     }
   }
 
-  private async checkIfCommitIsBuilt(commitHash: string) {
+  async checkIfCommitIsBuilt(commitHash: string) {
     try {
       const { data: buildList } = await this.storage.getBuildsList();
       return buildList.some((build: BuildModel) => build.commitHash === commitHash);

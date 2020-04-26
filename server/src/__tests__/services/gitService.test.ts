@@ -1,4 +1,5 @@
 import GitService from '../../services/gitService';
+import { mocked } from 'ts-jest/utils';
 
 const gitService = new GitService();
 
@@ -11,8 +12,7 @@ beforeAll(() => {
 });
 
 afterAll(() => {
-  // @ts-ignore
-  global.console.error.mockRestore();
+  mocked(global.console.error).mockRestore();
 });
 
 describe('Git Service', () => {
