@@ -1,6 +1,11 @@
 import { formatTime } from '../../utils/formatTime';
 
 describe('formatTime', () => {
+  test('returns formated duration with only seconds', () => {
+    const duration = formatTime(30);
+
+    expect(duration).toBe('30 sec');
+  });
   test('returns formated duration with only minutes', () => {
     const duration = formatTime(600);
 

@@ -23,7 +23,7 @@ exports[`Input with all possible props matches the snapshot 1`] = `
     onClick={[Function]}
     onKeyDown={[Function]}
     role="button"
-    tabIndex="0"
+    tabIndex={0}
   />
 </div>
 `;

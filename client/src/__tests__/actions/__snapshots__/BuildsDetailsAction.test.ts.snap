@@ -17,9 +17,7 @@ Array [
   Object {
     "error": true,
     "payload": Object {
-      "error": Object {
-        "message": "Request failed with status code 500",
-      },
+      "error": "Request failed with status code 500",
       "id": "30c10a6a-087e-4a6b-aed8-8a809169a305",
     },
     "type": "GET_BUILD_DETAILS_FAIL",
@@ -27,9 +25,7 @@ Array [
   Object {
     "error": true,
     "payload": Object {
-      "error": Object {
-        "message": "Request failed with status code 500",
-      },
+      "error": "Request failed with status code 500",
       "id": "30c10a6a-087e-4a6b-aed8-8a809169a305",
     },
     "type": "GET_BUILD_LOGS_FAIL",

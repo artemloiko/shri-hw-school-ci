@@ -15,9 +15,10 @@ test('Input with all possible props matches the snapshot', () => {
       required
       pattern="\w{7,}"
       title="Hash 7 letters/numbers"
-      onChange={() => {}}
-      onBlur={() => {}}
-      setFieldValue={() => {}}
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      onChange={(): void => {}}
+      onBlur={(): void => {}}
+      setFieldValue={(): void => {}}
       className="block"
       mods={{ clear: true, fullwidth: true }}
       mix={['block']}
@@ -34,8 +35,8 @@ test('Input is trimming value on blur via setFieldValue call', () => {
       id="commitHash"
       name="commitHash"
       placeholder="Commit hash"
-      onChange={() => {}}
-      onBlur={() => {}}
+      onChange={(): void => {}}
+      onBlur={(): void => {}}
       setFieldValue={setFieldValueMock}
       mods={{ clear: true }}
       data-testid="input"
@@ -51,9 +52,9 @@ describe('Input clear button', () => {
   test('is avaible for focus', () => {
     const { getByRole } = render(
       <Input
-        onChange={() => {}}
-        onBlur={() => {}}
-        setFieldValue={() => {}}
+        onChange={(): void => {}}
+        onBlur={(): void => {}}
+        setFieldValue={(): void => {}}
         mods={{ clear: true }}
       />,
     );
@@ -67,8 +68,8 @@ describe('Input clear button', () => {
     const { getByRole } = render(
       <Input
         name="input"
-        onChange={() => {}}
-        onBlur={() => {}}
+        onChange={(): void => {}}
+        onBlur={(): void => {}}
         setFieldValue={setFieldValueMock}
         mods={{ clear: true }}
       />,
@@ -85,8 +86,8 @@ describe('Input clear button', () => {
     const { getByRole } = render(
       <Input
         name="input"
-        onChange={() => {}}
-        onBlur={() => {}}
+        onChange={(): void => {}}
+        onBlur={(): void => {}}
         setFieldValue={setFieldValueMock}
         mods={{ clear: true }}
       />,
@@ -104,9 +105,9 @@ describe('Input clear button', () => {
     const { getByRole, getByPlaceholderText } = render(
       <Input
         placeholder="input"
-        onChange={() => {}}
-        onBlur={() => {}}
-        setFieldValue={() => {}}
+        onChange={(): void => {}}
+        onBlur={(): void => {}}
+        setFieldValue={(): void => {}}
         mods={{ clear: true }}
       />,
     );

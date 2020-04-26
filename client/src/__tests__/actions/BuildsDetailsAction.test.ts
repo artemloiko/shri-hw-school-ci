@@ -1,9 +1,11 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import { mocked } from 'ts-jest/utils';
 import { getBuildDetails } from '../../actions/BuildsDetailsAction';
 import apiMock from '../../utils/api';
+import { BuildModel } from 'typings';
 
-jest.mock('../../utils/api.js');
+jest.mock('../../utils/api');
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -17,18 +19,11 @@ const initialState = {
     },
   },
 };
-let store = null;
 
 describe('builds details actions', () => {
-  beforeEach(() => {
-    store = mockStore(initialState);
-  });
-  afterEach(() => {
-    store = null;
-  });
-
   test('fetching builds details success', async () => {
-    const details = {
+    const store = mockStore(initialState);
+    const details: BuildModel = {
       id: buildId,
       configurationId: 'e4a75284-3cbb-4676-8db6-4e3012958328',
       buildNumber: 1,
@@ -41,22 +36,23 @@ describe('builds details actions', () => {
       duration: 3254,
     };
     const logs = '\u001b[32mCompiled successfully.\u001b[39m\u001b[32m\u001b[39m';
-    apiMock.getBuildDetails.mockImplementationOnce(() => Promise.resolve(details));
-    apiMock.getBuildLog.mockImplementationOnce(() => Promise.resolve(logs));
+    mocked(apiMock.getBuildDetails).mockImplementationOnce(() => Promise.resolve(details));
+    mocked(apiMock.getBuildLog).mockImplementationOnce(() => Promise.resolve(logs));
 
-    await store.dispatch(getBuildDetails(buildId));
+    await store.dispatch<any>(getBuildDetails(buildId));
 
     expect(store.getActions()).toMatchSnapshot();
   });
 
   test('fetching builds details fail', async () => {
+    const store = mockStore(initialState);
     const error = {
       message: 'Request failed with status code 500',
     };
-    apiMock.getBuildDetails.mockImplementationOnce(() => Promise.reject(error));
-    apiMock.getBuildLog.mockImplementationOnce(() => Promise.reject(error));
+    mocked(apiMock.getBuildDetails).mockImplementationOnce(() => Promise.reject(error));
+    mocked(apiMock.getBuildLog).mockImplementationOnce(() => Promise.reject(error));
 
-    await store.dispatch(getBuildDetails(buildId));
+    await store.dispatch<any>(getBuildDetails(buildId));
 
     expect(store.getActions()).toMatchSnapshot();
   });

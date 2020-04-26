@@ -56,10 +56,8 @@ Array [
 exports[`settings actions update settings error 1`] = `
 Array [
   Object {
-    "payload": Object {
-      "errorCode": "GIT_CANNOT_FIND_REPO",
-      "message": "Cannot find artuom130/shri-hw-asyncs repository",
-    },
+    "error": true,
+    "payload": "Cannot find artuom130/shri-hw-asyncs repository",
     "type": "SET_SETTINGS_FAIL",
   },
 ]
