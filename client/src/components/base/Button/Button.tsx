@@ -6,7 +6,7 @@ import Icon, { IconTypes } from '../Icon/Icon';
 
 import './Button.css';
 
-export type ButtonMods = {
+type ButtonMods = {
   size?: 'small';
   icon?: boolean;
   action?: boolean;
@@ -15,48 +15,38 @@ export type ButtonMods = {
   disabled?: boolean;
 };
 
-export interface ButtonProps {
-  type?: 'submit' | 'reset' | 'button' | undefined;
-  to?: string;
+type ButtonCommonProps = {
   children: string;
   iconType?: IconTypes;
-  onClick?: (ev: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
-}
+} & CNProps<ButtonMods>;
 
-const Button: React.HTMLProps<HTMLButtonElement> & React.FC<ButtonProps & CNProps<ButtonMods>> = (
-  props,
-) => {
-  const {
-    type = 'button',
-    to = '',
-    children,
-    iconType,
-    mods = {},
-    className,
-    mix,
-    ...buttonProps
-  } = props;
+type ButtonDefaultProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+type ButtonLinkProps = { to: string; replace?: boolean } & React.HTMLAttributes<HTMLAnchorElement>;
+type ComponentProps = ButtonDefaultProps | ButtonLinkProps;
+
+type ButtonProps = ButtonCommonProps & ComponentProps;
+
+const Button: React.FC<ButtonProps> = (props) => {
+  const { children, iconType, mods = {}, className, mix, ...restProps } = props;
+  const componentProps = restProps as ComponentProps;
   if (iconType) mods.icon = true;
 
-  return to ? (
-    <Link
-      {...buttonProps}
-      to={to}
-      className={cn('button', { className, mods, mix })}
-      tabIndex={mods.disabled ? -1 : 0}
-    >
+  const buttonClass = cn('button', { className, mods, mix });
+  const buttonContent = (
+    <>
       {iconType && <Icon mods={{ size: 'small', type: iconType }} mix={['button']} />}
       <div className="button__text">{children}</div>
+    </>
+  );
+
+  // type guard to pass correct props to component
+  return 'to' in componentProps ? (
+    <Link {...componentProps} className={buttonClass} tabIndex={mods.disabled ? -1 : 0}>
+      {buttonContent}
     </Link>
   ) : (
-    <button
-      {...buttonProps}
-      type={type}
-      className={cn('button', { className, mods, mix })}
-      disabled={mods.disabled}
-    >
-      {iconType && <Icon mods={{ size: 'small', type: iconType }} mix={['button']} />}
-      <div className="button__text">{children}</div>
+    <button {...componentProps} className={buttonClass} disabled={mods.disabled}>
+      {buttonContent}
     </button>
   );
 };

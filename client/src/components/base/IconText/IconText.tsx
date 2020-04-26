@@ -5,17 +5,18 @@ import Icon, { IconTypes } from '../Icon/Icon';
 
 import './IconText.css';
 
-export type IconTextProps = CNProps & {
+type IconTextProps = {
   iconType: IconTypes;
   text: string;
   secondaryText?: string;
-};
+} & CNProps &
+  React.HTMLAttributes<HTMLDivElement>;
 
 const IconText: React.FC<IconTextProps> = (props) => {
-  const { iconType, text, secondaryText } = props;
+  const { iconType, text, secondaryText, mods, className, mix, ...restProps } = props;
 
   return (
-    <div className={cn('icon-text', props)}>
+    <div {...restProps} className={cn('icon-text', { mods, className, mix })}>
       <Icon mods={{ type: iconType }} mix={['icon-text']} />
       <div className="icon-text__text">{text}</div>
       {secondaryText && (

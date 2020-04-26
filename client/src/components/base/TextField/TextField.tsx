@@ -9,17 +9,18 @@ type TextFieldMods = {
 };
 
 type Props = {
+  label: string;
   appendText?: string;
 };
 
-export type TextFieldProps = Props & React.HTMLProps<HTMLLabelElement> & CNProps<TextFieldMods>;
+type TextFieldProps = Props & CNProps<TextFieldMods> & React.LabelHTMLAttributes<HTMLLabelElement>;
 
 const TextField: React.FC<TextFieldProps> = (props) => {
-  const { htmlFor, label, children, appendText } = props;
+  const { htmlFor, label, children, appendText, mods, className, mix, ...restProps } = props;
 
   return (
-    <div className={cn('textfield', props)}>
-      <label className="textfield__label" htmlFor={htmlFor}>
+    <div className={cn('textfield', { mods, className, mix })}>
+      <label {...restProps} className="textfield__label" htmlFor={htmlFor}>
         {label}
       </label>
       {children}

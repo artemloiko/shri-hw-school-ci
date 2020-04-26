@@ -4,13 +4,18 @@ import { cn, CNProps } from '../../../utils/bem-cn';
 
 import './Link.css';
 
-export type LinkProps = { to?: string; children: ReactNode } & CNProps;
+type LinkProps = {
+  to: string;
+  replace?: boolean;
+  children: ReactNode;
+} & CNProps &
+  React.HTMLAttributes<HTMLAnchorElement>;
 
 const Link: React.FC<LinkProps> = (props) => {
-  const { to = '', children } = props;
+  const { children, to, mods, className, mix, ...restProps } = props;
 
   return (
-    <RouterLink to={to} className={cn('link', props)}>
+    <RouterLink {...restProps} to={to} className={cn('link', { mods, className, mix })}>
       {children}
     </RouterLink>
   );

@@ -17,10 +17,12 @@ type IconModsType = {
   type: IconTypes;
 };
 
-export type IconProps = CNProps<IconModsType>;
+type IconProps = CNProps<IconModsType> & React.HTMLAttributes<HTMLDivElement>;
 
 const Icon: React.FC<IconProps> = (props) => {
-  return <div className={cn('icon', props)}></div>;
+  const { mods, className, mix, ...restProps } = props;
+
+  return <div {...restProps} className={cn('icon', { mods, className, mix })}></div>;
 };
 
 export default Icon;
