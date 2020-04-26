@@ -3,10 +3,10 @@ import { Link } from '@reach/router';
 
 import './Header.css';
 
-export interface HeaderProps {
+type HeaderProps = {
   text?: string;
   controls?: ReactElement | ReactElement[];
-}
+};
 
 const Header: React.FC<HeaderProps> = (props) => {
   const { text, controls } = props;

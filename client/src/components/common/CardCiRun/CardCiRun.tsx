@@ -14,9 +14,10 @@ type CardCiRunMods = {
   details?: boolean;
 };
 
-export type CardCiRunProps = {
+type Props = {
   buildInfo: BuildModel;
-} & CNProps<CardCiRunMods>;
+};
+type CardCiRunProps = Props & CNProps<CardCiRunMods>;
 
 const CardCiRun: React.FC<CardCiRunProps> = (props) => {
   const { buildInfo } = props;

@@ -3,7 +3,7 @@ import { cn, CNProps } from '../../../utils/bem-cn';
 
 import './Form.css';
 
-export type FormProps = CNProps & React.PropsWithoutRef<JSX.IntrinsicElements['form']>;
+type FormProps = CNProps & React.FormHTMLAttributes<HTMLFormElement>;
 
 const Form: React.FC<FormProps> = (props) => {
   const { children } = props;

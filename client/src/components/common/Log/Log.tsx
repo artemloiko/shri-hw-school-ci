@@ -4,9 +4,9 @@ import './Log.css';
 
 const ansiConverter = new Convert({ fg: '#000', bg: '#000' });
 
-export interface LogProps {
+type LogProps = {
   log?: string;
-}
+};
 
 const Log: React.FC<LogProps> = (props) => {
   const { log = '' } = props;

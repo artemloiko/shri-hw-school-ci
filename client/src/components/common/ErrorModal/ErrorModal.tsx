@@ -5,10 +5,10 @@ import Button from '../../base/Button/Button';
 
 import './ErrorModal.css';
 
-export interface ErrorModalProps extends ModalProps {
+type ErrorModalProps = ModalProps & {
   closeModal: () => void;
   errorMessage?: string;
-}
+};
 
 const ErrorModal: React.FC<ErrorModalProps> = (props) => {
   const { errorMessage = 'Something get wrong!', closeModal } = props;

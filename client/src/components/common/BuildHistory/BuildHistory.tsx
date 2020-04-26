@@ -6,12 +6,12 @@ import CardCiRun from '../CardCiRun/CardCiRun';
 import './BuildHistory.css';
 import { BuildModel } from 'typings';
 
-export interface BuildHistoryProps {
+type BuildHistoryProps = {
   builds: BuildModel[];
-  loadMore: () => void;
   isLoadedAll: boolean;
   isLoadingMore: boolean;
-}
+  loadMore: () => void;
+};
 
 const BuildHistory: React.FC<BuildHistoryProps> = (props) => {
   const { builds = [], loadMore, isLoadedAll, isLoadingMore } = props;
