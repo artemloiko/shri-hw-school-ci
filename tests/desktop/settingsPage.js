@@ -1,6 +1,6 @@
 const config = require('config');
 const expect = require('chai').expect;
-const storage = require('../../server/src/models/storage');
+const storage = require('../utils/storage');
 
 const page = require('../utils/pageObject');
 const { settings, home } = page;

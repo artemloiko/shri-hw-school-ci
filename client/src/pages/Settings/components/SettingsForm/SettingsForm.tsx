@@ -61,7 +61,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
         } catch (err) {
           const { response } = err;
           const error = response?.data?.error || err;
-          dispatch(updateSettingsFail(error));
+          dispatch(updateSettingsFail(error.message));
         }
         setSubmitting(false);
       }}

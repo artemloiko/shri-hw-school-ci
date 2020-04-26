@@ -1,6 +1,6 @@
 const config = require('config');
 const expect = require('chai').expect;
-const storage = require('../../server/src/models/storage');
+const storage = require('../utils/storage');
 
 const page = require('../utils/pageObject');
 const { home, settings, buildModal, details } = page;
@@ -103,14 +103,12 @@ describe('Home page build modal', () => {
       return this.browser
         .setValue(buildModal.input, 'a0')
         .click(buildModal.submit)
-        .assertEnabled(buildModal.submit)
+        .assertEnabled(buildModal.submit, 'Submit button is enabled')
         .assertNotExist(buildModal.loader, 'Loader should not be shown')
-        .saveScreenshot('./test1.png')
         .clearElement(buildModal.input)
-        .setValue(buildModal.input, 'hash')
+        .setValue(buildModal.input, 'ha')
         .click(buildModal.submit)
-        .saveScreenshot('./test2.png')
-        .assertEnabled(buildModal.submit)
+        .assertEnabled(buildModal.submit, 'Submit button is enabled')
         .assertNotExist(buildModal.loader, 'Loader should not be shown');
     });
 

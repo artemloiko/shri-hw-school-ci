@@ -3,10 +3,10 @@ module.exports = {
   header: '.header__heading',
   loader: '.page__content .loader',
   errorModal: '.error-modal',
-  errorModalCloseButton: '.error-modal .button[type=button]',
+  errorModalCloseButton: '.error-modal .button',
 
   home: {
-    runBuild: '.button[type=button].header__control',
+    runBuild: '.button.header__control',
     getStarted: '.get-started',
     getStartedButton: '.get-started__button',
     history: '.build-history',
@@ -15,7 +15,7 @@ module.exports = {
   buildModal: {
     block: '.build-modal',
     submit: '.build-modal .button_action.button[type=submit]',
-    cancel: '.build-modal .button[type=button]',
+    cancel: '.build-modal .button:not(.button_action)',
     input: 'input#commitHash',
     loader: '.build-modal .loader',
   },

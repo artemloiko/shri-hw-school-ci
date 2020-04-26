@@ -11,6 +11,7 @@
     "prod": "npm run build:client && npm run prod:server",
     "prod:test": "npm run build:client && cross-env NODE_TEST=test npm run prod:server",
     "prod:t": "cross-env NODE_TEST=test npm run prod:server",
+    "selenium": "docker-compose up",
     "test:e2e": "cross-env NODE_TEST=test hermione",
     "test:gui": "cross-env NODE_TEST=test hermione gui"
   },
@@ -25,6 +26,7 @@
   },
   "homepage": "https://github.com/artuom130/shri-hw-school-ci#readme",
   "devDependencies": {
+    "axios": "^0.19.2",
     "config": "^3.3.1",
     "cross-env": "^7.0.2",
     "npm-run-all": "^4.1.5",
