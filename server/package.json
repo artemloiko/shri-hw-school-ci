@@ -1,16 +1,16 @@
 {
   "name": "school-ci-server",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "School CI. Server.",
   "main": "server.ts",
   "scripts": {
-    "start": "cross-env NODE_ENV=production ts-node server.ts",
-    "dev": "nodemon server.ts",
-    "dev:debug": "nodemon --inspect server.ts",
+    "prod": "cross-env NODE_ENV=production ts-node server.ts",
+    "start": "nodemon server.ts",
+    "start:debug": "nodemon --inspect server.ts",
     "build": "tsc",
     "test": "jest --forceExit",
     "test:watch": "jest --watch",
-    "lint": "eslint ./ --ext .ts"
+    "lint": "eslint ./typings ./src server.ts --ext js,ts"
   },
   "engines": {
     "node": "^12.16.1",

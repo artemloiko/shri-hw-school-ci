@@ -1,7 +1,7 @@
 {
   "name": "school-ci-client",
   "description": "School CI. Layout.",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "private": true,
   "author": "Artem Loiko",
   "proxy": "http://localhost:3001",

@@ -1,8 +1,6 @@
 # SHRI School CI
 
-## Задание по react в папке client
-
-## Задание по серверу лежит в папке server
+### Node.js version 12.16.1
 
 ## Перед началом работы
 
