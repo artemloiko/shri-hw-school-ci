@@ -11,7 +11,6 @@ jest.mock('../../models/storage', () => ({
   getBuildLog: jest.fn(),
 }));
 jest.mock('../../services/gitService');
-jest.mock('../../models/buildQueue');
 
 const buildId = '30c10a6a-087e-4a6b-aed8-8a809169a305';
 

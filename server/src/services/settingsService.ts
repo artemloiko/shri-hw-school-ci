@@ -1,5 +1,4 @@
 import GitService from './gitService';
-import { buildQueue } from '../models/buildQueue';
 import { ConfigurationDTO, BuildModel } from '@i/storage.interfaces';
 
 import { Storage } from '../models/storage';
@@ -28,15 +27,11 @@ export default class SettingsService {
     try {
       const { mainBranch } = settingsDTO;
       const lastCommitHash = await this.gitService.getLastCommitHash(mainBranch);
-
       const isAlredyBuilt = await this.checkIfCommitIsBuilt(lastCommitHash);
-      const isAlreadyInQueue = buildQueue.has(lastCommitHash);
 
-      if (!isAlreadyInQueue && !isAlredyBuilt) {
+      if (!isAlredyBuilt) {
         const commitDetails = await this.gitService.getCommitDetails(lastCommitHash);
-        const data = await this.storage.buildInit(commitDetails);
-        const buildId = data.data.id;
-        await buildQueue.enqueue({ commitHash: lastCommitHash, buildId });
+        await this.storage.buildInit(commitDetails);
       }
     } catch (error) {
       console.log('Cannot add last commit for repo', settingsDTO.mainBranch);

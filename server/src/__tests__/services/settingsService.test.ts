@@ -2,7 +2,6 @@ import { mocked } from 'ts-jest/utils';
 
 import SettingsService from '../../services/settingsService';
 import GitService from '../../services/gitService';
-import { buildQueue } from '../../models/buildQueue';
 import storage from '../../models/storage';
 
 const GitServiceMock = mocked(GitService);
@@ -10,7 +9,6 @@ const GitServiceMock = mocked(GitService);
 mocked(storage).getSettings.mockImplementation();
 jest.mock('../../models/storage');
 jest.mock('../../services/gitService');
-jest.mock('../../models/buildQueue');
 
 const settingsDTO = {
   repoName: 'artuom130/itItReal',
@@ -59,15 +57,15 @@ describe('Settings Service', () => {
       GitServiceMock.prototype.getLastCommitHash = jest.fn().mockResolvedValueOnce(commitHash);
       settingsService = new SettingsService(storage);
       settingsService.checkIfCommitIsBuilt = jest.fn();
+      mocked(storage).buildInit.mockClear();
     });
 
-    test("Add commit to queue if it's not built nor in queue", async () => {
-      mocked(buildQueue.has).mockImplementationOnce(() => false);
+    test("Add commit to queue if it's not built", async () => {
       mocked(settingsService.checkIfCommitIsBuilt).mockResolvedValueOnce(false);
 
       await settingsService.addLastCommitToQueue(settingsDTO);
 
-      expect(buildQueue.enqueue).toHaveBeenCalledWith({ commitHash, buildId });
+      expect(mocked(storage).buildInit).toHaveBeenCalled();
     });
 
     test("Don't add commit to queue if it's built recently", async () => {
@@ -75,16 +73,7 @@ describe('Settings Service', () => {
 
       await settingsService.addLastCommitToQueue(settingsDTO);
 
-      expect(buildQueue.enqueue).toHaveBeenCalledWith({ commitHash, buildId });
-    });
-
-    test("Don't add commit to queue if it's already in queue", async () => {
-      mocked(buildQueue.has).mockImplementationOnce(() => true);
-      mocked(settingsService.checkIfCommitIsBuilt).mockResolvedValueOnce(false);
-
-      await settingsService.addLastCommitToQueue(settingsDTO);
-
-      expect(buildQueue.enqueue).toHaveBeenCalledWith({ commitHash, buildId });
+      expect(mocked(storage).buildInit).not.toHaveBeenCalled();
     });
   });
 });

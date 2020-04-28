@@ -5,7 +5,6 @@ import morgan from 'morgan';
 import config from './src/config';
 import routes from './src/routes';
 import syncCommitsCron from './src/tasks/sync-commits-cron';
-import buildQueueCron from './src/tasks/process-queue';
 
 async function bootstrap(): Promise<void> {
   const server = express();
@@ -16,7 +15,6 @@ async function bootstrap(): Promise<void> {
   routes.init(server);
 
   syncCommitsCron.init();
-  buildQueueCron.init();
 
   server.listen(config.port, () => console.log(`Server listening on port ${config.port}!`));
 }

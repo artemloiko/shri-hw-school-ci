@@ -1,5 +1,4 @@
 import GitService from './gitService';
-import { buildQueue } from '../models/buildQueue';
 import { Storage } from 'src/models/storage';
 
 export default class BuildsService {
@@ -17,7 +16,6 @@ export default class BuildsService {
     const commitDetails = await this.gitService.getCommitDetails(commitHash);
     const data = await this.storage.buildInit(commitDetails);
     const buildId = data.data.id;
-    await buildQueue.enqueue({ commitHash, buildId });
     return buildId;
   }
 
