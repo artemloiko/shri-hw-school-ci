@@ -15,7 +15,7 @@ class BuilderService {
     return this.registerAgent();
   }
 
-  async registerAgent() {
+  async registerAgent(attemptToRegister = 1) {
     logger.info('[REGISTER AGENT]');
 
     try {
@@ -25,10 +25,17 @@ class BuilderService {
       this.agentId = agentId;
       logger.info('[REGISTERED]', agentId);
     } catch (e) {
-      const errMessage = `${e.message}.\nServer ${this.serverUrl} is down. Please check build server\n`;
-      logger.error(errMessage);
-      // eslint-disable-next-line no-process-exit
-      process.exit(-1);
+      setTimeout(() => {
+        if (attemptToRegister === 15) {
+          const errMessage = `${e.message}.\nServer ${this.serverUrl} is down. Please check build server\n`;
+          logger.error('[SERVER IS NOT RESPONDING]', errMessage);
+          // eslint-disable-next-line no-process-exit
+          process.exit(-1);
+        }
+        logger.warn('[SERVER IS NOT AVAILABLE]', `try again in ${attemptToRegister} seconds`);
+
+        this.registerAgent(attemptToRegister * 4);
+      }, attemptToRegister * 1000);
     }
   }
 
