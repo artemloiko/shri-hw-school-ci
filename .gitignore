@@ -9,6 +9,7 @@ dist
 #node.js server temp fodlers
 repo
 temp
+testRepo
 
 #tests temp folders
 hermione-reports
