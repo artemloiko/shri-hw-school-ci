@@ -6,7 +6,6 @@ const cors = require('cors');
 const config = require('./src/config');
 const routes = require('./src/routes');
 const syncCommitsCron = require('./src/tasks/sync-commits-cron');
-const buildQueueCron = require('./src/tasks/process-queue');
 
 async function bootstrap() {
   const server = express();
@@ -18,7 +17,6 @@ async function bootstrap() {
   routes.init(server);
 
   syncCommitsCron.init();
-  buildQueueCron.init();
 
   server.listen(config.port, () => console.log(`Server listening on port ${config.port}!`));
 }

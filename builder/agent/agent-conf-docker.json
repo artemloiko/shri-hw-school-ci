@@ -1,0 +1,5 @@
+{
+  "port": 5050,
+  "serverHost": "host.docker.internal",
+  "serverPort": 8080
+}
