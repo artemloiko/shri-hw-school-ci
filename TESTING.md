@@ -14,9 +14,10 @@ npm run test
 ```bash
 cd server
 # если не делали install, то еще и npm install
-# для тестирования работы с гитом используется отдельный репозиторий который нужно склонировать в папку src/__tests__/testRepo
-# для этого запустите команду (находясь в папке сервер)
-git clone https://github.com/artuom130/school-ci-test-repo.git src/__tests__/testRepo
+# для тестирования работы с гитом используется отдельный репозиторий https://github.com/artuom130/school-ci-test-repo.git
+# который должен быть склонирован в папку src/__tests__/testRepo
+# для этого запустите команду (находясь в папке сервер).
+npm run test:pre
 # затем можно
 npm run test
 ```

@@ -10,6 +10,7 @@
     "build": "tsc",
     "test": "jest --forceExit",
     "test:watch": "jest --watch",
+    "test:pre": "rm -rf src/__tests__/testRepo && git clone https://github.com/artuom130/school-ci-test-repo.git src/__tests__/testRepo",
     "lint": "eslint ./typings ./src server.ts --ext js,ts"
   },
   "engines": {
