@@ -1,11 +1,11 @@
 module.exports = {
-  screenshotsDir: 'tests/hermione/screens',
-  retry: 3,
+  screenshotsDir: 'e2e/screens',
+  retry: 4,
   waitTimeout: 2000,
 
   sets: {
     desktop: {
-      files: 'tests/desktop',
+      files: 'e2e/desktop',
     },
   },
 
@@ -21,7 +21,7 @@ module.exports = {
     'hermione-custom-assert': true,
     'html-reporter/hermione': {
       enabled: true,
-      path: 'tests/hermione-reports',
+      path: 'e2e/hermione-reports',
       errorPatterns: [
         'Parameter .* must be a string',
         {

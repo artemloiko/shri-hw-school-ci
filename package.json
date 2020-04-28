@@ -15,10 +15,7 @@
     "prod:server": "cd server && npm run prod",
     "prod": "npm run build:client && npm run prod:server",
     "prod:t": "npx env-cmd -f .env.test npm run prod:server",
-    "prod:test": "npm run build:client && npm run prod:t",
-    "selenium": "docker-compose up",
-    "test:e2e": "hermione",
-    "test:gui": "hermione gui"
+    "prod:test": "npm run build:client && npm run prod:t"
   },
   "repository": {
     "type": "git",
@@ -31,17 +28,14 @@
   },
   "homepage": "https://github.com/artuom130/shri-hw-school-ci#readme",
   "devDependencies": {
-    "axios": "^0.19.2",
-    "config": "^3.3.1",
     "cross-env": "^7.0.2",
     "env-cmd": "^10.1.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1"
   },
-  "dependencies": {
-    "chai": "^4.2.0",
-    "hermione": "^3.1.0",
-    "hermione-custom-assert": "file:tests/hermione/plugins/hermione-custom-assert",
-    "html-reporter": "^5.15.2"
-  }
+  "engines": {
+    "node": "^12.16.1",
+    "npm": "^6.13.4 "
+  },
+  "engineStrict": true
 }

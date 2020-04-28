@@ -1,0 +1,23 @@
+{
+  "name": "school-ci-tests-e2e",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "selenium": "docker-compose up",
+    "build:docker": "docker build -t hermione .",
+    "e2e": "hermione",
+    "gui": "hermione gui",
+    "docker:e2e": "echo docker run -v $PWD/e2e:/hermione/e2e hermione npm run e2e | bash",
+    "docker:gui": "echo docker run -v $PWD/e2e:/hermione/e2e -p 8000:8000 hermione npm run e2e:gui | bash"
+  },
+  "author": "Artem Loiko",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "config": "^3.3.1",
+    "chai": "^4.2.0",
+    "hermione": "^3.1.0",
+    "hermione-custom-assert": "file:plugins/hermione-custom-assert",
+    "html-reporter": "^5.15.2"
+  }
+}

@@ -7,7 +7,9 @@
 ## Перед началом работы
 
 ```bash
-npm install
+npm run setup # установит все разом
+# или можно самому только необходимые зависимости поставить
+npm install # npm install в корне опционален, т.к. в скриптах используется npx
 cd client && npm install
 cd server && npm install
 ```
