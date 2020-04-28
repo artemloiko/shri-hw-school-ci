@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "start:fake": "npx cross-env FAKE_BUILDER=true node index.js",
     "dev": "nodemon index.js",
     "dev:debug": "nodemon --inspect-brk index.js",
     "build-docker-image": "docker build -t school-ci-build-agent ."

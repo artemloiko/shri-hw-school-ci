@@ -1,6 +1,8 @@
 const axios = require('axios');
 const logger = require('../utils/logger');
-const { builder } = require('../../builder');
+const { builder: realBuilder, fakeBuilder } = require('../../builder');
+
+const builder = process.env.FAKE_BUILDER ? fakeBuilder : realBuilder;
 
 class BuilderService {
   constructor(serverUrl, port) {
