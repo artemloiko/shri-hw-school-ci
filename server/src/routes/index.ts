@@ -6,9 +6,7 @@ import clientSSR from './clientSSR';
 const init = (server: Express): void => {
   server.use('/api', apiRoutes);
 
-  if (process.env.NODE_ENV === 'production') {
-    server.use(clientSSR);
-  }
+  server.use(clientSSR);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   server.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
