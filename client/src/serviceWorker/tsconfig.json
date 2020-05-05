@@ -4,7 +4,7 @@
     "outFile": "../../public/sw.js",
     "sourceMap": false,
     "strict": true,
-    "types": ["../../node_modules/types-serviceworker"]
+    "types": ["../../node_modules/types-serviceworker", "workbox-sw"]
   },
   "files": ["sw.ts"]
 }
