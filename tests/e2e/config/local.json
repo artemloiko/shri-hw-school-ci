@@ -1,0 +1,13 @@
+{
+  "client": {
+    "urls": {
+      "root": "http://host.docker.internal:3001",
+      "settings": "http://host.docker.internal:3001/settings",
+      "details": "http://host.docker.internal:3001/details"
+    }
+  },
+  "storage": {
+    "apiToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjQyMjgxMTU0IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImNoaWJpMTMwIiwidXJuOmdpdGh1Yjp1cmwiOiJodHRwczovL2FwaS5naXRodWIuY29tL3VzZXJzL2NoaWJpMTMwIiwibmJmIjoxNTg2NzYzMTUzLCJleHAiOjE1ODkzNTUxNTMsImlzcyI6IlNocmktSG9tZXdvcmsiLCJhdWQiOiJTaHJpLUhvbWV3b3JrIn0.FcQunwqVbL5ZAi-axfIQbNy6jtnPvTBBS83fu4kajzE",
+    "baseUrl": "https://hw.shri.yandex/api"
+  }
+}

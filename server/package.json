@@ -1,15 +1,17 @@
 {
   "name": "school-ci-server",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "School CI. Server.",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
+    "prod": "cross-env NODE_ENV=production ts-node server.ts",
+    "start": "nodemon server.ts",
+    "start:debug": "nodemon --inspect server.ts",
+    "build": "tsc",
     "test": "jest --forceExit",
     "test:watch": "jest --watch",
-    "start": "nodemon server.js",
-    "start:debug": "nodemon --inspect-brk server.js",
-    "start:prod": "cross-env NODE_ENV=production node server.js",
-    "lint": "eslint ./"
+    "test:pre": "rm -rf src/__tests__/testRepo && git clone https://github.com/artuom130/school-ci-test-repo.git src/__tests__/testRepo",
+    "lint": "eslint ./typings ./src server.ts --ext js,ts"
   },
   "engines": {
     "node": "^12.16.1",
@@ -31,21 +33,36 @@
     "node-cron": "^2.0.3"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.6",
+    "@types/find-config": "^1.0.0",
+    "@types/fs-extra": "^8.1.0",
+    "@types/jest": "^25.2.1",
+    "@types/morgan": "^1.9.0",
+    "@types/node-cron": "^2.0.3",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
     "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jest": "^23.8.2",
-    "eslint-plugin-node": "^11.0.0",
-    "jest": "^25.3.0",
-    "nodemon": "^2.0.2"
+    "jest": "^25.4.0",
+    "nodemon": "^2.0.2",
+    "ts-jest": "^25.4.0",
+    "ts-node": "^8.9.0",
+    "typescript": "^3.8.3"
   },
   "nodemonConfig": {
     "ignore": [
       "repo/*",
       "temp/*"
-    ]
+    ],
+    "execMap": {
+      "ts": "node --require ts-node/register"
+    },
+    "ext": "js,json,ts"
   },
   "jest": {
+    "preset": "ts-jest",
     "testEnvironment": "node"
   }
 }

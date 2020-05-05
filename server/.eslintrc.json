@@ -4,22 +4,25 @@
     "es6": true,
     "node": true
   },
-  "plugins": ["jest"],
-  "extends": ["eslint-config-airbnb-base", "plugin:node/recommended", "plugin:jest/recommended"],
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
-  "parserOptions": {
-    "ecmaVersion": 2018
-  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["jest", "@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended"
+  ],
   "rules": {
-    "linebreak-style": "off",
-    "consistent-return": "off",
-    "object-curly-newline": "off",
     "no-console": "off",
     "class-methods-use-this": "off",
-    "no-unused-vars": "warn",
-    "no-underscore-dangle": "off"
-  }
+    "@typescript-eslint/explicit-function-return-type": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/__tests__/**/*.[jt]s"],
+      "rules": {
+        "@typescript-eslint/no-empty-function": "off"
+      }
+    }
+  ]
 }

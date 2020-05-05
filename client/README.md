@@ -12,15 +12,12 @@ npm install
 Проект был развернут с [Create React App](https://github.com/facebook/create-react-app).  
 Стандартные его комманды для запуска и билда
 
-`npm start`  
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-`npm test`  
-Launches the test runner in the interactive watch mode.
-
-`npm run build`  
-Builds the app for production to the `build` folder.
+```bash
+npm start // запуск в development mode на http://localhost:3000
+npm run build // сбилдить клиент
+npm run test // запустить тесты
+npm run lint // запуск линтера
+```
 
 ## About (Описание моих решений)
 

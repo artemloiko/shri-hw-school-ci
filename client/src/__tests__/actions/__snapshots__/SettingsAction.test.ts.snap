@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`settings actions fetching settings fail 1`] = `
+Array [
+  Object {
+    "type": "GET_SETTINGS_REQUEST",
+  },
+  Object {
+    "error": true,
+    "payload": "Internal server error",
+    "type": "GET_SETTINGS_FAIL",
+  },
+]
+`;
+
+exports[`settings actions fetching settings success 1`] = `
+Array [
+  Object {
+    "type": "GET_SETTINGS_REQUEST",
+  },
+  Object {
+    "payload": Object {
+      "buildCommand": "npm run build",
+      "id": "c42db8b8-128a-4194-a19b-7974cabccf4f",
+      "mainBranch": "master",
+      "period": 0,
+      "repoName": "artuom130/shri-hw-async",
+    },
+    "type": "GET_SETTINGS_SUCCESS",
+  },
+]
+`;
+
+exports[`settings actions reset settings error 1`] = `
+Array [
+  Object {
+    "type": "RESET_SETTINGS_ERROR",
+  },
+]
+`;
+
+exports[`settings actions update settings 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "buildCommand": "npm run build",
+      "mainBranch": "master",
+      "period": 0,
+      "repoName": "artuom130/itItReal",
+    },
+    "type": "SET_SETTINGS",
+  },
+]
+`;
+
+exports[`settings actions update settings error 1`] = `
+Array [
+  Object {
+    "error": true,
+    "payload": "Cannot find artuom130/shri-hw-asyncs repository",
+    "type": "SET_SETTINGS_FAIL",
+  },
+]
+`;
