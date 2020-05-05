@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "outFile": "../../public/sw.js",
+    "sourceMap": false,
+    "strict": true,
+    "types": ["../../node_modules/types-serviceworker"]
+  },
+  "files": ["sw.ts"]
+}

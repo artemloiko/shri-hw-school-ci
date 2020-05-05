@@ -14,13 +14,15 @@
     "date-fns": "^2.11.1",
     "formik": "^2.1.4",
     "react": "^16.13.1",
+    "react-app-rewired": "^2.1.6",
     "react-dom": "^16.13.1",
     "react-modal": "^3.11.2",
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "workbox-webpack-plugin": "^5.1.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -39,16 +41,22 @@
     "@typescript-eslint/eslint-plugin": "^2.29.0",
     "@typescript-eslint/parser": "^2.29.0",
     "cross-env": "^7.0.2",
+    "npm-run-all": "^4.1.5",
     "react-test-renderer": "^16.13.1",
     "redux-mock-store": "^1.5.4",
     "ts-jest": "^25.4.0",
+    "types-serviceworker": "0.0.1",
     "typescript": "^3.8.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "cross-env PUBLIC_URL=/static react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "sw:start": "tsc -w -p src/serviceWorker",
+    "sw:build": "tsc -p src/serviceWorker",
+    "client:start": "react-app-rewired start",
+    "client:build": "react-app-rewired build",
+    "start": "run-p sw:start client:start",
+    "build": "run-s sw:build client:build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
     "lint": "eslint src --ext js,jsx,ts,tsx"
   },
   "eslintConfig": {
