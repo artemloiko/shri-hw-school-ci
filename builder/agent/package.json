@@ -1,7 +1,7 @@
 {
-  "name": "build-server",
+  "name": "build-agent",
   "version": "1.0.0",
-  "description": "Build server for school ci",
+  "description": "Build agent for school ci",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
