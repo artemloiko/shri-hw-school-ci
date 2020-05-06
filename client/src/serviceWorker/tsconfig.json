@@ -1,10 +1,18 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "outFile": "../../public/sw.js",
-    "sourceMap": false,
     "strict": true,
-    "types": ["../../node_modules/types-serviceworker", "workbox-sw"]
-  },
-  "files": ["sw.ts"]
+    "module": "es6",
+    "lib": ["esnext"],
+    "types": [
+      "../../node_modules/types-serviceworker",
+      "workbox-precaching",
+      "workbox-cacheable-response",
+      "workbox-expiration",
+      "workbox-strategies",
+      "workbox-routing",
+      "node"
+    ],
+    "moduleResolution": "node"
+  }
 }

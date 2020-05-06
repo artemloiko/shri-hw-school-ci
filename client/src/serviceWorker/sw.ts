@@ -1,34 +1,31 @@
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+import { createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching';
+import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
+import { NavigationRoute, registerRoute } from 'workbox-routing';
+import { CacheableResponsePlugin } from 'workbox-cacheable-response';
+import { ExpirationPlugin } from 'workbox-expiration';
 
-type PrecacheEntry = { revision: string; url: string };
-declare interface ServiceWorkerGlobalScope {
-  __WB_MANIFEST: PrecacheEntry[];
-}
 const YEAR_IN_SECONDS = 60 * 60 * 24 * 365;
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 const STATIC_SOURCES_VERSION = '1';
 const staticResourcesManifest = [
   { url: '/manifest.json', revision: STATIC_SOURCES_VERSION },
   { url: '/favicon.ico', revision: STATIC_SOURCES_VERSION },
+  { url: '/logo192.png', revision: STATIC_SOURCES_VERSION },
+  { url: '/logo512.png', revision: STATIC_SOURCES_VERSION },
 ];
 const compiledResourcesManifest = self.__WB_MANIFEST || [];
 const assetsToCache = [...compiledResourcesManifest, ...staticResourcesManifest];
-// @ts-ignore it is right here
-const { CacheableResponsePlugin } = workbox.cacheableResponse;
-// @ts-ignore it is right here
-const { ExpirationPlugin } = workbox.expiration;
-const { CacheFirst, StaleWhileRevalidate } = workbox.strategies;
-const { NavigationRoute, registerRoute } = workbox.routing;
-// @ts-ignore createHandlerBoundToURL is available in workbox v5 (types are for 4)
-const { createHandlerBoundToURL, precacheAndRoute } = workbox.precaching;
 
-// precashe static sources
-workbox.precaching.precacheAndRoute(assetsToCache);
-
-// handle spa navigation, always return index.html
-const handler = createHandlerBoundToURL('/index.html');
-const navigationRoute = new NavigationRoute(handler, {});
-registerRoute(navigationRoute);
+if (isProduction) {
+  // precashe static sources
+  precacheAndRoute(assetsToCache);
+  // handle spa navigation, always return index.html
+  const handler = createHandlerBoundToURL('/index.html');
+  const navigationRoute = new NavigationRoute(handler, {});
+  registerRoute(navigationRoute);
+}
 
 // cashe StaleWhileRevalidate /api/settings and /api/builds
 registerRoute(/\/api\/(settings|builds)(\?.+)?$/, new StaleWhileRevalidate());
@@ -71,11 +68,7 @@ registerRoute(
 );
 
 self.addEventListener('install', (event: ExtendableEvent) => {
-  console.log('sw installed, assets:', assetsToCache);
-});
-
-self.addEventListener('activate', (event: ExtendableEvent) => {
-  console.log('sw activated');
+  console.log('sw installed, assetsToCache:', assetsToCache);
 });
 
 self.addEventListener('message', (event) => {
