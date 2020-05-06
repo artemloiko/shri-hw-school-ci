@@ -14,6 +14,7 @@ npm install
 
 ```bash
 npm start // запуск в development mode на http://localhost:3000
+npm run start:sw // запуск в development mode с включением сервис воркера
 npm run build // сбилдить клиент
 npm run test // запустить тесты
 npm run lint // запуск линтера
