@@ -109,6 +109,7 @@ describe('Input clear button', () => {
         onBlur={(): void => {}}
         setFieldValue={(): void => {}}
         mods={{ clear: true }}
+        name="input"
       />,
     );
     const input = getByPlaceholderText('input');

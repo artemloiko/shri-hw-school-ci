@@ -3,7 +3,6 @@
 exports[`Button with default props matches the snapshot 1`] = `
 <button
   className="button"
-  type="button"
 >
   <div
     className="button__text"
