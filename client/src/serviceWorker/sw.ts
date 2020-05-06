@@ -1,5 +1,5 @@
 import { createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching';
-import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
+import { CacheFirst, NetworkFirst } from 'workbox-strategies';
 import { NavigationRoute, registerRoute } from 'workbox-routing';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { ExpirationPlugin } from 'workbox-expiration';
@@ -27,11 +27,11 @@ if (isProduction) {
   registerRoute(navigationRoute);
 }
 
-// cashe StaleWhileRevalidate /api/settings and /api/builds
-registerRoute(/\/api\/(settings|builds)(\?.+)?$/, new StaleWhileRevalidate());
+// cashe NetworkFirst /api/settings and /api/builds
+registerRoute(/\/api\/(settings|builds)(\?.+)?$/, new NetworkFirst({ networkTimeoutSeconds: 2 }));
 
-// cashe StaleWhileRevalidate /api/builds/:buildId
-registerRoute(/\/api\/builds\/[\w-]+$/, new StaleWhileRevalidate());
+// cashe NetworkFirst /api/builds/:buildId
+registerRoute(/\/api\/builds\/[\w-]+$/, new NetworkFirst({ networkTimeoutSeconds: 2 }));
 
 // cashe CacheFirst /api/builds/:buildId/logs
 registerRoute(

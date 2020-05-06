@@ -26,9 +26,11 @@
 Так же отдельно добавил кэширование шрифтов, стратегия CacheFirst (CacheOnly with fallback to Network), сохраняет на год только успешно загруженные шрифты. Тут все довольно просто, экономим трафик юзера сохранив шрифты локально.
 
 И для запросов апи стратегии:  
-/settings - StaleWhileRevalidate  
-/builds - StaleWhileRevalidate  
-/builds/:buildId - StaleWhileRevalidate
+/settings - NetworkFirst  
+/builds - NetworkFirst  
+/builds/:buildId - NetworkFirst  
+В данном случае NetworkFirs стратегия использована для того, чтобы в случае
+когда юзер зайдет на страницу в оффлайн режиме ему отобразились ранее загруженные данные.  
 Для данных логов билда такая стратегия, потому что они не изменяются
 /builds/:buildsId/logs - CacheFirst
 
