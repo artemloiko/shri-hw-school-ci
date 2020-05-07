@@ -28,10 +28,16 @@ if (isProduction) {
 }
 
 // cashe NetworkFirst /api/settings and /api/builds
-registerRoute(/\/api\/(settings|builds)(\?.+)?$/, new NetworkFirst({ networkTimeoutSeconds: 2 }));
+registerRoute(
+  /\/api\/(settings|builds)(\?.+)?$/,
+  new NetworkFirst({ networkTimeoutSeconds: 2, cacheName: 'api-get-requests' }),
+);
 
 // cashe NetworkFirst /api/builds/:buildId
-registerRoute(/\/api\/builds\/[\w-]+$/, new NetworkFirst({ networkTimeoutSeconds: 2 }));
+registerRoute(
+  /\/api\/builds\/[\w-]+$/,
+  new NetworkFirst({ networkTimeoutSeconds: 2, cacheName: 'api-get-requests' }),
+);
 
 // cashe CacheFirst /api/builds/:buildId/logs
 registerRoute(

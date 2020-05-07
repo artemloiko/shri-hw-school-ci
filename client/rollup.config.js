@@ -19,6 +19,6 @@ export default {
       tsconfig: 'src/serviceWorker/tsconfig.json',
     }),
     resolve(),
-    terser(),
+    isProd && terser(),
   ],
 };
