@@ -9,7 +9,6 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 function App() {
   const { addToast } = useToasts();
   useEffect(() => {
-    console.log('add listeners once');
     const networkChangeHandler = () => {
       const message = navigator.onLine
         ? 'App is online. Reload page to get latest data.'

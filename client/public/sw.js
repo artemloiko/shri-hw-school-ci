@@ -3047,6 +3047,59 @@ class ExpirationPlugin {
     }
 }
 
+function generateNotificationData(payload) {
+    let notifData = null;
+    try {
+        const parsedData = JSON.parse(payload);
+        if (!parsedData.code || !parsedData.title)
+            throw new Error();
+        const { code, body, title, data } = parsedData;
+        let icon;
+        switch (code) {
+            case 'BUILD_SUCCESS':
+                icon = '/success.svg';
+                break;
+            case 'BUILD_FAIL':
+                icon = '/fail.svg';
+                break;
+        }
+        notifData = {
+            title,
+            body,
+            icon,
+            data,
+        };
+    }
+    catch (error) {
+        console.log('Push payload is wrong', payload);
+        notifData = {
+            title: payload,
+        };
+    }
+    return notifData;
+}
+self.addEventListener('push', function (event) {
+    if (!event.data) {
+        console.log('Push notification without data');
+        return;
+    }
+    const payload = event.data.text();
+    const notificationData = generateNotificationData(payload);
+    console.log('[PUSH EVENT]', notificationData);
+    if (notificationData) {
+        event.waitUntil(self.registration.showNotification(notificationData.title, notificationData));
+    }
+});
+self.addEventListener('notificationclick', function (event) {
+    const notificationData = event.notification.data;
+    console.log('[NOTIFICATION CLICK]', notificationData);
+    if (notificationData === null || notificationData === void 0 ? void 0 : notificationData.buildId) {
+        const urlToOpen = new URL(`/details/${notificationData.buildId}`, self.location.origin).href;
+        const promiseChain = self.clients.openWindow(urlToOpen);
+        event.waitUntil(promiseChain);
+    }
+});
+
 const YEAR_IN_SECONDS = 60 * 60 * 24 * 365;
 const STATIC_SOURCES_VERSION = '1';
 const staticResourcesManifest = [
@@ -3087,7 +3140,7 @@ registerRoute(/^https:\/\/yastatic\.net/, new CacheFirst({
         }),
     ],
 }));
-self.addEventListener('install', (event) => {
+self.addEventListener('install', () => {
     console.log('sw installed, assetsToCache:', assetsToCache);
 });
 self.addEventListener('message', (event) => {

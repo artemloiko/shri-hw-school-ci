@@ -9,6 +9,7 @@ import * as serviceWorker from './serviceWorker';
 import App from './App';
 
 import './index.css';
+import { subscribe } from 'notifications';
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -35,3 +36,5 @@ if (isProd || process.env.REACT_APP_SW_DEVELOPMENT === 'true') {
 } else {
   serviceWorker.unregister();
 }
+// notifications
+subscribe();

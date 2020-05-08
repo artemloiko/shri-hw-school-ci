@@ -3,6 +3,7 @@ import { CacheFirst, NetworkFirst } from 'workbox-strategies';
 import { NavigationRoute, registerRoute } from 'workbox-routing';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { ExpirationPlugin } from 'workbox-expiration';
+import './notificationsSW';
 
 const YEAR_IN_SECONDS = 60 * 60 * 24 * 365;
 
@@ -73,7 +74,7 @@ registerRoute(
   }),
 );
 
-self.addEventListener('install', (event: ExtendableEvent) => {
+self.addEventListener('install', () => {
   console.log('sw installed, assetsToCache:', assetsToCache);
 });
 
