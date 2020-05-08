@@ -26,6 +26,8 @@ describe('Service worker', () => {
     expect(registeredListeners).toContain('install');
     expect(registeredListeners).toContain('message');
     expect(registeredListeners).toContain('fetch');
+    expect(registeredListeners).toContain('push');
+    expect(registeredListeners).toContain('notificationclick');
   });
 
   it('should precache static resources', async () => {
