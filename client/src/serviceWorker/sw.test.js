@@ -16,11 +16,10 @@ describe('Service worker', () => {
     self.__WB_MANIFEST = [{ url: '/index.html', revision: '5961ba0ce1462673888c9f8250f6b371' }];
     jest.resetModules();
     require('fake-indexeddb/auto');
+    require(pathToSw);
   });
 
   it('should add listeners', () => {
-    require(pathToSw);
-    console.log('require(pathToSw)', require(pathToSw));
     const registeredListeners = Array.from(self.listeners.keys());
 
     expect(registeredListeners).toContain('install');
@@ -36,7 +35,6 @@ describe('Service worker', () => {
       expect.stringMatching(/manifest.json/),
     ];
 
-    require(pathToSw);
     await self.trigger('install');
     // await Promise is used because workbox have to install caches
     // in such way we continue testing on next tick, when caches are ready
@@ -54,7 +52,6 @@ describe('Service worker', () => {
   });
 
   it('should cache fonts', async () => {
-    require(pathToSw);
     await self.trigger('install');
 
     self.trigger('fetch', 'https://yastatic.net/islands/_/7_GKBdKFbUPzKlghJRv55xgz0FQ.woff2');
@@ -67,7 +64,6 @@ describe('Service worker', () => {
   });
 
   it('should cache api get requests with NetworkFirst strategy', async () => {
-    require(pathToSw);
     await self.trigger('install');
 
     await self.trigger('fetch', 'https://www.test.com/api/settings');
@@ -85,7 +81,6 @@ describe('Service worker', () => {
     expect(cachedRequests).toHaveLength(3);
   });
   it('should cache api get requests with CacheFirst strategy', async () => {
-    require(pathToSw);
     await self.trigger('install');
 
     await self.trigger(

@@ -1,10 +1,11 @@
+const config = require('../config');
 const logger = require('../utils/logger');
 const webpush = require('web-push');
 
 const vapidKeys = {
   publicKey:
     'BKUWqPDuuuO-YTZ42oEQNKOdENd5pDykZM3cU1s_992RewC6kgEvYsfcpl0vHKeujsDtA-uZ1jhOUcV3H8HN-Wg',
-  privateKey: 'SN_1cPjUBoHIAX1r6f2mbd5ale9qOmppNr-gn9rh4rw',
+  privateKey: config.pushToken,
 };
 
 webpush.setVapidDetails('mailto:chibi130@yandex.ru', vapidKeys.publicKey, vapidKeys.privateKey);
@@ -78,7 +79,7 @@ class SubscriptionService {
         res.send(JSON.stringify({ data: { success: true } }));
       })
       .catch(function (err) {
-        console.log('err', err);
+        logger.error('[SBUSCRIPTION ERROR]', err.body || err.message);
         res.status(500);
         res.setHeader('Content-Type', 'application/json');
         res.send(
@@ -112,10 +113,10 @@ class SubscriptionService {
   triggerPushMsg(subscription, dataToSend) {
     return webpush.sendNotification(subscription, dataToSend).catch((err) => {
       if (err.statusCode === 404 || err.statusCode === 410) {
-        console.log('Subscription has expired or is no longer valid: ', err);
+        logger.info('[SUBSCRIPTION]', err.body || err.message);
         return this.deleteSubscriptionFromDatabase(subscription._id);
       } else {
-        console.error('Cannot send push', err);
+        logger.error('[SUBSCRIPTION ERROR]', err.body || err.message);
       }
     });
   }
