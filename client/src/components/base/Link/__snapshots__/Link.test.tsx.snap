@@ -12,9 +12,8 @@ exports[`Link with all possible props matches the snapshot 1`] = `
 
 exports[`Link with default props matches the snapshot 1`] = `
 <a
-  aria-current="page"
   className="link"
-  href="/"
+  href="/path"
   onClick={[Function]}
 >
   Link

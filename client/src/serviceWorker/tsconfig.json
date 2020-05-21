@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "lib": ["esnext"],
+    "types": [
+      "../../node_modules/types-serviceworker",
+      "workbox-precaching",
+      "workbox-cacheable-response",
+      "workbox-expiration",
+      "workbox-strategies",
+      "workbox-routing",
+      "node"
+    ],
+    "moduleResolution": "node"
+  }
+}

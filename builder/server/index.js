@@ -1,12 +1,19 @@
 const express = require('express');
+const cors = require('cors');
 const config = require('./src/config');
 const logger = require('./src/utils/logger');
 const { buildServer } = require('./src/services/buildServer');
 const { queueHandler } = require('./src/services/queueHandler');
+const { SubscriptionService } = require('./src/services/subscriptionService');
+// Type 3: Persistent datastore with automatic loading
+const Datastore = require('nedb');
+const db = new Datastore({ filename: 'temp/db', autoload: true });
+const subscriptionService = new SubscriptionService(db);
 
 async function bootstrap() {
   const server = express();
   server.use(express.json({ limit: '10MB' }));
+  server.use(cors());
 
   server.post('/notify-agent', async (req, res) => {
     const { port } = req.body;
@@ -34,6 +41,15 @@ async function bootstrap() {
     try {
       await queueHandler.saveBuildFinish(data);
       logger.success('[SAVED BUILD]', data.buildId);
+      const pushData = {
+        title: `Build ${data.buildId.slice(0, 8)} is ${data.success ? 'built' : 'failed'}`,
+        body: data.buildLog.slice(0, 100),
+        code: data.success ? 'BUILD_SUCCESS' : 'BUILD_FAIL',
+        data: {
+          buildId: data.buildId,
+        },
+      };
+      subscriptionService.sendPushes(pushData);
     } catch (e) {
       logger.warn('[ENQUEUE BUILD AGAIN]', agent.currentBuild.buildId);
       queueHandler.enqueueBuild(agent.currentBuild);
@@ -41,6 +57,21 @@ async function bootstrap() {
     agent.clear();
     res.end();
     queueHandler.runQueueProcessing();
+  });
+
+  server.post('/subscribe', async (req, res) => {
+    return subscriptionService.saveSubscription(req, res);
+  });
+
+  server.get('/send', async (req, res) => {
+    subscriptionService
+      .sendPushes(
+        '{"title":"Build is successful","body":"Built in 10 minutes", "code": "BUILD_SUCCESS"}',
+      )
+      .catch((err) => {
+        logger.error('[CANNOT SEND PUSHES]', err);
+      });
+    return res.end();
   });
 
   server.listen(config.port, () => console.log(`Server listening on port ${config.port}!`));

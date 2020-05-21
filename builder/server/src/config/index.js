@@ -13,14 +13,14 @@ const getEnvConfig = () => {
   if (process.env.PORT) conf.port = Number(process.env.PORT);
   if (process.env.API_BASE_URL) conf.apiBaseUrl = process.env.API_BASE_URL;
   if (process.env.API_TOKEN) conf.apiToken = process.env.API_TOKEN;
+  if (process.env.PUSH_TOKEN) conf.pushToken = process.env.PUSH_TOKEN;
   return conf;
 };
 
 const envConfig = getEnvConfig();
-
 const config = { ...fileConfig, ...envConfig };
 
-const requiredFileds = ['port', 'apiToken', 'apiBaseUrl'];
+const requiredFileds = ['port', 'apiToken', 'apiBaseUrl', 'pushToken'];
 const missedFields = requiredFileds.filter((field) => config[field] === undefined);
 
 if (missedFields.length) {

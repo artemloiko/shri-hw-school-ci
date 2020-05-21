@@ -6,11 +6,15 @@ import express from 'express';
 const clientSSR = express.Router();
 const pathToBuild = path.resolve(__dirname, '../../../client/build');
 
-clientSSR.use('/static', express.static(pathToBuild));
+clientSSR.get('/*', (req, res, next) => {
+  if (/\.\w+$/.test(req.url)) {
+    next();
+    return;
+  }
 
-clientSSR.get('/*', (req, res) => {
   // const appCode = renderClientToString(req.url);
-  const appCode = '';
+  console.log('get req', req.url);
+  const appCode = 'help';
 
   const indexFile = path.resolve(pathToBuild, 'index.html');
   fs.readFile(indexFile, 'utf8', (err, data) => {
@@ -22,5 +26,7 @@ clientSSR.get('/*', (req, res) => {
     return res.send(data.replace('<div id="root"></div>', `<div id="root">${appCode}</div>`));
   });
 });
+
+clientSSR.use(express.static(pathToBuild));
 
 export default clientSSR;

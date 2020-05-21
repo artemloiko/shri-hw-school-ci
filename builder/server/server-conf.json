@@ -1,5 +1,6 @@
 {
   "port": 8080,
   "apiBaseUrl": "https://hw.shri.yandex/api/",
-  "apiToken": "API_TOKEN"
+  "apiToken": "API_TOKEN",
+  "pushToken": "PUSH_TOKEN"
 }

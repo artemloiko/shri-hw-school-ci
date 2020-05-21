@@ -7,7 +7,6 @@
     "prod": "cross-env NODE_ENV=production ts-node server.ts",
     "start": "nodemon server.ts",
     "start:debug": "nodemon --inspect server.ts",
-    "build": "tsc",
     "test": "jest --forceExit",
     "test:watch": "jest --watch",
     "test:pre": "rm -rf src/__tests__/testRepo && git clone https://github.com/artuom130/school-ci-test-repo.git src/__tests__/testRepo",
@@ -27,8 +26,8 @@
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "fs-extra": "^8.1.0",
     "find-config": "^1.0.0",
+    "fs-extra": "^8.1.0",
     "morgan": "^1.9.1",
     "node-cron": "^2.0.3"
   },

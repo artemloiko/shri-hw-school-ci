@@ -4,6 +4,7 @@ import { RouteComponentProps } from '@reach/router';
 import { fetchSettingsIfNeeded } from '../../actions/SettingsAction';
 import { fetchBuildsListIfNeeded, fetchMoreBuilds } from '../../actions/BuildsAction';
 import { RootState } from 'reducers';
+import { useToasts } from 'react-toast-notifications';
 
 import Button from '../../components/base/Button/Button';
 import Page from '../../components/common/Page/Page';
@@ -18,6 +19,16 @@ const Home: React.FC<RouteComponentProps> = () => {
   const settings = useSelector((state: RootState) => state.settings);
   const builds = useSelector((state: RootState) => state.builds);
   const dispatch = useDispatch();
+  const { addToast } = useToasts();
+  const { error } = settings;
+
+  useEffect(() => {
+    if (error) {
+      const isNetworkError = /500$/.test(error);
+      const message = isNetworkError ? 'Network error. Please check internet connection' : error;
+      addToast(message, { appearance: 'error' });
+    }
+  }, [error, addToast]);
 
   useEffect(() => {
     dispatch(fetchSettingsIfNeeded());

@@ -28,9 +28,9 @@ STORAGE_API_KEY=API_KEY # API_KEY - apiKey от вашего хранилища,
 Для разработки используется nodemon
 
 ```bash
-npm run dev // запуск nodemon
-npm run dev:debug // запуск nodemon в дебаг режиме
-npm run start // запуск сервера в прод режиме (обязательно нужно сбилдить клиент, перед запуском этой команды)
+npm run start // запуск nodemon
+npm run start:debug // запуск nodemon в дебаг режиме
+npm run prod // запуск сервера в прод режиме (обязательно нужно сбилдить клиент, перед запуском этой команды)
 npm run lint // запуск линтера
 ```
 

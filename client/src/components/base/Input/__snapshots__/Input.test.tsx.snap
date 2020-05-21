@@ -8,7 +8,6 @@ exports[`Input with all possible props matches the snapshot 1`] = `
     className="input__text"
     id="commitHash"
     inputMode="text"
-    name="commitHash"
     onBlur={[Function]}
     onChange={[Function]}
     pattern="\\\\w{7,}"
