@@ -5,6 +5,7 @@ import { fetchSettingsIfNeeded } from '../../actions/SettingsAction';
 import { fetchBuildsListIfNeeded, fetchMoreBuilds } from '../../actions/BuildsAction';
 import { RootState } from 'reducers';
 import { useToasts } from 'react-toast-notifications';
+import { useTranslation } from 'react-i18next';
 
 import Button from '../../components/base/Button/Button';
 import Page from '../../components/common/Page/Page';
@@ -16,6 +17,8 @@ import BuildModal from './components/BuildModal/BuildModal';
 import './Home.css';
 
 const Home: React.FC<RouteComponentProps> = () => {
+  const { t } = useTranslation();
+
   const settings = useSelector((state: RootState) => state.settings);
   const builds = useSelector((state: RootState) => state.builds);
   const dispatch = useDispatch();
@@ -70,7 +73,7 @@ const Home: React.FC<RouteComponentProps> = () => {
               iconType="play"
               onClick={handleBuildModalOpen}
             >
-              Run build
+              {t('Run build')}
             </Button>
           )}
           <Button
@@ -78,8 +81,9 @@ const Home: React.FC<RouteComponentProps> = () => {
             className="header__control"
             mods={{ size: 'small', 'icon-only': !!settings.repoName }}
             iconType="settings"
+            title={t('Settings')}
           >
-            Settings
+            {t('Settings')}
           </Button>
         </>
       }

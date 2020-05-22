@@ -8,16 +8,15 @@ export const SUPPORTED_LOCALES = ['en', 'ru'];
 i18n
   .use(Fetch)
   .use(LanguageDetector)
-  .use(initReactI18next) // passes i18n down to react-i18next
+  .use(initReactI18next)
   .init({
     fallbackLng: 'en',
     debug: true,
 
-    keySeparator: false, // we do not use keys in form messages.welcome
-
     interpolation: {
       escapeValue: false, // react already safes from xss
     },
+    returnEmptyString: false,
 
     ns: ['translation'],
     defaultNS: 'translation',

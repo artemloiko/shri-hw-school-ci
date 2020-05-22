@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Button from '../../base/Button/Button';
 import CardCiRun from '../CardCiRun/CardCiRun';
@@ -14,6 +15,8 @@ type BuildHistoryProps = {
 };
 
 const BuildHistory: React.FC<BuildHistoryProps> = (props) => {
+  const { t } = useTranslation();
+
   const { builds = [], loadMore, isLoadedAll, isLoadingMore } = props;
 
   const buildsCards = builds.map((build) => (
@@ -30,12 +33,12 @@ const BuildHistory: React.FC<BuildHistoryProps> = (props) => {
               className="build-history__pagination"
               onClick={loadMore}
             >
-              Show more
+              {t('Show more')}
             </Button>
           )}
         </>
       ) : (
-        <h3 className="typography__headline4">No builds.</h3>
+        <h3 className="typography__headline4">{t('No builds')}</h3>
       )}
     </div>
   );

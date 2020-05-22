@@ -11,6 +11,7 @@ import ErrorModal from '../../../../components/common/ErrorModal/ErrorModal';
 import { addBuild, updateBuildsList } from '../../../../actions/BuildsAction';
 
 import './BuildForm.css';
+import { useTranslation } from 'react-i18next';
 
 interface BuildFormValues {
   commitHash: string;
@@ -27,6 +28,8 @@ type BuildFormProps = {
 };
 
 const BuildForm: React.FC<BuildFormProps> = (props) => {
+  const { t } = useTranslation();
+
   const { closeModal, className = '' } = props;
 
   const dispatch = useDispatch();
@@ -43,7 +46,7 @@ const BuildForm: React.FC<BuildFormProps> = (props) => {
         validate={(values) => {
           const errors: FormikErrors<BuildFormValues> = {};
           if (!values.commitHash) {
-            errors.commitHash = 'Commit hash is required';
+            errors.commitHash = t('Commit hash is required');
           }
           return errors;
         }}
@@ -53,7 +56,11 @@ const BuildForm: React.FC<BuildFormProps> = (props) => {
             dispatch(updateBuildsList(data));
             navigate(`/details/${data.id}`);
           } catch (error) {
-            setError({ isOpen: true, message: error?.response?.data?.error.message });
+            const errorMessage: string =
+              error?.response?.data?.error?.errorCode ||
+              error?.response?.data?.error?.message ||
+              error.message;
+            setError({ isOpen: true, message: errorMessage });
           }
           resetForm();
           setSubmitting(false);
@@ -66,13 +73,13 @@ const BuildForm: React.FC<BuildFormProps> = (props) => {
               <form className={`build-form ${className}`} onSubmit={handleSubmit}>
                 <Input
                   mods={{ clear: true, fullwidth: true }}
-                  placeholder="Commit hash"
+                  placeholder={t('Commit hash')}
                   id="commitHash"
                   setFieldValue={setFieldValue}
                   {...getFieldProps('commitHash')}
                   required
                   pattern="\w{6,}"
-                  title="Hash 6 letters/numbers"
+                  title={t('Hash 6 letters/numbers')}
                 ></Input>
                 <div className="build-form__submit-group build-modal__elem">
                   <Button
@@ -80,14 +87,14 @@ const BuildForm: React.FC<BuildFormProps> = (props) => {
                     mods={{ action: true, disabled: isSubmitting }}
                     className="build-form__submit-group-elem"
                   >
-                    Run build
+                    {t('Run build')}
                   </Button>
                   <Button
                     className="build-form__submit-group-elem"
                     mods={{ disabled: isSubmitting }}
                     onClick={closeModal}
                   >
-                    Cancel
+                    {t('Cancel')}
                   </Button>
                 </div>
               </form>

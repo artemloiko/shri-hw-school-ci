@@ -1,4 +1,37 @@
 {
+  "Show more": "Show more",
+  "No builds": "No builds",
+  "Support": "Support",
+  "Learning": "Learning",
+  "copyright 2020 Artem Loiko": "© 2020 Artem Loiko",
+  "Rebuild": "Rebuild",
+  "Settings": "Settings",
+  "Not found": "Not found",
+  "Commit hash is required": "Commit hash is required",
+  "Commit hash": "Commit hash",
+  "Hash 6 letters/numbers": "Hash 6 letters/numbers",
+  "Run build": "Run build",
+  "Cancel": "Cancel",
+  "New build": "New build",
+  "Enter the commit hash which you want to build": "Enter the commit hash which you want to build",
+  "Configure repository connection and synchronization settings": "Configure repository connection and synchronization settings",
   "Open settings": "Open settings",
-  "Configure repository connection and synchronization settings": "Configure repository connection and synchronization settings"
+  "Repository name": "Repository name",
+  "Build Command": "Build Command",
+  "Main branch": "Main branch",
+  "{{fieldName}} is required": "{{fieldName}} is required",
+  "Period should be a number": "Period should be a number",
+  "Synchronize every {{count}} minutes": "Synchronize every {{count}} minute",
+  "Synchronize every {{count}} minutes_plural": "Synchronize every {{count}} minutes",
+  "GitHub repository": "GitHub repository",
+  "Build command": "Build command",
+  "Save": "Save",
+  "Error": "Error",
+  "Close": "Close",
+  "error": {
+    "GIT_CANNOT_FIND_BRANCH": "Cannot find specified branch",
+    "GIT_CANNOT_FIND_REPO": "Cannot find specfieid repository",
+    "GIT_CANNOT_FIND_COMMIT": "Cannot find specified commit",
+    "UNSPECIFIED": "Something went wrong!"
+  }
 }

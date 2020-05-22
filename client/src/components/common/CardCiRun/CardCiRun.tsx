@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Link } from '@reach/router';
+import { useTranslation } from 'react-i18next';
 import { cn, CNProps } from '../../../utils/bem-cn';
 import { formatTime } from '../../../utils/formatTime';
 import { format } from 'date-fns';
@@ -20,6 +21,8 @@ type Props = {
 type CardCiRunProps = Props & CNProps<CardCiRunMods>;
 
 const CardCiRun: React.FC<CardCiRunProps> = (props) => {
+  const { i18n } = useTranslation();
+
   const { buildInfo } = props;
   const {
     id,
@@ -70,13 +73,13 @@ const CardCiRun: React.FC<CardCiRunProps> = (props) => {
           <IconText
             className="card-ci-run__meta-elem"
             iconType="calendar"
-            text={format(new Date(start), 'dd LLL, kk:mm')}
+            text={format(new Date(start), 'dd LLL, kk:mm')} // TODO: FORMAT 21 янв, 03:06
           ></IconText>
           {typeof duration === 'number' && (
             <IconText
               className="card-ci-run__meta-elem"
               iconType="stopwatch"
-              text={formatTime(duration)}
+              text={formatTime(duration)} // TODO: FORMAT 1 h 34 min
             ></IconText>
           )}
         </div>

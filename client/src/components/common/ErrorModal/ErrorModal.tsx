@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Modal, { ModalProps } from '../../base/Modal/Modal';
 import Button from '../../base/Button/Button';
@@ -11,7 +12,14 @@ type ErrorModalProps = ModalProps & {
 };
 
 const ErrorModal: React.FC<ErrorModalProps> = (props) => {
-  const { errorMessage = 'Something get wrong!', closeModal } = props;
+  const { t } = useTranslation();
+
+  const { closeModal, errorMessage } = props;
+
+  const errorMessageTranslated = t([
+    `error.${errorMessage}`,
+    errorMessage ? errorMessage : 'error.UNSPECIFIED',
+  ]);
 
   return (
     <Modal
@@ -28,10 +36,10 @@ const ErrorModal: React.FC<ErrorModalProps> = (props) => {
         <div className="f-modal-placeholder"></div>
         <div className="f-modal-fix"></div>
       </div>
-      <h2 className="typography__headline3 error-modal__elem">Error</h2>
-      <p className="typography__body2 error-modal__elem">{errorMessage}</p>
+      <h2 className="typography__headline3 error-modal__elem">{t('Error')}</h2>
+      <p className="typography__body2 error-modal__elem">{errorMessageTranslated}</p>
       <Button onClick={closeModal} className="error-modal__elem">
-        Close
+        {t('Close')}
       </Button>
     </Modal>
   );

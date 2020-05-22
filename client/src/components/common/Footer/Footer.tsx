@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
       event.preventDefault();
       i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en');
     },
-    [i18n.changeLanguage],
+    [i18n],
   );
 
   return (
@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
             </Link>
           </li>
         </ul>
-        <div className="footer__copy">&copy; 2020 Artem Loiko</div>
+        <div className="footer__copy">{t('copyright 2020 Artem Loiko')}</div>
       </div>
     </footer>
   );
