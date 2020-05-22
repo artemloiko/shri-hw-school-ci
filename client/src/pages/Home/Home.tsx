@@ -23,7 +23,7 @@ const Home: React.FC<RouteComponentProps> = () => {
   const { error } = settings;
 
   useEffect(() => {
-    if (error) {
+    if (error && error !== 'INTERNAL_SERVER_ERROR') {
       const isNetworkError = /500$/.test(error);
       const message = isNetworkError ? 'Network error. Please check internet connection' : error;
       addToast(message, { appearance: 'error' });

@@ -20,7 +20,7 @@ export const initialState: SettingsState = {
   isLoaded: false,
 };
 
-export function settingsReducer(state = initialState, action: SettingsActions) {
+export function settingsReducer(state = initialState, action: SettingsActions): SettingsState {
   switch (action.type) {
     case GET_SETTINGS_REQUEST:
       return { ...state, isFetching: true };

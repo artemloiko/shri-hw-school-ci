@@ -34,7 +34,7 @@ const Settings: React.FC<RouteComponentProps> = () => {
         </div>
       </Loader>
       <ErrorModal
-        isOpen={Boolean(settings.error)}
+        isOpen={Boolean(settings.error && settings.error !== 'INTERNAL_SERVER_ERROR')}
         errorMessage={settings.error}
         closeModal={() => dispatch(resetSettingsError())}
       ></ErrorModal>

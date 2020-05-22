@@ -45,7 +45,8 @@ function fetchSettings(): ThunkAction<void, RootState, unknown, Action<string>> 
       const data = await api.getSettings();
       dispatch(getSettingsSuccess(data));
     } catch (error) {
-      dispatch(getSettingsFail(error.message));
+      const errorMessage = error.response?.data?.error?.errorCode || error.message;
+      dispatch(getSettingsFail(errorMessage));
     }
   };
 }
