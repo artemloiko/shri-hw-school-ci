@@ -1,21 +1,37 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Link from '../../base/Link/Link';
 
 import './Footer.css';
+import { useTranslation } from 'react-i18next';
 
 const Footer: React.FC = () => {
+  const { t, i18n } = useTranslation();
+
+  const handleLanguageChange = useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+      event.preventDefault();
+      i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en');
+    },
+    [i18n.changeLanguage],
+  );
+
   return (
     <footer className="footer">
       <div className="container footer__container">
         <ul className="footer__nav">
           <li className="footer__nav-item">
             <Link to="/" className="footer__link">
-              Support
+              {t('Support')}
             </Link>
           </li>
           <li className="footer__nav-item">
             <Link to="/" className="footer__link">
-              Learning
+              {t('Learning')}
+            </Link>
+          </li>
+          <li className="footer__nav-item">
+            <Link to="/" className="footer__link" onClick={handleLanguageChange}>
+              {i18n.language === 'en' ? 'Русский язык' : 'English'}
             </Link>
           </li>
         </ul>

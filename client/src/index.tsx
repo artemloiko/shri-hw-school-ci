@@ -5,10 +5,11 @@ import { ToastProvider } from 'react-toast-notifications';
 import ErrorBoundary from 'components/common/ErrorBoundary/ErrorBoundary';
 import { store } from './store/configureStore';
 import * as serviceWorker from './serviceWorker';
-
 import App from './App';
 
 import './index.css';
+import './i18n';
+
 import { subscribe } from 'notifications';
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = process.env.NODE_ENV === 'production';

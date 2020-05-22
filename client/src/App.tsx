@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { Router } from '@reach/router';
 import { useToasts } from 'react-toast-notifications';
+import Loader from './components/common/Loader/Loader';
 import Home from './pages/Home/Home';
 import Settings from './pages/Settings/Settings';
 import Details from './pages/Details/Details';
@@ -22,13 +23,16 @@ function App() {
       window.removeEventListener('offline', networkChangeHandler);
     };
   }, [addToast]);
+
   return (
-    <Router>
-      <Home path="/" />
-      <Settings path="settings" />
-      <Details path="details/:buildId" />
-      <ErrorPage default />
-    </Router>
+    <Suspense fallback={<Loader isLoading />}>
+      <Router>
+        <Home path="/" />
+        <Settings path="settings" />
+        <Details path="details/:buildId" />
+        <ErrorPage default />
+      </Router>
+    </Suspense>
   );
 }
 

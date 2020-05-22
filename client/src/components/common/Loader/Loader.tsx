@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 import { cn, CNProps } from '../../../utils/bem-cn';
 
 import './Loader.css';
@@ -9,7 +9,7 @@ type LoaderMods = {
 };
 
 type Props = {
-  children: ReactElement | ReactElement[];
+  children?: ReactNode;
   isLoading: boolean;
   showContent?: boolean;
 };
