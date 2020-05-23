@@ -6,13 +6,14 @@ import { useTranslation } from 'react-i18next';
 
 const Footer: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const lang = i18n.language.replace(/-\w+$/, '');
 
   const handleLanguageChange = useCallback(
     (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       event.preventDefault();
-      i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en');
+      i18n.changeLanguage(lang === 'en' ? 'ru' : 'en');
     },
-    [i18n],
+    [lang],
   );
 
   return (
@@ -31,7 +32,7 @@ const Footer: React.FC = () => {
           </li>
           <li className="footer__nav-item">
             <Link to="/" className="footer__link" onClick={handleLanguageChange}>
-              {i18n.language === 'en' ? 'Русский язык' : 'English'}
+              {lang === 'en' ? 'Русский язык' : 'English'}
             </Link>
           </li>
         </ul>
