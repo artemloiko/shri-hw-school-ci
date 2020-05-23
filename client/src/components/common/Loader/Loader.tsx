@@ -6,6 +6,7 @@ import './Loader.css';
 type LoaderMods = {
   static?: boolean;
   animate?: boolean;
+  fullpage?: boolean;
 };
 
 type Props = {
@@ -17,11 +18,11 @@ type Props = {
 type LoaderProps = Props & CNProps<LoaderMods> & React.HTMLAttributes<HTMLDivElement>;
 
 const Loader: React.FC<LoaderProps> = (props) => {
-  const { children, isLoading, showContent, ...loaderProps } = props;
+  const { children, isLoading, showContent, mods, mix, className, ...loaderProps } = props;
   return (
     <>
       {isLoading && (
-        <div {...loaderProps} className={cn('loader', props)}>
+        <div {...loaderProps} className={cn('loader', { mods, mix, className })}>
           <div className="cat">
             <div className="cat__body"></div>
             <div className="cat__body"></div>
