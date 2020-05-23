@@ -2,13 +2,11 @@
   "Build command": "Команда для билда",
   "Build Command": "Команда для билда",
   "Cancel": "Отмена",
-  "Close": "близко",
   "Commit hash": "Хэш коммита",
   "Commit hash is required": "Хэш коммита должен быть указан",
   "Configure repository connection and synchronization settings": "Настроить соединение с репозиторием и параметры синхронизации",
   "copyright 2020 Artem Loiko": "© 2020 Артем Лойко",
   "Enter the commit hash which you want to build": "Введите хеш коммита, который вы хотите сбилдить",
-  "Error": "Закрыть",
   "error": {
     "GIT_CANNOT_FIND_BRANCH": "Не удается найти указанную ветку",
     "GIT_CANNOT_FIND_COMMIT": "Не удается найти указанный коммит",
@@ -32,11 +30,13 @@
   "Settings": "Настройки",
   "Show more": "Показать больше",
   "Support": "Служба поддержки",
+  "Synchronize every {{count}} minutes_0": "Синхронизировать каждую {{count}} минуту",
+  "Synchronize every {{count}} minutes_1": "Синхронизировать каждые {{count}} минуты",
+  "Synchronize every {{count}} minutes_2": "Синхронизировать каждые {{count}} минут",
   "Synchronize every {{count}} minutes_5": "Синхронизировать каждые {{count}} минут",
   "{{X}} h {{Y}} min": "{{X}} ч {{Y}} мин",
   "{{Y}} min": "{{Y}} мин",
   "{{Z}} sec": "{{Z}} сек",
-  "Synchronize every {{count}} minutes_0": "Синхронизировать каждую {{count}} минуту",
-  "Synchronize every {{count}} minutes_1": "Синхронизировать каждые {{count}} минуты",
-  "Synchronize every {{count}} minutes_2": "Синхронизировать каждые {{count}} минут"
+  "Error": "Ошибка",
+  "Close": "Закрыть"
 }
