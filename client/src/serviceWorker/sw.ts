@@ -1,5 +1,5 @@
 import { createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching';
-import { CacheFirst, NetworkFirst } from 'workbox-strategies';
+import { CacheFirst, NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
 import { NavigationRoute, registerRoute } from 'workbox-routing';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { ExpirationPlugin } from 'workbox-expiration';
@@ -40,18 +40,20 @@ registerRoute(
   new NetworkFirst({ networkTimeoutSeconds: 2, cacheName: 'api-get-requests' }),
 );
 
-// cashe CacheFirst /api/builds/:buildId/logs
+// cashe StaleWhileRevalidate /locales/:lng/{namespace}.json
+registerRoute(
+  /\/locales\/[\w-]+\/.+\.json$/,
+  new StaleWhileRevalidate({ cacheName: 'translations' }),
+);
+
+// cashe StaleWhileRevalidate /api/builds/:buildId/logs
 registerRoute(
   /\/api\/builds\/.+\/logs/,
-  new CacheFirst({
+  new StaleWhileRevalidate({
     cacheName: 'api-cachedonly-get-requests',
     plugins: [
       new CacheableResponsePlugin({
         statuses: [200],
-      }),
-      new ExpirationPlugin({
-        purgeOnQuotaError: true,
-        maxEntries: 100,
       }),
     ],
   }),
