@@ -11,7 +11,6 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'en',
-    debug: true,
 
     interpolation: {
       escapeValue: false, // react already safes from xss
@@ -21,5 +20,9 @@ i18n
     ns: ['translation'],
     defaultNS: 'translation',
   });
+
+i18n.on('languageChanged', (lng) => {
+  if (document) document.documentElement.lang = lng;
+});
 
 export default i18n;
