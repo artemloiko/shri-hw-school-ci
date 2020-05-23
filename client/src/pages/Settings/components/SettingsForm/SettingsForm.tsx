@@ -83,7 +83,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
         } = formikBag;
 
         const getSynchronizationTranslates = (count = '0') => {
-          const period = Number(count) || 0;
+          const period = Number(count) || 10;
           const synchronizationPhrase = t('Synchronize every {{count}} minutes', {
             count: period,
           });
