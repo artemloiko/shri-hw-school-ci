@@ -16,6 +16,27 @@
   "error": {
     "GIT_CANNOT_FIND_BRANCH": "Не удается найти указанную ветку",
     "GIT_CANNOT_FIND_COMMIT": "Не удается найти указанный коммит",
-    "UNSPECIFIED": "Что-то пошло не так!"
-  }
+    "UNSPECIFIED": "Что-то пошло не так!",
+    "GIT_CANNOT_FIND_REPO": "Не удается найти указанное хранилище"
+  },
+  "No builds": "Нет билдов",
+  "Rebuild": "Пересобрать",
+  "Settings": "Настройки",
+  "Commit hash is required": "Хэш коммита должен быть указан",
+  "Commit hash": "Хэш коммита",
+  "Run build": "Запустить билд",
+  "New build": "Новый билд",
+  "Enter the commit hash which you want to build": "Введите хеш коммита, который вы хотите сбилдить",
+  "Repository name": "Название репозитория",
+  "Build Command": "Команда для билда",
+  "Main branch": "Основная ветка",
+  "{{fieldName}} is required": "Поле {{fieldName}} обязательное",
+  "Period should be a number": "Период синхронизации должен быть числом",
+  "GitHub repository": "GitHub репозиторий",
+  "Build command": "Команда для билда",
+  "Error": "Закрыть",
+  "Synchronize every {{count}} minutes_0": "Синхронизировать каждые {{count}} минут",
+  "Synchronize every {{count}} minutes_1": "Синхронизировать каждую {{count}} минуту",
+  "Synchronize every {{count}} minutes_2": "Синхронизировать каждые {{count}} минуты",
+  "Synchronize every {{count}} minutes_5": "Синхронизировать каждые {{count}} минут"
 }
