@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
       event.preventDefault();
       i18n.changeLanguage(lang === 'en' ? 'ru' : 'en');
     },
-    [lang],
+    [i18n, lang],
   );
 
   return (
