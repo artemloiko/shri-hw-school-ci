@@ -33,5 +33,8 @@
     "GIT_CANNOT_FIND_REPO": "Cannot find specfieid repository",
     "GIT_CANNOT_FIND_COMMIT": "Cannot find specified commit",
     "UNSPECIFIED": "Something went wrong!"
-  }
+  },
+  "{{X}} h {{Y}} min": "{{X}} h {{Y}} min",
+  "{{Y}} min": "{{Y}} min",
+  "{{Z}} sec": "{{Z}} sec"
 }

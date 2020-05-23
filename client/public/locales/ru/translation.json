@@ -34,5 +34,8 @@
     "GIT_CANNOT_FIND_REPO": "",
     "GIT_CANNOT_FIND_COMMIT": "",
     "UNSPECIFIED": ""
-  }
+  },
+  "{{X}} h {{Y}} min": "{{X}} ч {{Y}} мин",
+  "{{Y}} min": "{{Y}} мин",
+  "{{Z}} sec": "{{Z}} сек"
 }
