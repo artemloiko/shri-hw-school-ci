@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, FormikErrors } from 'formik';
+import { useTranslation } from 'react-i18next';
 
 import Input from '../../../../components/base/Input/Input';
 import Button from '../../../../components/base/Button/Button';
@@ -23,6 +24,8 @@ interface SettingsFormValues {
 }
 
 const SettingsForm: React.FC<SettingsFormProps> = (props) => {
+  const { t } = useTranslation();
+
   const settings = useSelector((state: RootState) => state.settings);
   const dispatch = useDispatch();
   const initialValues: SettingsFormValues = {
@@ -42,13 +45,14 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
           'buildCommand',
           'mainBranch',
         ];
-        const requiredFieldsLabels = ['Repository name', 'Build Command', 'Main branch'];
+        const requiredFieldsLabels = [t('Repository name'), t('Build Command'), t('Main branch')];
         requiredFields.forEach((field, i) => {
-          if (!values[field]) errors[field] = `${requiredFieldsLabels[i]} is required`;
+          if (!values[field])
+            errors[field] = t('{{fieldName}} is required', { fieldName: requiredFieldsLabels[i] });
         });
 
         if (values.period && !/^\d+$/.test(values.period)) {
-          errors.period = 'Period should be a number';
+          errors.period = t('Period should be a number');
         }
         return errors;
       }}
@@ -60,8 +64,9 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
           dispatch(fetchBuildsListIfNeeded());
         } catch (err) {
           const { response } = err;
-          const error = response?.data?.error || err;
-          dispatch(updateSettingsFail(error.message));
+          const errorMessage: string =
+            response?.data?.error?.errorCode || response?.data?.error?.message || err.message;
+          dispatch(updateSettingsFail(errorMessage));
         }
         setSubmitting(false);
       }}
@@ -74,13 +79,26 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
           setFieldValue,
           errors,
           touched,
+          values,
         } = formikBag;
+
+        const getSynchronizationTranslates = (count = '0') => {
+          const period = Number(count) || 10;
+          const synchronizationPhrase = t('Synchronize every {{count}} minutes', {
+            count: period,
+          });
+          return {
+            label: synchronizationPhrase.split(period.toString())[0],
+            appendText: synchronizationPhrase.split(period.toString())[1],
+          };
+        };
+
         return (
           <Loader isLoading={isSubmitting} showContent>
             <Form {...props} onSubmit={handleSubmit}>
               <FormInputGroup>
                 <TextField
-                  label="GitHub repository"
+                  label={t('GitHub repository')}
                   htmlFor="repoName"
                   mods={{ required: true }}
                   mix={['form']}
@@ -97,7 +115,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
                 </TextField>
 
                 <TextField
-                  label="Build command"
+                  label={t('Build command')}
                   htmlFor="buildCommand"
                   mods={{ required: true }}
                   mix={['form']}
@@ -114,7 +132,7 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
                 </TextField>
 
                 <TextField
-                  label="Main branch"
+                  label={t('Main branch')}
                   htmlFor="mainBranch"
                   mods={{ required: true }}
                   mix={['form']}
@@ -132,11 +150,11 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
               </FormInputGroup>
               <FormInputGroup>
                 <TextField
-                  label="Synchronize every"
+                  label={getSynchronizationTranslates(values.period).label}
                   htmlFor="period"
                   mods={{ row: true }}
                   mix={['form']}
-                  appendText="minutes"
+                  appendText={getSynchronizationTranslates(values.period).appendText}
                 >
                   <Input
                     mods={{ counter: true }}
@@ -157,14 +175,14 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
                   mods={{ action: true, disabled: isSubmitting }}
                   className="form__submit-group-elem"
                 >
-                  Save
+                  {t('Save')}
                 </Button>
                 <Button
                   to="/"
                   className="form__submit-group-elem"
                   mods={{ disabled: isSubmitting }}
                 >
-                  Cancel
+                  {t('Cancel')}
                 </Button>
               </FormSubmitGroup>
               <FormInputGroup>

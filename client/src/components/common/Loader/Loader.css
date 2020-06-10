@@ -23,6 +23,26 @@
   animation: fadeIn 1.5s;
 }
 
+.loader_fullpage {
+  margin: 48px 0 32px;
+  height: calc(100% - 48px - 32px) !important;
+}
+@media (max-width: 768px) {
+  .loader_fullpage {
+    margin: 48px 0 60px;
+    height: calc(100% - 48px - 60px) !important;
+  }
+}
+@media (max-width: 480px) {
+  .loader_fullpage {
+    margin: 68px 0 68px;
+    height: calc(100% - 68px - 68px) !important;
+  }
+}
+.loader_fullpage .cat {
+  transform: rotateX(180deg);
+}
+
 .cat {
   position: relative;
   width: 100%;
@@ -36,9 +56,7 @@
   display: block;
   padding-bottom: 100%;
 }
-/* .cat:hover > * {
-  animation-play-state: paused;
-} */
+
 .cat:active > * {
   animation-play-state: running;
 }

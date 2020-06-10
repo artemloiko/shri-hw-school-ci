@@ -14,12 +14,15 @@ import { updateBuildsList, addBuild } from '../../actions/BuildsAction';
 import { RootState } from 'reducers';
 
 import './Details.css';
+import { useTranslation } from 'react-i18next';
 
 export interface DetailsProps extends RouteComponentProps {
   buildId?: string;
 }
 
 const Details: React.FC<DetailsProps> = (props) => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
   const { buildId = '' } = props;
 
@@ -42,6 +45,7 @@ const Details: React.FC<DetailsProps> = (props) => {
       navigate(`/details/${data.id}`);
     } catch (error) {
       const errorMessage = error?.response?.data?.error?.message;
+      // TODO: ERROR_MESSAGE
       setRebuildError(errorMessage ? `${errorMessage}. Check your repo settings` : 'Network error');
     }
     setIsRebuildSubmitting(false);
@@ -63,15 +67,16 @@ const Details: React.FC<DetailsProps> = (props) => {
             iconType="rebuild"
             onClick={handleRebuild}
           >
-            Rebuild
+            {t('Rebuild')}
           </Button>
           <Button
             to="/settings"
             className="header__control"
             mods={{ size: 'small', 'icon-only': true, disabled: isRebuildSubmitting }}
             iconType="settings"
+            title={t('Settings')}
           >
-            Settings
+            {t('Settings')}
           </Button>
         </>
       }

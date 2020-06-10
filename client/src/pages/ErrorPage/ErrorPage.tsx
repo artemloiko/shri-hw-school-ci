@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Page from '../../components/common/Page/Page';
 import { RouteComponentProps } from '@reach/router';
 
@@ -10,7 +11,9 @@ export interface ErrorPageProps extends RouteComponentProps {
 }
 
 const ErrorPage: React.FC<ErrorPageProps> = (props) => {
-  const { errorHeading = '404', errorText = 'Not found' } = props;
+  const { t } = useTranslation();
+
+  const { errorHeading = '404', errorText = t('Not found') } = props;
 
   return (
     <Page contentClass="container">

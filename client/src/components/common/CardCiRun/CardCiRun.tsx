@@ -1,9 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Link } from '@reach/router';
+import { useTranslation } from 'react-i18next';
 import { cn, CNProps } from '../../../utils/bem-cn';
 import { formatTime } from '../../../utils/formatTime';
-import { format } from 'date-fns';
 
 import IconText from '../../base/IconText/IconText';
 
@@ -20,6 +20,8 @@ type Props = {
 type CardCiRunProps = Props & CNProps<CardCiRunMods>;
 
 const CardCiRun: React.FC<CardCiRunProps> = (props) => {
+  const { i18n, t } = useTranslation();
+
   const { buildInfo } = props;
   const {
     id,
@@ -37,6 +39,15 @@ const CardCiRun: React.FC<CardCiRunProps> = (props) => {
     'card-ci-run_status_success': status === 'Success',
     'card-ci-run_status_running': status === 'InProgress' || status === 'Waiting',
     'card-ci-run_status_fail': status === 'Fail' || status === 'Canceled',
+  };
+
+  const formatDate = (date: Date): string => {
+    return new Intl.DateTimeFormat(i18n.language, {
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    }).format(date);
   };
 
   return (
@@ -70,13 +81,13 @@ const CardCiRun: React.FC<CardCiRunProps> = (props) => {
           <IconText
             className="card-ci-run__meta-elem"
             iconType="calendar"
-            text={format(new Date(start), 'dd LLL, kk:mm')}
+            text={formatDate(new Date(start))}
           ></IconText>
           {typeof duration === 'number' && (
             <IconText
               className="card-ci-run__meta-elem"
               iconType="stopwatch"
-              text={formatTime(duration)}
+              text={formatTime(duration, t)}
             ></IconText>
           )}
         </div>
