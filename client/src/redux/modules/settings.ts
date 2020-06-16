@@ -6,13 +6,14 @@ import { RootState } from './root';
 import { Epic } from 'redux-observable';
 import { isOfType } from 'typesafe-actions';
 import { from, of } from 'rxjs';
-import { mergeMap, map, catchError, filter, take, tap } from 'rxjs/operators';
+import { mergeMap, map, catchError, filter, take, switchMap, tap } from 'rxjs/operators';
 
 // Actions
 const GET_SETTINGS = 'school-ci/settings/GET_SETTINGS';
 const GET_SETTINGS_SUCCESS = 'school-ci/settings/GET_SETTINGS_SUCCESS';
 const GET_SETTINGS_FAIL = 'school-ci/settings/GET_SETTINGS_FAIL';
 const SET_SETTINGS = 'school-ci/settings/SET_SETTINGS';
+const SET_SETTINGS_SUCCESS = 'school-ci/settings/SET_SETTINGS_SUCCESS';
 const SET_SETTINGS_FAIL = 'school-ci/settings/SET_SETTINGS_FAIL';
 const RESET_SETTINGS_ERROR = 'school-ci/settings/RESET_SETTINGS_ERROR';
 
@@ -22,7 +23,7 @@ export interface SettingsState extends Partial<ConfigurationModel> {
 }
 
 export const initialState: SettingsState = {
-  isFetching: false,
+  isFetching: true,
 };
 
 // Reducer
@@ -31,13 +32,11 @@ export default function settingsReducer(
   action: SettingsActions,
 ): SettingsState {
   switch (action.type) {
-    case GET_SETTINGS:
-      return { ...state, isFetching: true };
     case GET_SETTINGS_SUCCESS:
       return { ...state, ...action.payload, isFetching: false };
     case GET_SETTINGS_FAIL:
       return { ...state, error: action.payload, isFetching: false };
-    case SET_SETTINGS:
+    case SET_SETTINGS_SUCCESS:
       return { ...state, ...action.payload };
     case SET_SETTINGS_FAIL:
       return { ...state, error: action.payload };
@@ -75,20 +74,34 @@ export const getSettingsFail = (errorMessage: string): GetSettingsFailAction => 
   error: true,
 });
 
-export interface UpdateSettingsAction {
+export interface SetSettingsAction {
   type: typeof SET_SETTINGS;
   payload: ConfigurationDTO;
+  meta: {
+    callback: (success: boolean) => void;
+  };
 }
-export function updateSettings(settingsDTO: ConfigurationDTO): UpdateSettingsAction {
-  return { type: SET_SETTINGS, payload: settingsDTO };
+export function setSettings(
+  settingsDTO: ConfigurationDTO,
+  callback: (success: boolean) => void,
+): SetSettingsAction {
+  return { type: SET_SETTINGS, payload: settingsDTO, meta: { callback } };
 }
 
-export interface UpdateSettingsFailAction {
+export interface SetSettingsSuccessAction {
+  type: typeof SET_SETTINGS_SUCCESS;
+  payload: ConfigurationDTO;
+}
+export function setSettingsSuccess(settingsDTO: ConfigurationDTO): SetSettingsSuccessAction {
+  return { type: SET_SETTINGS_SUCCESS, payload: settingsDTO };
+}
+
+export interface SetSettingsFailAction {
   type: typeof SET_SETTINGS_FAIL;
   payload: string;
   error: boolean;
 }
-export function updateSettingsFail(errorMessage: string): UpdateSettingsFailAction {
+export function setSettingsFail(errorMessage: string): SetSettingsFailAction {
   return { type: SET_SETTINGS_FAIL, payload: errorMessage, error: true };
 }
 
@@ -103,8 +116,9 @@ export type SettingsActions =
   | GetSettingsRequestAction
   | GetSettingsSuccessAction
   | GetSettingsFailAction
-  | UpdateSettingsAction
-  | UpdateSettingsFailAction
+  | SetSettingsAction
+  | SetSettingsFailAction
+  | SetSettingsSuccessAction
   | ResetSettingsErrorAction;
 
 export const settingsEpic: Epic<SettingsActions, SettingsActions, RootState, EpicDependencies> = (
@@ -119,6 +133,31 @@ export const settingsEpic: Epic<SettingsActions, SettingsActions, RootState, Epi
       from(api.getSettings()).pipe(
         map((data) => getSettingsSuccess(data)),
         catchError((error: AxiosError) => of(getSettingsFail(error.message))),
+      ),
+    ),
+  );
+
+export const setSettingsEpic: Epic<
+  SettingsActions,
+  SettingsActions,
+  RootState,
+  EpicDependencies
+> = (action$, state$, { api }) =>
+  action$.pipe(
+    filter(isOfType(SET_SETTINGS)),
+    switchMap((action) =>
+      from(api.setSettings(action.payload)).pipe(
+        map((data) => {
+          return setSettingsSuccess(data);
+        }),
+        catchError((error: AxiosError) => {
+          const apiError = error?.response?.data?.error;
+          const errorMessage: string = apiError?.errorCode || apiError?.message || error.message;
+          return of(setSettingsFail(errorMessage));
+        }),
+        tap((resultingAction) => {
+          action.meta.callback(resultingAction.type === SET_SETTINGS_SUCCESS);
+        }),
       ),
     ),
   );

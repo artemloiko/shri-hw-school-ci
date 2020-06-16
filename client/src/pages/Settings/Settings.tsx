@@ -10,6 +10,7 @@ import SettingsForm from './components/SettingsForm/SettingsForm';
 
 import { getSettingsRequest, resetSettingsError } from 'redux/modules/settings';
 import { RootState } from 'redux/modules/root';
+import { fetchBuildsListIfNeeded } from 'actions/BuildsAction';
 
 import './Settings.css';
 
@@ -20,7 +21,10 @@ const Settings: React.FC<RouteComponentProps> = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!settings.repoName) dispatch(getSettingsRequest());
+    if (!settings.repoName) {
+      dispatch(getSettingsRequest());
+      dispatch(fetchBuildsListIfNeeded());
+    }
   }, [dispatch, settings]);
 
   return (

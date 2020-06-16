@@ -17,6 +17,7 @@ export class StorageAPI {
 
   async setSettings(settingsDTO: ConfigurationDTO) {
     await this.axiosInstance.post('/settings', settingsDTO);
+    return settingsDTO;
   }
 
   async getBuildsList(offset = 0, limit = 25) {

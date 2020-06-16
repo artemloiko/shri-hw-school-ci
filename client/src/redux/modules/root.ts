@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { combineEpics, ActionsObservable, StateObservable } from 'redux-observable';
 import { buildsDetailsReducer } from '../../reducers/buildsDetails';
 import { buildsReducer } from '../../reducers/builds';
-import settingsReducer, { settingsEpic, SettingsActions } from './settings';
+import settingsReducer, { settingsEpic, SettingsActions, setSettingsEpic } from './settings';
 import { EpicDependencies } from 'redux/createStore';
 import { catchError } from 'rxjs/operators';
 
@@ -20,7 +20,7 @@ export const rootEpic = (
   state$: StateObservable<RootState>,
   dependencies: EpicDependencies,
 ) =>
-  combineEpics(settingsEpic)(action$, state$, dependencies).pipe(
+  combineEpics(settingsEpic, setSettingsEpic)(action$, state$, dependencies).pipe(
     catchError((error, source) => {
       console.error('Epic error');
       console.dir(error);
