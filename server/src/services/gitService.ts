@@ -37,7 +37,7 @@ export default class GitService {
 
   async cloneRepository(repoName: string) {
     try {
-      const repoUrl = `git@github.com/${repoName}.git`;
+      const repoUrl = `git@github.com:${repoName}.git`;
       if (!(await this.checkIfRepositoryExists(repoUrl))) {
         throw new Error('Repository does not exist');
       }
