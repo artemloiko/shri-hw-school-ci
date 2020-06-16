@@ -20,12 +20,12 @@ const Settings: React.FC<RouteComponentProps> = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getSettingsRequest());
-  }, [dispatch]);
+    if (!settings.repoName) dispatch(getSettingsRequest());
+  }, [dispatch, settings]);
 
   return (
     <Page contentClass="container">
-      <Loader isLoading={!settings.isLoaded}>
+      <Loader isLoading={settings.isFetching}>
         <div className="settings">
           <div className="settings__elem">
             <h4 className="typography__elem typography__headline4">{t('Settings')}</h4>
