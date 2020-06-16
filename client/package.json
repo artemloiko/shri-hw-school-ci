@@ -111,6 +111,9 @@
         }
       }
     ],
+    "ignorePatterns": [
+      "src/serviceWorker/**/*.*"
+    ],
     "settings": {
       "import/resolver": {
         "node": {
