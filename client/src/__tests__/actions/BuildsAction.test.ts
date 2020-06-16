@@ -7,7 +7,7 @@ import {
   fetchMoreBuilds,
 } from '../../actions/BuildsAction';
 import apiMock from '../../utils/api';
-import { RootState } from 'reducers';
+import { RootState } from 'redux/modules/root';
 import { BuildModel } from 'typings';
 
 jest.mock('../../utils/api');

@@ -9,9 +9,9 @@ import TextField from '../../../../components/base/TextField/TextField';
 import Loader from '../../../../components/common/Loader/Loader';
 import Form, { FormInputGroup, FormSubmitGroup } from '../../../../components/common/Form/Form';
 
-import { updateSettings, updateSettingsFail } from '../../../../actions/SettingsAction';
 import { fetchBuildsListIfNeeded } from '../../../../actions/BuildsAction';
-import { RootState } from 'reducers';
+import { updateSettings, updateSettingsFail } from 'redux/modules/settings';
+import { RootState } from 'redux/modules/root';
 import api from 'utils/api';
 
 type SettingsFormProps = React.ComponentProps<typeof Form>;

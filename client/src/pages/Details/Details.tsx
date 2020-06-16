@@ -11,7 +11,7 @@ import ErrorModal from '../../components/common/ErrorModal/ErrorModal';
 
 import { getBuildDetails } from '../../actions/BuildsDetailsAction';
 import { updateBuildsList, addBuild } from '../../actions/BuildsAction';
-import { RootState } from 'reducers';
+import { RootState } from 'redux/modules/root';
 
 import './Details.css';
 import { useTranslation } from 'react-i18next';

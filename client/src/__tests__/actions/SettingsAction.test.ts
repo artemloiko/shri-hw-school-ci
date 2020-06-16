@@ -2,13 +2,13 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { mocked } from 'ts-jest/utils';
 import {
-  fetchSettingsIfNeeded,
+  getSettingsRequest,
   updateSettings,
   updateSettingsFail,
   resetSettingsError,
-} from '../../actions/SettingsAction';
+} from '../../redux/modules/settings';
 import apiMock from '../../utils/api';
-import { RootState } from 'reducers';
+import { RootState } from 'redux/modules/root';
 
 jest.mock('../../utils/api');
 
@@ -41,7 +41,7 @@ describe('settings actions', () => {
     };
     mocked(apiMock.getSettings).mockImplementationOnce(() => Promise.resolve(data));
 
-    await store.dispatch<any>(fetchSettingsIfNeeded());
+    await store.dispatch<any>(getSettingsRequest());
 
     expect(store.getActions()).toMatchSnapshot();
   });
@@ -50,7 +50,7 @@ describe('settings actions', () => {
     const error = { message: 'Internal server error' };
     mocked(apiMock.getSettings).mockImplementationOnce(() => Promise.reject(error));
 
-    await store.dispatch<any>(fetchSettingsIfNeeded());
+    await store.dispatch<any>(getSettingsRequest());
 
     expect(store.getActions()).toMatchSnapshot();
   });

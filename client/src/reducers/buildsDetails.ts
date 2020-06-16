@@ -31,7 +31,10 @@ export interface BuildDetailsState {
 }
 const initialState: BuildDetailsState = {};
 
-export function buildsDetailsReducer(state = initialState, action: BuildDetailsActions) {
+export function buildsDetailsReducer(
+  state = initialState,
+  action: BuildDetailsActions,
+): BuildDetailsState {
   const { id = 'default' } = action.payload || {};
   const updateStateWithDetails = (details: Details) => {
     return {

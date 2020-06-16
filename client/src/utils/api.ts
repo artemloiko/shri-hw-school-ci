@@ -5,7 +5,7 @@ const axiosAPI = axios.create({
   baseURL: '/api',
 });
 
-class API {
+export class StorageAPI {
   constructor(private axiosInstance: AxiosInstance) {
     this.axiosInstance = axiosInstance;
   }
@@ -48,7 +48,7 @@ class API {
   }
 }
 
-const ApiInstance = new API(axiosAPI);
+const ApiInstance = new StorageAPI(axiosAPI);
 
 export interface HttpError {
   errorCode: string;

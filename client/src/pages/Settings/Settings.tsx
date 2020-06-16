@@ -8,8 +8,8 @@ import Loader from '../../components/common/Loader/Loader';
 import ErrorModal from '../../components/common/ErrorModal/ErrorModal';
 import SettingsForm from './components/SettingsForm/SettingsForm';
 
-import { fetchSettingsIfNeeded, resetSettingsError } from '../../actions/SettingsAction';
-import { RootState } from 'reducers';
+import { getSettingsRequest, resetSettingsError } from 'redux/modules/settings';
+import { RootState } from 'redux/modules/root';
 
 import './Settings.css';
 
@@ -20,7 +20,7 @@ const Settings: React.FC<RouteComponentProps> = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchSettingsIfNeeded());
+    dispatch(getSettingsRequest());
   }, [dispatch]);
 
   return (
