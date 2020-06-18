@@ -9,13 +9,13 @@ import { from, of } from 'rxjs';
 import { mergeMap, map, catchError, filter, take, switchMap, tap } from 'rxjs/operators';
 
 // Actions
-const GET_SETTINGS = 'school-ci/settings/GET_SETTINGS';
-const GET_SETTINGS_SUCCESS = 'school-ci/settings/GET_SETTINGS_SUCCESS';
-const GET_SETTINGS_FAIL = 'school-ci/settings/GET_SETTINGS_FAIL';
-const SET_SETTINGS = 'school-ci/settings/SET_SETTINGS';
-const SET_SETTINGS_SUCCESS = 'school-ci/settings/SET_SETTINGS_SUCCESS';
-const SET_SETTINGS_FAIL = 'school-ci/settings/SET_SETTINGS_FAIL';
-const RESET_SETTINGS_ERROR = 'school-ci/settings/RESET_SETTINGS_ERROR';
+export const GET_SETTINGS = 'school-ci/settings/GET_SETTINGS';
+export const GET_SETTINGS_SUCCESS = 'school-ci/settings/GET_SETTINGS_SUCCESS';
+export const GET_SETTINGS_FAIL = 'school-ci/settings/GET_SETTINGS_FAIL';
+export const SET_SETTINGS = 'school-ci/settings/SET_SETTINGS';
+export const SET_SETTINGS_SUCCESS = 'school-ci/settings/SET_SETTINGS_SUCCESS';
+export const SET_SETTINGS_FAIL = 'school-ci/settings/SET_SETTINGS_FAIL';
+export const RESET_SETTINGS_ERROR = 'school-ci/settings/RESET_SETTINGS_ERROR';
 
 export interface SettingsState extends Partial<ConfigurationModel> {
   isFetching: boolean;
