@@ -5,7 +5,7 @@ const axiosAPI = axios.create({
   baseURL: '/api',
 });
 
-class API {
+export class StorageAPI {
   constructor(private axiosInstance: AxiosInstance) {
     this.axiosInstance = axiosInstance;
   }
@@ -17,6 +17,7 @@ class API {
 
   async setSettings(settingsDTO: ConfigurationDTO) {
     await this.axiosInstance.post('/settings', settingsDTO);
+    return settingsDTO;
   }
 
   async getBuildsList(offset = 0, limit = 25) {
@@ -48,7 +49,7 @@ class API {
   }
 }
 
-const ApiInstance = new API(axiosAPI);
+const ApiInstance = new StorageAPI(axiosAPI);
 
 export interface HttpError {
   errorCode: string;

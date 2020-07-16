@@ -27,7 +27,7 @@ const initialState: BuildsState = {
   buildsList: [],
 };
 
-export function buildsReducer(state = initialState, action: BuildsActions) {
+export function buildsReducer(state = initialState, action: BuildsActions): BuildsState {
   switch (action.type) {
     case GET_BUILDS_LIST_REQUEST:
       return { ...state, isLoaded: false, isFetching: true, error: undefined };

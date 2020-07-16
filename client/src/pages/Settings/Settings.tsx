@@ -8,8 +8,9 @@ import Loader from '../../components/common/Loader/Loader';
 import ErrorModal from '../../components/common/ErrorModal/ErrorModal';
 import SettingsForm from './components/SettingsForm/SettingsForm';
 
-import { fetchSettingsIfNeeded, resetSettingsError } from '../../actions/SettingsAction';
-import { RootState } from 'reducers';
+import { getSettingsRequest, resetSettingsError } from 'redux/modules/settings';
+import { RootState } from 'redux/modules/root';
+import { fetchBuildsListIfNeeded } from 'actions/BuildsAction';
 
 import './Settings.css';
 
@@ -20,12 +21,15 @@ const Settings: React.FC<RouteComponentProps> = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchSettingsIfNeeded());
-  }, [dispatch]);
+    if (!settings.repoName) {
+      dispatch(getSettingsRequest());
+      dispatch(fetchBuildsListIfNeeded());
+    }
+  }, [dispatch, settings]);
 
   return (
     <Page contentClass="container">
-      <Loader isLoading={!settings.isLoaded}>
+      <Loader isLoading={settings.isFetching}>
         <div className="settings">
           <div className="settings__elem">
             <h4 className="typography__elem typography__headline4">{t('Settings')}</h4>

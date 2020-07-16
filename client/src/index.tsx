@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ToastProvider } from 'react-toast-notifications';
 import ErrorBoundary from 'components/common/ErrorBoundary/ErrorBoundary';
-import { store } from './store/configureStore';
+import { createStore } from './redux/createStore';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
 
@@ -13,6 +13,8 @@ import './i18n';
 import { subscribe } from 'notifications';
 const isDev = process.env.NODE_ENV === 'development';
 const isProd = process.env.NODE_ENV === 'production';
+
+const store = createStore();
 
 const mount = isDev ? ReactDOM.render : ReactDOM.hydrate;
 

@@ -1,87 +1,147 @@
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import { mocked } from 'ts-jest/utils';
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
+import { ActionsObservable, StateObservable } from 'redux-observable';
+import { Subject, of } from 'rxjs';
+import { toArray, delay, concatMap } from 'rxjs/operators';
 import {
-  fetchSettingsIfNeeded,
-  updateSettings,
-  updateSettingsFail,
-  resetSettingsError,
-} from '../../actions/SettingsAction';
-import apiMock from '../../utils/api';
-import { RootState } from 'reducers';
+  getSettingsRequest,
+  setSettings,
+  settingsEpic,
+  setSettingsEpic,
+  GET_SETTINGS_SUCCESS,
+  GET_SETTINGS_FAIL,
+  SET_SETTINGS_SUCCESS,
+  SET_SETTINGS_FAIL,
+} from '../../redux/modules/settings';
+import { RootState } from 'redux/modules/root';
+import { createStore } from 'redux/createStore';
 
-jest.mock('../../utils/api');
+const initialState: RootState = createStore().getState();
 
-const middlewares = [thunk];
-const mockStore = configureMockStore<RootState>(middlewares);
-const initialState: RootState = {
-  settings: {
-    isFetching: false,
-    isLoaded: false,
-  },
-  builds: {
-    isFetching: false,
-    isLoaded: false,
-    isFetchingMore: false,
-    isFullListLoaded: false,
-    buildsList: [],
-  },
-  buildsDetails: {},
+const settingsToSave = {
+  repoName: 'artuom130/itItReal',
+  buildCommand: 'npm run build',
+  mainBranch: 'master',
+  period: 0,
 };
 
-describe('settings actions', () => {
-  test('fetching settings success', async () => {
-    const store = mockStore(initialState);
-    const data = {
-      id: 'c42db8b8-128a-4194-a19b-7974cabccf4f',
-      repoName: 'artuom130/shri-hw-async',
-      buildCommand: 'npm run build',
-      mainBranch: 'master',
-      period: 0,
+const fetchedSettings = {
+  id: 'c42db8b8-128a-4194-a19b-7974cabccf4f',
+  repoName: 'artuom130/shri-hw-async',
+  buildCommand: 'npm run build',
+  mainBranch: 'master',
+  period: 0,
+};
+
+describe('Fetch settings epic (settingsEpic)', () => {
+  let state$ = new StateObservable<RootState>(new Subject(), initialState);
+  const api = {
+    getSettings: jest.fn(),
+    setSettings: jest.fn(),
+  };
+
+  beforeEach(() => {
+    state$ = new StateObservable<RootState>(new Subject(), initialState);
+    api.getSettings.mockReset();
+    api.setSettings.mockReset();
+  });
+
+  test('should dispatch data when fetch is succeed', async () => {
+    api.getSettings.mockResolvedValueOnce(fetchedSettings);
+    const action$ = ActionsObservable.of(getSettingsRequest());
+
+    // @ts-ignore
+    const epic$ = settingsEpic(action$, state$, { api });
+    const result = await epic$.pipe(toArray()).toPromise();
+
+    const expectedActions = [
+      {
+        type: GET_SETTINGS_SUCCESS,
+        payload: fetchedSettings,
+      },
+    ];
+    expect(result).toEqual(expectedActions);
+  });
+
+  test('should dispatch an error when cannot fetch settings', async () => {
+    const errorMessage = 'Internal server error';
+    api.getSettings.mockRejectedValueOnce(new Error(errorMessage));
+    const action$ = ActionsObservable.of(getSettingsRequest());
+
+    // @ts-ignore
+    const epic$ = settingsEpic(action$, state$, { api });
+    const result = await epic$.pipe(toArray()).toPromise();
+
+    const expectedActions = [
+      {
+        type: GET_SETTINGS_FAIL,
+        payload: errorMessage,
+        error: true,
+      },
+    ];
+    expect(result).toEqual(expectedActions);
+  });
+
+  test('should dispatch updated settings when settings saving is succeed', async () => {
+    api.setSettings.mockResolvedValueOnce(settingsToSave);
+    const action$ = ActionsObservable.of(setSettings(settingsToSave, () => {}));
+
+    // @ts-ignore
+    const epic$ = setSettingsEpic(action$, state$, { api });
+    const result = await epic$.pipe(toArray()).toPromise();
+
+    const expectedActions = [
+      {
+        type: SET_SETTINGS_SUCCESS,
+        payload: settingsToSave,
+      },
+    ];
+    expect(result).toEqual(expectedActions);
+  });
+
+  test('should dispatch an error with errorCode when settings saving is failed', async () => {
+    const error: any = new Error('Update settings error');
+    error.response = {
+      data: {
+        error: {
+          errorCode: 'GIT_CANNOT_FIND_REPO',
+          message: 'Cannot find specified repository',
+        },
+      },
     };
-    mocked(apiMock.getSettings).mockImplementationOnce(() => Promise.resolve(data));
+    api.setSettings.mockRejectedValueOnce(error);
+    const action$ = ActionsObservable.of(setSettings(settingsToSave, () => {}));
 
-    await store.dispatch<any>(fetchSettingsIfNeeded());
+    // @ts-ignore
+    const epic$ = setSettingsEpic(action$, state$, { api });
+    const result = await epic$.pipe(toArray()).toPromise();
 
-    expect(store.getActions()).toMatchSnapshot();
+    const expectedActions = [
+      {
+        type: SET_SETTINGS_FAIL,
+        payload: 'GIT_CANNOT_FIND_REPO',
+        error: true,
+      },
+    ];
+    expect(result).toEqual(expectedActions);
   });
-  test('fetching settings fail', async () => {
-    const store = mockStore(initialState);
-    const error = { message: 'Internal server error' };
-    mocked(apiMock.getSettings).mockImplementationOnce(() => Promise.reject(error));
 
-    await store.dispatch<any>(fetchSettingsIfNeeded());
+  test('should call callback passed in action meta with result of settings saving', async () => {
+    api.setSettings.mockResolvedValueOnce(settingsToSave);
+    api.setSettings.mockRejectedValueOnce(new Error('Cannot save errors'));
 
-    expect(store.getActions()).toMatchSnapshot();
-  });
-  test('update settings', () => {
-    const store = mockStore(initialState);
-    const data = {
-      repoName: 'artuom130/itItReal',
-      buildCommand: 'npm run build',
-      mainBranch: 'master',
-      period: 0,
-    };
+    const callback = jest.fn();
+    const action$ = ActionsObservable.of(
+      setSettings(settingsToSave, callback),
+      setSettings(settingsToSave, callback),
+    ).pipe(concatMap((action) => of(action).pipe(delay(1))));
+    // concatMap with delay is used to get around switch map
 
-    store.dispatch(updateSettings(data));
+    // @ts-ignore
+    const epic$ = setSettingsEpic(action$, state$, { api });
+    await epic$.pipe(toArray()).toPromise();
 
-    expect(store.getActions()).toMatchSnapshot();
-  });
-  test('update settings error', () => {
-    const store = mockStore(initialState);
-    const error = {
-      message: 'Cannot find artuom130/shri-hw-asyncs repository',
-      errorCode: 'GIT_CANNOT_FIND_REPO',
-    };
-
-    store.dispatch(updateSettingsFail(error.message));
-
-    expect(store.getActions()).toMatchSnapshot();
-  });
-  test('reset settings error', () => {
-    const store = mockStore(initialState);
-    store.dispatch(resetSettingsError());
-
-    expect(store.getActions()).toMatchSnapshot();
+    expect(callback).toHaveBeenCalledTimes(2);
+    expect(callback).toHaveBeenNthCalledWith(1, true);
+    expect(callback).toHaveBeenNthCalledWith(2, false);
   });
 });

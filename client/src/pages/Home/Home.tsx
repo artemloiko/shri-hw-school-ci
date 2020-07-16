@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps } from '@reach/router';
-import { fetchSettingsIfNeeded } from '../../actions/SettingsAction';
-import { fetchBuildsListIfNeeded, fetchMoreBuilds } from '../../actions/BuildsAction';
-import { RootState } from 'reducers';
 import { useToasts } from 'react-toast-notifications';
 import { useTranslation } from 'react-i18next';
+
+import { fetchBuildsListIfNeeded, fetchMoreBuilds } from '../../actions/BuildsAction';
+import { getSettingsRequest } from 'redux/modules/settings';
+import { RootState } from 'redux/modules/root';
 
 import Button from '../../components/base/Button/Button';
 import Page from '../../components/common/Page/Page';
@@ -34,9 +35,11 @@ const Home: React.FC<RouteComponentProps> = () => {
   }, [error, addToast]);
 
   useEffect(() => {
-    dispatch(fetchSettingsIfNeeded());
-    dispatch(fetchBuildsListIfNeeded());
-  }, [dispatch]);
+    if (!settings.repoName) {
+      dispatch(getSettingsRequest());
+      dispatch(fetchBuildsListIfNeeded());
+    }
+  }, [dispatch, settings]);
 
   const handleLoadMore = useCallback(() => {
     dispatch(fetchMoreBuilds());
@@ -57,7 +60,7 @@ const Home: React.FC<RouteComponentProps> = () => {
     setBuildModalOpen(false);
   }, [setBuildModalOpen]);
 
-  const settingsLoadedAndSpecified = Boolean(settings.isLoaded && settings.repoName);
+  const settingsLoadedAndSpecified = Boolean(!settings.isFetching && settings.repoName);
 
   return (
     <Page
@@ -88,7 +91,7 @@ const Home: React.FC<RouteComponentProps> = () => {
         </>
       }
     >
-      <Loader isLoading={!settings.isLoaded || (settingsLoadedAndSpecified && !builds.isLoaded)}>
+      <Loader isLoading={settings.isFetching || (settingsLoadedAndSpecified && !builds.isLoaded)}>
         {!settings.repoName ? (
           <GetStarted />
         ) : (

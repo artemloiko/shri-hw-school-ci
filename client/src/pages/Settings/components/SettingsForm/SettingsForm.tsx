@@ -9,10 +9,9 @@ import TextField from '../../../../components/base/TextField/TextField';
 import Loader from '../../../../components/common/Loader/Loader';
 import Form, { FormInputGroup, FormSubmitGroup } from '../../../../components/common/Form/Form';
 
-import { updateSettings, updateSettingsFail } from '../../../../actions/SettingsAction';
-import { fetchBuildsListIfNeeded } from '../../../../actions/BuildsAction';
-import { RootState } from 'reducers';
-import api from 'utils/api';
+import { RootState } from 'redux/modules/root';
+import { setSettings } from 'redux/modules/settings';
+import { fetchBuildsListIfNeeded } from 'actions/BuildsAction';
 
 type SettingsFormProps = React.ComponentProps<typeof Form>;
 
@@ -56,19 +55,14 @@ const SettingsForm: React.FC<SettingsFormProps> = (props) => {
         }
         return errors;
       }}
-      onSubmit={async (values, { setSubmitting }) => {
+      onSubmit={(values, { setSubmitting }) => {
         const settingsDTO = { ...values, period: Number(values.period) };
-        try {
-          await api.setSettings(settingsDTO);
-          dispatch(updateSettings(settingsDTO));
-          dispatch(fetchBuildsListIfNeeded());
-        } catch (err) {
-          const { response } = err;
-          const errorMessage: string =
-            response?.data?.error?.errorCode || response?.data?.error?.message || err.message;
-          dispatch(updateSettingsFail(errorMessage));
-        }
-        setSubmitting(false);
+        dispatch(
+          setSettings(settingsDTO, (success) => {
+            if (success) dispatch(fetchBuildsListIfNeeded());
+            setSubmitting(false);
+          }),
+        );
       }}
     >
       {(formikBag) => {

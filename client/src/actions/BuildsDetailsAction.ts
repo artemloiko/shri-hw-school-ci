@@ -1,5 +1,5 @@
 import api from '../utils/api';
-import { RootState } from 'reducers';
+import { RootState } from 'redux/modules/root';
 import { BuildModel } from 'typings';
 import { ThunkAction } from 'redux-thunk';
 import { Action } from 'redux';
